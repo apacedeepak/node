@@ -1,0 +1,54 @@
+{
+  "name": "master_product_assign",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "school_id": {
+      "type": "number"
+    },
+    "student_login": {
+      "type": "any"
+    },
+    "teacher_login": {
+      "type": "any"
+    },
+    "other_login": {
+      "type": "any"
+    },
+    "form_id": {
+      "type": "string"
+    },
+    "product_id": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "activation_date": {
+      "type": "any"
+    },
+    "instal_date": {
+      "type": "date"
+    },
+    "warning_date": {
+      "type": "any"
+    },
+    "expiry_date": {
+      "type": "any"
+    },
+    "check_user_expiration": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

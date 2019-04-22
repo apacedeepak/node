@@ -1,0 +1,278 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+      <!-- Homework   -->
+<div class="boxModel pull-left maxHightOuto" style="margin-top: 15px;">
+    <div class="headBox">
+        <h5 class="h5 pull-left" > {{'homework' | translate}}</h5>
+<a title="{{'Create New homework'|translate}}" routerLink="/homework/createhomework/" class="plussing"><i class="fa fa-fw fa-plus"></i></a>
+    </div>
+    <div class="col-sm-10 col-md-10 pull-left" style="padding: 0;">
+
+       <div class="leftRightgap">
+	   <ng-container *ngIf="ishomeworkexist;else nodata">
+                        <div class="mailBox submail" *ngFor="let homelist of datahome">
+                            <div class="sunjectIcon"><img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'" ></div>
+                            <a routerLink="/homework/teacherdetail/{{homelist.homework_id}}">
+                                <h2 title="{{homelist.subject_name}} ({{homelist.class_section_name}})" >{{homelist.subject_name}} ({{homelist.class_section_name}})</h2>
+                                <h3  >{{homelist.homework_title}}</h3>
+                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+
+                            </a>
+                            <div *ngIf="homelist.attachment_count==1" class="mailtime mailtimeSpace "><i  class="fa fa-fw fa-paperclip ng-scope"></i></div>
+                            <div class="reciveNotification">
+                                <p ><label>  {{'received' | translate}}</label>: {{homelist.homework_received_count}}/{{homelist.homework_assigned_count}}</p>
+                                <p ><label>  {{'checked' | translate}}</label>: {{homelist.homework_checked_count}}</p>
+                            </div>
+                        </div>
+			</ng-container>
+            </div>
+
+      <!-- <h6 *ngIf="datahome.length==0"  class="text-center text-info" style="font-size: 14px;width:100%;float:left;margin-top:10px;">{{norecordmessage}}</h6> -->
+        </div>
+    </div>
+</div>
+<!-- Message -->
+<div class="col-sm-12 col-md-12 pull-left  padding-left-none">
+<div class="col-sm-6 col-md-6 pull-left" style="padding-left: 0;">
+        <div class="boxModel pull-left">
+          <div class="headBox">
+            <h5 class="h5 pull-left"> {{'message' | translate}}<span *ngIf="globalObj.messageCount != 0" class="ng-binding ng-scope">({{globalObj.messageCount}})</span></h5>
+          </div>
+           <div id="inbox" class="inboxTab">
+                 <ng-container *ngIf="iscommexist;else nodata">
+        <div class="mailBox" *ngFor="let data of listInbox" [ngClass]="(data.message_isread) == 'Yes' ? 'readMail' : ''">
+
+        <div class="capsletter">{{data.display_name | slice:0:1}}</div>
+        <a [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: data.message_id,place: 'Inbox'}">
+        <h2>{{data.display_name}}</h2>
+        <h3 class="textLimit">{{(data.message_subject) == '' ? '...':data.message_subject}}</h3>
+        <h4 class="textLimit" [innerHTML]="(data.message_body) == ''? '...':data.message_body"></h4>
+        </a>
+        <div  class="mailtime mControllerOverhide">
+		<div class="mailinkDiv text-right">
+          <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)' ><i class="fa fa-fw fa-archive"></i></a>
+          <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)'>
+            <i class="myFavrite" id='message_{{data.message_id}}' [ngClass]="(data.message_isimportant) == 'Yes' ? 'redColor' : ''" ></i></a>
+          <span *ngIf="data.attachments.length != 0"><i class="fa fa-fw fa-paperclip"></i></span>
+		  <span class="d-block dBlock"> {{data.message_date | date:'yyyy-MM-dd'}}</span>
+		  </div>
+		  </div>
+      </div>
+          </ng-container>
+    <ng-template #nodata>
+        <p class="text-center text-info" style="font-size: 14px;width:100%;float:left;margin-top:10px;">{{norecordlistmessage |translate}}</p>
+    </ng-template>
+      <div class="clearfix"></div>
+       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+    </div>
+
+        </div>
+      </div>
+
+
+<!--Notices-->
+<div class="col-sm-6 col-md-6 pull-left" style="padding-right: 0;">
+    <div class="boxModel pull-left">
+        <div class="headBox">
+            <h5 class="h5 pull-left"> {{'notice' | translate}}
+              <span *ngIf="globalObj.noticeCount != 0" class="ng-binding ng-scope">({{globalObj.noticeCount}})</span>
+               {{'and'|translate}}  {{'circular' | translate}}
+               <span *ngIf="globalObj.circularCount != 0" class="ng-binding ng-scope">({{globalObj.circularCount}})</span>
+
+              </h5>
+
+        </div>
+        <div class="leftRightgap">
+      <div *ngFor="let notcir of listNoticeCircular; index as i;" [ngClass]="[i < 3 ? 'mailBox':'', (notcir.isread) == '1' ? 'readMail' : '']">
+        <ng-container *ngIf="i < 3">
+        <div class="capsletter">{{notcir.displayName | slice:0:1}}</div>
+        <a [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: notcir.announce_id,place: notcir.displayName}">
+        <h2>{{notcir.displayName}}</h2>
+        <h3 class="textLimit">{{(notcir.title) == ''? '...': notcir.title}}</h3>
+        <h4 class="textLimit" [innerHTML]="(notcir.description) == ''? '...':notcir.description"></h4>
+        </a>
+        <div class="mailtime">
+            <span *ngIf="notcir.attachments != ''"> <i class="fa fa-fw fa-paperclip"></i></span>
+        <span class="d-block dBlock"> {{notcir.start_date | date:'yyyy-MM-dd'}}</span>
+        </div>
+          </ng-container>
+      </div>
+
+           <!-- <div class="mailBox ng-scope" *ngIf="listNoticeCircular == ''"> -->
+
+                <p class="text-center text-info" style="font-size: 14px;">{{norecordlistNoticemessage | translate}}</p>
+            <!-- </div> -->
+            <!-- end ngIf: circnotice == '' -->
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="globalObj.ldap_status == 1 && globalObj.userLoginErp != 1" class="modal fade" id="acceptance"  style='pointer-events: none;'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{'acceptance' | translate}}</h3>
+            </div>
+            
+            <div class="modal-body">
+                <form [formGroup]='formaccept' (ngSubmit)="onAcceptance(formaccept.value, $event)">
+                    <p class="username_mob_err" style="color:red;font-size: 13px;margin: 0 0 10px 0;">{{'message_here' | translate}} </p>
+                    <ng-container>
+                        <table class="loginTable">
+                            <tr>
+                                <td style="width: 150px">
+                                    <input type="radio" formControlName="acceptance" value="1"> Yes 
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" formControlName="acceptance" value="0"> No
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span><button type="submit" style="float:right;" class="btn btn-primary">Accept</button></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </ng-container>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="overlay" style='pointer-events: none;'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 *ngIf="globalObj.onAdmissionUpdate" class="modal-title">{{'update_my_details' | translate}}</h4>
+          <h5 *ngIf="globalObj.onMobileUpdate" class="modal-title">{{'update_mobile_number' | translate}}</h5>
+           <button type="button" (click)="closePersonal()"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  
+        </div>
+        <div class="modal-body">
+          <form [formGroup]='form' (ngSubmit)="onSubmit(form.value, $event)">
+            <!-- <p *ngIf="globalObj.username" class="username_err" style="color:red;">Selected username is empty</p>
+            <p *ngIf='globalObj.emailAlert' class="username_email_err" style="color:red;">Entered email is invalid</p>
+            <p *ngIf='globalObj.phoneAlert' class="username_mob_err" style="color:red;">Entered mobile is invalid</p> -->
+            <p *ngIf="globalObj.message != ''" class="username_mob_err" style="color:red;font-size: 13px;margin: 0 0 10px 0;">{{globalObj.message|translate}}</p>
+            <ng-container *ngIf="globalObj.onAdmissionUpdate">
+            <table class="loginTable">
+                <tr>
+                    <td style="width: 150px"><b> {{'faculty_name' | translate}} :</b></td>
+                   <td>{{globalObj.name}}</td>
+                </tr>
+                <tr>
+                    <td><b>{{'login_using' | translate}}:</b></td>
+                    <td><input type="radio"  [checked]="globalObj.admin == 1" [value]="globalObj.adminNo" formControlName="radiobutton" (click)="checkExist('admin')" checked> {{'staff_code' | translate}}<br>{{globalObj.adminNo}}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="radio" [value]="globalObj.phone1" formControlName="radiobutton" [checked]="globalObj.phoneCheck == 1" (click)="checkExist('phone')">  {{'mobile_no' | translate}}
+                        <span *ngIf="globalObj.phoneUpdate">
+                          <!-- <input type="text" formControlName='updatePhone' name="update_mob" pattern="^\d{10}$" minlength="10" maxlength="10" /> -->
+                         </span><br><span>{{globalObj.phone}}</span><span *ngIf="globalObj.phone == ''">{{'no_mobile_number_exist' | translate}}</span>
+                         <!-- </span><br><span>{{global.userNumber}}</span> -->
+                        <a *ngIf="globalObj.mobileUpdateShow" (click)="checkExist('phoneUp')" href="javascript:void(0);" >{{'update' | translate}}</a></td>
+                </tr>
+                 <tr>
+                    <td>&nbsp;</td>
+                    <td> <input type="radio"  formControlName="radiobutton" [value]="globalObj.email1" [checked]="globalObj.emailCheck == 1" (click)="checkExist('email')">  {{'email_id' | translate}}
+                        <span *ngIf="globalObj.emailUpdate">
+                          <!-- <input type="text" formControlName='updateEmail' name="update_email"/> -->
+                         </span><br><span>{{globalObj.email}}</span><span *ngIf="globalObj.email == ''">{{'no_email_id_exist' | translate}}</span>
+                        <!-- </span><br><span></span> -->
+                        <a *ngIf="globalObj.emailUpdateShow" (click)="checkExist('emailUp')" href="javascript:void(0);" >{{'update' | translate}}</a></td>
+                 </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                      <span><button type="submit" class="btn btn-primary">{{'update' | translate}}</button></span>
+                        <!-- <button type="button" class="btn btn-primary">Cancel</button></td> -->
+                </tr>
+            </table>
+              </ng-container>
+  
+             <ng-container *ngIf="globalObj.onMobileUpdate">
+            <table class="loginTable">
+            <tr>
+             <td style="width: 150px"><b>{{'faculty_name' | translate}}:</b></td>
+                   <td>{{globalObj.name}}</td>
+            </tr>
+            <tr>
+             <td style="width: 150px"><b>{{'old_mobile_number' | translate}}:</b></td>
+                   <td>{{globalObj.phone}}<span *ngIf="globalObj.phone == ''">{{'no_mobile_number_exist' | translate}}</span></td>
+            </tr>
+            <tr>
+             <td style="width: 150px"><b>{{'new_mobile_number' | translate}}:</b></td>
+                   <td><input type="text" formControlName='updatePhone' name="update_mob" pattern="^\d{10}$" minlength="10" maxlength="10" />
+                   <br><a *ngIf="globalObj.sendOTP" href="javascript:void(0)" (click)="sendOTP()"> {{'send_otp' | translate}}</a>
+                  <p *ngIf="globalObj.verified">{{'verified' | translate}}</p>
+                  </td>
+            </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>
+                  <span *ngIf="globalObj.finalUpdateMobile"><button  (click)="updateFinal('mobile')" type="button" class="btn btn-primary">{{'update' | translate}}</button></span>
+                 <button type="button" class="btn btn-primary"  (click)="cancel('mobile')">{{'cancel' | translate}}</button></td>
+            </tr>
+            </table>
+            </ng-container>
+            <ng-container *ngIf="globalObj.otpConfirmBox">
+              <table style="width: 100%;" class="getotp">
+                <tr>
+                  <td>
+                      <input placeholder="{{'Enter OTP (One Time Password) Sent To'|translate}} {{globalObj.viewMobile}}" type="textbox" minlength="6" maxlength="6" class="form-control pull-left" name="otptext" formControlName="otptext">
+                      <a style="font-size: 14px;float: right;margin-top: 6px;margin-left: 10px;" href="javascript:void(0)" (click)="sendOTP()">{{'resend_otp' | translate}}</a>
+                  </td>
+                    </tr>
+                 <tr>
+                    <td class="text-right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-primary btn-sm"  (click)="confirmVaildData('mobile')">{{'confirm' | translate}}</button>
+                  </td>
+                </tr>
+  
+  
+              </table>
+  
+            </ng-container>
+            <ng-container *ngIf="globalObj.onEmailUpdate">
+            <table class="loginTable">
+            <tr>
+             <td style="width: 150px"><b>{{'faculty_name' | translate}}:</b></td>
+                   <td>{{globalObj.name}}</td>
+            </tr>
+            <tr>
+             <td style="width: 150px"><b>{{'old_email_id' | translate}}:</b></td>
+                   <td>{{globalObj.email}}<span *ngIf="globalObj.email == ''">{{'no_email_id_exist' | translate}}</span></td>
+            </tr>
+            <tr>
+             <td style="width: 150px"><b>{{'new_email_id' | translate}}:</b></td>
+                   <td><input type="text" formControlName='updateEmail' name="update_email"/>
+                   <br><a href="javascript:void(0)" (click)="verifyEmail()"> {{'verify_email' | translate}}</a></td>
+            </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>
+                  <!-- <span *ngIf="globalObj.finalUpdateMobile"><button  (click)="updateFinal('mobile')" type="button" class="btn btn-primary">Update</button></span> -->
+                 <button type="button" class="btn btn-primary"  (click)="cancel('email')">{{'cancel' | translate}}</button></td>
+            </tr>
+            </table>
+            </ng-container>
+              <ng-container *ngIf="globalObj.onEmailSentMessage">
+                <h4> {{'verification_sent' | translate}}</h4><br>
+                  <div>{{'verification_link_sent_to' | translate}} {{globalObj.showEmail}}  {{'please_check_your_email_for_instructions' | translate}}</div>
+                <br><div class="text-center">
+                    <button type="button" class="btn btn-primary" (click)="popupdisplay()"> {{'ok' | translate}}</button>
+                </div>
+                </ng-container>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<style>
+    .loginTable td{ padding:10px 5px; font-size: 14px;}
+</style>

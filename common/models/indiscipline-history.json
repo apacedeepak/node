@@ -1,0 +1,50 @@
+{
+  "name": "indiscipline_history",
+  "plural": "indiscipline_history",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "indisciplineId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "fine": {
+      "type": "number"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "indiscipline_date": {
+      "type": "date"
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

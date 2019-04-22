@@ -1,0 +1,45 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+    <h5 class="pull-left">{{'Menu Assignment' | translate}}</h5>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+    <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+      <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+  </div>
+  <form class="form-signin" ngNativeValidate [formGroup]="roleForm" (ngSubmit)="menuAssignment(roleForm.value)">
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty width30" formControlName='user_type' #userType (change)="getRole(userType.value)">
+            <option value="" disabled>--{{'Select User Type' | translate}}--</option>
+            <option *ngFor="let userType of userTypeList | keyvalue;" value="{{userType.value}}">{{userType.value}}</option>
+        </select>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty width30" formControlName="role_name" #role (change)="getRoleWiseData(role.value)">
+            <option value="" disabled>--{{'Select Role' | translate}}--</option>
+            <option *ngFor="let role of roleList | keyvalue;" value="{{role.value}}">{{role.value}}</option>
+        </select>
+    </div>
+    <!-- <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <input type="hidden" value="" formControlName='id' />
+        <input type="text" class="form-control cleanup validate-empty width30" value="" formControlName='role_name' placeholder="{{'Role Name' | translate}}" required="" autofocus="" />
+    </div> -->
+    
+    <div class="clearfix"></div>
+
+    <div class="col-lg-4 col-sm-12" style="width: 100%;">
+        <div class="form-group" style="width: 700px;">
+          <ngx-treeview [config]="config" [items]="items" (selectedChange)="values = $event"></ngx-treeview>
+        </div>
+      </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+        <input class="btn btn-primary" value="Save" [value]="editOrUpadte?'Update':'Save'" name="save" id="submit" type="submit">
+    </div>
+  </form>
+ 
+  
+
+</div>

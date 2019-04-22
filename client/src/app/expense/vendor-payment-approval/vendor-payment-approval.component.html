@@ -1,0 +1,123 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{vendor_approval_title}}</h5>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <!--SEARCH START-->
+    <div id="searchTable" class="col-sm-12 col-md-12 pull-left  padding-left-none padding-right-none">
+      <form class="form-horizontal" [formGroup]="fileExpenseSearchForm">
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+          <label for="title">From date</label>
+          <div class="datBox">
+            <input class="calenerIcon" placeholder="From date" readonly ngbDatepicker #d1="ngbDatepicker" formControlName="from_date">
+            <button class="btnover" (click)="d1.toggle()" type="button"></button>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+          <label for="title">To date </label>
+          <div class="datBox">
+            <input class="calenerIcon" placeholder="To Date" readonly ngbDatepicker #d="ngbDatepicker" formControlName="to_date">
+            <button class="btnover" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left mb15">
+          <label for="title">Center </label>
+          <select [(ngModel)]="FormCenterSearch" formControlName='center_id' class="form-control" title="Select Center" placeholder="Select Subject">
+            <option [value]="0"> Select Center</option>
+            <option [value]="userAssignCenter.assigned_schools.id" *ngFor="let userAssignCenter of globalObj.userAssignCenterList">
+              {{userAssignCenter.assigned_schools.school_name}}
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left mb15">
+          <label for="title"> Status </label>
+          <select [(ngModel)]="FormApprovalStatus" formControlName='approval_status' class="form-control" title="Select Status" placeholder="Select Status">
+            <option [value]="0"> Select Status</option>
+            <option [value]="approvalStatusList.id" *ngFor="let approvalStatusList of approvalSearchStatus">
+              {{approvalStatusList.status_name}}
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left mb15">
+          <button class="btn btn-primary mr10" (click)="onSearchSubmit(fileExpenseSearchForm.value)">Submit</button>
+          <button class="btn btn-primary" (click)="getFromSet()">Reset</button>
+        </div>
+      </form>
+    </div>
+    <!--SEARCH END-->
+
+    <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt15">
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+        <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+        <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+      </div>
+      <table class="table table-striped table-bordered customTable">
+        <thead class="thheadbg">
+          <tr>
+            <th align="center">S No.</th>
+            <th>Date</th>
+            <th>Expense Category</th>
+            <th>Expense</th>
+            <!-- <th>Payment Mode</th> -->
+            <!-- <th>Basic Amount</th>
+            <th>GST Amount</th> -->
+            <th>Total Invoice</th>
+            <th>Doc</th>
+            <th>Action</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fileExpenseRequest of fileExpenseRequestList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}; index as i">
+            <td align="center">{{ itemsPerPage * (currentPage - 1) + i +1 }}</td>     
+            <td>{{fileExpenseRequest.expense_date | date : "dd/MM/y" }} </td>
+            <td>{{fileExpenseRequest.expenseCategory.category_name}} </td>
+            <td>{{fileExpenseRequest.expenseMaster.expense_name}}</td>
+            <!-- <td>{{fileExpenseRequest.expenseMode.payment_mode}} </td> -->
+            <!-- <td> {{fileExpenseRequest.amount}}</td>
+            <td>{{fileExpenseRequest.gst_amount}} </td> -->
+            <td>{{fileExpenseRequest.total_amount}} </td>
+            <td>
+              <span *ngIf="fileExpenseRequest.bill_doc">
+                <a target="_blank" href="{{serverurl}}{{fileExpenseRequest.bill_doc}}" download>View</a>
+              </span>
+            </td>
+            <td>
+              <button *ngIf="fileExpenseRequest.approval_status==1" class="btn btn-info btn-sm" (click)="updateApprovalStatus(fileExpenseRequest.id,2)">Paid</button>
+              &nbsp;&nbsp;
+              <button *ngIf="fileExpenseRequest.approval_status==1" class="btn btn-info btn-sm" (click)="updateApprovalStatus(fileExpenseRequest.id,3)">Unpaid</button>
+            </td>
+            <td>
+              <ng-template [ngIf]="fileExpenseRequest.approval_status==1">
+                Pending
+              </ng-template>
+              <ng-template [ngIf]="fileExpenseRequest.approval_status==2">
+                Paid
+              </ng-template>
+              <ng-template [ngIf]="fileExpenseRequest.approval_status==3">
+                Unpaid
+              </ng-template>
+            </td>
+          </tr>
+          <tr *ngIf="(fileExpenseRequestList.length==0)">
+            <td colspan="8" align="center">
+              <span style="color:red;text-align: center;"> No record found..</span>
+            </td>
+          </tr>
+          <tr>             
+            <td colspan="8">
+                <span  align="center">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "oauthclient",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "idInjection": false,
+    "mysql": {
+      "table": "oauthclient"
+    }
+  },
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "client_id": {
+      "type": "string"
+    },
+    "client_secret": {
+      "type": "string"
+    },
+    "redirect_uri": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

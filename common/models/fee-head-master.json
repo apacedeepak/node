@@ -1,0 +1,96 @@
+{
+  "name": "fee_head_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "fee_head_name": {
+      "type": "string",
+      "required": true
+    },
+    "sac_hsn_code": {
+      "type": "string"
+    },
+    "fee_head_short_name": {
+      "type": "string"
+    },
+    "fee_head_type_id": {
+      "type": "number"
+    },
+    "fee_head_type_name": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "number",
+      "required": true
+    },
+    "is_optional": {
+      "type": "number",
+      "dataType": "tinyint",
+      "dataLength": 1
+    },
+    "is_offer_applicable": {
+      "type": "number",
+      "dataType": "tinyint",
+      "dataLength": 1
+    },
+    "is_refundable": {
+      "type": "number",
+      "dataType": "tinyint",
+      "dataLength": 1
+    },
+    "is_included_in_certificate": {
+      "type": "number",
+      "dataType": "tinyint",
+      "dataLength": 1
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "cgst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    },
+    "sgst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    },
+    "igst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

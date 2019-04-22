@@ -1,0 +1,83 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+      <h5 class="pull-left">{{'Student Enquiry' | translate}}</h5>
+  </div>
+ 
+  <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+    <div class="alert alert-danger mb15 mt15">{{errormsg}}</div></div>
+  <form class="form-signin" ngNativeValidate [formGroup]="enquiryForm" (ngSubmit)="createEnquiry(enquiryForm.value)">
+    
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+          <input type="text" class="form-control cleanup validate-empty width30" formControlName='name' placeholder="Student Name"
+              required="" autofocus="" />
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <input type="text" class="form-control cleanup validate-empty width30" (keypress)=" isNumber($event)" formControlName='mobile' placeholder="Phone No."
+            required="" autofocus="" />
+    </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+          <input type="text" class="form-control cleanup validate-empty width30" formControlName='email' placeholder="Email Id"
+              required="" autofocus="" />
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty width30" formControlName="course">
+            <option value="">--course--</option>
+            <option *ngFor="let item of boards_list" value="{{item.board_name}}"> {{item.board_name}}</option>
+        </select>
+    </div>
+    <div class="col-auto pull-left inputItem mt15">
+        <label class="customChek"><input type="radio" class="cleanup validate-empty width30" formControlName='serviceType'
+        value="center_demo"/> Center Demo <span class="radioCheck"></span></label>
+  </div> 
+   <div class="col-auto pull-left inputItem mt15">
+    <label class="customChek"><input type="radio" class="cleanup validate-empty width30" formControlName='serviceType'
+       value="center_visit"/> Center Visit <span class="radioCheck"></span></label>
+</div> 
+ <div class="col-auto pull-left inputItem mt15">
+  <label class="customChek"><input type="radio" class="cleanup validate-empty width30" formControlName='serviceType'
+      value="call_back"/> Call Back <span class="radioCheck"></span></label>
+</div>
+
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+        
+          <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+          <hr/>
+      </div>
+  </form>
+
+  <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+    <span id ="success_message" class="span_success"></span>    
+   <table class="table table-striped table-bordered customTable">
+       <thead class="thheadbg">
+           <tr>            
+             <th>Student Name</th>
+             <th>Mobile No.</th>
+             <th>Email</th>
+             <th>Course</th>
+           
+           </tr>
+       </thead>
+       <tbody >
+           <tr  *ngFor="let data of enqList;">             
+               <td >{{data.student_name}}</td>
+               <td >{{data.mobile_no}}</td>
+               <td >{{data.email_id}}</td>
+        
+               <td>{{data.board_id}}</td>
+               
+             </tr>
+    
+           <tr *ngIf="enqList.length == 0">
+               <td colspan="4">
+                <div class="text-center text-danger"> No record found...</div>
+               </td>
+           </tr>
+ 
+       </tbody>
+   </table>
+ </div>
+</div>

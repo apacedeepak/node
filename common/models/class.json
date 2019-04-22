@@ -1,0 +1,48 @@
+{
+  "name": "class",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "class_name": {
+      "type": "string",
+      "required": true
+    },
+    "class_code": {
+      "type": "string"
+    },
+    "class_order": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "boardId": {
+      "type": "number"
+    },
+    "classId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "board": {
+      "type": "belongsTo",
+      "model": "boards",
+      "foreignKey": "boardId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

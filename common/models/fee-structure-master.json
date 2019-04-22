@@ -1,0 +1,63 @@
+{
+  "name": "fee_structure_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "fee_structure_name": {
+      "type": "string",
+      "required": true
+    },
+    "session_id": {
+      "type": "number",
+      "required": true
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fee_strcuture_master_map_fee_structure_detail": {
+      "type": "hasMany",
+      "model": "fee_structure_detail",
+      "foreignKey": "fee_structure_id"
+    },
+    "fee_revenue_target": {
+      "type": "hasMany",
+      "model": "revenue_target",
+      "foreignKey": "fee_structure_id"
+    },
+    "fee_strcuture_map_term_master": {
+      "type": "hasMany",
+      "model": "fee_structure_term_master",
+      "foreignKey": "fee_structure_id"
+    },
+    "revenue_target_fee_term": {
+      "type": "hasMany",
+      "model": "revenue_target_fee_term",
+      "foreignKey": "fee_structure_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

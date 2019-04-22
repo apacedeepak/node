@@ -1,0 +1,80 @@
+page-create-homework {
+  .header-md {
+    background:#3c6ecd !important;
+    color:#fff;
+    font-size:1.7rem;
+    font-weight:bold;
+    .userDp{ width:32px; height:32px; overflow:hidden; border-radius:80%; position:absolute;display: inline-block;right:0;top:5px; 
+    img{position:absolute;left:0; top:0; width:100%; height:100%;}
+    }
+    .mailaction a{margin-left:.6rem;}
+    .paerclip{
+        img{height: 1.5rem;vertical-align: middle;}
+    }
+    }
+    #file-input {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        z-index: 999;
+      }
+
+      ion-row.active {
+        background-color: #f5f5f5;
+      }
+      
+      ion-row.success {
+        background-color: #dff0d8;
+      }
+      
+      ion-row.warning {
+        background-color: #fcf8e3;
+      }
+      
+      ion-row.error {
+        background-color: #f2dede;
+      }
+      .paerclip{
+        img{height: 1.5rem;}
+    }
+    .sendmail{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+      img{height:1.8rem;}
+      }
+    .contentarea {
+      -webkit-user-select: auto;min-height:200px;max-height:200px; overflow-y:auto;width: 90%;
+      margin: 5%;
+  }
+  .attachport{display: block;
+    vertical-align: top;
+    margin: 0rem 0rem .3rem 0;
+    position: relative;
+    background: #f0f0f0;
+    color: #004eff;
+    border-radius: 2px;
+    font-size: 1.3rem;
+    padding: 0.5rem 4rem 0.5rem 1rem;
+    border: 1px solid #ddd; 
+    .removefile{position: absolute;right: .2rem;top: .5rem;text-decoration: none;color: #000;background-color: transparent;}
+    }
+    .rowborder{width: 95%;margin-left: 5%; padding-bottom:4px;min-height: 4.7rem;border-bottom: 1px solid #cccccc;
+      .maillable{font-size: 1.3rem;background-color: #ebe7e7;margin-right: .3rem;margin-bottom: .2rem;display: inline-block;padding:.5rem .3rem .3rem 1.2rem;border-radius: 28px;vertical-align: top;color: #6f6767;
+      button{ vertical-align:middle;background-color: #ebe7e7;}
+      }
+      .toclass{position: absolute;}
+      }
+      .tomail{padding-left: 0px;position: relative;
+      .label-md{ position: absolute;left: 0;top:0px; width: auto;}
+      }
+      .text-input-div{border:0px solid #cccccc;min-height: 32px; margin: 0; padding:7px 4rem 7px 0px; width: 100%;border-radius:2px;position: relative;
+        .addMail{position: absolute;right: 0;top: 9px;background: transparent;padding: 2px 8px;font-weight: bold;font-size: 2rem;}
+        }
+        .htool{ position: absolute;right: 1rem;bottom: 1rem;}
+        .leftmargin{margin-left:5px;}
+        .whitcolor{color:white}
+        .gridcontent{padding: 0px;padding-right: 18px;}
+        .iconfontsize{font-size: 2.7rem;}
+        .iconcolor{color:#fff;}
+}

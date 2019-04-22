@@ -1,0 +1,70 @@
+.erpViewbtn {
+  margin: 21px 12px 0;
+  float:right;
+}
+.erpViewbtn a {
+	background-color: #285ab9 !important;
+	border-color: #5385e4 !important;
+	font-size: 12px;
+}
+.ngbDropdownMenu{top:inherit !important; bottom: 0 !important; height: calc(100% - 70px) !important}
+.userNotification .dropdown-toggle::after{display: none;}
+.userNotification .badge{right: 0;}
+#changepass .modal-dialog{top:0;margin-top:14%;}
+#changepass .btn{font-size: 16px; margin: 0 5px;}
+#changepass h4{font-size: 20px;	margin: 0;}
+#changepass input[type=text],#changepass input[type=password]{font-size: 14px;}
+#changepass .alert{font-size: 14px; text-align: center;}
+.hdmodel{padding:15px;}
+.hdmodel h5{font-size: 18px;margin: 0;}
+.slctbx{font-size: 14px;}
+.userNotification{margin-right: 30px;}
+.userNotification .mailBox small {color: #3d3939;}
+.userNotification .dropdown-menu:before{ display:none;}
+.userNotification .dropdown-menu{box-shadow:0 0 5px 5000px rgba(0, 0, 0, 0.55)}
+.dropdown-language select{-moz-appearance: none;
+    background: #285ab9 url("/assets/images/downarrow.png") no-repeat scroll 95% center;  
+    border: 1px solid #5385e4;
+    color: #fff;
+    font-size: 13px;
+    height: 30px;
+    outline: medium none;
+    padding: 0 15px 0 7px;
+    width: 100px;}
+.dropdown-position{
+	width: 0px;
+    float: left;
+    text-align: left;
+    padding: 7px 0 0 0;
+	margin-top: 15px;		
+}
+.dropdown-position-mgmnt{	
+	margin-right:0px;
+}
+.dropdown-position-user{	
+	/*margin-right:80px;*/
+        margin-right:0px;
+}
+.hdRightMenu{ margin-top: 20px;}
+.hdRightMenu select{padding: 5px;font-size: 14px;height: 30px;float: left;border: 0;min-width: 100px;max-width: 120px;}
+.hdRightMenu .userNotification{ margin-top: 0 !important;padding: 5px 0 0 0 !important;margin-left: 8px;}
+.hdRightMenu .spacer{float: left;margin-left: 8px !important;}
+.multischool{ margin-top: 0 !important;}
+.erpViewbtn{margin: 0px 0px 0 !important;float: left !important;}
+.teacherLogR{ margin-right: 0;}
+.teacherLogR .dropdown-icon{ margin-left:0 !important;}
+.studentLogR{margin-right: 0;}
+.studentLogR .dropdown-icon{ margin:0 !important;}
+.studentLogR .userNotification{margin-right: 20px !important;}
+.parentLogR{margin-right: 0;}
+.parentLogR .userNotification{margin-right:0px !important;}
+.parentLogR .dropdown-icon{ margin:0 !important;}
+.parentLogR .childNotification{ padding: 0;margin-right: 10px;width: 50px;}
+.parentLogR .childNotification figure{width: 35px !important;height: 35px !important; margin: 0; position:relative;}
+.parentLogR .childNotification a.dropdown-icon{width: 60px !important;}
+.parentLogR .childNotification a.dropdown-icon:hover .fa-caret-down{ color: #fff !important;}
+.parentLogR .childNotification .dropdown-menu{top: 14px!important; left: 5px!important;}
+.parentLogR{margin-right: 0;}
+.managementLogR{margin-right: 112px;}
+.childNotification figure{position:relative;}
+.childNotification figure img{position:absolute; width: 100%;height: 100%; left: 0; top: 0;}

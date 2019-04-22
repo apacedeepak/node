@@ -1,0 +1,49 @@
+{
+  "name": "inv_category_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "category_name": {
+      "type": "string",
+      "required": true
+    },
+    "approver_ho_user_id": {
+      "type": "number",
+      "required": true
+    },
+    "approver_ho_final_user_id": {
+      "type": "number",
+      "required": true
+    },
+    "dispatcher_user_id": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    },
+    "created_by": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,98 @@
+   
+    <div class="col-sm-12 col-md-12 padding-left-none padding-right-none"  *ngIf="userType=='teacher'">
+       <div class="boxModel pull-left maxHightOuto">
+          <div id='mainContent' class="">
+             <div class="headBox">
+                <h5 class="pull-left">Leave Balance Details</h5>
+             </div>
+             <div class="clearfix"></div>
+             <div id="scc_msg" ></div>
+             <div id="err_msg" ></div>
+             <div>
+                <table class="table table-striped table-bordered margin-15 paddingnone">
+                   <tbody *ngIf="details.leavedetails != ''">
+                      <tr>
+                         <td class="text-center" *ngFor="let data of details;let i=index;">
+                            <div id="headerclass"  class="thheadbg" style="text-transform:capitalize"><b>{{data.leave_name}}</b></div>
+                            <div id="bodyClass">{{data.gain - data.taken}}</div>
+                         </td>
+                      </tr>
+                   <tbody>
+                   <tbody *ngIf="details.length == 0">
+                      <tr>
+                         <td >
+                            <h4>No Available Leaves</h4>
+                         </td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+             <div class="col-sm-12 col-md-12">
+                <h4 class="text-center yearTitle"><b>Year: </b>{{startdate}}-{{enddate}}</h4>
+                <form ngNativeValidate [formGroup]="tableForm" (ngSubmit)="onSubmitDetail(tableForm.value)"  class="ui form">
+                <span id ="success_message" class="span_success"></span>
+                <span id ="leave_erro" class="td_error_leave" ></span>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+                    <label>Leave Type <b style="color:red">*</b></label> 
+                    <select class="form-control" #v formControlName='leavetypeid' (change)="getHalfday(v.value,details)">
+                    <option value="" >--Select --</option>
+                    <option *ngFor="let data of details;let i=index;" value="{{data.leave_id}}">{{data.abbrevation}}-{{data.leave_name}}</option>
+                    </select>
+                    <span class="td_error" *ngIf="leaveTypeFlag == 1 " style="color:red;float: left;margin-top: 1px;">*please select leave</span>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 has-feedback">
+                    <span   *ngIf="leaveAlreadyFlag == 1 " class="td_error errorPosition">Leave date already exist</span>
+                    <span  *ngIf="dateRangeError == 1 "  class="td_error errorPosition">You are exceeding your leave limits</span>
+                    <label>From Date <b style="color:red">*</b></label> 
+                    <input formControlName="fromdate" class="form-control"   type="text"  (click)="displaycal();" value="{{dateA |date:'dd-MM-yyyy'}}"> 
+                    <ng-container *ngIf="showcalander && toDateFlags==false">
+                        <ngb-datepicker     required  #dp (select)="onDateChange($event, 'from')"  >
+                        </ngb-datepicker>   
+                    </ng-container>
+                    <span class="td_error"  *ngIf="fromDateFlag == 1 "  style="color:red;float: left;margin-top: 1px;">*please select from date</span>
+                    <div  *ngIf="halfday == 1 " >
+                        <p style="margin-top: 0px;"><input type="checkbox" formControlName="halfdayStart" value="1"> <label>Half leave for this date</label></p>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3">
+                     
+                    <label>To Date <b style="color:red">*</b></label>
+                    <input  class="form-control" formControlName="todate" type="text" (click)="displaycal2();" value="{{today |date:'dd-MM-yyyy'}}">
+                    <ng-container  *ngIf="showcalander &&fromDateFlags==false"> 
+                        <ngb-datepicker    required  required  #dp (select)="onDateChange($event, 'to')" ></ngb-datepicker>
+                    </ng-container>
+                    <span class="td_error"    *ngIf="toDateFlag == 1 " style="color:red;float: left;margin-top: 1px;">*please select to date</span>
+                    <span class="td_error"  *ngIf="dateError == 1 ">End date can't be less then start date</span>
+                    <div  *ngIf="halfday == 1 ">
+                        <p style="margin-top: 0px;"><input type="checkbox" formControlName="halfdayEnd" value="1"> <label>Half leave for this date</label></p>
+                    </div>
+                    <span *ngIf="comparisonfllag == ''" style="display:none"></span>
+                    <span *ngIf="comparisonfllag == 'notvalid'" style="color:red;float: left;margin-top: 1px;">*End date must be greater than start date</span>
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                <div class="col-sm-12 col-md-12">
+                   <label>Reason For Leave/Comp-off <b style="color:red">*</b></label> 
+                   <textarea class="form-control" formControlName='reason'></textarea>
+                   <span class="td_error"  *ngIf="reasonFlag == 1 " style="color:red;float: left;margin-top: 1px;">*please enter reason</span>
+                </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12">
+                    <label>Submitted To  <b style="color:red">*</b></label>
+                    <input type="text" class="form-control"  formControlName='rolename' readonly>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-12 padding-right-none text-right bntspaec"><input type="submit" value="Submit" class="btn btn-primary btn-sm"></div>
+                </form>
+             </div>
+          </div>
+       
+    <style>
+       .ui-datepicker-prev { display: none; }  
+    </style>
+    

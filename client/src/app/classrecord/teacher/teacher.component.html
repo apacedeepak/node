@@ -1,0 +1,53 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+<div class="boxModel pull-left maxHightOuto" style="margin-top: 15px;"> 
+<div class="headBox"><h5 class="h5 pull-left"> {{'class_records' | translate}}</h5></div> 
+<div class="searchPanel">
+<div class="col-xs-12 col-sm-2 col-md-2 pull-left">
+<h5>{{'class' | translate}}</h5>
+<p><b>{{globalObj.classname}}</b></p>
+</div>
+<div class="col-xs-12 col-sm-2 col-md-2 pull-left">
+<h5> {{'section' | translate}}</h5>
+<p><b>{{globalObj.section}}</b></p>
+</div>
+
+<div class="searchStudent">
+<input type="search" value="" #df (keyup)="checkIsBlank(df.value)" (keyup.enter)="searchData(df.value)" placeholder="{{'search'|translate}}">
+</div>
+</div>
+
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+<table class="table table-striped studentRecordTable">
+<tbody>
+<tr *ngFor="let stud of studentData; index as i;">
+<td class="text-center">{{i+1}}</td>
+<td class="text-center">
+    <div *ngIf="stud.student_photo != ''" class="studentPic" [ngStyle]="{'background-image': 'url('+globalObj.basepath+stud.student_photo+')'}"></div>
+    <div *ngIf="stud.student_photo == ''" class="studentPic" style="background-image:url(assets/images/profile_img.jpg)"></div>
+</td>
+<td>
+<p><label> {{'name' | translate}}</label> {{stud.name}}</p>
+<p><label> {{'roll_no' | translate}}</label> {{(stud.roll_no) == 0 ? 'NA': stud.roll_no}}</p>
+<p><label>{{'admission_no' | translate}}</label>{{stud.admission_no | slice: 4 }}</p>
+<p><label> {{'dues' | translate}}</label> {{(stud.fee) == 0 ? 'NA': stud.fee}}</p>
+</td>
+<td>
+<p><label> {{'attendance' | translate}}</label> {{ (stud.presentAttendance != undefined && stud.presentAttendance != null)? stud.presentAttendance : 0  }}/{{stud.totalAttendance}}</p>
+<p><label> {{'library' | translate}}</label>  {{'na' | translate}}</p>
+<p><label> {{'in_discipline' | translate}}</label> {{(stud.indiscipline) == 0 ?  'NA': stud.indiscipline }}</p>
+<p><label> {{'exam' | translate}}</label>  {{'na' | translate}}</p>  
+</td>
+<td class="text-center" style="width:130px">
+<a [routerLink]="['/classrecord/viewprofile']" [queryParams]="{id: stud.userId,section: globalObj.classname+'-'+globalObj.section }" class="btn btn-default"> {{'view_profile' | translate}}</a>
+<a [routerLink]="['/communication/compose']" [queryParams]="{flag:'classrecord',id: stud.userId}" href="javascript:void(0)" class="btn btn-default"> {{'send_message' | translate}}</a>
+</td>
+</tr>
+
+
+
+</tbody>          
+</table>          
+      
+</div>
+</div>
+</div>

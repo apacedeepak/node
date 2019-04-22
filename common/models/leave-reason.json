@@ -1,0 +1,47 @@
+{
+  "name": "leave_reason",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "reason_name": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_by": {
+      "type": "number",
+      "required": false
+    },
+    "modified_date": {
+      "type": "date",
+      "required": false
+    },
+    "old_id": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

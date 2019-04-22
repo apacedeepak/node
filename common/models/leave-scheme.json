@@ -1,0 +1,34 @@
+{
+  "name": "leave_scheme",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "scheme_name": {
+      "type": "string",
+      "required": true
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leavescheme": {
+      "type": "hasMany",
+      "model": "leave_scheme_details",
+      "foreignKey": "leave_schemeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

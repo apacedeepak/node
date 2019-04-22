@@ -1,0 +1,1 @@
+{"name":"duration_master","base":"Model","idInjection":true,"options":{"validateUpsert":true},"properties":{"duration_name":{"type":"string","required":true},"duration_time":{"type":"number","required":true},"school_id":{"type":"number","required":false},"status":{"type":"boolean","required":true,"default":1}},"validations":[],"relations":{},"acls":[],"methods":{}}

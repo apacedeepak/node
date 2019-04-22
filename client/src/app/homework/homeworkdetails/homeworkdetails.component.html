@@ -1,0 +1,97 @@
+
+    <div class="boxModel pull-left maxHightOuto" style="margin-top:15px;">
+      <div *ngIf="!through" class="col-sm-6 col-md-6 pull-right text-right mailController">
+        <a *ngIf="!replyhide" class="" id="reply" routerLink="/homework/replyhomework/{{homeId}}"> <i class="fa fa-fw fa-reply"></i> {{'reply' | translate}}</a>
+        <a class="back" [routerLink]="['/homework/main']"  [queryParams]="{flag: 'back',calledfrom: calledfrom}"> <i class="fa fa-fw fa-arrow-left"></i> {{'back' | translate}}</a>
+      </div>
+        <div *ngIf="through" class="col-sm-6 col-md-6 pull-right text-right mailController">
+        <a class="back" [routerLink]="['/classrecord/viewprofile']" [queryParams]="{id: studuserid,section: classsec,revertby: 'homework', calledfrom: calledfrom }"> <i class="fa fa-fw fa-arrow-left"></i> {{'back' | translate}}</a>
+      </div>
+      <!--Mail Format-->
+      <div class="col-sm-12 col-md-12 pull-left">
+        <div class="subjectItem">{{subject}}: {{title}}</div>
+        <div class="mailBlock">		
+          <div class="mailHeader has-feedback">
+            <div class="mailPic mailMe" [ngStyle]="{'background-image': 'url(' + teacherimage + ')'}">&nbsp;</div>
+            <div class="mailPic mailTo" [ngStyle]="{'background-image': 'url(' + studentimage + ')'}">&nbsp;</div>
+
+            <div class="col-sm-6 col-md-6 pull-left">
+              <h4><b>{{teachername}}</b> <span class="lightGray"></span></h4>
+              <h4><b> {{'to' | translate}} :  {{'me' | translate}}</b> <span class="lightGray"></span></h4>
+            </div>
+            <div class="col-sm-6 col-md-6 text-right padding-right-none   pull-right">
+              <h4>{{creationdate}}</h4>
+              <h4> {{'submission' | translate}}: <b>{{targetdate}}</b></h4>
+            </div>
+            <div class="mailContent">
+              <div class="attched_item" style="padding-left: 0;">
+                <div *ngFor="let attach of attachment">
+                  <a download="{{serverurl}}{{attach}}" target="_self" href="{{serverurl}}{{attach}}">
+               <i class="fa fw fa-paperclip"></i>{{attach | split: '~':1}}</a>
+                </div>
+              </div>
+              <!-- <a  download="{{allimages}}" target="_self" href="{{allimages}}">
+            <i class="fa fa-fw fa-download">
+            </i> Download All</a> -->
+              <div class="col-sm-12 col-md-12 mailSubformating  pull-left padding-left-none">
+                <title></title>
+                <div [innerHTML]="content"></div>            
+				</div>
+          </div>
+</div>
+  </div>
+
+  <ng-container *ngIf="subexist">
+          <div class="mailBlock">
+          
+              <div class="mailHeader has-feedback">
+                <div class="mailPic mailMe" [ngStyle]="{'background-image': 'url(' + studentimage + ')'}">&nbsp;</div>
+               <div class="mailPic mailTo" [ngStyle]="{'background-image': 'url(' + teacherimage + ')'}">&nbsp;</div>
+              <div class="col-sm-6 col-md-6  pull-left">
+                <h4><b> {{'me' | translate}} </b> <span class="lightGray"></span></h4>
+                <h4><b>{{'to' | translate}} : {{teachername}} </b> <span class="lightGray"></span></h4>
+				</div>
+                <div class="col-sm-6 col-md-6 text-right padding-right-none  pull-left">
+                  <h4 class="greenperot"> {{'submitted' | translate}}: <b>{{submitdate}}</b></h4>
+                </div>
+                <div class="mailContent">
+                  <div class="attched_item" style="padding-left: 0;" *ngIf="submitattachment.length > 0">
+                    <div *ngFor="let submitattach of submitattachment">
+                      <a download="{{serverurl}}{{submitattach}}" target="_self" href="{{serverurl}}{{submitattach}}">
+               <i class="fa fw fa-paperclip"></i>{{submitattach | split: '~':1}}</a>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-12 mailSubformating  pull-left padding-right-none  padding-left-none">
+                    <title></title>
+                    <div [innerHTML]="submitcontent"></div>
+                  </div>
+                </div>
+              </div>           
+           </div>
+ </ng-container>
+       
+<ng-container *ngIf="remarksexist">	   
+		<div class="mailBlock">
+            
+              <div class="mailHeader has-feedback">
+                <div class="mailPic mailMe" [ngStyle]="{'background-image': 'url(' + teacherimage + ')'}">&nbsp;</div>
+               <div class="mailPic mailTo" [ngStyle]="{'background-image': 'url(' + studentimage + ')'}">&nbsp;</div>
+              <div class="col-sm-6 col-md-6  pull-left">
+                <h4><b>{{teachername}}</b> <span class="lightGray"></span></h4>
+                <h4><b>{{'to' | translate}} : {{'me' | translate}} </b> <span class="lightGray"></span></h4>
+                  </div>
+                <div class="col-sm-6 col-md-6 text-right padding-right-none  pull-left">
+                  <h4 class="greenperot"> {{'submitted' | translate}}: <b>{{remarkdate}}</b></h4>
+                </div>
+                <div class="col-sm-12 col-md-12 mailSubformating  pull-left  padding-right-none  padding-left-none">
+                  <title></title>
+                  <div [innerHTML]="remarkcontent"></div>
+                </div>             
+                </div>          
+          </div>
+  </ng-container>
+        
+    
+    </div>
+	</div>

@@ -1,0 +1,91 @@
+<!--
+  Generated template for the NoteslistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hideBackButton="true" can-swipe-back="false">
+    <button ion-button menuToggle enable-menu-with-back-views="true">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notes</ion-title>
+   <!--<page-notification callFromType=1></page-notification>-->
+  </ion-navbar>
+    
+    <div style="background: #fff; position: relative;">
+  <ion-segment [(ngModel)]="globalObj.tabSelected">
+<!--      <ion-segment-button value="inbox" (click)="getNotes('inbox')">
+          Inbox <ng-container *ngIf="globalObj.inboxCount > 0">({{globalObj.inboxCount}})</ng-container>
+      </ion-segment-button>-->
+      <ion-segment-button value="sent" (click)="getNotes('sent')">
+        Sent <ng-container *ngIf="globalObj.sentCount > 0">({{globalObj.sentCount}})</ng-container>
+      </ion-segment-button>
+<!--      <ion-segment-button value="draft" (click)="getNotes('draft')">
+        Draft <ng-container *ngIf="globalObj.draftCount > 0">({{globalObj.draftCount}})</ng-container>
+      </ion-segment-button>-->
+    </ion-segment>
+    </div>
+
+</ion-header>
+
+
+<ion-content padding>
+    
+    <div class="paddingTop" [ngSwitch]="globalObj.tabSelected">
+        <ion-list *ngSwitchCase="'inbox'">
+            
+            <div *ngFor="let notes of notesList" class="mailBlock">
+                <div (click)="notesDetails(notes.notes_id, 'inbox')">
+            <div class="mailername textoverlap attachtomail fontsize4">{{notes.subject}} 
+                    <div class="mailinginfo fontsize4">
+                        <ion-icon *ngIf="notes.attachments>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{notes.created_date_app | date:'d MMM h:mm a'}}</div></div>
+           <div class="subtitle textoverlap fontsize4 color39">{{(globalObj.placeholder) != 'draft' ? notes.class_section: ""}}</div>
+           <div class="subtitle textoverlap fontsize4 color39">{{notes.notes_title}}</div>
+           <div class="subtitletext fontsize4 color52"> Shared by: {{notes.sender_name}}</div>
+        </div>  </div>
+
+        
+            
+            
+        </ion-list>
+        
+        
+        <ion-list *ngSwitchCase="'sent'">
+            <div *ngFor="let notes of notesList" class="mailBlock">
+                <div (click)="notesDetails(notes.notes_id, 'sent')">
+            <div class="mailername textoverlap attachtomail fontsize4">{{notes.subject}} 
+                    <div class="mailinginfo fontsize4">
+                        <ion-icon *ngIf="notes.attachments>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{notes.created_date_app | date:'d MMM h:mm a'}}</div></div>
+           <div class="subtitle textoverlap fontsize4 color39">{{notes.class_section}}</div>
+           <div class="subtitle textoverlap fontsize4 color39">{{notes.notes_title}}</div>
+           <div class="subtitletext fontsize4 color52"> Shared by: {{notes.sender_name}}</div>
+        </div> </div> 
+            
+        </ion-list>
+        
+        
+        <ion-list *ngSwitchCase="'draft'">
+            
+            <div *ngFor="let notes of notesList" class="mailBlock">
+                <div (click)="notesDetails(notes.notes_id, 'draft')">
+            <div class="mailername textoverlap attachtomail fontsize4">{{notes.subject}} 
+                    <div class="mailinginfo fontsize4">
+                        <ion-icon *ngIf="notes.attachments>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{notes.created_date_app | date:'d MMM h:mm a'}}</div></div>
+           <div class="subtitle textoverlap fontsize4 color39">{{notes.class_section}}</div>
+           <div class="subtitle textoverlap fontsize4 color39">{{notes.notes_title}}</div>
+           <div class="subtitletext fontsize4 color52"> Created by: Me</div>
+        </div> </div> 
+        </ion-list>
+    </div>
+    
+    <ion-fab right bottom>
+  
+       <ion-icon ion-fab mini name="add" (click)="createNotes()"></ion-icon>
+    
+    </ion-fab>
+
+</ion-content>
+
+

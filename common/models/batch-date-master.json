@@ -1,0 +1,45 @@
+{
+  "name": "batch_date_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "batch_name": {
+      "type": "string",
+      "required": true
+    },
+    "session_id": {
+      "type": "number",
+      "required": true
+    },
+    "batch_start_date": {
+      "type": "date",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    }
+  },
+  "validations": [],
+  "relations": {
+    "session_data": {
+      "type": "belongsTo",
+      "model": "academic_session_master",
+      "foreignKey": "session_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

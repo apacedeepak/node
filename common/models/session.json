@@ -1,0 +1,45 @@
+{
+  "name": "session",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "schoolId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "session_id": {
+      "type": "number"
+    },
+    "session_name": {
+      "type": "string",
+      "required": true
+    },
+    "start_date": {
+      "type": "date",
+      "required": true
+    },
+    "end_date": {
+      "type": "date",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "school_session": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "schoolId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

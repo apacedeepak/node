@@ -1,0 +1,67 @@
+page-profile {
+    .padding10{padding:10px;}
+    .background{ background-color:#f6f6f6;}
+    .profileHead{
+        background: #3c6ecd;
+        padding-bottom:1rem;
+        text-align:center;
+        .profilethumb {
+    width:6rem;
+    height:6rem;
+    display:inline-block;
+    overflow:hidden;
+    position: relative;
+    border-radius:80%;
+    box-shadow:0px 0 0px 2px #ffffff;
+    vertical-align: middle;
+    img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 80%;
+    }
+        }
+    }
+    .twoColumn {
+        box-shadow: rgba(221, 221, 221, 0.65) 0px 0px 5px 3px;
+        border-radius: 4px;
+        overflow: hidden;
+        padding:1.5rem;
+        background-color:#fff;
+    .fieldcover{ border-bottom:1px solid #d4d4d4; height:5.5rem; margin-bottom:1.5rem;
+    .text-input-md{width:100%; margin:0;height: 3rem; font-size:1.7rem;line-height: 3.4rem;}
+    .inputvalue{height: 3rem; font-size:1.7rem; line-height: 3.4rem;}
+    .label-md{ margin:0; color:#4473cd; font-size:1.3rem;}
+    .hide{ display:none;}	
+    }
+    }
+    
+  .editcolor{color:#a5a5a5;}
+
+.editprofilebtn{background-color: #4473cd;
+width: 5rem;
+height: 5rem;
+border-radius: 80%;
+padding: 12px !important;
+box-shadow:0 4px 3px 3px rgba(196, 190, 190, 0.36);
+position: fixed;
+right: 3.4rem;
+bottom: 2rem;
+}
+.segment-md .segment-button{opacity: 1;color: #6e6e6e;    border-bottom-width: 4px;font-size: 1.5rem;border-color: #fff;line-height: 4.5rem;height:4.8rem;}
+.segment-md-primary .segment-button.activated, .segment-md-primary .segment-button.segment-activated {
+    border-color: #ff8633;
+    color: #ff8633;
+    opacity: 1;
+}
+.floatright{float: center;}
+.iconround{border: 1px solid #ef7211;
+    padding: 0px 4px;
+    border-radius: 100%;
+    background-color: #ef7211;
+    color: white;position: relative;
+    right: 10px;}
+.iconedit{font-size: 1.0em;}
+}

@@ -1,0 +1,639 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../node_modules/loopback-include-through-mixin",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "school": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "session": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "section": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "notes": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_notes": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_sections": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "parent": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "staff": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "groups": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "group_users": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "subject": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_subject": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "class_subject": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "oauthclient": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "oauthaccestoken": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "login": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "homework": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_homework": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "submitted_homework": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "communication": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "message_recipient": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "constant": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "fileupload": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "user_device_token": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "master_user_log": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "uploadtobroker": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "ctp": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "ctp_configuration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "attendence_rule": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "financial_year": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_apply": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_details": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_scheme_details": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_scheme": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_in_out_time": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_attendance": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_leave_apply": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "layoutmenulist": {
+    "dataSource": null,
+    "public": true
+  },
+  "announcement": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "announcement_assign": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_subject_attendance": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_calendar": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "holiday_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "holiday_assign_details": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "portal_login_image": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "notification": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "registration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "product_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "master_product_assign": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "country_configuration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "mail_configuration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "tle_config": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "attendance_master": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "attendance_detail": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "otp_information": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "sendmail",
+    "public": false
+  },
+  "dashboard": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leaveApplyStudent": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_school": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_login": {
+    "dataSource": "mysqlolddb",
+    "public": true
+  },
+  "user_type": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "role": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "indiscipline": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "indiscipline_history": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "other_registration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "applicant_info": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_defaulter": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "receipt": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leave_reason": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "receipt_detail": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_remark": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "studyplan": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "emscc_sync_log": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "class": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "medical": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "illness": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "allergies": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "vaccination": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "hygiene": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "expense": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "imprest_collection": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "common": {
+    "dataSource": null,
+    "public": true
+  },
+  "socketservice": {
+    "dataSource": null,
+    "public": true
+  },
+  "polls": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "attendance_timetable_structure": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "attendance_timetable_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "attendance_timetable_detail": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "poll_users": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "leftmenu": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "chat": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "chat_user": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "validator": {
+    "dataSource": "mysqldb",
+    "public": false
+  },
+  "syncdetail": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "syncdata": {
+    "dataSource": "mysqlolddb",
+    "public": false
+  },
+  "sso_url_configuration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "feedback_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_feedback_remarks": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_feedback_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "course_mode": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "iitjeereport": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_head_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_structure_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "boards": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "transfer": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_structure_detail": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "equipment": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "lmsapi": {
+    "dataSource": null,
+    "public": true
+  },
+  "duration_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "doubts_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "doubts_solution": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "term_name": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_structure_term_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "assign_term_fee": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "batch_date_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "academic_session_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "center_room_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "center_room_equipment_details": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_fee_structure": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "student_fee": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_category_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_item_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_item_unit_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_raise_request": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_request_status_log": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "inv_request_status": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "revenue_target": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "myhr": {
+    "dataSource": "db",
+    "public": true
+  },
+  "microschedule_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "lms_class_subject": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "batch_planning": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "batch_planning_timetable": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "revenue_target_fee_term": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "enquiry": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "expense_category_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "imprest_request": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "expense_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "expense_request": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "expense_payment_mode": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "expense_for": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "dpp": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_refund_request_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "fee_refund_request_detail_master": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_feedback": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "refund_configuration": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "menumaster": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "user_feedback_frequency": {
+    "dataSource": "mysqldb",
+    "public": true
+  },
+  "website": {
+    "dataSource": null
+  },
+  "migration": {
+    "dataSource": "mysqldb",
+    "public": true
+  }
+}

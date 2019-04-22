@@ -1,0 +1,16 @@
+.mt15{margin-top: 20px;}
+.mb15{margin-bottom: 20px;}
+.inputItem{ min-height: 55px;}
+.mb25{ margin-bottom: 25px;}
+.mb15{ margin-bottom: 15px;}
+.mr10{margin-right: 10px;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;}
+a > .fa-trash-o{color:red;}
+a > .fa-pencil{color:#0b4ac1;}
+.dblock{ display: block;}
+.maxW{max-width: 70px; display: inline-block;}
+.customDivHead { color: #fff; background: #0b3fa2;}
+.customSearchTiTle {margin-top:5px;}
+.btn{border-radius: 4px;}
+.divSpace {margin-top:10px;}

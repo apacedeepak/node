@@ -1,0 +1,46 @@
+{
+  "name": "user_device_token",
+  "plural": "userdevicetoken",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "idInjection": false,
+    "mysql": {
+      "table": "user_device_token"
+    }
+  },
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "device_token": {
+      "type": "string",
+      "required": true
+    },
+    "device_type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "network_id": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

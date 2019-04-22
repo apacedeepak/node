@@ -1,0 +1,318 @@
+
+page-teacher-dashboard {
+.header-md{
+font-size:2rem;
+.notifications {
+text-align:center !important;
+position:relative;
+.badge-md-danger {
+position: absolute;
+top: 0;
+right: 10px;
+border-radius: 80%;
+font-weight: normal;
+}
+.ion-md-notifications {
+font-size:1.5em;
+}
+a {
+color:#fff;
+text-decoration:none;
+}
+}
+}
+.content-md {
+	background: #f3f3f3 !important;
+}
+.footer-md::before, .footer-md::after {
+	display: none !important;
+}
+.footer-md {
+	padding: .5rem .5rem .2rem .5rem;
+button {
+background:#fb8134 !important;
+text-transform:capitalize;
+font-size:1.8rem;
+padding:2.5rem 2rem;
+border-radius:4px;
+}
+}
+.stundentInfo {
+	background: #3c6ecd;
+	padding-top:1rem;
+	padding-bottom:.8rem;
+.profilethumb {
+width:6rem;
+height:6rem;
+display:inline-block;
+overflow:hidden;
+position: relative;
+border-radius:80%;
+box-shadow:0px 0 0px 2px #ffffff;
+margin-top:.8rem;
+}
+.profilethumb img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+.userInfo{
+ label {
+	display: inline-block;
+}
+span {
+	color: #fff200;
+}
+p {
+	margin:.4rem 0;
+	font-size: 1.3rem;
+	color: #fff;
+}
+.col{padding:0;}
+}
+}
+.twoColumn {
+	box-shadow: 0 0 5px 3px #ddd;
+	overflow: hidden;
+	margin-bottom: 14px;
+.col9 {
+padding:0;
+}
+}
+.padding10 {
+	padding: 1.2rem!important;
+}
+.has-feedback {
+	position: relative;
+}
+.iconColumn {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #ff4081;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #ff4081;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+span {
+background:#d9366e;
+width: $db-icon-wdth;
+height:$db-icon-hgt;
+text-align:center;
+border-radius:80%;
+line-height:$db-icon-lhgt;
+font-size:1.9rem;
+}
+}
+.mailInfo {
+	padding:0;
+       .ion-md-link{margin-right: 5px;}
+ h4 {
+color:#ff4081;
+
+    border-radius: 4px 4px 0 0;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-top: 1rem;
+ a {
+color:#ff4081;
+text-decoration:none;
+}
+ .badge-md-danger {
+border-radius: 80%;
+font-weight: normal;
+vertical-align: text-top;
+}
+}
+.mailername {
+	padding-left: 1rem;
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+.subtitle {
+	padding-left: 1rem;
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+ .description {
+	padding-left: 1rem;
+	display: block;
+	font-size: 1.2rem;
+	color: #525252;
+ p{margin:0}
+ h1{margin:0}
+ h2{margin:0}
+ h3{margin:0}
+ h4{margin:0}
+ h5{margin:0}
+ h6{margin:0}
+ td{font-size:1.2rem; height: auto !important;
+font{font-size:1.2rem !important;}
+}
+}
+.textoverlap {
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 20px;
+    line-height: 20px;
+}
+
+.mailBlock {
+	border-bottom: 1px solid #e3e3e3;
+    padding-bottom: .5rem;
+    margin-bottom: .6rem;
+    margin-left: 0rem;
+}
+.mailBlock:last-child {
+	border-bottom: 0px solid #e3e3e3;
+	padding-bottom: 0px;
+
+}
+.attachtomail{padding-right:9rem;position:relative;
+.mailinginfo{position: absolute;right: 0;top:0;font-size: 1.3rem;font-weight: 400; color: #3C6ECD;padding-right:1rem}
+}
+}
+.hometheme {
+ .iconColumn {
+background:#f7b63e;
+ span {
+background:#f7b63e;
+}
+}
+.mailInfo {
+ h4 {
+color:#fff;
+background:#f7b63e;
+ a {
+color:#f7b63e;
+}
+ .badge-md-danger {
+background-color:#856629;
+}
+}
+.mailername {
+	position: relative;
+ span {
+font-size:1.3rem;
+font-weight:500;
+position:absolute;
+right:0;
+top:0;
+color:#525252;
+ a {
+color:#6cadf4;
+text-decoration:none;
+}
+}
+}
+}
+}
+
+.messagetheme {
+	.iconColumn {
+   background:#008eaa;
+	span {
+   background:#008eaa;
+   }
+   }
+   .mailInfo {
+	h4 {
+   color:#fff;
+   background:#008eaa;
+	a {
+   color:#008eaa;
+   }
+	.badge-md-danger {
+   background-color:#004f5f;
+   }
+   }
+   .mailername {
+	   position: relative;
+	span {
+   font-size:1.3rem;
+   font-weight:500;
+   position:absolute;
+   right:0;
+   top:0;
+   color:#525252;
+	a {
+   color:#6cadf4;
+   text-decoration:none;
+   }
+   }
+   }
+   }
+   }
+   .announcetheme {
+	.iconColumn {
+   background:#ff3f7f;
+	span {
+   background:#ff3f7f;
+   }
+   }
+   .mailInfo {
+	h4 {
+   color:#fff;
+   background:#ff3f7f;
+	a {
+   color:#ff3f7f;
+   }
+	.badge-md-danger {
+   background-color:#8f2648;
+   }
+   }
+   .mailername {
+	   position: relative;
+	span {
+   font-size:1.3rem;
+   font-weight:500;
+   position:absolute;
+   right:0;
+   top:0;
+   color:#525252;
+	a {
+   color:#6cadf4;
+   text-decoration:none;
+   }
+   }
+   }
+   }
+   }
+
+.text-center{text-align:center}
+.text-info{color: #3c6ecd; padding: 5px 12px; margin: 0;}
+.paerclip{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+img{height: .9rem;}
+}
+.readmail {
+ .mailername {
+font-weight:300;
+ span {
+color:#7e7e7e;
+}
+}
+.subtitle {
+	font-weight: 300;
+}
+.description {
+	color: #7f7f7f;
+	font-weight: 300;
+}
+}
+.mailStatus{width:10rem; position: absolute; right: 0; top:0; background: #1e72c7; height: 100%; color: #fff; display: flex;
+	justify-content: center; align-items: center;font-size: 1.3rem;text-align: center;}
+	.hmblok{ position: relative; padding-right: 11rem;}
+}

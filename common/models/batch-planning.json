@@ -1,0 +1,1 @@
+{"name":"batch_planning","base":"PersistedModel","idInjection":true,"options":{"validateUpsert":true},"properties":{"timetable_master_id":{"type":"number","required":true},"logs":{"type":"string","required":false},"created_date":{"type":"date","dataType":"timestamp","defaultFn":"now"}},"validations":[],"relations":{},"acls":[],"methods":{}}

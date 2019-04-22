@@ -1,0 +1,83 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+      <h5 class="pull-left">{{'Batch Summary Report'| translate}}</h5>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left chartMinhg">
+        <p-chart type="pie" [data]="chartData" ></p-chart>
+    
+  </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+  
+    <select   class="form-control cleanup validate-empty width150"  name="subject_id" #subject_id (change)="getSyllabusCoverage(subject_id.value)">
+          <option value="" >All</option>
+          <option value="2" >Math</option>
+          
+      </select>
+    <div class="clearfix"></div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered customTable mt15">
+            <thead class="thheadbg">
+                <tr>            
+                    <th>{{'Subject' | translate}}</th>
+                    <th >{{'Total Topic Count' | translate}}</th>
+                    <th>{{'Covered Topic' | translate}}</th>
+                    <th >{{'Pending Topic' | translate}}</th>
+                                      
+                </tr>
+            </thead>
+            <tbody >
+                    <tr>     
+                                      
+                        <td>{{subjectName}}</td>
+                        <td>{{totalTopic}}</td>
+                        <td>{{coveredTopic}}</td>
+                        <td>{{pendingTopic}}</td>
+                                                              
+                    </tr>
+            </tbody>
+        </table>
+       
+  
+   
+    </div>
+    </div>
+  
+  
+   <div  class="col-sm-12 col-md-12 pull-left mt15">
+       <div class="table-responsive">
+        <table class="table table-striped table-bordered customTable mt15">
+            <thead class="thheadbg">
+                <tr>            
+                    <th>{{'Subject' | translate}}</th>
+                    <th >{{'Topic' | translate}}</th>
+                    <th>{{'Status' | translate}}</th>
+                    <th >{{'Date of Completion' | translate}}</th>
+                    <th >{{'Faculty' | translate}}</th>
+                   
+                                        
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngIf="!syllabusCoverage.length"><td colspan="9">No Record Found !</td></tr>
+
+                <tr *ngFor="let item of syllabusCoverage; let i = index">     
+                                      
+                    <td></td>
+                    <td>{{item.topicName}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.completeDate | date:'dd MMM yyyy'}}</td>
+                    <td>{{item.facultyName}}</td>
+                              
+                </tr>
+            </tbody>
+        </table>
+       
+  
+   
+    </div>
+
+
+</div>

@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar>
+   <ion-title>Homework Reply</ion-title>
+   <div class="htool">
+        <a href="javascript:void(0)" (click)="openAttachmentLocation()"><ion-icon class="paerclip"><img src="/assets/imgs/papperclip.png"></ion-icon></a> 
+        <ion-button type="submit"   class="leftmargin" (click)="onSubmit()"><ion-icon class="sendmail"><img src="/assets/imgs/send-mail.png"></ion-icon></ion-button>
+   </div>
+    </ion-navbar>
+    </ion-header>
+  
+  
+  <ion-content padding>
+      
+      <ion-grid>
+          
+    <div class='rowborder tomail'>
+  <ion-label class='toclass'>To</ion-label>
+    <div class='text-input-div'>
+      <span class="maillable">{{globalObj.teacherName}}
+      </span><br>
+           
+    </div>    
+   </div>
+   <div class='rowborder tomail'>
+    <ion-label class='toclass'>Title</ion-label>
+      <div class='text-input-div labelFrom'>
+        <span class="">{{globalObj.title}}
+        </span><br>
+             
+      </div>    
+     </div>
+
+             
+      <br>
+      <!-- <div contenteditable="true" id="contentText" (click)="clearPlaceholder()" [innerHTML]= "globalObj.replyContent | pipesRemovehtmltags" class="contentarea" ></div> -->
+        <textarea class="contentarea" [(ngModel)]="globalObj.replyContent" placeholder="Enter a text"></textarea>
+      
+    
+   <ion-row>
+  
+       
+          <ion-col class="paddingnone" *ngFor="let photo of globalObj.photos; let id = index">
+              <span class="attachport"><ion-icon class="paerclip"><img src="/assets/imgs/papperclip-black.png"></ion-icon> {{photo}} <button  class="removefile" type="button" (click)="removeAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+    </ion-col>
+        </ion-row>
+      
+        <ion-row>
+          <ion-col col-2 class="profileimg">
+             <img [src]="globalObj.teacherImage">
+          </ion-col>
+          <ion-col col-6>
+             <p>{{globalObj.teacherName}} <span class="lightGray"></span></p>
+          </ion-col>
+          <ion-col col-4 class="text-right subdate">
+             <p><small>{{globalObj.creationDate | date:'d MMM'}}</small></p>
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-2 class="profileimg">
+             <img [src]="globalObj.studentImage">
+          </ion-col>
+          <ion-col col-6>
+             <p>To : Me<span class="lightGray"></span></p>
+          </ion-col>
+          <ion-col col-4 class="text-right subdate"><small>Submission: <b>{{globalObj.targetDate | date:'d MMM'}}</b></small>          
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-12>
+             <!-- <ng-container  *ngFor="let attach of globalObj.attachment">
+                <span class="attachport">
+                   {{attach | separator: '~': '1'}}
+                   <a download="{{globalObj.domainUrl}}/{{attach}}" target="_self" href="{{globalObj.domainUrl}}/{{attach}}" class="downloadfile">
+                      <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                   </a>
+                </span>
+             </ng-container> -->
+             <div *ngFor="let item of globalObj.attachment"> 
+              <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+              <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+              </span> 
+          </div>
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-12 class="htmlcontent">
+             <title></title>
+             <div  [innerHTML]="globalObj.content | pipesRemovehtmltags"> </div>
+            
+          </ion-col>
+       </ion-row>
+              
+   </ion-grid>
+  </ion-content>
+  
+  
+  

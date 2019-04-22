@@ -1,0 +1,88 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox">
+      <h5 class="h5 pull-left">
+        <a (click)="discardremark()" routerLink="/group/creategroup">
+          <i class="fa fa-fw fa-close"></i>
+        </a>  {{'create_group' | translate}}
+      </h5>
+      <div class="pull-right creatNewGrp">
+        <a (click)="creategroup()" routerLink="/group/creategroup"> {{'done' | translate}}</a>
+      </div>
+    </div>
+    <form [formGroup]='form' class="ng-pristine ng-valid">
+
+      <section class="createGroupForm">
+        <div class="inputBar">
+          <label class="fieldName"> {{'group_of' | translate}}</label>
+          <select #class (change)="getassignedsection(class.value)">
+               <option value="" *ngIf="product_type != 'emscc'" selected="selected">  {{'all' | translate}} {{'class' | translate}}</option>
+               <option value="" *ngIf="product_type == 'emscc'" selected="selected">   {{'all_course_type' | translate}}</option>
+               
+               <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+            </select>
+          <select #section (change)="getassignedsubject(section.value,section)">
+               <option value="" *ngIf="product_type != 'emscc'" selected="selected">  {{'all' | translate}} {{'section' | translate}}</option>
+               <option value="" *ngIf="product_type == 'emscc'" selected="selected">  {{'all' | translate}} {{'batch' | translate}}</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+            </select>
+          <select #subject (change)="getassignedclasssecandgroup(subject.value)">
+                      <option  value="" selected="selected"> {{'select_subject' | translate}}</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+          </select>
+        </div>
+        <div class="inputBar">
+          <label class="fieldName"> {{'group_name' | translate}}</label>
+          <input type="text" id="gpname" formControlName='subject' maxlength="50" placeholder=" {{'enter_group_name' | translate}}">
+        </div>
+
+      </section>
+      <div class="filterStatus">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-right" width="68">
+                <!-- <input type="checkbox" (click)="allstudentckd($event.target.checked)" style="margin: -4px 0 0 0;vertical-align: middle;">Add</th> -->
+              <th> {{'admission_no' | translate}}</th>
+              <th *ngIf="product_type != 'emscc'"> {{'roll_no' | translate}}</th>
+              <th>  {{'student_name' | translate}}</th>
+              <!-- <th>Parent Name</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lst of studentdata; index as i;">
+              <td class="text-center" formArrayName="admincheck">
+                <input type="checkbox" id="details.user_id" formControlName={{i}} (change)="adminchange(lst.user_id, $event.target.checked)">
+              </td>
+              <td>{{lst.admission_no}}</td>
+              <td *ngIf="product_type != 'emscc'">{{lst.roll_no}}</td>
+              <td>{{lst.student_name}}</td>
+
+            </tr>
+            <tr *ngIf="studentdata.length >= 0">
+              <td colspan="4" style="padding-left: 400px;">  {{'no_record_found' | translate}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </form>
+  </div>
+  <!--Success Pupup-->
+  <div *ngIf="discardremk" class="successMessage discardpoup hide">
+    <div>
+      <span> {{'discard_group_confirm' | translate}}<p><button type="button" class="btn btn-default btn-info" (click)="rmkcancel()" > {{'cancel' | translate}}</button>
+      <button type="button" class="btn btn-default btn-info" (click)="rmkdiscard()" routerLink="/group/grouplist" > {{'discard' | translate}}</button></p></span>
+    </div>
+  </div>
+  <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessage}}</p><a routerLink="/group/grouplist" class="msgclose sm-blue-btn" (click)="closeme()"> {{'ok' | translate}}</a></span></div>
+  </div>
+  <div *ngIf="responseMessagegrpexit" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessagegrp}}</p><a routerLink="/group/creategroup" class="msgclose sm-blue-btn" (click)="closeme()"> {{'ok' | translate}}</a></span></div>
+  </div>
+
+</div>

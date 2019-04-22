@@ -1,0 +1,8 @@
+.boxModel{margin-top:15px !important; min-height: 330px; max-height: 330px;}
+
+.mailBox:nth-child(3){border-bottom: 0;}
+.inboxTab .mailBox { padding-left: 70px;}
+.inboxTab .capsletter {left: 15px;}
+.mControllerOverhide{right: 10px;}
+.mailBox{padding-right:155px}
+.submail{padding-right:140px}

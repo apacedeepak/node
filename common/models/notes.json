@@ -1,0 +1,75 @@
+{
+  "name": "notes",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "notes_title": {
+      "type": "string"
+    },
+    "notes_text": {
+      "type": "Text"
+    },
+    "attachments": {
+      "type": "Text"
+    },
+    "author": {
+      "type": "string"
+    },
+    "share_status": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "notes_type": {
+      "type": "string",
+      "default": "draft"
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "subjectId": {
+      "type": "number"
+    },
+    "sectionId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "belongs_to_users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "notesId",
+      "through": "user_notes"
+    },
+    "have_assignee": {
+      "type": "hasMany",
+      "model": "user_notes",
+      "foreignKey": "notesId"
+    },
+    "belongs_to_subject": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    },
+    "belongs_to_section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "author"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

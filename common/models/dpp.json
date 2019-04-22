@@ -1,0 +1,28 @@
+{
+  "name": "dpp",
+  "plural": "dpp",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": { "validateUpsert": true },
+  "properties": {
+    "userId": { "type": "number", "required": true },
+    "sectionId": { "type": "number", "required": true },
+    "subjectId": { "type": "number", "required": true },
+    "topicId": { "type": "number", "required": true },
+    "schoolId": { "type": "number", "required": true },
+    "status": { "type": "string", "required": true },
+    "test_date": { "type": "date", "required": true },
+    "lms_dpp_message": { "type": "string" },
+    "added_date": { "type": "date" }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+  },
+  "acls": [],
+  "methods": {}
+}

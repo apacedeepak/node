@@ -1,0 +1,190 @@
+<div class="hide" id="fetchresult">
+  <div class="boxModel pull-left overFlow maxHightOuto" style="margin-top:15px;">
+    <div class="headBox">
+      <h5 class="h5 pull-left"> {{'study_plan' | translate}}</h5>
+    </div>
+    <h4 class="col-sm-12 col-md-12 viewStplan"> {{'view_study_plan' | translate}} <a href="#" class="pull-right btn btn-primary btn-sm" data-toggle="modal" (click)="reset()" data-target="#uploadStudyPlan"><i class="fa fa-upload"></i> {{'upload_study_plan' | translate}}</a></h4>
+    <div class="searchFilterBlock">
+      <div class="formLabel"> {{'class' | translate}}</div>
+      <select  #classs (change)="getassignedsection(classs.value)">
+               <option value="" selected="selected">  {{'all' | translate}}  {{'class' | translate}}</option>
+               <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+            </select>
+
+      <div class="formLabel"> {{'section' | translate}}</div>
+      <select #sections (change)="getassignedsubject(sections.value,section)">
+                    <option  value="" selected="selected"> {{'all' | translate}} {{'section' | translate}}</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+      </select>
+
+      <div class="formLabel"> {{'subject' | translate}}</div>
+      <select #subjects (change)="getassignedclasssecandgroup(subjects.value)">
+                      <option  value="" selected="selected">  {{'select_subject' | translate}}</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+            </select>
+
+      <div id="doneid" class="btngrup"><a (click)=" $event.preventDefault(); seeresult()" href="#" class="btn btn-default"> {{'display' | translate}}</a></div>
+    </div>
+
+    <div class="col-sm-12 col-md-12" *ngIf="fetchresult">
+      <h4 class="text-center midline"> <span>{{subjectname}}</span></h4>
+      <table class="table tablestyle topgap">
+        <thead>
+          <tr>
+            <td align="center"> {{'serial_no' | translate}}</td>
+            <td align="center"> {{'subject' | translate}}</td>
+            <td align="center"> {{'class' | translate}} - {{'section' | translate}} </td>
+            <td align="center"> {{'file_name' | translate}}</td>
+            <td align="center"> {{'upload_date' | translate}}</td>
+            <td align="center"> {{'action' | translate}}</td>
+          </tr>
+        </thead>
+        <tbody> 
+            <tr *ngIf="renderTimetable==''">
+              <td style="text-align: center;" colspan="6">  {{'no_record_found' | translate}}</td>
+
+              </tr>
+           <ng-container *ngIf="renderTimetable;else Timetablecond">
+          <ng-container *ngFor="let timetable of renderTimetable; index as j;">
+         
+            <tr> 
+            <td align="center">{{j+1}}</td>
+            <td align="center">{{timetable.subjectName}}</td>
+            <td align="center">{{timetable.sectionName}}</td>
+            <td align="center">
+              <a target="_self" download="{{serverurl}}{{timetable.attachments[0]}}" href="{{serverurl}}{{timetable.attachments[0]}}">{{timetable.attachments[0] }}</a>
+            </td>
+            <td align="center">{{timetable.createdDate | date: 'yyyy/MM/dd'}}</td>
+            <td align="center">
+              <a href="#uploadfile" style="text-decoration: none" (click)=" $event.preventDefault(); showfilediv(timetable.id)" href="#uploadfile{{timetable.id}}"><i class="fa fa-fw fa-pencil-square-o"></i>
+            </a>
+            <a (click)=" $event.preventDefault(); removestudyfun(timetable.id)" style="text-decoration: none" href="#">
+              <i class="fa fa-fw fa-trash"></i>
+            </a>
+            </td>
+          </tr>
+           <tr id="uploadfile{{timetable.id}}" class="collapse"  style="background-color:#fff" >
+            <td align="right" colspan="6">
+              <div class="pull-right tableBtnGroup">
+                <div class='browsers pull-left'>
+                        <!-- <input-file
+                            minimal=true
+                            id="input-id"
+                            class="file"
+                            type="file"
+                            inputId="images"
+                            inputMaxFiles="5"
+                            disableUpload=true
+                            [(ngModel)]="inputFileModel"
+                          (acceptedFile)="onAccept($event, 'edit')"
+                          (removedFile)="onRemove($event)">
+                        </input-file> -->
+                        <input-file fileAccept="*" (acceptedFile)="onAccept($event,'edit')"  fileLimit="1" (deletedFile)="onRemove($event)"></input-file>
+                </div>
+                  <div class="updatefilename">{{nameofimage}}</div>
+                  <input type="button" class="btn btn-sm btn-used" name="sub" (click)="updatefiles(timetable.id)" value="{{'update'|translate}}">
+                  <a (click)=" $event.preventDefault(); removefiles(timetable.id)" class="btn btn-sm btn-used" href="#">
+                <i class="fa fa-fw fa-close" ></i> {{'close' | translate}}</a>
+                </div>
+          </td>
+          </tr> 
+        
+         
+          </ng-container>
+           </ng-container>
+          <ng-template #Timetablecond>
+          <tr>
+            <td align="center" colspan="6" class="text-info text-center">  {{'no_data_available' | translate}}</td>
+          </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div id="uploadStudyPlan" class="modal">
+    <div class="modal-dialog" style="min-width: 875px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">   {{'upload_study_plan' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+          <form class="ng-pristine ng-valid">
+            <div class="searchFilterBlock">
+              <div class="formLabel"> {{'class' | translate}}</div>
+              <select   id="classslist" #class (change)="getassignedsection(class.value)">
+               <option value="" selected="selected">  {{'all' | translate}}  {{'class' | translate}}</option>
+               <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+              </select>
+              <div class="formLabel"> {{'section' | translate}}</div>
+              <select #section (change)="getassignedsubject(section.value,section)">
+                       <option  value="" selected="selected">  {{'all' | translate}}  {{'section' | translate}}</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+              </select>
+              <div class="formLabel"> {{'subject' | translate}}</div>
+              <select #subject (change)="getassignedclasssecandgroup(subject.value)">
+                      <option  value="" selected="selected">  {{'select_subject' | translate}}</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+              </select>
+              <div class="col-sm-12 col-md-12 pull-left padding-left-none  padding-right-none" style="margin:15px 0">
+                <!-- <div class="alert alert-dismissible browsersBlock" *ngIf="isImage">
+                  <a href="#" class="close" data-dismiss="alert" (click)="removeAllFile(isImage)" aria-label="close">&times;</a>
+                  <div class="alert alert-dismissible fileContainer" *ngFor="let files of filelist; index as i;">
+                    <a href="#" class="close" data-dismiss="alert" (click)="removeFile(i,'new')" aria-label="close">&times;</a>
+                    <div class="attchedContent">
+                      <img src="{{fileimage[i]}}" alt="">
+                    </div>
+                    <div class="itemTitle">{{files.file.name}}</div>
+                  </div>
+                </div> -->
+
+                <div class='browsers '>
+                  <!-- <input-file 
+                    minimal=true 
+                    id="input-id" 
+                    class="file"
+                    type="file" 
+                    inputId="images" 
+                    inputMaxFiles="1" 
+                    disableUpload=false 
+                    [(ngModel)]="inputFileModel"
+                    (acceptedFile)="onAccept($event, 'add')" 
+                    (removedFile)="onRemove($event)">
+                  </input-file> -->
+                  <input-file fileAccept="*" (acceptedFile)="onAccept($event,'add')"  fileLimit="1" (deletedFile)="onRemove($event)"></input-file>
+                </div>
+
+              </div>
+            
+              <div class="clearfix"></div>
+              <div>
+                <span class="btn btn-default has-feedback" (click)="uploadpdf()"> {{'upload' | translate}}</span>
+              </div>
+                <div class="attachelist" *ngIf="attachelist" style="padding-left: 0;">
+                <ul>
+                  <li>
+                    <h6><i class="fa fa-fw fa-file-pdf-o"></i></h6> 
+                    <a download="{{serverurl}}{{attpath}}" target="_self" href="{{serverurl}}{{attpath}}" >
+                       <i class="fa fa-arrow-down"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+         
+          <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer" *ngIf="flag==true">
+          
+          <button type="button" class="btn" data-dismiss="modal" (click)="refresh()"> {{'close' | translate}}</button>
+        </div>
+        <div class="modal-footer" *ngIf="flag==false">
+          
+            <button type="button" class="btn" data-dismiss="modal" (click)="resest()"  > {{'close' | translate}}</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

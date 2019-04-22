@@ -1,0 +1,58 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+  <div class="headBox" style="border:0;padding: 0; min-height: inherit"><h5 class="h5 pull-left"><a href="report/performanceoverview"><i class="fa fa-fw fa-arrow-left"></i></a> Performance Overview (Weekly Test ) - <small> Attempted time - 4th Oct 2018, 09:30 PM</small> </h5></div>
+  
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+  <div class="boxModel pull-left">
+  <div class="headBox"><h5 class="h5 pull-left">Overall</h5></div>
+   <div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-left-none text-center"><img src="assets/images/reports/rank.png"></div>
+   <div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-right-none">
+    <h4 class="mtp30">Rank 	:  <strong>{{rankInfoObj.get_rank}}</strong>/{{rankInfoObj.total_rank}}</h4>
+     <h4>Percentile :  <strong>{{rankInfoObj.percentile}}</strong></h4>
+    </div> 
+    </div>
+    </div>
+    
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+  <div class="boxModel pull-left">
+  <div class="headBox"><h5 class="h5 pull-left">Score</h5></div>
+   <div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-left-none text-center">
+    <p-chart type="doughnut" [options]="doughnoutoptionsscore" [data]="scoreData"></p-chart>
+   </div>
+   <div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-right-none">
+    <h4 class="mtp13"><img src="assets/images/reports/correct.png"> <strong>{{scoreInfoObj.correct_que}}</strong> Correct</h4>
+    <h4><img src="assets/images/reports/incorrect.png"> <strong>{{scoreInfoObj.incorrect_que}}</strong> Incorrect</h4>
+     <h4><img src="assets/images/reports/skipped.png"> <strong>{{scoreInfoObj.skipped_que}}</strong> skipped</h4>
+    </div> 
+    </div>
+    </div>
+    
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+  <div class="boxModel pull-left">
+  <div class="headBox"><h5 class="h5 pull-left">Subject wise Analysis</h5></div>
+    <div class="col-xs-12 col-sm-4 col-md-4 pull-left padding-left-none padding-right-none text-center" *ngFor="let subjectScore of subjectWiseScoreObj; index as i;">
+      <!-- <div> <img src="assets/images/reports/physics.png"></div> -->
+      <div>
+        <p-chart type="doughnut" [options]="subjectScore.subject_option" [data]="subjectScore.subject_data"></p-chart>
+      </div>
+      <h4>{{subjectScore.subject_name}}</h4>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left text-center" style="margin-top:14px;"><a href="report/subjectwiseperformance" class="btn btn-info btn-block">View Detailed Subject Analysis</a></div>
+    
+    </div>
+    </div>
+    
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+  <div class="boxModel pull-left">
+  <div class="headBox"><h5 class="h5 pull-left">Summary & Suggestions</h5></div>
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left margintop20">
+    <p *ngFor="let experAdvice of experAdviceObj; index as i;"><span class="title-blue-sm">{{experAdvice.title}}</span><br>
+      <span [innerHTML]="experAdvice.expert_comment"></span>
+    </p>
+    <hr>
+  
+  </div>
+    
+  </div>
+  </div>
+  
+  </div>

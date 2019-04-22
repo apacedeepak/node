@@ -1,0 +1,13 @@
+.commnicationBox li.active a {
+    background-color: #2196f3;
+    color: #fff;
+}
+.boxModel{margin-top: 15px;}
+.ptop15{margin-top: 15px;}
+
+.mailBox:nth-child(3){border-bottom: 0;}
+.inboxTab .mailBox { padding-left: 70px;}
+.inboxTab .capsletter {left: 15px;}
+.mControllerOverhide{right: 10px;}
+.mailBox{padding-right:155px}
+.submail{padding-right:140px}

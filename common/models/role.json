@@ -1,0 +1,49 @@
+{
+  "name": "role",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "role_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "added_by": {
+      "type": "string"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "is_editable": {
+      "type": "number",
+      "default": 1
+    },
+    "user_type": {
+      "type": "string"
+    },
+    "is_reporting": {
+      "type": "string",
+      "default": "N"
+    },
+    "communicate_two_way": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

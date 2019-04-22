@@ -1,0 +1,85 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox">
+      <h5 class="h5 pull-left"> {{'add_behavior_types' | translate}}</h5>
+    </div>
+    <div class="col-sm-12 col-md-12 text-center pull-left">
+      <ul class="nav center-Tab">
+        <li>
+          <a class="active" data-toggle="tab" href="#positivefeedback" (click)="toggleBehaviour()"> {{'add_positive_behavior' | translate}}</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#negativefeedback" (click)="toggleBehaviour()"> {{'add_negative_behavior' | translate}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content tabPadding tabedit">
+      <div id="positivefeedback" class="tab-pane active">
+        <div class="inputbehaviou">
+          <form [formGroup]="behaviourForm" (ngSubmit)="behaviourSubmit('Positive')" novalidate>
+            <div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+              <label> {{'add_behavior_icon' | translate}}</label>
+              <input type="file" id="icon" value="Upload Icon" (change)="onFileChange($event, 'positive')"
+                #fileInput> </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 pull-left">
+              <label> {{'add_behavior_type' | translate}}</label>
+              <input type="text" #input placeholder="{{'Enter Behavior Type' | translate}}"
+                formControlName="behaviour_type" name="behaviour_type"> </div>
+            <input type="submit" [value]="btnName |translate"> </form>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 pull-left" *ngFor="let obj of positiveArr">
+          <div class="stBox horizental">
+            <div class="fIcon" [ngStyle]="{'background-image':obj.icon ? 'url('+globalObj.domainUrlwithoutSlash+project_name+obj.icon+')' : 'url()' }">&nbsp;
+              <div class="firstLetter" *ngIf="!obj.icon">{{obj.name.charAt(0).toUpperCase()}}</div>
+            </div>
+            <div class="stName">
+              <label>{{ obj.name | ucfirst }}</label>
+              <div class="pull-right editb">
+                <a class="editbehave" (click)="editUserFeedbackMaster(obj, 'positive')">
+                  <i class="fa fa-fw fa-pencil-square-o"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="negativefeedback" class="tab-pane fade">
+        <div class="inputbehaviou">
+          <form [formGroup]="negativeBehaviourForm" (ngSubmit)="behaviourSubmit('Negative')" novalidate>
+            <div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+              <label> {{'add_behavior_icon' | translate}}</label>
+              <input type="file" value="Upload Icon" (change)="onFileChange($event, 'negative')"
+                #fileInputNegative> </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 pull-left">
+              <label> {{'add_behavior_type' | translate}}</label>
+              <input type="text" #negativeinput placeholder="{{'Enter Behavior Type' | translate}}"
+                formControlName="negative_behaviour_type" name="negative_behaviour_type"> </div>
+            <input type="submit" value="{{'Add' | translate}}"> </form>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 pull-left" *ngFor="let obj of negativeArr">
+          <div class="stBox horizental">
+            <div class="fIcon negativeBg" [ngStyle]="{'background-image':obj.icon ? 'url('+globalObj.domainUrlwithoutSlash+project_name+obj.icon+')' : 'url()' }">&nbsp;
+              <div class="firstLetter" *ngIf="!obj.icon">{{obj.name.charAt(0).toUpperCase()}}</div>
+            </div>
+            <div class="stName">
+              <label>{{ obj.name | ucfirst }}</label>
+              <div class="pull-right editb">
+                <a class="editbehave" (click)="editUserFeedbackMaster(obj, 'negative')">
+                  <i class="fa fa-fw fa-pencil-square-o"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="responseMessage" id="successpop" class="successMessage">
+  <div>
+    <span class="has-feedback">
+      <p>{{popmessage}}</p>
+      <a style="cursor: default;" class="msgclose sm-blue-btn" (click)="closeme()">{{'ok' | translate}}</a>
+    </span>
+  </div>
+</div>

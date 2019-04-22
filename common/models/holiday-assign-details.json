@@ -1,0 +1,31 @@
+{
+  "name": "holiday_assign_details",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "holiday_masterId": {
+      "type": "number",
+      "required": true
+    },
+    "sectionId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "holidays": {
+      "type": "belongsTo",
+      "model": "holiday_master",
+      "foreignKey": "holiday_masterId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

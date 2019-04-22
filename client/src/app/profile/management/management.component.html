@@ -1,0 +1,59 @@
+<ng-container>
+  <div class="col-sm-12 col-md-12 padding-left-none" style="margin-top: 15px;">
+     
+       
+          <div class="tab-content">
+
+              <div id="wards" role="tabpanel" class="tab-pane active">
+<!--                      <div class="dpBlock absposition">-->
+                  <div  style="margin-left: 370px;">
+                        
+                        <div class="dp d-inline-block"  style="background-image:url(assets/images/profile_img.jpg)"></div>
+                    </div>
+                  <form>
+                      <div class="row margintop20">
+                          <div class="col-sm-6 col-md-6">
+                              <h5 class="formH5"> {{'name' | translate}}</h5>
+                              <label class="inputStyle" >{{name}}</label>
+                              <!-- <label class="inputStyle" >--</label> -->
+                          </div>
+
+                      
+                        <div class="col-sm-6 col-md-6">
+                            <h5 class="formH5"> {{'address' | translate}}</h5>
+                            <label class="inputStyle" >{{address}}</label>
+                            <!-- <label class="inputStyle" *ngIf="!studentData.address">--</label> -->
+                        </div>
+
+                        <div class="col-sm-6 col-md-6">
+                            
+                            <h5 class="formH5"> {{'gender' | translate}}</h5>
+                            <label class="inputStyle" *ngIf="gender=='M'" >Male</label>
+                            <label class="inputStyle" *ngIf="gender=='F'" >Female</label>
+                            <!-- <label class="inputStyle" *ngIf="!studentData.emergency_number">--</label> -->
+                        </div>
+
+                        <div class="col-sm-6 col-md-6" >
+                            <h5 class="formH5"> {{'contact_number' | translate}}</h5>
+                            <label class="inputStyle" >{{mobile_number}}</label>
+                            <!-- <label class="inputStyle" *ngIf="!studentData.house">--</label> -->
+                        </div>
+
+        
+                      </div>
+                  </form>
+              </div>
+
+             
+
+
+             
+          </div>
+
+  </div>
+
+
+</ng-container>
+
+
+

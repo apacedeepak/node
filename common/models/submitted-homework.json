@@ -1,0 +1,56 @@
+{
+  "name": "submitted_homework",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "homeworkId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "attachment": {
+      "type": "Text",
+      "default": ""
+    },
+    "content": {
+      "type": "Text",
+      "default": ""
+    },
+    "submitted_date": {
+      "type": "date",
+      "required": true
+    },
+    "teacher_remark": {
+      "type": "Text"
+    },
+    "remark_date": {
+      "type": "date"
+    },
+    "remark_attachment": {
+      "type": "Text",
+      "default": ""
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "homework": {
+      "type": "belongsTo",
+      "model": "homework",
+      "foreignKey": "homeworkId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

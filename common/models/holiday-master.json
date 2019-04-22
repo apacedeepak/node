@@ -1,0 +1,59 @@
+{
+  "name": "holiday_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "default": "Holiday"
+    },
+    "description": {
+      "type": "string"
+    },
+    "applicable_date": {
+      "type": "date",
+      "required": true
+    },
+    "attendance_applicable": {
+      "type": "string",
+      "default": "Yes"
+    },
+    "attendance_applicable_for": {
+      "type": "string",
+      "default": "Both"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "added_by": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assigned_holidays": {
+      "type": "hasMany",
+      "model": "holiday_assign_details",
+      "foreignKey": "holiday_masterId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

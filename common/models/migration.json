@@ -1,0 +1,60 @@
+{
+    "name": "migration",
+    "base": "Model",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "admission_number": {
+            "type": "string",
+            "required": true
+        },
+        "first_name": {
+            "type": "string",
+            "required": true
+        },
+        "last_name": {
+            "type": "string",
+            "required": true
+        },
+        "gender": {
+            "type": "string",
+            "required": true
+        },
+        "mother_name": {
+            "type": "string"
+        },
+        "father_name": {
+            "type": "string"
+        },
+        "admission_date": {
+            "type": "string"
+        },
+        "dob": {
+            "type": "string"
+        },
+        "contact_number": {
+            "type": "string"
+        },
+        "paid_fee": {
+            "type": "number"
+        },
+        "due_fee": {
+            "type": "number"
+        },
+        "student_email": {
+            "type": "string"
+        },
+        
+        "migration_status": {
+            "type": "number",
+            "required": true,
+            "default": 0
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

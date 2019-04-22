@@ -1,0 +1,68 @@
+{
+  "name": "user_subject",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "subjectId": {
+      "type": "number",
+      "index": true
+    },
+    "class_subjectId": {
+      "type": "number"
+    },
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "user_type": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "number",
+      "index": true
+    },
+    "sectionId": {
+      "type": "number",
+      "index": true
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "subjects": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "assigned_section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "staff_users": {
+      "type": "belongsTo",
+      "model": "staff",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

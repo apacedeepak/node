@@ -1,0 +1,67 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{title}}</h5>
+      <span class="float-right" *ngIf="(userfeedbackfrequencyList.length==0)">
+        <button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm mr10 mt15">Add</button>
+      </span>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <div *ngIf="show_add_item_master">
+      <form (ngSubmit)="onSubmit(userfeedbackfrequencyForm.value)" [formGroup]="userfeedbackfrequencyForm" ngNativeValidate>
+        <input type="hidden" class="form-control" value="" formControlName='id' />
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+          <label>Number of Days
+            <span class="text-danger">*</span>: </label>
+          <input type="number" required class="form-control" formControlName="no_of_days" min="0" numbersOnly/>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-right divSpace text-left">
+          <input class="btn btn-primary mr10" value="Save" name="submit" id="submit" type="submit">
+          <button class="btn btn-primary mr10" (click)="getFromSet()">Reset</button>
+          <button class="btn btn-primary" (click)="getFromClose()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div *ngIf="show_item_master_list">
+      <div id="leaveTable" class="col-sm-12 col-md-12 pull-left">
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+          <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+          <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+        </div>
+        <table class="table table-striped table-bordered customTable" id="content" #content>
+          <thead class="thheadbg">
+            <tr>                 
+              <th class="col-md-4">Number of Days</th>             
+              <th class="col-md-4">Satus</th>
+              <th class="col-md-4">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userfeedbackfrequency of userfeedbackfrequencyList; index as i">                          
+              <td>{{userfeedbackfrequency.no_of_days}} </td>             
+              <td>
+                <ng-template [ngIf]="userfeedbackfrequency.status==1">
+                  Active
+                </ng-template>
+                <ng-template [ngIf]="userfeedbackfrequency.status==2">
+                  Inacive
+                </ng-template>                
+              </td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="userfeedbackfrequencyEdit(userfeedbackfrequency.id)">Edit</button>
+              </td>
+            </tr>
+            <tr *ngIf="(userfeedbackfrequencyList.length==0)">
+              <td colspan="6" align="center">
+                <span style="color:red;text-align: center;"> No record found..</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+    </div>
+  </div>
+</div>

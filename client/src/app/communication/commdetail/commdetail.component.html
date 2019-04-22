@@ -1,0 +1,80 @@
+ <div class="communication margin15">
+ <div class="headBox">
+<h5 class="h5 pull-left">{{globalObj.displayHeader|translate}}</h5>
+   <div class="pull-right createMsg" style="margin: 20px 15px 0 0;">
+    <!-- <a href='javascript:void(0)' title='Mark as Favourite' (click)="markasimp()"><i class="fa fa-fw fa-heart" [ngClass]="(globalObj.message_isimportant) == 'Yes' ? 'redColor' : ''"></i></a> -->
+    <a *ngIf="globalObj.place == 'Inbox'" href='javascript:void(0)' (click)="markasimp()"><i class="myFavrite" [ngClass]="(globalObj.message_isimportant) == 'Yes' ? 'redColor' : ''"></i></a>
+    <a *ngIf="globalObj.place == 'Inbox'" title="{{'reply'|translate}}" class="" id="reply" [routerLink]="['/communication/compose']" [queryParams]="{flag: 'reply',mesgeId: globalObj.message_id,place: globalObj.place}"> <i class="fa fa-fw fa-reply"></i></a>
+    <a title="{{'back'|translate}}" class="back" [routerLink]="['/communication/main']" [queryParams]="{place: globalObj.place}" > <i class="fa fa-fw fa-arrow-left"></i></a>
+   </div>
+</div>
+
+
+        <div style="display:block;" class="fullDescription" *ngIf="globalObj.place != 'Notice' && globalObj.place != 'Circular'">
+
+                <div class="headBlock">
+                   <div *ngIf="!globalObj.images && globalObj.countReceipent == 1" class="col-sm-1 col-md-1 mailerPic pull-left">
+                     <img alt="Image" src="assets/images/icons/profile_img.jpg"></div>
+                   <div *ngIf="globalObj.images && globalObj.countReceipent == 1" class="col-sm-1 col-md-1 mailerPic pull-left">
+                     <img alt="Image" src="{{globalObj.imagePrefix}}{{globalObj.images}}"></div>
+                   <div *ngIf="globalObj.countReceipent > 1" class="col-sm-1 col-md-1 mailerPic pull-left">
+                     <img alt="Image" src="assets/images/group_profile_img.png"></div>
+                    <div class="col-sm-11 col-md-11 pull-left">
+                        <h3>{{globalObj.display_name}}</h3>
+                        <h4><b> {{'sent_on' | translate}}</b> {{globalObj.message_date}}</h4>
+                         <h3>{{globalObj.message_subject}}</h3>
+
+                          <div class="attched_item" style="padding-left: 0;">
+                       <div *ngFor="let attr of globalObj.attachments"> <a download="{{globalObj.domainName}}{{attr}}" target="_self" href="{{globalObj.domainName}}{{attr}}"><i class="fa fw fa-paperclip"></i>{{attr | split: '~': 1}}</a>
+                          </div>
+                   </div>
+<!--                           <div *ngIf="globalObj.attachments.length != 0">
+                           <a (click)="downloadall(globalObj.attachments)" download target="_self" href="">
+                            <i class="fa fa-fw fa-download"></i> Download All</a></div>-->
+                   </div>
+
+
+
+                  </div>
+
+            <div class="clearfix"></div>
+
+                   <div class="col-sm-12 col-md-12 leftspacedetail" [innerHTML]="globalObj.message_body"></div>
+
+        </div>
+
+        <div style="display:block;" class="fullDescription" *ngIf="globalObj.place == 'Notice' || globalObj.place == 'Circular'">
+                  <div class="headBlock">
+                    <div class="col-sm-1 col-md-1 mailerPic pull-left">
+                      <img alt="" src="assets/images/logo.png"></div>
+                  <div class="col-sm-11 col-md-11 ng-scope pull-left">
+                          <h3>{{globalObj.display_name}}</h3>
+                          <h4><b>  {{'sent_on' | translate}}</b> {{globalObj.start_date}}</h4>
+                          <h3>{{globalObj.title}}</h3>
+
+                          <div class="attched_item" style="padding-left: 0;">
+                        <div *ngIf="globalObj.attachments && globalObj.product_type == 'emscc'">
+                          <a download="{{globalObj.domainName1}}{{globalObj.attachments}}" target="_self" href="{{globalObj.domainName1}}{{globalObj.attachments}}"><i class="fa fw fa-paperclip"></i>
+                            {{globalObj.attachments | slice: 28}}</a>
+
+                            </div>
+                        <div *ngIf="globalObj.attachments && globalObj.product_type != 'emscc'">
+                          <a download="{{globalObj.domainName1}}{{globalObj.projectName}}{{globalObj.attachments}}" target="_self" href="{{globalObj.domainName1}}{{globalObj.projectName}}{{globalObj.attachments}}"><i class="fa fw fa-paperclip"></i>
+                            {{globalObj.attachments | slice: 28}}</a>
+
+                        </div>
+                    </div>
+
+                    </div>
+
+                  <div class="mailtime"></div>
+
+                    </div>
+              <div class="clearfix"></div>
+
+                    <div class="col-sm-12 col-md-12 leftspacedetail"  [innerHTML]="globalObj.description">
+              </div>
+
+        </div>
+
+  </div>

@@ -1,0 +1,183 @@
+<!--
+  Generated template for the AttendancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+   <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Attendance</ion-title>
+  </ion-navbar>
+  <div class='backheader' style="">
+      <ion-segment [(ngModel)]="globalObj.tabSelected">
+          <ion-segment-button (click)="ionViewDidLoad()" value="attendance">
+              <span class='colorwhite'>MONTHLY</span>
+          </ion-segment-button>
+          <ion-segment-button value="leave">
+            <span class='colorwhite'>LEAVE</span>
+          </ion-segment-button>
+         
+        </ion-segment>
+        </div>
+
+<!--    <div style="background: #fff; position: relative;">
+        <ion-segment>
+            <ion-segment-button value="monthly">Monthly</ion-segment-button>
+            <ion-segment-button value="leave">Leave</ion-segment-button>
+        </ion-segment>
+    </div>-->
+    
+</ion-header>
+
+
+<ion-content>
+    
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="pull to refresh">
+
+    </ion-refresher-content>
+  </ion-refresher>
+    
+    <div class="paddingTop" [ngSwitch]="globalObj.tabSelected">
+        <ion-list *ngSwitchCase="'attendance'">
+    <div class="calendar-header">
+        <ion-row class="calendar-month">
+          <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+          <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+          <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+        </ion-row>
+      </div>
+      <div class="calendar-body">
+        <ion-grid>
+          <ion-row class="calendar-weekday">
+            <ion-col>Su</ion-col>
+            <ion-col>Mo</ion-col>
+            <ion-col>Tu</ion-col>
+            <ion-col>We</ion-col>
+            <ion-col>Th</ion-col>
+            <ion-col>Fr</ion-col>
+            <ion-col>Sa</ion-col>
+          </ion-row>
+          <ion-row class="calendar-date">
+            <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">
+                     <span class='lastotherday'> {{lastDay}}</span></ion-col>
+            <ion-col col-1 *ngFor="let day of globalObj.eventDays">
+              <span [class]="day.color" *ngIf="day.color; else otherDate">{{day.day}}</span>
+                <ng-template #otherDate class="otherDate"><span class='otherday'>{{day.day}}</span></ng-template>
+            </ion-col>
+            <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month">
+                     <span class='lastotherday'>{{nextDay}}</span></ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div>
+        <div class="calendar-footer">
+        <ion-grid>
+          <ion-row class='bordergrey'>
+            <ion-col class="p borderright"><span> {{globalObj.present}}</span><br>Present
+            </ion-col>
+            <ion-col class="a borderright"><span> {{globalObj.absent}} </span><br>Absent</ion-col>
+            <ion-col class="l borderright"><span> {{globalObj.leave}} </span><br>Leave</ion-col>
+            <ion-col class="e borderright"><span> {{globalObj.eventCount}} </span><br>Event</ion-col>
+            <ion-col class="h"><span> {{globalObj.holidayCount}}</span><br>Holiday</ion-col>
+          </ion-row>
+        
+        </ion-grid>
+        <ion-grid>
+          <ng-container *ngFor = "let attendanceDetails of globalObj.eventDays">
+            <ion-card *ngIf="attendanceDetails.date != ''">
+                    <ion-card-content class='carddata'>
+                        <ion-list>
+                            <ion-col col-2 [ngClass]="[(attendanceDetails.color) == 'presentcolor' ? 'presentcolorcard' : '',
+                                (attendanceDetails.color) == 'absentcolor' ? 'absentcolorcard' : '',
+                                (attendanceDetails.color) == 'leavecolor' ? 'leavecolorcard' : '',
+                                (attendanceDetails.color) == 'eventcolor' ? 'eventcolorcard' : '',
+                                (attendanceDetails.color) == 'holidaycolor' ? 'holidaycolorcard' : '']">&nbsp;</ion-col>
+                            
+                            <ion-col col-4>{{attendanceDetails.day}}
+                            {{currentMonth | slice: 0:3}}</ion-col>
+                            
+                            <ion-col col-6 [ngClass]="[(attendanceDetails.color) == 'presentcolor' ? 'presentcard' : '',
+                                (attendanceDetails.color) == 'absentcolor' ? 'absentcard' : '',
+                                (attendanceDetails.color) == 'leavecolor' ? 'leavecard' : '',
+                                (attendanceDetails.color) == 'eventcolor' ? 'eventcard' : '',
+                                (attendanceDetails.color) == 'holidaycolor' ? 'holidaycard' : '']">
+                                        {{(attendanceDetails.color) == 'presentcolor' ? 'Present' : ''}}
+                                       {{ (attendanceDetails.color) == 'absentcolor' ? 'Absent' : ''}}
+                                       {{ (attendanceDetails.color) == 'leavecolor' ? 'Leave' : ''}}
+                                       {{ (attendanceDetails.color) == 'eventcolor' ? 'Event' : ''}}
+                                       {{ (attendanceDetails.color) == 'holidaycolor' ? 'Holiday' : ''}}
+                        </ion-col>
+                        </ion-list>
+                        
+                    </ion-card-content>
+
+                </ion-card>
+          </ng-container>
+        </ion-grid>
+        </div>
+
+      </div>
+      </ion-list>
+      <ion-list class='contentsize' *ngSwitchCase="'leave'">
+          
+          <ion-grid>
+              <ion-row>
+                  <ion-col class='borderbottom border' col-6>
+                      <ion-label>From</ion-label>
+                        <!--<ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="myDate"></ion-datetime>-->
+                        <ion-label class="calenderlecstyle" (click)="openCalendar('fromdate')">{{globalObj.fromDate | date:'d MMM'}}
+                                <ion-icon class="calicon" name="calendar"></ion-icon></ion-label>
+                  </ion-col>
+                  <ion-col class='borderbottom' col-6>
+                  <ion-label>To</ion-label>
+                    <ion-label class="calenderlecstyle" (click)="openCalendar('todate')">{{globalObj.toDate | date:'d MMM'}}
+                                <ion-icon class="calicon" name="calendar"></ion-icon></ion-label>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+         
+              <div class='reasonselect'>
+                  <ion-select class='reasonwidth' [(ngModel)]="globalObj.leave_reason" interface="popover" aria-placeholder="Select">
+                    <ion-option value="">Select Reason</ion-option>
+                    <ion-option *ngFor="let reason of globalObj.reasonList" [value]="reason.reason_name">{{reason.reason_name}}</ion-option>
+                  </ion-select>
+                </div>
+          
+                <div>  
+                    
+                <ion-textarea id="leavedesc" class="contentarea leaveeditor" [(ngModel)]="globalObj.reasonDesc" placeholder="Enter details" min="0" max="50"></ion-textarea>
+                </div>
+        
+      <button *ngIf="!globalObj.editFlag" class="submitbtn" ion-button full (click)="submitLeave($event)">Submit</button>
+      <button *ngIf="globalObj.editFlag" class="submitbtn" ion-button full (click)="submitLeave($event)">Update</button>
+      
+      <div><h4 class="contentsize padding10" >Leave Details</h4></div>
+        <ion-card class="leavecards contentsize" *ngFor="let leave of globalObj.reasonDeatils">
+                    <ion-card-content>
+                        <div>{{leave.from_date | date: 'd MMM'}} To {{leave.to_date  | date: 'd MMM'}} 
+                        <span *ngIf="leave.status == 'Pending' && !globalObj.editFlag" (click)="editLeave(leave.id)" class="floatright iconround"><ion-icon class="iconedit" ios="ios-create" md="md-create"></ion-icon></span>
+                        </div>
+                        <div><span>Reason:</span>
+                            <span>{{leave.reason}}</span>
+                            
+                        </div>
+                        <div><span>Status:</span>
+                        <span>{{leave.status}}</span>
+                        <span *ngIf="leave.status == 'Pending' && !globalObj.editFlag" (click)="deleteLeave(leave.id)" class="floatright iconround"><ion-icon class="iconedit" ios="ios-trash" md="md-trash"></ion-icon></span>
+                        </div>
+                        <div *ngIf="leave.status == 'Rejected'"><span>Rejected Reason:</span>
+                            <span>{{leave.reject_reason}}</span>
+                            
+                        </div>
+                    </ion-card-content>
+
+                </ion-card>
+      
+      </ion-list>
+      </div>
+</ion-content>
+

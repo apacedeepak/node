@@ -1,0 +1,102 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{item_master_title}}</h5>
+      <span class="float-right">
+        <button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm mr10 mt15">Add</button>
+      </span>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <div *ngIf="show_add_item_master">
+      <form (ngSubmit)="onSubmit(itemMasterForm.value)" [formGroup]="itemMasterForm" ngNativeValidate>
+        <input type="hidden" class="form-control" value="" formControlName='id'  />
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Category<span class="text-danger">*</span>: </label>
+          <select formControlName='category_id' class="form-control" required title="Please select cetegory">
+            <option value=""> Select category</option>
+            <option [value]="itemCategoryMaster.id" *ngFor="let itemCategoryMaster of globalObj.itemCategoryMasterData">
+              {{itemCategoryMaster.category_name}}</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Enter Item Name<span class="text-danger">*</span>: </label>
+          <input type="text" class="form-control" required value="" formControlName='item_name' placeholder="Enter Item name" title="Please Enter Item Name"
+            autofocus="" />
+        </div>
+
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Select Item Unit<span class="text-danger">*</span>: </label>
+            <select formControlName='item_unit' class="form-control" required title="Please select unit">
+                <option value=""> Select Unit</option>
+                <option [value]="itemUnitMaster.id" *ngFor="let itemUnitMaster of globalObj.itemUnitMasterData">
+                  {{itemUnitMaster.unit_name}}</option>
+              </select>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Enter Item Price: </label>
+          <input type="text" min="0" type="number" class="form-control" value="" formControlName='item_unit_price' placeholder="Enter Item Unit Price"
+            title="Please Enter Item Unit Price" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Enter Item Description: </label>
+          <textarea class="form-control" value="" formControlName='item_description' placeholder="Enter Item Description"
+            title="Please Insert Item Description" autofocus=""></textarea>
+        </div>
+
+
+      <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+              <label>Upload Item Image: </label>
+              <input-file fileLimit="1" fileAccept="image/*" (acceptedFile)="onAccept($event)" class="form-control cleanup validate-empty" formControlName="item_image_upload"></input-file>
+          </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-right divSpace text-center">          
+          <input class="btn btn-primary" value="Save" name="submit" id="submit" type="submit">
+          <button class="btn btn-warning mr10" (click)="getFromSet()">Reset</button>
+          <button class="btn btn-danger mr10" (click)="getFromClose()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div *ngIf="show_item_master_list">
+      <div id="leaveTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <span id="success_message" class="span_success text-success">{{successMessage.message}}</span>
+        <span id="error_message" class="span_error text-danger">{{errorMessage.message}}</span>
+        <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+            <tr>
+              <th align="center">S No.</th>
+              <th>Category</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Unit</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let itemmaster of globalObj.itemmasterList; index as i">
+              <td align="center">{{i+1}}</td>
+              <td>{{itemmaster.itemMasterCategory.category_name}} </td>
+              <td>{{itemmaster.item_name}} </td>
+              <td>{{itemmaster.price}}</td>
+              <td>{{itemmaster.itemMasterUnit.unit_name}} </td>
+              <td>{{itemmaster.description}} </td>
+              <td><a target="_blank" href="{{serverurl}}{{itemmaster.item_image}}" download>View</a></td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="itemMasterEdit(itemmaster.id)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-info btn-sm" (click)="deleteItemMaster(itemmaster.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

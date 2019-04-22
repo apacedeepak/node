@@ -1,0 +1,57 @@
+{
+  "name": "expense",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bill_no": {
+      "type": "string",
+      "required": true
+    },
+    "expense_head_name": {
+      "type": "string",
+      "required": true
+    },
+    "sessionId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number"
+    },
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "amount_date": {
+      "type": "date"
+    },
+    "school_id": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "created_by": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "modified_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,65 @@
+{
+  "name": "notification",
+  "plural": "notification",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "module_key_id": {
+      "type": "number"
+    },
+    "type": {
+      "type": "number",
+      "description": [
+        "0 => unKnown",
+        "1 => message",
+        "2 => notice",
+        "3 => circular",
+        "4 => homework",
+        "5 => fee",
+        "6 => attendance",
+        "7 => assessment",
+        "8 => card punch in punch out",
+        "9 => start class",
+        "10 => end class",
+        "11 => polls",
+        "12 => chat",
+        "13 => stop poll",
+        "14 => Poll submission",
+        "15 => Blackin/Blackout",
+        "16 => lock/unlock"
+      ],
+      "default": 0
+    },
+    "title": {
+      "type": "string"
+    },
+    "notification_text": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "is_read": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

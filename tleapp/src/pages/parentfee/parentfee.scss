@@ -1,0 +1,32 @@
+page-parentfee {
+    .receptcard{
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+    .right{
+        float: right;
+    }
+    .fontsize{
+        font-size: 1.4rem;
+        .spancolor{color: #525252;}
+    }
+    .margin10{
+        margin-top: 10px;
+    }
+    .dueclass{width:100%;
+    .tbobystyle{background-color: #3c6ecd;color: white;
+        th{padding: 6px 0px;}
+    }
+    }
+    
+    .greenclass{color: green;font-size: 1.8rem;}
+.redclass{color: red;font-size: 1.8rem;}
+.aligncenter{text-align: center;
+        td{padding: 6px;border-bottom: 1px solid #ddd;}
+    }
+#fabbutton{
+    display: inline-block;
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem; z-index:1;}
+}

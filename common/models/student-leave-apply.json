@@ -1,0 +1,63 @@
+{
+  "name": "student_leave_apply",
+  "plural": "studentleaveapply",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "session_id": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "from_date": {
+      "type": "date",
+      "required": true
+    },
+    "to_date": {
+      "type": "date",
+      "required": true
+    },
+    "student_id": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "cause": {
+      "type": "string"
+    },
+    "reject_reason": {
+      "type": "string"
+    },
+    "detail_reason": {
+      "type": "string"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "user_id": {
+      "type": "number",
+      "index": true
+    },
+    "school_id": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

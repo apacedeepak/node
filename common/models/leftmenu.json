@@ -1,0 +1,26 @@
+{
+  "name": "leftmenu",
+  "plural": "leftmenu",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "product_type": {
+      "type": "string",
+      "required": true
+    },
+    "json_value": {
+      "type": "text",
+      "required": true
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

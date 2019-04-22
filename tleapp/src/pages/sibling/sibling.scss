@@ -1,0 +1,51 @@
+page-sibling {
+    .navuser{ position:relative;
+        .profilethumb {
+        width:5rem;
+        height:5rem;
+        display:inline-block;
+        overflow:hidden;
+        position: relative;
+        border-radius:80%;
+        box-shadow:0px 0 0px 2px #ffffff;
+        margin-top:1rem;
+         img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+        }
+        }
+        .logedname{ color:#fff; font-size:1.3rem;}
+        }
+        .siblingPro{
+            color: #fff;
+            font-size:1.3rem;
+            padding-right: 10px;
+            position: absolute;
+            right: 0;
+            top: 19px;
+            ul{ list-style-type: none; padding:0px; margin:12px 0 0 0; background: #fff;
+            li{ display: block;border-bottom:1px solid #ccc;
+                a{color: #333; text-decoration: none; padding: 8px 10px; display: block;}  
+                &:last-child{border: 0;}
+            }
+            }
+          .profilethumb{ width:25px; height:25px;margin-left: 1rem;position: relative;
+            img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                border-radius: 80%;
+            }
+        }  
+        }
+        
+        
+}
+.toolbar{ overflow: visible !important;}
+.showList {visibility: ''};
+.hideList {visibility: hidden};

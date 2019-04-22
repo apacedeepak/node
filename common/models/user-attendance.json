@@ -1,0 +1,52 @@
+{
+  "name": "user_attendance",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "leave_applyId": {
+      "type": "number"
+    },
+    "in_time": {
+      "type": "string"
+    },
+    "out_time": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "extra_day": {
+      "type": "string"
+    },
+    "attendance_status": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "index": true,
+      "default": "Present"
+    },
+    "schoolId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leave_apply": {
+      "type": "belongsTo",
+      "model": "leave_apply",
+      "foriegnKey": "leave_applyId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

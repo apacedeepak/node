@@ -1,0 +1,34 @@
+
+<ion-header>
+
+  <ion-navbar hideBackButton="true" can-swipe-back="false">
+      <button ion-button menuToggle enable-menu-with-back-views="true">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Group</ion-title>
+      <page-notification callFromType=1></page-notification>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="pull to refresh">
+    
+        </ion-refresher-content>
+      </ion-refresher>
+  <ng-container *ngIf="globalObj.groupExist;else nogrpdata">
+    <ion-grid *ngFor="let item of globalObj.groupData" (click)="groupDetail(item.group_name,item.created_by_name,item.member_list)" class="mailBlock groupBlock">
+      <ion-row>
+          
+          <ion-col class="mailername textoverlap" col-12>{{item.group_name }} </ion-col>
+          <ion-col class="mailername textoverlap" col-12>{{item.created_date | date:'d MMM, y'}} </ion-col>
+          <ion-col  class="subtitle" col-12> Members: {{item.member_list | pipesArraytostring}}</ion-col>
+          <ion-col class="description textoverlap" col-12>Created By: {{item.created_by_name}}</ion-col>
+          
+      </ion-row>
+     </ion-grid>
+  </ng-container>
+  <ng-template #nogrpdata><p class="text-info">No Record Found</p></ng-template>
+</ion-content>

@@ -1,0 +1,25 @@
+{
+  "name": "course_mode",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "course_mode_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

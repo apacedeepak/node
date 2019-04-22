@@ -1,0 +1,44 @@
+page-createnotes {
+    .header-md {
+        background:#3c6ecd !important;
+        color:#fff;
+        font-size:1.7rem;
+        font-weight:bold;
+        .userDp{ width:32px; height:32px; overflow:hidden; border-radius:80%; position:absolute;display: inline-block;right:0;top:5px; 
+        img{position:absolute;left:0; top:0; width:100%; height:100%;}
+        }
+        .mailaction a{margin-left:.6rem;}
+        .paerclip{
+            img{height: 1.5rem;vertical-align: middle;}
+        }
+        }
+.rowborder{border-bottom: 1px solid #cccccc !important; padding-bottom:0px;min-height: 0rem;
+           .label-md{margin: 0;}
+           .bordernone{ .item-inner{border-bottom: 0px solid #dedede; }}
+.maillable{font-size: 1.3rem;background-color: #ebe7e7;margin-top:0;;margin-right: .3rem;margin-bottom: .2rem;display: inline-block;padding:.5rem .3rem .3rem 1.2rem;border-radius: 28px;vertical-align: top;color: #6f6767;
+button{ vertical-align:middle;background-color: #ebe7e7;}
+}
+}
+.tomail{padding-left: 0px;position: relative;color: #000;
+.label-md{ position: absolute;left: 0;top:0px; width: auto;}
+}
+.text-input-div{border:0px solid #cccccc;min-height: 36px; margin: 0; padding:0px 20px; width: 100%;border-radius:2px;
+   .toclass{position: absolute;left: 0;top:0px; width: auto;}
+.addMail{position: absolute;right: 0;top:0;background: transparent;padding: 2px 0px;font-weight: bold;font-size: 2rem;}
+}
+.maillable{font-size: 1.3rem;background-color: #ebe7e7;display: inline-block;padding:.5rem .3rem .3rem 1.2rem;border-radius: 28px;vertical-align: top;color: #6f6767;
+button{ vertical-align:middle;background-color: #ebe7e7;}
+}
+/*.addMail{position: absolute;right: 0;top: 9px;background: transparent;padding: 2px 8px;font-weight: bold;font-size: 2rem;}*/
+.contentarea {
+    -webkit-user-select: auto;min-height:200px;max-height:200px; overflow-y:auto;margin-top: 15px;
+}
+.paerclip{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+img{height: .9rem;}
+}
+.leftmargin{margin-left:10px;}
+.htool{ position: absolute;right: 2rem;bottom: 1rem;}
+.margin15{margin-top: 15px;}
+.colorwhite{color:#fff}
+
+}

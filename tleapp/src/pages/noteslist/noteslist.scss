@@ -1,0 +1,105 @@
+page-noteslist {
+    .mailBlock {
+	border-bottom: 1px solid #e3e3e3;
+	padding-bottom: .7rem;
+    padding-top: .7rem;
+	padding-left: 0px;
+	position: relative;
+ .mailername {
+ padding-left: 10px;
+ font-size: 1.8rem;
+ font-weight: bold;
+ padding-right:150px;
+ span {
+position:absolute;
+right:4px;
+top:14px;
+width:70px;
+text-align:right;
+color:#4385f5;
+font-size: 1.3rem;
+}
+}
+.subtitle {
+	padding-left: 10px;
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+.subtitletext{
+    padding-left: 10px;
+    font-size: 1.5rem;
+}
+.description {
+	padding-left: 10px;
+	display: block;
+	font-size: 1.2rem;
+	color: #525252;
+ p {
+margin:0
+}
+h1 {
+	margin: 0
+}
+h2 {
+	margin: 0
+}
+h3 {
+	margin: 0
+}
+h4 {
+	margin: 0
+}
+h5 {
+	margin: 0
+}
+h6 {
+	margin: 0
+}
+td {
+	font-size: 1.2rem;
+	height: auto !important;
+font {
+font-size:1.2rem !important;
+}
+}
+}
+.textoverlap {
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 20px;
+	line-height: 20px;
+}
+.mailIndex {
+	width: 35px;
+	height: 35px;
+	border-radius: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	font-weight: bold;
+	position: absolute;
+	left: 15px;
+	top: 10px;
+	background: #f06292;
+	color: #fff;
+}
+}
+.mailBlock:last-child {
+	border-bottom: 0px solid #e3e3e3;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+.mailBlock:nth-child(3n+1) .mailIndex {
+	background: #eea01a;
+}
+.mailinginfo{position: absolute;right: .5rem;top:0;font-size: 1.3rem;font-weight: 400; color: #3C6ECD;}
+.paerclip{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+img{height: .9rem;}
+}
+.fontsize4{font-size: 1.0rem;}
+.color52{color: #525252;}
+.color39{color: #3a3939;}
+}

@@ -1,0 +1,296 @@
+<!--Page Work Space-->
+<div class="col-sm-12 col-md-12 padding-left-none pull-left">
+  <div id="SubjectAttendace" class="">
+    <div class="boxModel pull-left maxHightOuto">
+      <div class="headBox">
+        <h5 class="h5 pull-left" > {{'Attendance' | translate}}</h5>
+
+        <div *ngIf="!hidedonebtnflag" class="pull-right doneidbtn">
+          <a href="#" (click)="onSubmit($event)" class="sm-blue-btn pull-right"> {{'done' | translate}}</a>
+        </div>
+      </div>
+      <ul class="nav commnicationBox takeAttandanceList  margin-bottom-15" style="padding-left: 15px;" *ngIf="switchFlag == true  ">
+        <li>
+          <a class="active" data-toggle="tab" id="takeattendtag" (click)="showdonebtn()" href="#takeattendance">{{'take_attendance' | translate}}
+            <span class="badge"></span>
+          </a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" id="leavetag" href="#leavedetails" (click)="hidedonebtn()"> {{'leave_details' | translate}}
+            <span class="badge"></span>
+          </a>
+        </li>
+      </ul>
+      <div *ngIf="atten_flag && !hidedonebtnflag  " class="col-sm-12 col-md-12 pull-left">
+        <div class="d-inlinle" *ngIf="classteacherflag == 'Yes'">
+          <label class="radioContainer">
+            <input type="checkbox" [checked]="!atten_flag_other" (change)="attenFlagFunc()"> {{'daily_attendance' | translate}}
+            <span class="checkmarks"></span>
+          </label>
+        </div>
+        <div class="d-inlinle" *ngIf="product_type!='emscc'">
+          <label class="radioContainer">
+            <input type="checkbox" [checked]="atten_flag_other" (change)="attenFlagFunc()"> {{'lecture_wise_attendance' | translate}}
+            <span class="checkmarks"></span>
+          </label>
+        </div>
+      </div>
+      <div class="filterBox" *ngIf="!switchFlag || (atten_flag_other && check_flag) ">
+        <div class="col-sm-3 col-md-3 pull-left">
+          <select class="form-control" id="getassignedsectionfilter" (change)="getassignedsection($event)">
+            <option> {{'select_class' | translate}}</option>
+            <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id">{{class.class_name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 col-md-3 pull-left">
+          <select id="getassignedsubjectvalue" class="form-control" #section (change)="getassignedsubject(section.value,section)">
+            <option> {{'select_section' | translate}}</option>
+            <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id">{{section.section_name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 col-md-3 pull-left">
+          <select class="form-control" id="subjectvalue" #subject (change)="subjectdetail(subject.value)">
+            <option [value]="0"> {{'select_subject' | translate}}</option>
+            <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.class_subjectId" [value]="subject.class_subjectId">{{subject.subject_name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 col-md-3 pull-left padding-right-none">
+          <select class="form-control" id="period_start_time_value" [formControl]="period_start_time">
+            <option [value]="0"> {{'select_lecture' | translate}}</option>
+            <option *ngFor="let periodtime of periodtime" [value]="periodtime.lecture_id">{{periodtime.lecture_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="tab-content" style="margin-top: 10px;" *ngIf="switchFlag == false || atten_flag_other">
+        <div class="tab-pane active" id="takeattendance" *ngIf="!hidedonebtnflag">
+          <div class="attendanceFillter">
+            <div class="col-sm-2 col-md-2 pull-left">
+              <p>
+                <span> {{'class' | translate}} {{'section' | translate}}:</span>
+              </p>
+              <h5 style="cursor: pointer;" placement="left" ngbTooltip="{{classsection}}" class="textOverlap">
+                <span *ngIf="classsection != 'Select Course type'">{{classsection}}</span>
+              </h5>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+              <div class="datBox">
+                <input class="calenerIcon" placeholder="target date" readonly ngbDatepicker #d="ngbDatepicker" [formControl]="dpField"  [maxDate]="maxDate"[value]="dp"
+                  id="dp">
+                <button class="btnover" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+            <!-- <ng-container *ngIf="product_type=='emscc' || atten_flag_other">
+              <div class="col-sm-2 col-md-2 pull-left has-feedback padding-left-none padding-right-none">
+                <div style="margin-top:10px; " *ngIf="product_type == 'emscc'">
+                  <select class="form-control" id="start_time_value" [formControl]="start_time">
+                    <option [value]="0"> {{'time_slot' | translate}}</option>
+                    <option *ngFor="let batchtiming of batchtiminglist" [value]="batchtiming.lecture">{{batchtiming.start_time}}-{{batchtiming.end_time}}</option>
+                  </select>
+                </div>
+              </div>
+            </ng-container> -->
+            <div class="col-sm-1 col-md-1 pull-left text-center">
+              <p> {{'total' | translate}}:</p>
+              <h5>{{ttlcount}}</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 pull-left  text-center">
+              <p> {{'present' | translate}}:</p>
+              <h5>{{pcount}}</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 pull-left  text-center">
+              <p> {{'absent' | translate}}:</p>
+              <h5>{{acount}}</h5>
+            </div>
+            <div *ngIf="product_type != 'emscc' " class="col-sm-1 col-md-1 pull-left  text-center">
+              <p> {{'leave' | translate}}:</p>
+              <h5>{{lcount}}</h5>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+              <select class="select150 setAttendancefilterclass mt10" (change)='setAttendancefilter($event.target.value)'>
+                <option selected="selected"> {{'default_attendance' | translate}}</option>
+                <option value="Present"> {{'present' | translate}}</option>
+                <option value="Absent"> {{'absent' | translate}}</option>
+                <option *ngIf="switchFlag" value="Leave"> {{'leave' | translate}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="filtertitle">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td width="230" class="tdBoldstyle"> {{'student_name' | translate}}</td>
+                  <td class="tdBoldstyle"> {{'attended_class' | translate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="attndfilterResult mxHightAuto">
+            <table class="table table-striped vmid">
+              <tbody>
+                <tr *ngFor="let sublist of subjectlistother; let i = index">
+                  <td width="230">{{sublist.student_name}} </td>
+                  <td>
+                    <select #attendancestatus (change)="setattendancestatus(attendancestatus.value, sublist.user_id, i)" class="select150" id="row{{sublist.user_id}}"
+                      style="width: 150px;">
+                      <option value="" [selected]="attendancelist[i] == ''">-- {{'select' | translate}}--</option>
+                      <option value="P" [selected]="attendancelist[i] == 'P' ? true : pselected == true "> {{'present' | translate}}</option>
+                      <option value="A" [selected]="attendancelist[i] == 'A' ? true : aselected == true "> {{'absent' | translate}}</option>
+                      <option *ngIf="switchFlag == true" value="L" [selected]="attendancelist[i] == 'L' ? true : lselected == true "> {{'leave' | translate}}</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" style="margin-top: 10px;" *ngIf="switchFlag == true">
+        <div class="tab-pane active" id="takeattendance" *ngIf="!atten_flag_other">
+          <div class="attendanceFillter">
+            <div class="col-sm-2 col-md-2 pull-left">
+              <p> {{'class' | translate}} {{'section' | translate}}:</p>
+              <h5 title="{{classsection}}" class="textOverlap">
+                <span *ngIf="classsection != 'Select Course type'">{{classsection}}</span>
+              </h5>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+              <div class="datBox">
+                <input class="calenerIcon" placeholder="target date" readonly ngbDatepicker #d="ngbDatepicker" [formControl]="dpField" [value]="dp"
+                  id="dp">
+                <button class="btnover" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left text-center">
+              <p> {{'total' | translate}}:</p>
+              <h5>{{ttlcount}}</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 pull-left  text-center">
+              <p> {{'present' | translate}}:</p>
+              <h5>{{pcount}}</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 pull-left  text-center">
+              <p> {{'absent' | translate}}:</p>
+              <h5>{{acount}}</h5>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left  text-center">
+              <p> {{'leave' | translate}}:</p>
+              <h5>{{lcount}}</h5>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+              <select class="select150 setAttendancefilterclass" (change)='setAttendancefilter($event.target.value)'>
+                <option selected="selected"> {{'default_attendance' | translate}}</option>
+                <option value="Present"> {{'present' | translate}}</option>
+                <option value="Absent"> {{'absent' | translate}}</option>
+                <option *ngIf="switchFlag" value="Leave"> {{'leave' | translate}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="filtertitle">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td width="230" class="tdBoldstyle"> {{'student_name' | translate}}</td>
+                  <td class="tdBoldstyle"> {{'attended_class' | translate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="attndfilterResult mxHightAuto">
+            <table class="table table-striped vmid">
+              <tbody>
+                <tr *ngFor="let sublist of subjectlistother; let i = index">
+                  <td width="230">{{sublist.student_name}}</td>
+                  <td>
+                    <select #attendancestatus (change)="setattendancestatus(attendancestatus.value, sublist.user_id, i)" class="select150" id="row{{sublist.user_id}}"
+                      style="width: 150px;">
+                      <option value="" [selected]="attendancelist[i] == ''">-- {{'select' | translate}}--</option>
+                      <option value="P" [selected]="attendancelist[i] == 'P' ? true : pselected == true "> {{'present' | translate}}</option>
+                      <option value="A" [selected]="attendancelist[i] == 'A' ? true : aselected == true "> {{'absent' | translate}}</option>
+                      <option *ngIf="switchFlag == true" value="L" [selected]="attendancelist[i] == 'L' ? true : lselected == true ">{{'leave' | translate}}</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane" id="leavedetails" *ngIf="!check_flag">
+          <div class="attndfilterResult mxHightAuto padding-left-none padding-right-none">
+            <table class="table table-striped vmid" style="margin:0">
+              <thead>
+                <tr style="background: #004b80;color: #fff;">
+                  <td width="6%">{{'serial_no' | translate}}</td>
+                  <td width="13%"> {{'student_name' | translate}}</td>
+                  <td width="13%"> {{'from_date' | translate}}</td>
+                  <td width="15%"> {{'to_date' | translate}}</td>
+                  <td width="20%"> {{'cause' | translate}}</td>
+                  <td width="20%"> {{'description' | translate}}</td>
+                  <td width="15%" class="text-center"> {{'status' | translate}}</td>
+                  <td width="15%" class="text-center"> {{'action' | translate}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let markedleave of markedleavelist; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{markedleave.name}}</td>
+                  <td>{{markedleave.from_date | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{markedleave.to_date | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{markedleave.reason}}</td>
+                  <td>{{markedleave.detail}}</td>
+                  <td class="text-center">
+                    <div *ngIf="markedleave.status != 'Pending';then content else other_content"></div>
+                    <ng-template class="check-color-btn" #content>{{ markedleave.status }}</ng-template>
+                    <ng-template class="check-color-btn" #other_content>--</ng-template>
+                  </td>
+                  <td class="text-center">
+                    <div *ngIf="markedleave.status == 'Pending';then content1 else other_content1"></div>
+                    <ng-template class="check-color-btn" #content1>
+                      <a href="javascript:void(0)" class="check-color-btn" style="margin-right: 8px;" (click)="markstatus(markedleave.leave_apply_id, 1)">
+                        <i class="fa fa-check"></i>
+                      </a>
+                      <a href="javascript:void(0)" class="reject-color-btn" (click)="leavevalue(markedleave.leave_apply_id)" data-toggle="modal"
+                        data-target="#rejectAction">
+                        <i class="fa fa-close"></i>
+                      </a>
+                    </ng-template>
+                    <ng-template class="check-color-btn" #other_content1>--</ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center text-info" *ngIf="markedleavelistCount == 0" style="margin-top: 15px;"> {{'no_record_found' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="responseMessage" id="successpop" class="successMessage">
+  <div>
+    <span class="has-feedback">
+      <p>{{popmessage}}</p>
+      <a routerLink="/attendance/main" class="msgclose sm-blue-btn" (click)="closeme(popmessage)">{{'ok' | translate}}</a>
+    </span>
+  </div>
+</div>
+<div id="rejectAction" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> {{'reject_reason' | translate}}</h4>
+      </div>
+      <div class="modal-body">
+        {{'fill_reason' | translate}}
+        <em *ngIf="reasontext.invalid" [ngClass]="'error'">*</em>
+        <p>
+          <textarea class="reasionTextarea" [formControl]="reasontext"></textarea>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-info" data-dismiss="modal"> {{'close' | translate}}</button>
+        <button type="button" class="btn btn-default btn-info" [ngClass]="{'disable-btn': reasontext.invalid }" [disabled]="reasontext.invalid"
+          data-dismiss="modal" (click)="markstatus(leave_apply_id, 2)"> {{'reject' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

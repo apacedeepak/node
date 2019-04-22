@@ -1,0 +1,69 @@
+{
+  "name": "revenue_target",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "session_id": {
+      "type": "number",
+      "required": true
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "month": {
+      "type": "number",
+      "required": true
+    },
+    "fee_structure_id": {
+      "type": "number",
+      "required": true
+    },
+    "admission_target": {
+      "type": "number",
+      "required": true
+    },
+    "discount_target": {
+      "type": "number",
+      "default": 0
+    },
+    "revenue_target": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fee_structure": {
+      "type": "belongsTo",
+      "model": "fee_structure_master",
+      "foreignKey": "fee_structure_id"
+    },
+    "revenue_target_fee_term": {
+      "type": "hasMany",
+      "model": "revenue_target_fee_term",
+      "foreignKey": "revenue_target_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

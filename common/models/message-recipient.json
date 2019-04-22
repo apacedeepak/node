@@ -1,0 +1,87 @@
+{
+  "name": "message_recipient",
+  "plural": "message_recipients",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "messageId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "senderId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "receiverId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "placeholder": {
+      "type": "string",
+      "required": true
+    },
+    "message_isread": {
+      "type": "string"
+    },
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "message_isimportant": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "studentuserId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "messages": {
+      "type": "belongsTo",
+      "model": "communication",
+      "foreignKey": "messageId"
+    },
+    "students": {
+      "type": "hasOne",
+      "model": "student",
+      "foreignKey": "userId"
+    },
+    "staff": {
+      "type": "belongsTo",
+      "model": "staff",
+      "foreignKey": "userId"
+    },
+    "parents": {
+      "type": "hasOne",
+      "model": "parent",
+      "foreignKey": "userId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "studentuserId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

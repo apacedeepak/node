@@ -1,0 +1,49 @@
+{
+  "name": "attendance_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "sessionId": {
+      "type": "number",
+      "index": true
+    },
+    "sectionId": {
+      "type": "number",
+      "index": true
+    },
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "schoolId": {
+      "type": "number",
+      "index": true
+    },
+    "remark": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "index": true
+    },
+    "addedDate": {
+      "type": "date"
+    },
+    "addedBy": {
+      "type": "number"
+    },
+    "modifiedDate": {
+      "type": "date"
+    },
+    "modifiedBy": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

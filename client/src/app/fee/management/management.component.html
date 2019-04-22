@@ -1,0 +1,157 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+        <div class="boxModel pull-left" style="max-height: inherit;">
+           <div class="headBox">
+              <h5 class="h5 pull-left"><a [routerLink]="['/dashboard/main']"><i class="fa fa-fw fa-arrow-left"></i></a> {{'fee_collection' | translate}} </h5>
+              <div class="pull-right btnGroup">    
+                 <button id='fc' class="showall btn btn-sm  btn-defult btn-info" (click)="clickOn('fc','')">  {{'fee_collection' | translate}}</button>
+                 <button id='mc' class="showall btn btn-sm btn-defult" (click)="clickOn('mc','')"> {{'misc_collection' | translate}}</button>
+                 <button id='d' class="showall btn btn-sm btn-defult" (click)="clickOn('d','')"> {{'defaulter' | translate}}</button>
+              </div>
+           </div>
+           <ng-container *ngIf="globalObj.fc">
+              <div class="sAttandSerchpan">
+                 <div class="col-sm-3 col-md-3  pull-left  padding-left-none padding-right-none margin" >
+                    <label></label>
+                    <input type="text" placeholder="{{'select_date' | translate}}" class="calenerIcon" (click)="displaycalc();">
+                 </div>
+                 <div class="col-sm-2 com-md-2 pull-right padding-left-none padding-right-none">
+                    <label> {{'batch' | translate}}</label>
+                    <select  class="form-control" #section (change)="sessionReceipts('','',section.value,paymode,createdUser)">
+                    <option value="" selected="selected"> {{'select' | translate}}</option>
+                    <option *ngFor="let section of sections" value="{{section}}">{{section}}</option>
+                    </select>
+                 </div>
+                 <div class="col-sm-2 com-md-2 pull-right padding-left-none padding-right-none">
+                    <label> {{'user' | translate}}</label>
+                    <select  class="form-control" #receipt (change)="sessionReceipts('','',sectionName,paymode,receipt.value)" >
+                    <option value="" selected="selected"> {{'select' | translate}}</option>
+                    <option *ngFor="let receipt of reciptcreator" value="{{receipt.user_id}}">{{receipt.name}}</option>
+                    </select>
+                 </div>
+                 <div class="col-sm-2 com-md-2 pull-right padding-left-none padding-right-none">
+                    <label> {{'paymode' | translate}}</label>
+                    <select class="form-control" id="payment" #payment (change)="sessionReceipts('','',sectionName,payment.value,createdUser)" >
+                    <option value="">  {{'select' | translate}}</option>
+                    <option value="CA" > {{'cash' | translate}}</option>
+                    <option value="CH"> {{'cheque' | translate}}</option>
+                    <option value="OL"> {{'online' | translate}}</option>
+                    <option value="DD" > {{'demand_draft' | translate}}</option>
+                    </select>
+                 </div>
+              </div>
+              <div *ngIf="showdaterange" class="alert showDate">
+                 <label>{{dateA}}</label> <label><b>{{'to' | translate}}</b></label> <label>{{today}}</label><a (click)="removerange()" aria-label="close" data-dismiss="alert" class="close">×</a> 
+              </div>
+              <div>
+                 <label>    </label>
+              </div>
+              <div  class="col-sm-12 col-md-12 pull-left">
+                 <table class="table tablestyle">
+                    <thead>
+                       <tr>
+                          <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                          <td align="center"> {{'batch' | translate}}</td>
+                          <td align="center"> {{'number_of_receipt' | translate}}</td>
+                          <td align="center"> {{'amount' | translate}}</td>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <ng-container *ngFor="let result of sessionReceipt;index as j">
+                          <tr *ngFor="let sectionList of result.section_list; index as i;" class="ng-scope">
+                             <td align="center" class="ng-binding">{{j+1}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{sectionList.section_name}}</td>
+                             <td  align="center" class="ng-binding ng-scope">
+                                <a href="javascript:void(0)" (click) = "detailedReceipt(sectionList.section_name)">  {{sectionList.receipt_count}}</a>
+                             </td>
+                             <td  align="center" class="ng-binding ng-scope">{{sectionList.amount}}</td>
+                          </tr>
+                          <tr>
+                             <td colspan ="3" align="right" class="ng-binding ng-scope"> {{'total_amount_class' | translate}} {{result.class_name}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{result.class_amount}}</td>
+                          </tr>
+                       </ng-container>
+                       <tr *ngIf="sessionReceipt.length!=0" style="background-color: #004b80;">
+                          <td colspan="3" align="right" style="color: #fff !important;"  class="ng-binding ng-scope"> {{'total_amount_received' | translate}} </td>
+                          <td  align="center" style="color: #fff !important;" class="ng-binding ng-scope">{{totalamountrec}}</td>
+                       </tr>
+                       <tr *ngIf="sessionReceipt.length==0">
+                          <td  align="center" colspan="4" class="ng-binding ng-scope">  {{'no_record_found' | translate}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </ng-container>
+           <ng-container *ngIf="globalObj.mc">
+              <app-miscellaneous [datetype]="globalObj.dateFlag"></app-miscellaneous>
+           </ng-container>
+           <ng-container *ngIf="globalObj.d">
+              <app-defaulter></app-defaulter>
+           </ng-container>
+        </div>
+     </div>
+     <div class="modal fade" id="showpopup">
+        <div class="modal-dialog" style='max-width: 900px;'>
+           <div class="modal-content">
+              <div class="modal-header" style="background-color: #004b80;">
+                 <h5 style="color: #fff !important;"> {{'fee_collection_class' | translate}} </h5>
+                 <button type="button"style="color: #fff !important;"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                 <div class="overFlowY">
+                    <table class="table tablestyle">
+                       <thead>
+                          <tr>
+                             <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                             <td align="center"> {{'admission_no' | translate}}</td>
+                             <td align="center">  {{'class' | translate}} {{'section' | translate}}</td>
+                             <td align="center">  {{'student_name' | translate}}</td>
+                             <td align="center"> {{'receipt_date' | translate}}</td>
+                             <td align="center"> {{'receipt_no' | translate}}</td>
+                             <td align="center"> {{'payment_mode' | translate}}</td>
+                             <td align="center"> {{'amount' | translate}}</td>
+                          </tr>
+                       </thead>
+                       <tbody>
+                          <tr *ngFor="let detail of detailerecipt; index as i;" class="ng-scope">
+                             <td align="center" class="ng-binding">{{i+1}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{detail.admission_no}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{detail.section_name}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{detail.name}}</td>
+                             <td  align="center" class="ng-binding ng-scope"> {{detail.receipt_date}} </td>
+                             <td  align="center" class="ng-binding ng-scope"> {{detail.receipt_no}} </td>
+                             <td *ngIf="detail.payment_type=='CA'" align="center" class="ng-binding ng-scope"> {{'cash' | translate}}</td>
+                             <td *ngIf="detail.payment_type=='CH'" align="center" class="ng-binding ng-scope">  {{'cheque' | translate}}</td>
+                             <td *ngIf="detail.payment_type=='OL'" align="center" class="ng-binding ng-scope">  {{'online' | translate}} </td>
+                             <td *ngIf="detail.payment_type=='DD'" align="center" class="ng-binding ng-scope">    {{'demand_draft' | translate}}</td>
+                             <td  align="center" class="ng-binding ng-scope">{{detail.amount}}</td>
+                          </tr>
+                       </tbody>
+                       <tr >
+                          <td colspan="7" align="right"  class="ng-binding ng-scope"> {{'total_amount_received' | translate}}</td>
+                          <td  align="center"  class="ng-binding ng-scope">{{totalamount}}</td>
+                       </tr>
+                    </table>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <div class="modal fade" id="showselectdate">
+        <div class="modal-dialog" style='max-width: 300px;'>
+           <div class="modal-content">
+              <div class="modal-body" align="center">
+                 <ng-container *ngIf="showcalander">
+                    <ngb-datepicker #dp (select)="onDateChanges($event)" [displayMonths]="0" [dayTemplate]="t">
+                    </ngb-datepicker>
+                 </ng-container>
+                 <ng-template #t let-date="date" let-focused="focused">
+                    <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                    [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                    </span>
+                 </ng-template>
+              </div>
+           </div>
+        </div>
+     </div>
+     

@@ -1,0 +1,39 @@
+{
+  "name": "ctp_configuration",
+  "plural": "ctpconfiguration",
+  "base": "Model",
+  "options": {
+    "validateUpsert": true,
+    "idInjection": false,
+    "mysql": {
+      "schema": "schoolerp_test_master",
+      "table": "ctp_configuration"
+    }
+  },
+  "properties": {
+    "tag": {
+      "type": "string"
+    },
+    "value": {
+      "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "description": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number",
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,86 @@
+{
+  "name": "user_login",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true
+    },
+    "role_id": {
+      "type": "number"
+    },
+    "product_type_id": {
+      "type": "number"
+    },
+    "school_id": {
+      "type": "number"
+    },
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "Activate"
+    },
+    "user_expiry_date": {
+      "type": "date"
+    },
+    "old_username": {
+      "type": "string"
+    },
+    "old_password": {
+      "type": "string"
+    },
+    "tablet_imei_no": {
+      "type": "string"
+    },
+    "user_type_id": {
+      "type": "number"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "email_activation": {
+      "type": "string"
+    },
+    "website_auth": {
+      "type": "string",
+      "default": "0"
+    },
+    "user_login_mobileapp": {
+      "type": "number"
+    },
+    "user_login_erp": {
+      "type": "number"
+    },
+    "user_login_ctp": {
+      "type": "string"
+    },
+    "web_user_id": {
+      "type": "number"
+    },
+    "web_session_key": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

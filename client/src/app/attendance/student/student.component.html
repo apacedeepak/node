@@ -1,0 +1,383 @@
+<div class="pageWorkArea">
+<div class="boxwraper topSpace">
+  <div class="col-sm-12 col-md-12">
+    <div class="communication">
+      <ul class="commnicationBox">
+        <li id="mess" class="active"><a data-toggle="tab"  href="#message">Monthly Attendance<span class="badge" ></span> </a></li>
+        <li id="cir" class=""><a data-toggle="tab"  href="#/portal/studentleaveapply">Leave Application<span class="badge"></span></a></li>
+        <li id="not" class=""><a data-toggle="tab" href="#/portal/calendar">School Calendar<span class="badge"></span></a></li>
+      </ul>
+      <div class="clearfix"></div>
+      <div class="tab-content">
+        <div id="message" class="tab-pane fade in active">
+          <div class="col-sm-6 col-md-6">
+            <div class="pull-left" style="max-height: inherit;width: 100%; margin-top: 15px;">
+              <div ui-calendar="uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar" ng-model="eventSources" class="calendar ng-isolate-scope ng-pristine ng-valid fc fc-unthemed fc-ltr">
+                <div class="fc-toolbar fc-header-toolbar">
+                  <div class="fc-left">
+                    <h2>May 2017</h2>
+                  </div>
+                  <div class="fc-right">
+                    <button class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" type="button" disabled="">today</button>
+                    <div class="fc-button-group">
+                      <button class="fc-prev-button fc-button fc-state-default fc-corner-left" type="button"><span class="fc-icon fc-icon-left-single-arrow"></span></button>
+                      <button class="fc-next-button fc-button fc-state-default fc-corner-right" type="button"><span class="fc-icon fc-icon-right-single-arrow"></span></button>
+                    </div>
+                  </div>
+                  <div class="fc-center"></div>
+                  <div class="fc-clear"></div>
+                </div>
+                <div class="fc-view-container" style="">
+                  <div class="fc-view fc-month-view fc-basic-view" style="">
+                  
+                  </div>
+                </div>
+              </div>
+              <div class="calendarDescription">
+                <ul>
+                  <li>Weekend</li>
+                  <li>Present</li>
+                  <li>Absent</li>
+                  <li>Leave</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <div class="pull-left" style="max-height: inherit;width: 100%;">
+              <div class="attendaceScrore">
+                <h3></h3>
+              </div>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td align="left">Present</td>
+                    <td align="right">&nbsp;Days</td>
+                  </tr>
+                  <tr>
+                    <td align="left">Absent</td>
+                    <td align="right">&nbsp;Days</td>
+                  </tr>
+                  <tr>
+                    <td align="left">Leave</td>
+                    <td align="right">&nbsp;Days</td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b>Total</b></td>
+                    <td align="right" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b>&nbsp;Days</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+    
+  .thumb {
+  width: 50px;
+  height: 50px;
+  float: none;
+  position: relative;
+  display: inline;	
+}
+#Text1{
+width:400px;
+height:100px;
+border:1px solid #000000;
+background-color:#CCCCCC;
+};
+   
+.searchBlock{border-bottom: 0;}
+#return .modal-dialog{ width: 350px;margin: 15% auto;}
+#return .modal-body{padding: 0;}
+#return .modal-footer,#return .modal-header{border: 0;}
+/*Upload file inherit Css*/
+.file-footer-caption {width: 100%;padding-top: 4px;font-size: 10px;margin: 0px auto;}
+.file-preview-frame{display: table-cell;height: 110px;padding: 2px;width: 76px !important;}
+.kv-file-content img{ width:auto !important; height:55px!important;}
+.file-preview {padding: 5px; margin-bottom: 15px;}
+.file-actions {margin-top: 3px; text-align:center;}
+.file-actions .btn{border:0; float:none;}
+.input-group-btn .fileinput-cancel-button{ display:none;}
+.file-caption-main {width: 35%;}
+/*Calendra*/
+.calendarDescription {
+    background: none repeat scroll 0 0 #fff;
+    text-align: center;
+    width: 100%;
+    float: left;
+}
+.calendarDescription ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.calendarDescription ul li {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 0 none !important;
+    display: inline-block !important;
+    font-family: "robotoregular" !important;
+    font-size: 11px !important;
+    margin: 0 4px 0 0 !important;
+    padding: 0 0 0 11px !important;
+    position: relative;
+}
+.calendarDescription ul li:first-child::before {
+    background: none repeat scroll 0 0 #ec940a;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+}
+.calendarDescription ul li:last-child::before {
+    background: none repeat scroll 0 0 #2991ff;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+}
+/*.calendarDescription ul li:nth-child(4)::before {
+    background: none repeat scroll 0 0 #2991ff;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+}*/
+.calendarDescription ul li:nth-child(2)::before {
+    background: none repeat scroll 0 0 #009d56;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+}
+.calendarDescription ul li:nth-child(3)::before {
+    background: none repeat scroll 0 0 #e91e63;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+}
+.calendarStyle{ width: 100%; float:left; margin-top: 15px;}
+.calendar  * {
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.calendar-sm {
+    cursor: default;
+    width: 100%;
+    height: 370px;
+}
+.calendar {
+    cursor: default;
+    width: 100%;
+    height: 350px;
+}
+
+.calendar-sm .c-pad-top {
+    padding-top: 2%;
+}
+
+.calendar .c-pad-top {
+    padding-top: 1px;
+}
+
+.c-grid {
+     height: inherit;
+}
+.c-day {
+    width: 14.28%;
+    height: 13%;
+    background-color: #EFF4F9;
+    float: left;
+    text-align: center;
+}
+
+.c-day-previous-month {
+    width: 14.28%;
+    height: 13%;
+    background-color: #F9FBFD;
+    float: left;
+    text-align: center;
+    color: gray;
+}
+
+.c-day-next-month {
+    width: 14.28%;
+    height: 13%;
+    background-color: #F9FBFD;
+    float: left;
+    text-align: center;
+    color: gray;
+}
+
+.c-week-day {
+    width: 14.28%;
+    height: 10.38%;
+    background-color: rgb(145, 172, 203);
+    color: white;
+    float: left;
+    text-align: center;
+     padding-top: 0;
+	 font-family: 'robotomedium';
+}
+
+.c-next {
+    width: 12.5%;
+    height: 12%;
+    padding: 2% 2% 0 2%;
+    text-align: right;
+    cursor: pointer;
+}
+
+.c-previous {
+    width: 12.5%;
+    height: 12%;
+    padding: 2% 2% 0 2%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.c-month {
+    width: 75%;
+    height: 12%;
+    text-align: center;
+}
+
+.c-nav-btn-over {
+    background-color: rgb(137, 163, 192) !important;
+    font-weight: bold;
+}
+
+.c-today {
+    background-color: #D8EAF1;
+}
+
+.c-event {
+    background-color: rgb(166, 166, 166);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.c-grid {
+    float: left;
+    width: 50%;
+}
+
+.c-event-grid {
+    height: inherit;
+    width: 50%;
+    float: left;
+}
+
+.c-grid-title {
+    font-family: 'robotobold';
+    float: left;
+    background-color: rgb(28, 38, 49);
+    color: white;
+}
+
+.c-event-title {
+    width: 100%;
+    height: 12%;
+    text-align: center;
+       background-color: rgb(135, 155, 188);
+    color: white;
+	 font-family: 'robotobold';
+}
+
+.c-event-body {
+    background-color: #EFF4F9;
+    height: 88.1%;
+}
+
+.c-event-list {
+    padding: 7 0 0 0;
+    overflow: auto;
+    height: 95%;
+}
+
+.c-event-item > .title {
+    font-weight: bold;
+}
+
+.c-event-item > div {
+    text-overflow: ellipsis;
+    width: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.c-event-item {
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
+.c-event-over {
+    background-color: lightgray;
+    font-weight: bold;
+    color: black;
+}
+
+.c-event-over > .description {
+    font-weight: normal;
+}
+/*Neeraj Custom Calender*/
+.fc-day-grid-container{height:245px!important; overflow: hidden !important;}
+.fc-today-button{display:none;}
+.fc-header-toolbar .fc-right{ width:100%;}
+.fc-right .fc-button-group{width:100%; margin:8px 0px 0 0 !important}
+.fc-right .fc-button-group .fc-next-button{float:right}
+.fc-right .fc-button-group button {height: 20px; margin: 0;padding: 0;background:none;
+border:0;box-shadow:none;color:#fff;font-size: 20px;text-shadow:0;}
+.fc-header-toolbar{ margin:0 !important; height:40px; position:relative;}
+.fc-header-toolbar .fc-left{ width:100%; text-align:center;margin: 0 !important;}
+.fc-header-toolbar .fc-left h2{ font-size: 16px;line-height: 40px;margin: 0 !important;text-align: center; width: 100%;position: absolute; color:#fff !important}
+.fc-day-header{background: none repeat scroll 0 0 #DCDCDC!important;
+     box-shadow: none;
+    color: #333333;
+     font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    padding:0px 0!important;
+    text-align: center;
+}
+.fc-view-container td,.fc-view-container th{text-align: center!important;}
+.fc-view-container span {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    display: block;
+    float: none;
+    height: inherit;
+    text-align: center !important;
+    width: 100% !important;
+}
+.fc-sun{color:#EC940A !important}
+.fc-view-container .fc-day-header{border-bottom:1px solid #ccc!important;}
+.fc-view-container td{vertical-align: middle !important; line-height:40px!important}
+.fc-view-container .fc-today {background:none!important;color: #333333!important;}
+.fc-view-container .fc-basic-view tbody .fc-row { min-height: 40px;}
+.fc-icon-left-single-arrow::after,.fc-icon-right-single-arrow::after{font-size: 35px;}
+.fc-toolbar{ background:#004b80;}
+.attendaceScrore{background: none repeat scroll 0px 0px rgb(0, 75, 128); color: rgb(255, 255, 255); margin-top: 15px; padding: 11px;}
+.attendaceScrore h3{margin: 0px; font-size: 16px;text-align: center;}
+</style>

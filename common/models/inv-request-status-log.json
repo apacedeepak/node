@@ -1,0 +1,30 @@
+{
+  "name": "inv_request_status_log",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "inv_raise_request_id": {
+      "type": "number",
+      "required": true
+    },
+    "inv_request_status_id": {
+      "type": "number",
+      "required": true
+    },
+    "approval_user_id": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

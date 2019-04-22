@@ -1,0 +1,9 @@
+<div class="boxModel pull-left maxHightOuto">
+<div class="headBox mb15"><h5 class="h5 pull-left">Time Table</h5></div>
+<ng-container *ngIf="userType=='teacher'">
+  <app-teacher></app-teacher>
+</ng-container>
+ <ng-container *ngIf="userType=='student' || userType=='parent'">
+  <app-student></app-student>
+</ng-container>
+</div>

@@ -1,0 +1,26 @@
+<!-- <div>
+  <ion-row class="navuser" (click)="openProfile()">
+    <ion-col col-11 text-center>
+       <div class="profilethumb">
+          <img [src]="globalObj.ProfileImage">   
+       </div>
+    </ion-col>
+    <ion-col col-11 text-center class="logedname">
+       {{globalObj.loginName}} 
+    </ion-col>
+    <ion-col col-11 text-center class="logedname">
+     Last Login: {{globalObj.lastLogin | date : 'd MMM, y h:mm a'}} 
+  </ion-col>
+ </ion-row>
+  </div> -->
+ <ng-container *ngIf = "globalObj.siblingDataFlag">     
+<div class="siblingPro"> 
+    <div class="profilethumb">
+        <img (click) = "showStudentList()" [src]="globalObj.ProfileImage">   
+     </div>
+  <ul class = "{{globalObj.siblingDataList?'showList':'hideList'}}">
+    <li *ngFor="let data of globalObj.siblingData"><a  href="javascript:void(0)" (click)="changeUser(data.user_id)">{{data.name}}</a>    </li>
+  </ul>
+    
+</div>
+ </ng-container>

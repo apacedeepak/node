@@ -1,0 +1,100 @@
+.hdSpan{width: 35px;
+    display: inline-block;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 80%;
+    vertical-align: text-top;
+    margin-top: -4px;
+    margin-bottom: 10px;}
+    .previous {
+        background-color: #f1f1f1;
+        color: black;
+    }
+    
+    .next {
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    .round {
+        border-radius: 50%;
+    }   
+    .managementHeadRight{position: fixed; top:0; right: 0px; z-index: 999; padding-right: 15px;} 
+    .swipToggle{margin-right: 0px!important;}
+    .headToggle .dropdown-toggle{ padding-right: 0 !important;}
+    .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+      }
+      .custom-day.focused {
+        background-color: #e6e6e6;
+      }
+      .custom-day.range, .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+      }
+      .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+      }
+     
+      .tabsytle{
+      float: left;
+      margin:14px 0 0 0;
+      padding: 0 15px;
+      width: 100%;
+      border-bottom: 1px solid #cdcdcd;
+      padding-bottom: 12px;
+  }
+  .plussing{top:10px;}
+  .showDate{
+      padding: 4px 20px 4px 10px;
+      border: 1px solid #cdcdcd;
+      display: inline-block;
+      margin: 0px 0 0 0;
+      bottom: -18px;
+      font-size: 14px;
+          background: #f2f2f2;
+  }
+  .showDate label{margin:0;}.showDate .close{position: absolute; right: 0; margin: 0; top: 0px;font-weight: bold;}
+  .ngCalendra ngb-datepicker{
+    position: absolute;
+      right: 0;
+      z-index: 9;
+      background: #fff;
+      box-shadow: 0 0 3px 2px rgba(109, 106, 106, 0.48);
+      top: 100%;
+      margin-top: 1px;}
+      .controllArrowLeft{position: absolute; top: 40%; left: 5px; color: #333; background-color: transparent; font-size: 25px !important;}
+      .controllArrowRight{position: absolute; top: 40%; right: 5px; color: #333; background-color: transparent; font-size: 25px !important;}
+      #daterange .ngCalendra ngb-datepicker{position: static;
+        margin: 0 auto;
+        box-shadow: none;
+        border: 0;
+        width: 100%;}
+        .btnGroup{margin-top: 18px; margin-right: 15px;}
+        .btnGroup .btn-sm{font-size: 12px; padding: 5px 15px; font-weight: normal;border-radius: 28px;}
+        .btnGroup .btn-defult{border-color:#3C6ECD;background-color:transparent;}
+        .btnGroup .btn-info{background-color:#3C6ECD;border-color:#3C6ECD;}
+       .single-pos{ position: absolute; left: 15px; top: 30px }
+       .srchResult{border:0 !important;}
+       .codeIndicator{background:#F5F5F5; padding:2px 5px; margin-bottom: 10px;}
+       .codeIndicator label{ display: inline-block; vertical-align: middle; margin:0 4px 0 0;font-size: 12px; font-weight: normal;}
+       .codeIndicator span{width: 20px; height: 8px; border-radius: 10px; display: inline-block; margin-right: 5px;}
+       .span1{background-color:#844CE4}
+       .span2{background-color:#666666}
+       .span3{background-color:#0093FF}
+       .span4{background-color:#E4A406}
+       .span5{background-color:#C00D5F}
+       .span6{background-color:#2ABE5E}
+       .span7{background-color:#D4D4D4}
+       .maxHeightBox{max-height: 345px;min-height: 345px;}
+       .switch .slider:before{left:35px !important;}
+       .switch input:checked + .slider:before {left: 0px !important;}
+       .freeCollectionTitle .spanblock{background-color: #fe4080 !important;}
+       .attandanceTitle .spanblock{background-color: #20ae0c !important;}
+       .hostelTitle .spanblock{background-color: #f08a37 !important;}
+       

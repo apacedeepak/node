@@ -1,0 +1,401 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox">
+    <h5 class="h5 pull-left"><a routerLink="/homework/main"><i class="fa fa-fw fa-arrow-left"></i></a>  {{'homework_details' | translate}}</h5>
+    <div class="pull-right"><a href="#/" data-toggle="modal" data-target="#viewHomework" class="viewbtn"><i class="fa fa-fw fa-eye"></i></a></div>
+  </div>
+<div classs="leftRightgap">
+  <div class=" tab-content homeLBlock teachhomeL">
+    <ul class="nav messagetab">      
+      <li ><a  class="active" data-toggle="tab" href="#allHomework" >{{'all_students'|translate}}{{allhomework}}</a></li>
+      <li><a data-toggle="tab" href="#submitted" >{{'submitted'|translate}}{{subhomeworkstring}}</a></li>
+      <li><a data-toggle="tab" href="#nsubmitted" >{{'not_submitted'|translate}}{{nsubhomeworkstring}}</a></li>
+      <li><a data-toggle="tab" href="#csubmission" >{{'Checked Submissions'|translate}}{{chksubhomeworkstring}}</a></li>
+      <li><a data-toggle="tab" href="#usubmission" >{{'Unchecked Submissions'|translate}}{{nchksubhomeworkstring}}</a></li>
+      <li><a data-toggle="tab" href="#lsubmission" >{{'Late Submissions'|translate}}{{latehomeworkstring}}</a></li>
+    </ul>
+  </div>
+  <div class="homeRBlock borderLeft teachhomeR">
+    <div class="attendanceFillter" style="padding-left:0; padding-right:0;">
+      <div class="col-sm-4 col-md-4 pull-left">
+        <label> {{'topic' | translate}}:</label><br> {{homeworkdetail.homework_detail.title}}
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <label> {{'subject' | translate}}:</label><br> {{homeworkdetail.homework_detail.subject}}
+      </div>
+      <div class="col-sm-2 col-md-2 pull-left " *ngIf="product_type != 'emscc'">
+        <label> {{'class' | translate}} - {{'section' | translate}}:</label><br> {{homeworkdetail.homework_detail.class_section_name}}
+      </div>
+      <div class="col-sm-2 col-md-2 pull-left " *ngIf="product_type == 'emscc'">
+        <label> {{'course_type_batch' | translate}}:</label><br> {{homeworkdetail.homework_detail.class_section_name}}
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left ">
+        <label>  {{'submission_date' | translate}}:</label><br> {{homeworkdetail.homework_detail.target_date}}
+      </div>
+    </div>
+    <div class="tab-content">
+     <div id="allHomework" class="tab-pane active">
+             
+                 <div class="col-sm-12 col-md-12 pull-left"><h2 class="hdingtitle"> {{'all_students' | translate}}  <a href="javascript void(0)"  (click)="$event.preventDefault(); submitdata('allhome');" class="sm-blue-btn pull-right" style="margin-left: 10px;"> {{'done' | translate}}  </a>&nbsp;&nbsp; </h2>
+          </div> 
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody><tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr   style="" *ngFor="let studentHomework of homeworkdetail.student_detail;index as i;" >
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">
+                
+             <select class="form-control"  (change)="changesubmitstatus($event,studentHomework.user_id,'allhome')" >
+             
+               <option  *ngIf="studentHomework.submitted_date==''" value="1"    > {{'submitted' | translate}}</option>
+               <option *ngIf="studentHomework.submitted_date==''" value="0"    selected="selected"> {{'not_submitted' | translate}}</option>
+               <option *ngIf="studentHomework.submitted_date!=''" value="1"    selected="selected">{{studentHomework.submitted_date}}</option>
+             </select>
+            </td>
+            <td width="25%">
+              
+              <select class="form-control" (change)="changeremarkstatus($event,studentHomework.user_id,'allhome')" [disabled]="false"  >
+                
+                <option *ngIf="studentHomework.remark_date==''" value="0" [selected]="studentHomework.remark_date==''?true:false" > {{'unchecked' | translate}}</option>
+                <option  value="1" [selected]="studentHomework.remark_date!=''?true:false"> {{'checked' | translate}}</option>
+              </select>
+            </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    </div>
+   <div id="submitted" class="tab-pane">
+             
+                <div class="col-sm-12 col-md-12  pull-left"><h2 class="hdingtitle"> {{'all_students' | translate}}  <a href="javascript void(0)"  (click)="$event.preventDefault(); submitdata('submit');" class="sm-blue-btn pull-right" style="margin-left: 10px;"> {{'done' | translate}} </a>&nbsp;&nbsp; </h2>
+          </div>
+                <ng-container *ngIf="subhomework>0;else nosubdata">
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody><tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr *ngFor="let studentHomework of subhomeworkarr" style="">
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">
+                 <select class="form-control"  (change)="changesubmitstatus($event,studentHomework.user_id,'submit')">
+             
+               
+               <option value="1"    selected="selected">{{studentHomework.submitted_date}}</option>
+             </select>
+            </td>
+            <td width="25%">
+              
+              <select class="form-control" (change)="changeremarkstatus($event,studentHomework.user_id,'submit')">
+                
+                <option *ngIf="studentHomework.remark_date==''" value="0" [selected]="studentHomework.remark_date==''?true:false" > {{'unchecked' | translate}}</option>
+                <option  value="1" [selected]="studentHomework.remark_date!=''?true:false"> {{'checked' | translate}}</option>
+              </select>
+            </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    </ng-container>
+    <ng-template #nosubdata>
+        <div class="alert alert-info">  {{'no_data_available' | translate}}</div>
+</ng-template>
+    </div>
+   <div id="nsubmitted" class="tab-pane">
+             
+                 <div class="col-sm-12 col-md-12 pull-left"><h2 class="hdingtitle"> {{'all_students' | translate}} <a href="javascript void(0)"  (click)="$event.preventDefault(); submitdata('nsubmit');" class="sm-blue-btn pull-right" style="margin-left: 10px;"> {{'done' | translate}} </a>&nbsp;&nbsp; </h2>
+          </div>
+                <ng-container *ngIf="nsubhomework>0;else nonsubdata ">
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody>
+	  <tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr *ngFor="let studentHomework of nsubhomeworkarr"  style="">
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">
+                <select class="form-control"  (change)="changesubmitstatus($event,studentHomework.user_id,'nsubmit')">
+             
+               <option  value="1" > {{'submitted' | translate}}</option>
+               <option  value="0"  selected="selected"> {{'not_submitted' | translate}}</option>
+               
+             </select>
+            </td>
+            <td width="25%">
+              
+              <select class="form-control" (change)="changeremarkstatus($event,studentHomework.user_id,'nsubmit')" [disabled]="false"  >
+                
+                <option value="0" selected="selected"> {{'unchecked' | translate}}</option>
+                <option value="1" > {{'checked' | translate}}</option>
+              </select>
+            </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+                </ng-container>
+    <ng-template #nonsubdata>
+        <div class="alert alert-info"> {{'no_data_available' | translate}}</div>
+</ng-template>
+    </div>
+   <div id="csubmission" class="tab-pane">
+             
+                
+                <ng-container *ngIf="chksubhomework>0;else nochksubdata">
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody><tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr *ngFor="let studentHomework of chksubhomeworkarr"   style="">
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">{{studentHomework.submitted_date}}
+               <!-- <select>
+             
+               
+               <option value="1"    selected="selected">{{studentHomework.submitted_date}}</option>
+             </select> -->
+            </td>
+            <td width="25%"> {{'checked' | translate}}
+              
+              <!-- <select>
+                
+               <option value="1" selected="selected">Checked</option>
+              </select> -->
+            </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+                </ng-container>
+     <ng-template #nochksubdata>
+        <div class="alert alert-info"> {{'no_data_available' | translate}}</div>
+</ng-template>
+    </div>
+   <div id="usubmission" class="tab-pane">
+             
+                 <div class="col-sm-12 col-md-12  pull-left"><h2 class="hdingtitle"> {{'all_students' | translate}}  <a href="javascript void(0)"  (click)="$event.preventDefault(); submitdata('unchksubmit');" class="sm-blue-btn pull-right" style="margin-left: 10px;"> {{'done' | translate}} </a>&nbsp;&nbsp; </h2>
+          </div>
+                <ng-container *ngIf="nchksubhomework>0;else nounchksubdata ">
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody><tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr *ngFor="let studentHomework of nchksubhomeworkarr"  style="">
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">
+                <select class="form-control"  (change)="changesubmitstatus($event,studentHomework.user_id,'unchksubmit')">
+             
+               
+               <option value="1"    selected="selected">{{studentHomework.submitted_date}}</option>
+             </select>
+            </td>
+            <td width="25%">
+              
+              <select class="form-control"  (change)="changeremarkstatus($event,studentHomework.user_id,'unchksubmit')">
+                
+                <option value="0" selected="selected"> {{'unchecked' | translate}}</option>
+                <option value="1" > {{'checked' | translate}}</option>
+              </select>
+            </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+                </ng-container>
+    <ng-template #nounchksubdata>
+        <div class="alert alert-info">  {{'no_data_available' | translate}}</div>
+</ng-template>
+    </div>
+   <div id="lsubmission" class="tab-pane">
+             
+               <div class="col-sm-12 col-md-12 pull-left"><h2 class="hdingtitle"> {{'all_students' | translate}}  <a href="javascript void(0)"  (click)="$event.preventDefault(); submitdata('latesubmit');" class="sm-blue-btn pull-right" style="margin-left: 10px;"> {{'done' | translate}} </a>&nbsp;&nbsp; </h2>
+          </div>
+                <ng-container *ngIf="latehomework>0;else nolatedata">
+    <div class="filtertitle" style="padding-left:0; padding-right:0;">
+      <table class="table">
+      <tbody><tr>
+      <!-- <td class="tdBoldstyle" width="15%">Roll No.</td> -->
+      <td class="tdBoldstyle" width="20%">  {{'student_name' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'submission_date' | translate}}</td>
+      <td class="tdBoldstyle" width="25%"> {{'checked' | translate}}/{{'unchecked' | translate}}</td>
+      <td class="tdBoldstyle" width="15%"> {{'action' | translate}}</td>
+      </tr>
+      </tbody>
+      </table>          
+      </div>
+    <div class="attndfilterResult mxHightAuto" style="padding-left:0; padding-right:0;">
+      <table id="allhome" class="table table-striped vmid">
+        <tbody>
+          <!-- ngRepeat: homewrkdet in homedetail -->
+          <!-- ngIf: homedetail!='' -->
+          <tr *ngFor="let studentHomework of latehomeworkarr" style="">
+            <!-- <td  width="15%">{{studentHomework.roll_no}}</td> -->
+            <td  width="20%">{{studentHomework.name}} </td>
+            <td width="25%">
+               <select class="form-control"  (change)="changesubmitstatus($event,studentHomework.user_id,'latesubmit')" >
+             
+               
+               <option value="1"    selected="selected">{{studentHomework.submitted_date}}</option>
+             </select>
+            </td>
+            <td width="25%">
+              <select class="form-control"  (change)="changeremarkstatus($event,studentHomework.user_id,'latesubmit')" >
+              <option *ngIf="studentHomework.remark_date==''" value="0" [selected]="studentHomework.remark_date==''?true:false" > {{'unchecked' | translate}}</option>
+                <option  value="1" [selected]="studentHomework.remark_date!=''?true:false"> {{'checked' | translate}}</option>
+             </select>
+              </td>
+            <td class="viewIcon" width="15%" align="center">
+              <a *ngIf="studentHomework.submitted_date!=''" routerLink="/homework/checkhomework/{{studentHomework.user_id}}/{{studentHomework.name}}/{{homeworkId}}"> 
+                <i class="fa fa-fw fa-eye"></i></a>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+                </ng-container>
+    <ng-template #nolatedata>
+        <div class="alert alert-info">  {{'no_data_available' | translate}}</div>
+</ng-template>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- viewHomework Popup -->
+<div id="viewHomework" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content"> 
+<div class="modal-header">  {{'homework_details' | translate}}</div>
+ <div class="modal-body padding-left-none padding-right-none" style="max-height: 300px; overflow-y: auto;">
+  <table class="table table-border">
+  <tr>
+  <td style="width:185px"><b> {{'assignment_date' | translate}}</b></td>
+  <td>{{homeworkdetail.homework_detail.creation_date}}</td>
+  </tr> 
+  <tr>
+  <td><b> {{'target_date' | translate}}</b></td>
+  <td>{{homeworkdetail.homework_detail.target_date}}</td>
+  </tr>
+  <tr>
+  <td><b> {{'assignment_title' | translate}}</b></td>
+  <td>{{homeworkdetail.homework_detail.title}}</td>
+  </tr>
+  </table>
+
+  <div *ngFor="let aatt of homeworkdetail.homework_detail.attachments" class="col-sm-12 col-md-12">
+  <a  download="{{serverurl}}{{aatt}}" target="_self" href="{{serverurl}}{{aatt}}" class="" ><i class="fa fw fa-paperclip"></i> {{aatt | split: '~':1}}</a> 
+  </div> 
+  <div class="text-primary col-sm-12 col-md-12">
+  <div class="textARea" [innerHTML] = "homeworkdetail.homework_detail.content"></div>
+  </div>
+</div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-info" data-dismiss="modal"> {{'close' | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+<div *ngIf="responseMessage" id="successpop" class="successMessage">
+        <div><span class="has-feedback"><p>{{popmessage}}</p><a routerLink="/homework/main" class="msgclose sm-blue-btn" ng-click="closeme()"> {{'ok' | translate}}</a></span></div>
+</div>

@@ -1,0 +1,166 @@
+ <div class="col-sm-12 col-md-12 pull-left padding-left-none">
+  <div class="boxModel pull-left" style="max-height: inherit;">
+  <div class="headBox">
+   <h5 class="h5 pull-left"><a [routerLink]="['/dashboard/main']"><i class="fa fa-fw fa-arrow-left"></i></a>   {{'student_attendance' | translate}}</h5>
+   <div class="pull-right btnGroup">    
+           <button id='all' class="showall btn btn-sm  btn-defult btn-info" (click)="clickOn('all')">   {{'view_all' | translate}}</button>
+           <button id='pt' class="showall btn btn-sm btn-defult" (click)="clickOn('pt')">  {{'present' | translate}}</button>
+           <button id='ab' class="showall btn btn-sm btn-defult" (click)="clickOn('ab')">  {{'absent' | translate}}</button>
+           <button id='le' class="showall btn btn-sm btn-defult" (click)="clickOn('le')">  {{'leave' | translate}}</button>
+           <button id='nottaken' class="showall btn btn-sm btn-defult" (click)="clickOn('nottaken')">  {{'attendance_not_taken' | translate}}</button>   
+  </div>
+  </div>
+<div class="sAttandSerchpan">
+  <div class="col-sm-3 com-md-3 pull-left">
+      <span *ngIf="globalObj.nottaken" style="color:#fff">   {{'from_date' | translate}}:</span>
+      <div class="datBox">
+        <input class="calenerIcon" placeholder="target date" readonly
+        ngbDatepicker #d="ngbDatepicker" [formControl]="dpField" [value]="dp"  id="dp">
+        <button class="btnover" (click)="d.toggle()" type="button"></button>
+   </div>
+  </div>
+      <div *ngIf="globalObj.nottaken" class="col-sm-3 com-md-3 pull-left">
+         <span style="color:#fff">    {{'to_date' | translate}}:</span>
+      <div  class="datBox">
+        <input class="calenerIcon" placeholder="target date" readonly
+        ngbDatepicker #d="ngbDatepicker" [formControl]="dpFieldToDate" [value]="todate"  id="dp">
+        <button class="btnover" (click)="d.toggle()" type="button"></button>
+   </div>
+      
+      
+    <!--<input type="text" class="clenderInput" placeholder="Select Date">-->
+  </div>
+  <div *ngIf="!globalObj.nottaken" class="col-sm-2 com-md-2 padding-right-none  pull-left">
+  <div class="btn-group">
+  <button class="btn dropdown-toggle" data-toggle="dropdown">  {{'select_class' | translate}} <b class="caret"></b></button>
+   <div  class="dropdown-menu">
+    <label class="checkbtnBlock" *ngFor="let attendance of classList; index as i;">
+    <input type="checkbox" id="staff{{i}}" value="{{attendance.classSectionId}}" (click)="selectClass(attendance.classSectionId)">
+     {{attendance.classSection}} <span class="checkbtn"></span>
+    </label>
+ 
+  </div>
+  </div>
+</div>
+  </div>
+ <div *ngIf="!globalObj.nottaken" class="col-sm-12 col-md-12 pull-left"> 
+<table class="table tablestyle margin-top-10">
+              <thead>
+              <tr>
+                  <td width="60px" align="center">  {{'serial_no' | translate}}</td>
+                  <td align="center">  {{'class' | translate}}</td> 
+                  <td align="center">  {{'class_teacher' | translate}}</td> 
+                  <td align="center">  {{'no_of_student' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.pt">  {{'present' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.ab">  {{'absent' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.le">  {{'leave' | translate}}</td> 
+                  <!--<td align="center" *ngIf="globalObj.reason">Reason</td>-->   
+              </tr>
+              </thead>
+              <tbody>
+              
+               <tr *ngFor="let attendance of attendanceList; index as i;" class="ng-scope">
+                   <td align="center" class="ng-binding">{{i+1}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.classSection}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.classTeacher}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.totalStudent}}</td>
+                  <td *ngIf="globalObj.pt &&attendance.present>0" align="center" class="ng-binding ng-scope">
+                 <a href="javascript:void(0)" (click)="showPopUp(attendance.classSectionId, 'P',attendance.classSection)" >{{attendance.present}}</a></td>
+                 <td *ngIf="globalObj.pt &&attendance.present==0" align="center" class="ng-binding ng-scope">{{attendance.present}}</td>
+
+                 <td *ngIf="globalObj.ab && attendance.absent>0" align="center" class="ng-binding ng-scope">
+                    <a href="javascript:void(0)" (click)="showPopUp(attendance.classSectionId, 'A',attendance.classSection)">{{attendance.absent}}</a></td>
+                    <td *ngIf="globalObj.ab && attendance.absent==0" align="center" class="ng-binding ng-scope">{{attendance.absent}}</td>
+                    <td *ngIf="globalObj.le && attendance.leave>0" align="center" class="ng-binding ng-scope">
+                      <a href="javascript:void(0)" (click)="showPopUp(attendance.classSectionId, 'L',attendance.classSection)">{{attendance.leave}}</a></td>
+                      <td *ngIf="globalObj.le && attendance.leave==0" align="center" class="ng-binding ng-scope">{{attendance.leave}}</td>
+                  <!--<td *ngIf="globalObj.reason" align="center" class="ng-binding ng-scope">{{(globalObj.ab) ? "NA" : attendance.reason}}</td>-->
+                   
+               </tr>
+                 
+              </tbody>
+          </table>
+ </div>
+      
+      <div *ngIf="globalObj.nottaken" class="col-sm-12 col-md-12 pull-left"> 
+<table class="table tablestyle margin-top-10">
+              <thead>
+              <tr>
+                  <td width="60px" align="center">  {{'serial_no' | translate}}</td>
+                  <td align="center">  {{'class' | translate}}</td> 
+                  <td align="center" align="center">   {{'class_teacher' | translate}}</td> 
+                  <td align="center">  {{'no_of_not_taken_att_total_days' | translate}}</td> 
+                  <!--<td align="center">Reason</td>--> 
+                    
+              </tr>
+              </thead>
+              <tbody>
+              
+               <tr *ngFor="let attendance of attendanceNotTakenList; index as i;" class="ng-scope">
+                   <td align="center" class="ng-binding">{{i+1}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.section_name}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.classTeacher}}</td>
+                  <td  align="center" class="ng-binding ng-scope">{{attendance.notTakenCount}}/{{attendance.totalCount}}</td>
+                  <!--<td  align="center" class="ng-binding ng-scope">{{attendance.remark}}</td>-->
+                  
+                   
+               </tr>
+                 
+              </tbody>
+          </table>
+ </div>
+      
+      
+      
+      
+  </div>
+ </div>
+
+<div class="modal fade" id="showpopup">
+    <div class="modal-dialog" style='max-width: 700px;'>
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5>{{globalObj.classPopUpName}}</h5>   
+                
+       <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+            <div class="modal-body">
+                <div class="overFlowY">
+                <table class="table tablestyle">
+              <thead>
+              <tr>
+                  <td width="60px" align="center">  {{'serial_no' | translate}}</td>
+                  <td align="center">  {{'admission_no' | translate}}</td> 
+                  <td align="center">   {{'student_name' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.leaveStatus">  {{'applied_on' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.leaveStatus">  {{'leave_date' | translate}}</td> 
+                  <td align="center" *ngIf="globalObj.leaveStatus">  {{'reason' | translate}}</td> 
+                  <!--<td align="center" *ngIf="globalObj.leaveStatus">Status</td>--> 
+              </tr>
+              </thead>
+              <tbody>
+              
+               <ng-container *ngFor="let attend of attendancePopUpList; index as j;">
+              <ng-container *ngFor="let att of attend | keyvaluepair">
+              
+               <tr *ngFor="let attendance of att.value; index as i;" class="ng-scope">
+                  <td align="center" class="ng-binding">{{attendance.index}}</td>
+                  <td align="center" class="ng-binding ng-scope">{{attendance.admission_no}}</td>
+                  <td align="center" class="ng-binding ng-scope">{{attendance.student_name}}</td>
+                  <td align="center" *ngIf="globalObj.leaveStatus" class="ng-binding ng-scope">{{attendance.appliedOn}}</td>
+                  <td align="center" *ngIf="globalObj.leaveStatus" class="ng-binding ng-scope">{{attendance.leaveDate}}</td>
+                  <td align="center" *ngIf="globalObj.leaveStatus" class="ng-binding ng-scope">{{attendance.reason}}</td>
+                  <!--<td align="center" *ngIf="globalObj.leaveStatus" class="ng-scope">{{attendance.leaveStatus}}</td>--> 
+               </tr>
+                  </ng-container>
+                    </ng-container>
+              <tr *ngIf="attendancePopUpList.length == 0">
+                  <td align="center" [attr.colspan]="globalObj.colspan">{{globalObj.message}}</td>
+              </tr>
+              </tbody>
+          </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

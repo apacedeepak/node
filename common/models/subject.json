@@ -1,0 +1,71 @@
+{
+  "name": "subject",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "subject_name": {
+      "type": "string",
+      "required": true
+    },
+    "subject_abbriviation": {
+      "type": "string"
+    },
+    "subject_icon": {
+      "type": "string"
+    },
+    "subject_order": {
+      "type": "number"
+    },
+    "subject_code": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "required": true,
+      "default": "schoolerp"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "subject_sections": {
+      "type": "hasMany",
+      "model": "section",
+      "foreignKey": "subjectId",
+      "through": "class_subject"
+    },
+    "subject_has_users": {
+      "type": "hasMany",
+      "model": "users",
+      "foreignKey": "subjectId",
+      "through": "user_subjects"
+    },
+    "subject_has_homework": {
+      "type": "hasMany",
+      "model": "homework",
+      "foreignKey": "subjectId"
+    },
+    "subject_has_user": {
+      "type": "hasOne",
+      "model": "user_subjects",
+      "foreignKey": "subjectId",
+      "through": "user_subjects"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

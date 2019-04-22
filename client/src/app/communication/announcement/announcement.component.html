@@ -1,0 +1,77 @@
+<div class="boxModel pull-left maxHightOuto">
+   <div class="headBox mb25">
+      <h5  class="pull-left">Announcement</h5>
+   </div>
+   <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''">
+      <div class="alert alert-success mb15 mt15">{{successmsg}}</div>
+   </div>
+   <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+      <div class="alert alert-danger mb15 mt15">{{errormsg}}</div>
+   </div>
+   <form class="form-horizontal" [formGroup]="annnouncementForm">
+      <input type="hidden" class="form-control" value="" formControlName='id'  />             
+     
+        
+         <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15">
+			 <label for="Announcement Type"> Type<font color="red">*</font></label> 
+            <select  class="form-control required" formControlName="type"   >
+               <option value="">Select type</option>
+               <option value="Notice">Notice</option>
+               <option value="Circular">Circular</option>
+            </select>
+         </div>
+    
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15">
+			 <label for="Assign Center">Assign Center<font color="red">*</font></label>
+            <select  class="form-control required" formControlName="assign_centre"  >
+               <option value="">Select Center</option>
+               <option value="{{schools.id}}" *ngFor="let schools of schoolListtable">                                {{schools.school_name}}-{{schools.school_code}}                             </option>
+            </select>
+         </div>
+      
+	   <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15"> 
+			<label class="col-md-12 padding-left-none padding-right-none" for="User Type">User Type<font color="red">*</font> </label>
+			 <label class="customChek mr10">                       
+			<input type="radio" formControlName="batch" value="student" (click)="usertype('student')" checked> Student/Parent          <span class="radioCheck"></span>                     
+			 </label>                     
+			 <label class="customChek">
+				 <input type="radio" formControlName="batch" value="teacher" (click)="usertype('teacher')"> Teacher           <span class="radioCheck"></span>                     
+			 </label>                 
+		  </div>
+        
+         <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15">  
+			 <label for="Title">Title<font color="red">*</font> </label> 
+		 <input type="text" value=""  formControlName="title" placeholder="Title" class="form-control required" required>                 </div>     
+		
+         <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15">
+		<label class="col-md-12 padding-left-none padding-right-none" for="Description">Description<font color="red">*</font> </label>
+            <div class='editors'>
+               <app-ngx-editor   minHeight="250px" placeholder=" {{'enter_text_here' | translate}}.." [spellcheck]="true"                 formControlName="description"></app-ngx-editor>
+            </div>
+         </div>
+	   
+	 <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15"> 
+			  <label class="control-label" for="Start Date">Start Date<font color="red">*</font> </label>
+            <div class="datBox">                     
+			<input class="calenerIcon required" [minDate]="minDate" placeholder="Start Date" readonly ngbDatepicker #d1="ngbDatepicker" formControlName="start_date"                         id="dp"  required>                     <button class="btnover" (click)="d1.toggle()" type="button"></button>                   </div>
+         </div>
+     
+	 <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15">
+			 <label class="control-label" for="Start Date">End Date<font color="red">*</font> </label>
+            <div class="datBox">
+				<input class="calenerIcon required" [minDate]="minDate" placeholder="End Date" readonly ngbDatepicker #d="ngbDatepicker" formControlName="end_date"                         id="dp"  required>                     <button class="btnover" (click)="d.toggle()" type="button"></button>                   </div>
+         </div>
+     
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15">
+			 <label class="control-label" for="Start Date">Upload File </label>
+            <input-file fileLimit="1" fileAccept="*" (acceptedFile)="onAccept($event)" class="cleanup validate-empty" formControlName="attachments" placeholder="" title="Please file upload" ></input-file>
+         </div>
+    
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15 mb15">
+         <!-- <input type="submit" value="Save" class="btn btn-primary btn-sm" />-->                           
+		  <button class="btn btn-primary" [disabled]="annnouncementForm.invalid"  (click)="onSubmit(annnouncementForm.value)">Submit</button>                     
+        
+      </div>
+   </form>
+</div>
+

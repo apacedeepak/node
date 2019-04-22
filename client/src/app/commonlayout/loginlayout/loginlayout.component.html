@@ -1,0 +1,166 @@
+<style>
+    body{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+</style>
+  <div id="banner">
+  <div class="loginContainer">
+  <div class="logBlock">
+  <div class="loghD">
+  <h1 class="login-logo"><img src="{{school.school_logo}}"></h1>
+  <h3>{{school.school_name}}</h3>
+  </div>
+  <div class="loginBox">
+  <h2 class="text-center">Login</h2>
+  <!-- login -->
+
+
+  <script lanaguage="javascript">
+  //jQuery.noConflict();
+  if (window.opener)
+  {
+      window.close();
+  }
+
+  $(document).ready(function(){
+
+      var id = "1";
+
+      if(id>0){
+          $(".alert-danger").removeClass('hide');
+          $(".message").html("You have successfully logged out");
+          //setTimeout(function(){ $(".alert-danger").addClass('hide'); }, 2000);
+          return false;
+      }
+
+      var msg = "";
+      $(".message").html("");
+      if(msg){
+          $(".alert-danger").removeClass('hide');
+          //setTimeout(function(){ $(".alert-danger").addClass('hide'); }, 2000);
+      }
+
+
+  });
+  </script>
+
+
+  <!-- <script type="text/javascript" src="/schoolerp/js/main.js"></script> -->
+
+  <div class="alert alert-danger message">You have successfully logged out</div>
+
+
+<router-outlet></router-outlet>
+
+
+
+  <script>
+  $(document).ready(function(){
+      setTimeout(function() {
+          $('.message').slideUp();
+      }, 30000);
+
+      var s=$("#err").text();
+      $(".errshow").text(s);
+
+      $('#submit').on('click',function(){
+  var error = 0;
+
+      $('.required').each(function(){
+
+          var val = $(this).val();
+          var id = $(this).attr('id');
+          //alert("req");
+          if(ValidateEmpty(val)){
+            $("."+id+"error").html("Required!");
+            error++;
+        }else{
+
+           $("."+id+"error").html("");
+
+        }
+
+          });
+
+          if(error > 0){
+             return false;
+          }
+      });
+  });
+  </script>
+  </div>
+  </div>
+  </div>
+
+
+  <!-- Full Page Image Background Carousel Header -->
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#myCarousel" data-slide-to="4"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="fill" style="background-image:url('/assets/images/1481203760~Collaborative_Learning_(2).JPG');"></div>
+            </div>
+            <div class="carousel-item">
+                    <div class="fill" style="background-image:url('/assets/images/1481203760~Collaborative_Learning_(2).JPG');"></div>
+            </div>
+            <div class="carousel-item">
+                    <div class="fill" style="background-image:url('/assets/images/1481203760~Collaborative_Learning_(2).JPG');"></div>
+            </div>
+            <div class="carousel-item">
+                    <div class="fill" style="background-image:url('/assets/images/1481203760~Collaborative_Learning_(2).JPG');"></div>
+            </div>
+            <div class="carousel-item">
+                    <div class="fill" style="background-image:url('/assets/images/1481203760~Collaborative_Learning_(2).JPG');"></div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+
+      </div>
+
+
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="studdyPack">
+  <div class="packages">
+  <div class="title">Study at home with Extramarks Smart Study pack.</div>
+  </div>
+  <ul class="pkglist">
+  <li><img src="/schoolerp/images/newlogin/pkg1.png" alt=""> <span>Two Year Combo Pack</span></li>
+  <li><img src="/schoolerp/images/newlogin/pkg2.png" alt=""> <span>Annual Pack</span></li>
+  <li><img src="/schoolerp/images/newlogin/pkg3.png" alt=""> <span>Fast Track Pack</span></li>
+  <li><img src="/schoolerp/images/newlogin/pkg4.png" alt=""> <span>Online Test Pack</span></li>
+  <li><img src="/schoolerp/images/newlogin/pkg5.png" alt=""> <span>Smart Study Tab</span></li>
+
+  </ul>
+  </div>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="/schoolerp/js/newlogin/bootstrap.js"></script>
+  <!-- Script to Activate the Carousel -->
+      <script>
+      $('.carousel').carousel({
+          interval: 5000 //changes the speed
+      })
+      </script>
+
+

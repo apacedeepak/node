@@ -1,0 +1,20 @@
+page-notesdetail {
+    
+    .attachport{display: block;
+vertical-align: top;
+margin: 0rem 0rem .3rem 0;
+position: relative;
+background: #f0f0f0;
+color: #004eff;
+border-radius: 2px;
+font-size: 1.3rem;
+padding: 0.5rem 4rem 0.5rem 1rem;
+border: 1px solid #ddd;
+.downloadfile{position: absolute;right: .9rem;top: .7rem;text-decoration: none;color: #000;background-color: transparent;}
+.ion-md-attach{transform: rotate(90deg);vertical-align: middle; margin-right: 5px;color: #000;}
+.paerclip{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+img{height: .9rem;}
+}
+}
+
+}

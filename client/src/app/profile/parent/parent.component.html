@@ -1,0 +1,460 @@
+<ng-container>
+        <div class="col-sm-12 col-md-12 pull-left padding-left-none mt15">
+                 <div class="profileBlock topGap" style="padding-top: 150px;">
+                     <div class="clearfix"></div>
+                     <!-- <a *ngIf="global.product_type == 'emscc'" class="pull-right btn btn-sm btn-primary" (click)="popUpOpen()" href="javascript:void(0)">{{'user_personalization' | translate}}</a> -->
+                     <ul class="profileTab nav">
+                         <li id="ward"><a class="active" role="tab" data-toggle="tab" href="#wards">{{'ward' | translate}}</a></li>
+                         <li id="parent"><a data-toggle="tab" role="tab" href="#parentt">{{'parent' | translate}}</a></li>
+                         <li id="guard"><a data-toggle="tab" role="tab" href="#guardian">{{'guardian' | translate}}</a></li>
+                         <!-- <li class=""><a data-toggle="tab" ng-click=" $event.preventDefault();" href="#wardremarks" aria-expanded="false">VIEW WARD'S REMARKS</a></li> -->
+                         <li *ngIf="global.product_type != 'emscc'" class=""><a data-toggle="tab" (click)="accodfunc()" href="#wardremarks" aria-expanded="false"> {{'view_ward_remarks' | translate}}</a></li>
+                        </ul>
+                     <div class="clearfix"></div>
+                     <div class="tab-content">
+
+                         <div id="wards" role="tabpanel" class="tab-pane active">
+                             <!--<div class="dpBlock absposition">-->
+                             <div class="absposition" style="margin-left: 370px;">
+                                 <div class="dp d-inline-block has-feedback" *ngIf="studentData.student_photo"><img src="{{global.domainUrlwithSlash}}{{studentData.student_photo}}"></div>
+                                 <div class="dp d-inline-block" *ngIf="!studentData.student_photo" style="background-image:url(assets/images/profile_img.jpg)"></div>
+                             </div>
+                             <form>
+                                 <div class="row margintop20">
+                                     <div class="col-sm-6 col-md-6 pull-left">
+                                         <h5 class="formH5"> {{'name' | translate}}</h5>
+                                         <label class="inputStyle" *ngIf="studentData.name">{{studentData.name}}</label>
+                                         <label class="inputStyle" *ngIf="!studentData.name">--</label>
+                                     </div>
+
+                                     <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'class' | translate}} -{{'section' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.class_section">{{studentData.class_section}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.class_section">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'address' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.address">{{studentData.address}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.address">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'emergency_number' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.emergency_number">{{studentData.emergency_number}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.emergency_number">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left" *ngIf="global.product_type != 'emscc'">
+                                       <h5 class="formH5"> {{'house' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.house">{{studentData.house}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.house">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left" *ngIf="global.product_type != 'emscc'">
+                                       <h5 class="formH5">{{'transport' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.transport">{{studentData.transport}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.transport">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left" *ngIf="global.product_type != 'emscc'">
+                                       <h5 class="formH5"> {{'hostel' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.hostel">{{studentData.hostel}}</label>
+                                       <label class="inputStyle" *ngIf="!studentData.hostel">--</label>
+                                   </div>
+                                   <div class="col-sm-6 col-md-6" *ngIf="global.product_type != 'emscc'">
+                                    <h5 class="formH5" style="margin-top: 20px;">&nbsp;</h5>
+                                    <button (click)='newfunction()'class="btn btn-primary" data-toggle="modal" data-target="#teacherlistmodel"> {{'view_teacher_list' | translate}}</button>
+
+                                   </div>
+                                 </div>
+                             </form>
+                         </div>
+
+                         <div id="parentt"  role="tabpanel" class="tab-pane fade">
+                             <form [formGroup]='formprofile'>
+                             <!--<div class="dpBlock absposition">-->
+                             <div class="absposition" style="margin-left: 370px;">
+                                 <div class="editImgBlock">
+                                 <div class="dp d-inline-block has-feedback" *ngIf="studentData.father_photo"><img src="{{global.father_photo}}"></div>
+                                 
+                                 <div class="dp d-inline-block" *ngIf="!studentData.father_photo" style="background-image:url(assets/images/profile_img.jpg)"></div>
+                              <a href="javascript void(0)" data-toggle="modal" data-target="#uploadPhoto" class="btnMd btnSm btnEditsm">&nbsp;</a>
+                                 </div>
+                                 </div>
+                             
+                               <div class="row margintop20">
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'father_name' | translate}} </h5>
+                                       <label class="inputStyle" *ngIf="studentData.father_name!=null && studentData.father_name!=''">{{studentData.father_name}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.father_name==null || studentData.father_name==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'father_occupation' | translate}} </h5>
+                                       <label class="inputStyle" *ngIf="studentData.father_occupation!=null && studentData.father_occupation!=''">{{studentData.father_occupation}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.father_occupation==null || studentData.father_occupation==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'father_mobile_number' | translate}}</h5>
+                                    <span *ngIf="!globalObj.profileData">   <label class="inputStyle" *ngIf="studentData.father_contact!=null && studentData.father_contact!=''">{{studentData.father_contact}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.father_contact==null || studentData.father_contact==''">--</label>
+                                    </span>
+                                       <span *ngIf="globalObj.profileData"><input class="inputStyle" placeholder="{{studentData.father_contact}}" type="textbox" minlength="10" maxlength="10" formControlName="fatherMobile"></span>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'fatheremail_id' | translate}}</h5>
+                                      <span *ngIf="!globalObj.profileData">  <label class="inputStyle" *ngIf="studentData.father_email!=null && studentData.father_email!=''">{{studentData.father_email}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.father_email==null || studentData.father_email==''">--</label>
+                                    </span>
+                                       <span *ngIf="globalObj.profileData"><input class="inputStyle" placeholder="{{studentData.father_email}}" type="textbox" formControlName="fatherEmail"></span>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'mother_name' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.mother_name!=null && studentData.mother_name!=''">{{studentData.mother_name}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.mother_name== null || studentData.mother_name==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'mother_occupation' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.mother_occupation!=null && studentData.mother_occupation!=''">{{studentData.mother_occupation}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.mother_occupation==null || studentData.mother_occupation==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'mother_mobile_number' | translate}}</h5>
+                                      <span *ngIf="!globalObj.profileData">  <label class="inputStyle" *ngIf="studentData.mother_contact!=null  && studentData.mother_contact!=''">{{studentData.mother_contact}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.mother_contact==null || studentData.mother_contact==''">--</label>
+                                   </span>
+                                       <span *ngIf="globalObj.profileData"><input class="inputStyle" placeholder="{{studentData.mother_contact}}" type="textbox" minlength="10" maxlength="10" formControlName="motherMobile"></span>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'mother_email_id' | translate}}</h5>
+                                       <span *ngIf="!globalObj.profileData"><label class="inputStyle" *ngIf="studentData.mother_email!=null && studentData.mother_email!=''">{{studentData.mother_email}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.mother_email==null || studentData.mother_email==''">--</label>
+                                       </span>
+                                       <span *ngIf="globalObj.profileData"><input class="inputStyle" placeholder="{{studentData.mother_email}}" type="textbox" formControlName="motherEmail"></span>
+                                   </div>
+                               </div>
+                             <a *ngIf="!globalObj.profileData" [routerLink]="['/profile/main']" (click)="editProfile()" id="edit" class="btnMd btnEditMd">&nbsp;</a>
+                             <a *ngIf="globalObj.profileData" [routerLink]="['/profile/main']" (click)="updateProfile(formprofile.value)" id="update" class="btnMd btnUpdateMd">&nbsp;</a>
+                         </form>
+                         </div>
+
+                         <div id="guardian"  role="tabpanel" class="tab-pane fade">
+                             <!--<div class="dpBlock absposition">-->
+                             <div class="absposition" style="margin-left: 370px;">
+                                 <div class="dp d-inline-block has-feedback" *ngIf="studentData.guardian_photo"><img src="{{global.domainUrlwithSlash}}{{studentData.guardian_photo}}"></div>
+                                <div class="dp d-inline-block" *ngIf="!studentData.guardian_photo" style="background-image:url(assets/images/profile_img.jpg)"></div>
+                             </div>
+                               <div class="row margintop20">
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'name' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_name!=null && studentData.guardian_name!=''">{{studentData.guardian_name}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_name==null || studentData.guardian_name==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'contact_number' | translate}} </h5>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_contact!=null && studentData.guardian_contact!=''">{{studentData.guardian_contact}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_contact==null || studentData.guardian_contact==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'relation' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_relation!=null && studentData.guardian_relation!=''">{{studentData.guardian_relation}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_relation==null || studentData.guardian_relation==''">--</label>
+                                   </div>
+
+                                   <div class="col-sm-6 col-md-6 pull-left">
+                                       <h5 class="formH5">{{'address' | translate}}</h5>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_address!=null && studentData.guardian_address!=''">{{studentData.guardian_address}}</label>
+                                       <label class="inputStyle" *ngIf="studentData.guardian_address==null || studentData.guardian_address==''">--</label>
+                                   </div>
+                               </div>
+                           </div>
+                     
+                     
+                     
+                           <div id="wardremarks" role="tabpanel" class="tab-pane fade">
+                              <div class="col-xs-12 col-sm-12 col-md-12 text-left margin-bottom-10">
+                                  <label class="checkcontainer" style=" margin:20px 0 0 0">
+                                    <input type="radio" name="remarks" value="In-discipline" (click)="getissue('In-discipline')" checked>
+                                     {{'in_discipline' | translate}}<span class="radiobtn"></span></label>
+                                  <label class="checkcontainer" style=" margin:20px 0 0 0px">
+                                    <input type="radio" name="remarks" value="Achievements" (click)="getissue('Achievements')">
+                                     {{'achievements' | translate}}<span class="radiobtn"></span></label>
+                                </div>
+                            <div  class="col-sm-12 col-md-12 accordinMonth">
+                                <ng-container *ngIf="((inDisciplineflag==true && displineval==true) || (inDisciplineflag==false && achiveval==true))">
+                                  <ng-container *ngFor="let remark of remarksList; index as j;">
+                                  <ng-container *ngFor="let rem of remark | keyvaluepair;">
+                                <h4  class="has-feedback accordion_head aaa{{j}}" (click)="togledata(j)">{{rem.key}}</h4>
+                                <div class="accordion_body bbb{{j}}">
+                                  <table class="table tablestyle text-center">
+                                    <thead>
+                                      <tr>
+                                        <!-- <td style="width:100px">S. No</td> -->
+                                        <td style="width:150px"> {{'date' | translate}}</td>
+                                        <td *ngIf="inDisciplineflag==true"> {{'issue' | translate}}</td>
+                                        <td *ngIf="inDisciplineflag==false">{{'achievements' | translate}}</td>
+                                        <td style="width:250px">  {{'reported_by' | translate}}</td>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let remarks of rem.value; index as i;"> 
+                                        <!-- <td *ngIf="inDisciplineflag==true && remarks.category=='inDiscipline'">{{i + 1}}.</td> -->
+                                        <td *ngIf="inDisciplineflag==true && remarks.category=='In-discipline'">{{remarks.remark_date}}</td>
+                                        <td  *ngIf="inDisciplineflag==true && remarks.category=='In-discipline'">{{remarks.remark}}</td>
+                                        <td *ngIf="inDisciplineflag==true && remarks.category=='In-discipline'">{{remarks.senderName}}</td>
+                                                         
+                                          <!-- <td *ngIf="inDisciplineflag==false && remarks.category=='achivement'">{{i + 1}}.</td> -->
+                                          <td *ngIf="inDisciplineflag==false && remarks.category=='Achievements'">{{remarks.remark_date}}</td>
+                                          <td  *ngIf="inDisciplineflag==false && remarks.category=='Achievements'">{{remarks.remark}}</td>
+                                          <td *ngIf="inDisciplineflag==false && remarks.category=='Achievements'">{{remarks.senderName}}</td>
+                                        </tr>
+                     
+                                    </tbody>
+                                  </table>
+                                </div>
+                                </ng-container>
+                                </ng-container>
+                              </ng-container>
+                                 
+                                  <h3 *ngIf="inDisciplineflag==true && displineval==false" class="text-center">    {{'no_record_found' | translate}}</h3>
+                                  <h3 *ngIf="inDisciplineflag==false && achiveval==false" class="text-center">  {{'no_record_found' | translate}}</h3>
+                                </div>
+                            </div>
+                     </div>
+                 </div>
+                 </div>
+
+
+
+
+       </ng-container>
+
+
+       <div class="modal fade" id="overlay" style='pointer-events: none;'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 *ngIf="globalObj.onAdmissionUpdate" class="modal-title">  {{'update_my_details' | translate}}</h4>
+        <h5 *ngIf="globalObj.onMobileUpdate" class="modal-title">{{'update_mobile_number' | translate}}</h5>
+         <button type="button" (click)="closePersonal()"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='form' (ngSubmit)="onSubmit(form.value, $event)">
+          <!-- <p *ngIf="globalObj.username" class="username_err" style="color:red;">Selected username is empty</p>
+          <p *ngIf='globalObj.emailAlert' class="username_email_err" style="color:red;">Entered email is invalid</p>
+          <p *ngIf='globalObj.phoneAlert' class="username_mob_err" style="color:red;">Entered mobile is invalid</p> -->
+          <p *ngIf="globalObj.message != ''" class="username_mob_err" style="color:red;font-size: 13px;margin: 0 0 10px 0;">{{globalObj.message|translate}}</p>
+          <ng-container *ngIf="globalObj.onAdmissionUpdate">
+          <table class="loginTable">
+              <tr> 
+                  <td style="width: 150px"><b> {{'parent_name' | translate}}:</b></td>
+                 <td>{{globalObj.name}}</td>
+              </tr>
+              <tr>
+                  <td><b>{{'login_using' | translate}}:</b></td>
+                  <td><input type="radio"  [checked]="globalObj.admin == 1" [value]="globalObj.adminNo" formControlName="radiobutton" (click)="checkExist('admin')" checked>{{'admission_no' | translate}}<br>{{globalObj.adminNo}}</td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+                  <td><input type="radio" [value]="globalObj.phone1" formControlName="radiobutton" [checked]="globalObj.phoneCheck == 1" (click)="checkExist('phone')"> {{'mobile_no' | translate}}
+                      <span *ngIf="globalObj.phoneUpdate">
+                        <!-- <input type="text" formControlName='updatePhone' name="update_mob" pattern="^\d{10}$" minlength="10" maxlength="10" /> -->
+                      </span><br><span>{{globalObj.phone}}</span><span *ngIf="globalObj.phone == ''">{{'no_mobile_number_exist' | translate}}</span>
+                      <a *ngIf="globalObj.mobileUpdateShow" (click)="checkExist('phoneUp')" href="javascript:void(0);" >{{'update' | translate}}</a></td>
+              </tr>
+               <tr>
+                  <td>&nbsp;</td>
+                  <td> <input type="radio"  formControlName="radiobutton" [value]="globalObj.email1" [checked]="globalObj.emailCheck == 1" (click)="checkExist('email')">   {{'email_id' | translate}}
+                      <span *ngIf="globalObj.emailUpdate">
+                        <!-- <input type="text" formControlName='updateEmail' name="update_email"/> -->
+                      </span><br><span>{{globalObj.email}}</span><span *ngIf="globalObj.email == ''">{{'no_email_id_exist' | translate}}</span>
+                      <a *ngIf="globalObj.emailUpdateShow" (click)="checkExist('emailUp')" href="javascript:void(0);" >{{'update' | translate}}</a></td>
+               </tr>
+              <tr>
+                  <td>&nbsp;</td>
+                  <td>
+                    <span><button type="submit" class="btn btn-primary">{{'update' | translate}}</button></span>
+                      <!-- <button type="button" class="btn btn-primary">Cancel</button></td> -->
+              </tr>
+          </table>
+            </ng-container>
+
+           <ng-container *ngIf="globalObj.onMobileUpdate">
+          <table class="loginTable">
+         <tr>
+                  <td style="width: 150px"><b>{{'parent_name' | translate}}:</b></td>
+                 <td>{{globalObj.name}}<span *ngIf="globalObj.phone == ''">{{'no_mobile_number_exist' | translate}}</span></td>
+              </tr>
+          <tr>
+           <td style="width: 150px"><b>{{'old_mobile_number' | translate}}:</b></td>
+                 <td>{{globalObj.phone}}</td>
+          </tr>
+          <tr>
+           <td style="width: 150px"><b>{{'new_mobile_number' | translate}}:</b></td>
+                 <td><input type="text" formControlName='updatePhone' name="update_mob" pattern="^\d{10}$" minlength="10" maxlength="10" />
+                 <br><a *ngIf="globalObj.sendOTP" href="javascript:void(0)" (click)="sendOTP()">{{'send_otp' | translate}}</a>
+                <p *ngIf="globalObj.verified">{{'verified' | translate}}</p>
+                </td>
+          </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <span *ngIf="globalObj.finalUpdateMobile"><button  (click)="updateFinal('mobile')" type="button" class="btn btn-primary">{{'update' | translate}}</button></span>
+               <button type="button" class="btn btn-primary"  (click)="cancel('mobile')"> {{'cancel' | translate}}</button></td>
+          </tr>
+          </table>
+          </ng-container>
+         <ng-container *ngIf="globalObj.otpConfirmBox">
+            <table style="width: 100%;" class="getotp">
+              <tr>
+                <td>
+                    <input placeholder="{{'Enter OTP (One Time Password) Sent To'|translate}} {{globalObj.viewMobile}}" type="textbox" minlength="6" maxlength="6" class="form-control pull-left" name="otptext" formControlName="otptext">
+                    <a style="font-size: 14px;float: right;margin-top: 6px;margin-left: 10px;" href="javascript:void(0)" (click)="sendOTP()">{{'resend_otp' | translate}}</a>
+                </td>
+                  </tr>
+               <tr>
+                  <td class="text-right">&nbsp;</td>
+              </tr>
+              <tr>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm"  (click)="confirmVaildData('mobile')">{{'confirm' | translate}}</button>
+                </td>
+              </tr>
+
+
+            </table>
+
+          </ng-container>
+          <ng-container *ngIf="globalObj.onEmailUpdate">
+          <table class="loginTable">
+          <tr>
+                  <td style="width: 150px"><b> {{'parent_name' | translate}}:</b></td>
+                 <td>{{globalObj.name}}</td>
+              </tr>
+          <tr>
+           <td style="width: 150px"><b>{{'old_email_id' | translate}}:</b></td>
+                 <td>{{globalObj.email}}<span *ngIf="globalObj.email == ''">No email id exist</span></td>
+          </tr>
+          <tr>
+           <td style="width: 150px"><b>{{'new_email_id' | translate}}:</b></td>
+                 <td><input type="text" formControlName='updateEmail' name="update_email"/>
+                 <br><a href="javascript:void(0)" (click)="verifyEmail()">{{'verify_email' | translate}}</a></td>
+          </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <!-- <span *ngIf="globalObj.finalUpdateMobile"><button  (click)="updateFinal('mobile')" type="button" class="btn btn-primary">Update</button></span> -->
+               <button type="button" class="btn btn-primary"  (click)="cancel('email')">{{'cancel' | translate}}</button></td>
+          </tr>
+          </table>
+          </ng-container>
+        <ng-container *ngIf="globalObj.onEmailSentMessage">
+              <h4>{{'verification_sent' | translate}}</h4><br>
+                <div>{{'verification_link_sent_to' | translate}} {{globalObj.showEmail}} {{'please_check_your_email_for_instructions' | translate}}</div>
+              <br><div class="text-center">
+                  <button type="button" class="btn btn-primary" (click)="popupdisplay()">{{'ok' | translate}}</button>
+              </div>
+              </ng-container>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <div class="modal fade uploadImgPopup" id="uploadPhoto" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="margin-top: 7%;">
+    <div class="modal-content" style="background:none; box-shadow: none; border: 0px none;">
+    <ul class="proimgtab">
+      </ul>
+ <form [formGroup]="profilePhotoForm">
+     <div class="backgroundContent">
+          <div class="tab-content"> 
+            <div id="fatherDP">
+            <div class="modelHeader"> {{'father_profile_photo' | translate}}</div>
+            <div class="uploadBlock">
+            <div class="halfwidth">
+
+                     {{'upload_photo' | translate}}
+              
+            </div>
+            <input type="file" style="width: 88%;overflow: hidden;"  id="upload"  name="file" #fileInput (change)="onFileChange($event)" accept=".jpg,.JPG,.JPEG,.jpeg,.png,.PNG" />
+     
+            </div>
+            </div>
+
+          </div>
+          
+       <div class="modal-content-footer">
+        <button type="button" class="orangeBtn" (click)="cancelUpload()"  data-dismiss="modal">{{'cancel' | translate}}</button>
+        <button type="button" class="orangeBtn2" (click)="okUpload()" data-dismiss="modal"> {{'ok' | translate}}</button>
+      </div>
+</div>
+ </form>
+      </div>
+    </div>
+  </div>
+  
+  
+ <!-- Teacher List Modal -->
+                                    <div id="teacherlistmodel" class="modal md-modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                      
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header text-left"> {{'teacher_list' | translate}}
+                                                <button type="button" class="close" data-dismiss="modal">X</button>
+                                              </div>
+                                            <div class="modal-body">
+                                             
+  <table class="table table-striped table-bordered">
+               <thead>
+                <tr>
+                    <td style="width:50%">  {{'teacher_name' | translate}}</td>
+                    <td> {{'subject' | translate}}</td>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let user of userlist; let i = index">
+                      <td *ngIf="user.is_classTeacher == 'yes'||user.is_classTeacher == 'Yes'" >{{user.staff_name}}  ({{'class_teacher' | translate}})</td>                  
+                      <td *ngIf="user.is_classTeacher == 'No'||user.is_classTeacher == 'no'" >{{user.staff_name}}  </td>    
+                      <td>{{user.subject_name}}</td>
+                     
+                  </tr>
+                  <tr *ngIf="userlist.length == 0">
+                    <td style="text-align: center;" colspan="3">No   {{'no_record_found' | translate}}</td>
+                </tr>
+               <tbody>
+            </table>                                           
+                                            </div>
+
+                                          </div>
+                                      
+                                        </div>
+                                      </div>
+
+
+
+
+
+
+
+
+
+<style>
+    .loginTable td{ padding:10px 5px; font-size: 14px;}
+</style>
+
+

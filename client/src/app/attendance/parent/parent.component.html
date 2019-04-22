@@ -1,0 +1,139 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none" style="margin-top:15px">
+    <div class="communication">
+   
+     <div *ngIf="product_type == 'emscc'" class="headBox"><h5 class="h5 pull-left"> {{'attendance' | translate}}</h5></div>
+     <!-- <ng-container *ngIf="product_type != 'emscc'"> -->
+     <ul class="nav commnicationBox" >
+         <li><a class="active" data-toggle="tab" href="#subjectattendance" > {{'attendance' | translate}}<span class="badge"></span>  </a></li>  
+         <li><a data-toggle="tab" href="#leaveapplication">  {{'leave_application' | translate}}<span class="badge"></span></a></li>
+         <li><a data-toggle="tab" href="#schoolcalendar" >  {{'school_calendar' | translate}}<span class="badge"></span></a></li>    
+     </ul>
+   <!-- </ng-container> -->
+   
+   <div class="clearfix"></div>
+   <div class="tab-content">
+<div class="tab-pane active" id="subjectattendance">
+  <!-- <div class="col-sm-3 col-md-3 pull-right" style="margin-top: -67px;">
+<select #subject (change)="getsubjectid(subject.value);" class="form-control" style=" width:100%; margin-top: 14px;">
+  <option>Select Subject</option><option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+</select>
+</div> -->
+<div class="col-sm-6 col-md-6 pull-left has-feedback">
+ <div  style="margin-top:15px" *ngIf="calendarOptions && userType == 'student'">
+ <!-- <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+        (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+  -->
+        <ng-fullcalendar #ucCalendar [options]="calendarOptions" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+
+
+      </div> 
+        <div class="calendarDescription">
+                <ul>
+                  <li> {{'weekend' | translate}}</li>
+                  <li> {{'present' | translate}}</li>
+                  <li> {{'absent' | translate}}</li>
+                  <li *ngIf="product_type == 'emscc'">  {{'partial_present' | translate}}</li>
+                  <li *ngIf="product_type != 'emscc'"> {{'leave' | translate}}</li>
+                </ul>
+              </div>
+</div>
+<div class="col-sm-6 col-md-6 pull-left">
+<div class="attendaceScrore">
+<h3>{{counts.monthName}}&nbsp;{{yyyy}}</h3>
+ </div>
+<table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td align="left"> {{'present' | translate}}</td>
+                    <td align="right" class="ng-binding">{{counts.pcount}}&nbsp; {{'days' | translate}}</td>
+                  </tr>
+                  <tr>
+                    <td align="left"> {{'absent' | translate}}</td>
+                    <td align="right" class="ng-binding">{{counts.acount}}&nbsp; {{'days' | translate}}</td>
+                  </tr>
+                  <tr *ngIf="product_type == 'emscc'">
+                    <td align="left">  {{'partial_present' | translate}}</td>
+                    <td align="right" class="ng-binding">{{counts.ppcount}}&nbsp; {{'days' | translate}}</td>
+                  </tr>
+                  <tr *ngIf="product_type != 'emscc'">
+                      <td align="left">Leave</td>
+                      <td align="right" class="ng-binding">{{counts.lcount}}&nbsp; {{'days' | translate}}</td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b> {{'total' | translate}}</b></td>
+                    <td align="right" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b class="ng-binding">{{counts.total}}&nbsp; {{'days' | translate}}</b></td>
+                  </tr>
+                </tbody>
+              </table>
+</div>
+</div>
+<div class="tab-pane" id="leaveapplication">
+    <div class="col-sm-3 col-md-3 pull-left">
+    <h4>  {{'apply_leave' | translate}}</h4>  
+    <form [formGroup]="myForm">
+        <!-- <input type="text" class="calenerIcon" value="2018-10-08"  formControlName="todate" placeholder="From Date" style="margin-bottom:15px"> -->
+       
+        <div class="datBox">
+          <input class="calenerIcon" placeholder="From date" readonly
+          ngbDatepicker #d1="ngbDatepicker" [formControl]="dponeField" [value]="dpone">
+          <button class="btnover" (click)="d1.toggle()" type="button"></button>
+       </div>
+    
+       <div class="datBox">
+        <input class="calenerIcon" placeholder="To Date" readonly
+        ngbDatepicker #d="ngbDatepicker" [formControl]="dptwoField" [value]="dptwo">
+        <button class="btnover" (click)="d.toggle()" type="button"></button>
+     </div>
+       
+        <!-- <input type="text" class="calenerIcon" name="fromdate" formControlName="fromdate" value="2018-10-10" id="from"  placeholder="To Date">   -->
+        <select id="reason" class="selectNewBox" formControlName="reason">
+            <option [selected]="selectedreason">---  {{'select_reason' | translate}}---</option>
+            <option value="Medical Leave"> {{'medical_leave' | translate}}</option>
+        </select>
+        <textarea placeholder="Enter Details (50 Characters)" class="reasionTextarea" formControlName="details"  maxlength="50" rows="5" cols="30" value=''></textarea>
+        <button type="submit" class="smbtn" name="submit" value="submit" id="sub" (click)="leaveapply();">{{'submit' | translate}}</button> 
+        <button type="submit" class="smbtn" name="update" value="Update" style="display:none;" id="update">{{'update' | translate}}</button> 
+    </form>
+    </div>   
+    
+    <div class="col-sm-9 col-md-9 pull-left">
+    <h4>  {{'leave_details' | translate}}</h4> 
+    <div style="max-height:280px; overflow-y: auto;width: 100%;float: left;">
+        <table class="table col-sm-6 col-md-6 table-striped payinfohead">
+            <thead>              
+                <tr style=" background: #004b80; color: #fff;">
+                    <td align="left" width="15%"><strong>  {{'from_date' | translate}}</strong></td>
+                    <td align="left" width="15%"><strong>  {{'to_date' | translate}}</strong></td>
+                    <td align="left" width="20%"><strong> {{'reason' | translate}}</strong></td>
+                    <td align="left" width="25%"><strong> {{'description' | translate}}</strong></td>
+                    <td align="left" width="10%"><strong> {{'status' | translate}}</strong></td>
+                    <!-- <td align="left" width="15%" class="text-center"><strong>Action</strong></td> -->
+                </tr>
+            </thead>
+            <tbody> 
+                <tr *ngFor="let markedleave of markedleavelist">
+                    <td align="left">{{markedleave.from_date | date: 'dd/MM/yyyy'}}</td>
+                    <td align="left">{{markedleave.to_date | date: 'dd/MM/yyyy'}}</td>
+                    <td align="left">{{markedleave.reason}}<span *ngIf="markedleave.reason == null">--</span></td>
+                    <td align="left">{{markedleave.detail}}<span *ngIf="markedleave.detail == null">--</span></td>
+                    <td align="left">{{markedleave.status}}<span *ngIf="markedleave.status == null">--</span></td>
+                    <!-- <td align="left" class="text-center"></td> -->
+                </tr>            
+           <tr class="hide">
+           <td colspan="5" align="center" *ngIf="markedleavelistCount == 0"><p class="text-info">   {{'no_record_found' | translate}}</p></td>
+           </tr>
+          </tbody>
+        </table>  
+
+</div>
+</div>
+</div>
+<!-- <div class="tab-pane" id="schoolcalendar" >
+    <app-schoolcalendar></app-schoolcalendar>
+</div> -->
+</div>
+</div>
+
+<div *ngIf="popupflag" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popupmessage}}</p><a href="javascript:void(0)" class="msgclose sm-blue-btn" (click)="closeme(popupmessage)">OK</a></span></div>
+    </div>

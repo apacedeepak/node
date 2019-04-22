@@ -1,0 +1,155 @@
+
+        <div class="sAttandSerchpan">
+           
+                <div class="col-sm-3 col-md-3  pull-left  padding-left-none padding-right-none margin" >
+                        <label></label>
+                    <input type="text" placeholder="{{'select_date' | translate}} " class="calenerIcon" (click)="displaycalc();">
+                      
+                            </div>
+     <div class="col-sm-3 com-md-3 pull-right padding-left-none padding-right-none">
+            <label> {{'user' | translate}}</label>
+            <select  class="form-control" #recipt (change)="miscellaneousCollection('','',incomeType,recipt.value)">
+                    <option value="" selected="selected"> {{'select' | translate}}</option>
+                    <option *ngFor="let recipt of reciptcreator" value="{{recipt.user_id}}">{{recipt.name}}</option>
+                 </select>
+        </div>
+      
+                <div class="col-sm-3 com-md-3 pull-right padding-left-none padding-right-none">
+                        <label> {{'income' | translate}}</label>
+                        <select  class="form-control" #income (change)="miscellaneousCollection('','',income.value,createduser)">
+                                <option value="" selected="selected"> {{'select' | translate}}</option>
+                                <option *ngFor="let income of incomename" value="{{income}}">{{income}}</option>
+                             </select>
+                </div>
+    
+    
+    </div>
+    <div *ngIf="showdaterange" class="alert showDate">
+            <label>{{dateA}}</label> <label><b>{{'to' | translate}}</b></label> <label>{{today}}</label> <a (click)="removerange()" aria-label="close" data-dismiss="alert" class="close">×</a>
+        </div>
+        <div>
+                <label>    </label>
+        </div>
+
+    
+     <div  class="col-sm-12 col-md-12 pull-left"> 
+<table class="table tablestyle">
+              <thead>
+              <tr>
+                  <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                  <td align="center"> {{'income_type' | translate}}</td> 
+                  <td align="center"> {{'number_of_receipt' | translate}}</td> 
+                  <td align="center"> {{'amount' | translate}}</td> 
+                
+              </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let receipt of miscCollection; index as i;" class="ng-scope">
+                       <td align="center" class="ng-binding">{{i+1}}</td>
+                       <td align="center" class="ng-binding">{{receipt.income_name}}</td>
+                       <td align="center" class="ng-binding">
+                           <a href="javascript:void(0)" (click) = "miscDetails(receipt.income_name)"> {{receipt.receipt_count}}</a>
+                       </td>
+                       <td align="center" class="ng-binding">{{receipt.receipt_amount}}</td>
+                  </tr>
+                  
+              </tbody>
+              <tr *ngIf="miscCollection.length!=0" style="background-color: #004b80;">
+                    <td  style="color: #fff !important;"colspan="3" align="right"  class="ng-binding ng-scope">  {{'total_amount_received' | translate}}</td>
+                    <td   style="color: #fff !important;"align="center"  class="ng-binding ng-scope">{{amounttotal}}</td>
+              </tr>
+              <tr *ngIf="miscCollection.length==0">
+                    <td  colspan="4" align="center"  class="ng-binding ng-scope">   {{'no_record_found' | translate}}</td>
+              </tr>
+          </table>
+ </div>
+
+
+<div class="modal fade" id="showpopupmis">
+    <div class="modal-dialog" style='max-width: 700px;'>
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #004b80;">
+              <h5  style="color: #fff !important;">    {{'miscellaneous_collection_income_wise' | translate}}</h5>   
+                
+       <button type="button"  style="color: #fff !important;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+            <div class="modal-body">
+                <div class="overFlowY">
+                <table class="table tablestyle">
+              <thead>
+              <tr>
+                  <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                  <td align="center"> {{'receipt_no' | translate}}</td> 
+                  <td align="center"> {{'description' | translate}}</td> 
+                
+                  <td align="center"> {{'amount' | translate}}</td> 
+              </tr>
+              </thead>
+              <tbody>
+                    <tr *ngFor="let detail of detailerecipt; index as i;" class="ng-scope">
+                            <td align="center" class="ng-binding">{{i+1}}</td>
+                           <td  align="center" class="ng-binding ng-scope">{{detail.receipt_no}}</td>
+                           <td  align="center" class="ng-binding ng-scope">{{detail.description_type}}</td>
+                           <td  align="center" class="ng-binding ng-scope">{{detail.amount}}</td>
+                           
+                          
+                          
+                        </tr>
+              </tbody>
+              <tr>
+                    <td  colspan="3" align="right"  class="ng-binding ng-scope">   {{'total_amount_received' | translate}}</td>
+                    <td  align="center"  class="ng-binding ng-scope">{{totalamount}}</td>
+              </tr>
+          </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showfromdate">
+        <div class="modal-dialog" style='max-width: 300px;'>
+            <div class="modal-content"> 
+                <div class="modal-body" align="center">
+                        <ng-container *ngIf="showcalander&&fromDateFlag==true">
+                                <ngb-datepicker  #dp (select)="onDateChange($event, 'from')" [displayMonths]="0" [dayTemplate]="t">
+                                </ngb-datepicker>
+                            </ng-container>   
+                </div>
+                </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="showtodate">
+                        <div class="modal-dialog" style='max-width: 300px;'>
+                            <div class="modal-content"> 
+                                <div class="modal-body" align="center">
+                                        <ng-container *ngIf="showcalander&&toDateFlag==true">
+                                                <ngb-datepicker #dp (select)="onDateChange($event, 'to')" [displayMonths]="0" [dayTemplate]="t">
+                                                </ngb-datepicker>
+                                            </ng-container>    
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="modal fade" id="showselectdate">
+                                        <div class="modal-dialog" style='max-width: 300px;'>
+                                           <div class="modal-content"> 
+                                                      <div class="modal-body" align="center">
+                                                       <ng-container *ngIf="showcalander">
+                                                     <ngb-datepicker #dp (select)="onDateChanges($event)" [displayMonths]="0" [dayTemplate]="t">
+                                                     </ngb-datepicker>
+                                                     </ng-container>
+                                                     <ng-template #t let-date="date" let-focused="focused">
+                                                  <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                                  [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                        {{ date.day }}
+                                                 </span>
+                                             </ng-template>
+                                               
+                                               
+                                     </div>
+                                   </div>
+                                        </div>
+                                     </div>
+                                              

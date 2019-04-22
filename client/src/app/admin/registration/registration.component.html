@@ -1,0 +1,193 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25"><h5  class="pull-left">Search</h5></div>
+<div class="col-auto pull-left mt15">
+  <label class="customChek">
+    <input type="radio" name="search" value="enquiry" (click)="searchtype('enquiry')" checked > Enquiry Id
+    <span class="radioCheck"></span>
+  </label>
+	</div>
+	<div class="col-auto pull-left mt15">
+<label class="customChek">
+    <input type="radio" name="search" value="mobile" (click)="searchtype('mobile')"> Mobile No.
+    <span class="radioCheck"></span>
+  </label> 
+	</div>
+<div class="clearfix"></div>
+  <form class="form-signin" ngNativeValidate [formGroup]="searchform" (ngSubmit)="searchstudent(searchform.value)">
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15" *ngIf="search_type=='enquiry'">
+    <input type="text" class="form-control cleanup validate-empty width30" formControlName='enquiry' placeholder="Enter Enquiry Id"
+        required="" autofocus="" />
+</div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15"  *ngIf="search_type=='mobile'">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='mobile' placeholder="Enter Mobile No."
+      required="" autofocus="" />
+</div>
+<div class="col-auto pull-left inputItem mt15">        
+  <input class="btn btn-primary" value="Search" name="submit" id="submit" type="submit">
+</div>
+</form>
+
+<div class="headBox mb25"  ><h5  class="pull-left">Candidate Details </h5></div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+    <div class="alert alert-danger mb15 mt15">{{errormsg}}</div></div>
+  <form class="form-signin" ngNativeValidate [formGroup]="registrationForm" (ngSubmit)="onsubmit(registrationForm.value)">
+
+
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='fname' placeholder=" First Name"
+  required="" autofocus="" />
+	  </div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='lname' placeholder=" Last Name"
+  required="" autofocus="" />
+	  </div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+    <input formControlName="dob" class="form-control cleanup validate-empty width30"   type="text"  (click)="displaycal();" placeholder="Date of Birth"  readonly value="{{dateA |date:'dd-MM-yyyy'}}"> 
+    <ng-container *ngIf="showcalander">
+                        <ngb-datepicker     required  #dp (select)="onDateChange($event)"  >
+                        </ngb-datepicker>   
+                </ng-container>    
+	  </div>
+	<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <label class="customChek mr10">
+    <input type="radio" name="search" formControlName='gender' value="male"> Male
+    <span class="radioCheck"></span>
+  </label>
+  <label class="customChek" >
+    <input type="radio" name="search" formControlName='gender' value="female" > Female
+    <span class="radioCheck"></span>
+  </label>
+	  </div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30"  (keypress)=" isNumber($event)" formControlName='mobile_no' placeholder="Enter Mobile No."
+  required="" autofocus="" />
+</div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='email_id' placeholder="Enter Email Id"
+  required="" autofocus="" />
+	  </div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='father_name' placeholder="Father Name"
+  required="" autofocus="" />
+	  </div>
+	<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='mother_name' placeholder="Mother Name"
+  required="" autofocus="" />
+	  </div>
+	<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <input type="text" class="form-control cleanup validate-empty width30" formControlName='father_email' placeholder="Father Email Id"
+  required="" autofocus="" />
+	  </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty width30" formControlName="course_mode" #coursemode (change)="resetfront(coursemode.value)">
+          <option value="">---Select course mode---</option>
+          <option *ngFor="let item of course_modes_list" value="{{item.id}}"> {{item.course_mode_name}}</option>      
+      </select>
+    </div>
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select  class="form-control cleanup validate-empty width30" formControlName="course" #board (change)="getclasslist(board.value)">
+          <option value="">--course--</option>
+
+          
+          <option *ngFor="let item of boards_list" value="{{item.id}}"> {{item.board_name}}</option>
+      </select>
+    </div>
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty width30" formControlName="course_type" #coursetype (change)=getsectionlist(coursetype.value)>
+          <option value="">--Select course type--</option>
+          <option *ngFor="let item of classListArr" value="{{item.id}}"> {{item.class_name}}</option>
+      </select>
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty width30" formControlName="batch" #batch (change)="getpackageList(batch.value)">
+          <option value="">--Select Batch--</option>
+     
+          <option *ngFor="let item of filter_batch" value="{{item.id}},{{item.section_name}}"> {{item.section_name}}</option>
+                
+      </select>
+    </div> 
+
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+    <select required class="form-control cleanup validate-empty width30" formControlName="package" #package (change)=getfeeheads(package.value)>
+        <option value="">--Select Package--</option>
+<option *ngFor="let item of fee_structure_list" value="{{item.fee_structure_master.id}}"> {{item.fee_structure_master.fee_structure_name}}</option>
+
+    </select>
+</div>
+
+	  
+
+
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <select  class="form-control cleanup validate-empty width30" formControlName="discount_cat" #category (change)="changecat(category.value)">
+      <option value="">--Select discount type--</option>
+
+      <option *ngFor="let states of categoryobj |keyvalue" value="{{states.key}}">{{states.key}}</option>
+  </select>
+</div>
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+  <select  class="form-control cleanup validate-empty width30"  formControlName="discount_sub_cat">
+      <option value="">--Select sub discount type--</option>
+      
+      <option *ngFor="let val of subcat "  value="{{val}}">{{val}}</option>
+      
+  </select>
+</div>
+<!-- <div *ngIf="showoptional==true">
+    <label>AddOn
+    <div class="col-auto col-min pull-left mt15" *ngFor="let item of optional_heads;index as i" >
+    
+    <div  formArrayName="optional">
+      <input type="checkbox" class="cleanup validate-empty" [formControlName]='i'   autofocus="" />{{item.fee_head_name}}   
+    </div> 
+    <div formArrayName="optionalfeehead">
+      <input type="hidden" [formControlName]='i'  />
+    </div>
+    </div>
+    <div *ngIf="optional_heads.length==0"><label>No AddOns Available</label></div>
+    </label>
+  </div> -->
+  <table  class="table table-striped table-bordered customTable" *ngIf ="showoptional==true &&optional_heads.length>0">
+      <tr>
+        <th>S.no</th>
+        <th>Fee Head</th>
+        <th>Add On</th>
+      </tr>
+      <tr *ngFor="let item of optional_heads;index as i;">
+          <td>{{i+1}}</td>
+          <td formArrayName="optionalfeehead">{{item.fee_head_name}} <input type="hidden" [formControlName]='i'  /></td>
+          <td formArrayName="optional">      <input type="checkbox" class="cleanup validate-empty" [formControlName]='i'   autofocus="" />
+          </td>
+        </tr>
+        <tr *ngIf="optional_heads.length==0">
+            <td colspan="3">No Record Found</td>
+      
+          </tr>
+    </table>
+<table  class="table table-striped table-bordered customTable" *ngIf ="discountflag==true && discount_heads.length>0">
+  <tr>
+    <th>S.no</th>
+    <th>Fee Head</th>
+    <th>Discount in (%)</th>
+  </tr>
+  <tr *ngFor="let item of discount_heads;index as i;">
+      <td>{{i+1}}</td>
+      <td formArrayName="feeheadarr">{{item.fee_head_name}} <input type="hidden" [formControlName]='i'  /></td>
+      <td formArrayName="dicounts"><input type="number"[formControlName]='i' class="form-control cleanup validate-empty width30"  min="0" max="100"
+        required="" autofocus="" /></td>
+    </tr>
+    <tr *ngIf="discount_heads.length==0">
+        <td colspan="3">No Record Found</td>
+  
+      </tr>
+</table>
+
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+        
+  <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+</div>
+</form>
+</div>
+

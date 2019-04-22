@@ -1,0 +1,73 @@
+{
+  "name": "imprest_collection",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number"
+    },
+    "sessionId": {
+      "type": "number",
+      "required": true
+    },
+    "receipt_no": {
+      "type": "string",
+      "required": true
+    },
+    "receipt_date": {
+      "type": "date"
+    },
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "payment_mode": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "imp_name": {
+      "type": "string",
+      "required": true
+    },
+    "description_type": {
+      "type": "string"
+    },
+    "income_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "school_id": {
+      "type": "number"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "createdby": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "created_by"
+    },
+    "staff": {
+      "type": "belongsTo",
+      "model": "staff",
+      "foreignKey": "created_by"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

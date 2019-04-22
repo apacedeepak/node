@@ -1,0 +1,111 @@
+{
+  "name": "homework",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "subjectId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "sectionId": {
+      "type": "number",
+      "index": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "Text",
+      "required": true
+    },
+    "attachment": {
+      "type": "Text",
+      "default": ""
+    },
+    "submission_date": {
+      "type": "date",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "origin": {
+      "type": "string",
+      "required": true,
+      "default": "web"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "default": "normal"
+    },
+    "draft_data": {
+      "type": "string",
+      "required": false
+    },
+    "userId": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "timestamp": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "createdBy": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": false,
+        "disableInclude": false
+      }
+    },
+    "createdForSubject": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    },
+    "homework_section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "assignToStudent": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "homeworkId",
+      "through": "student_homework"
+    },
+    "submittedStudent": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "homeworkId",
+      "through": "submitted_homework"
+    },
+    "homework_assign": {
+      "type": "hasMany",
+      "model": "student_homework",
+      "foreignKey": "homeworkId"
+    },
+    "homework_submit": {
+      "type": "hasMany",
+      "model": "submitted_homework",
+      "foreignKey": "homeworkId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,23 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+    <div class="boxModel pull-left maxHightOuto">        
+        <div class="headBox"><h5 class="h5 pull-left">Marks Entry</h5></div>
+        <div class="formRow"></div>
+        
+        
+        <div *ngIf="globalObj.isClassTeacher" class="col-sm-12 col-md-12 pull-left text-center margin-top-10 padding-left-none padding-right-none">
+            <label class="radioContainer margin-left-15">
+                <input type="radio"  name="markentry" (click)="subjectStud('subject')" checked="checked" value="bysubject">By Subject<span class="checkmarks"></span></label>
+        <label class="radioContainer">
+            <input type="radio" name="markentry" (click)="subjectStud('student')" value="bystudent">By Student<span class="checkmarks"></span></label>
+        <hr>
+        </div>
+        
+        <ng-container *ngIf="globalObj.subjectStud">
+            <app-subjectwisemarkentry></app-subjectwisemarkentry>
+        </ng-container>
+        <ng-container *ngIf="!globalObj.subjectStud">
+            <app-studentwisemarkentry></app-studentwisemarkentry>
+        </ng-container>
+        
+    </div>
+</div>

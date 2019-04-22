@@ -1,0 +1,92 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25"><h5  class="pull-left">Refund Configuration List</h5></div>
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''">
+    <div class="alert alert-success mb15 mt15">{{successmsg}}</div></div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+    <div class="alert alert-danger mb15 mt15">{{errormsg}}</div></div>
+  
+  <form class="form-signin" ngNativeValidate [formGroup]="configForm" (ngSubmit)="onSubmit(configForm.value)" >
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty" formControlName="fee_head_id">
+          <option value="">Select fee head</option>
+          <option *ngFor= "let item of feeheadlistdata" value="{{item.id}}">{{item.fee_head_name}}</option>
+      </select>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty" formControlName="refund_on">
+          <option value="">Select refund on</option>
+          <option value="Total Fee">Total Fee</option>
+          <option value="Paid Fee">Paid Fee</option>
+          <option value="Due Fee">Due Fee</option>
+          <option value="Booked Fee">Booked Fee</option>
+      </select>
+  </div>
+
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+      <select required class="form-control cleanup validate-empty" formControlName="refund_ratio">
+          <option value="">Select refund ratio</option>
+          <option value="percentage">Percentage</option>
+          <option value="amount">Amount</option>
+      </select>
+  </div>
+          
+   <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+     <input maxlength="10" type="text" class="form-control cleanup validate-empty" formControlName='percentage_or_amount' placeholder="Amount/Pecentage" required="" autofocus="" />
+    </div>
+              
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15"><input min="0" type="number" class="form-control cleanup validate-empty"  formControlName='day_of_refund_in_days' placeholder="Days" autofocus="" /></div>
+              
+
+            
+               <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+                   <input type="hidden" formControlName="id" value="" />
+                      <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">   
+                      <hr/>
+                  </div>
+              
+  </form>
+  
+  
+  
+  
+  
+  <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+     <span id ="success_message" class="span_success"></span>    
+    <table class="table table-striped table-bordered customTable">
+        <thead class="thheadbg">
+            <tr>            
+              <th>Fee Head Name</th>
+              <th>Refund On</th>
+              <th>Refund Ratio</th>
+              <th>Amount/Percentage</th>
+              <th>Days</th>
+              <th>Action</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr  *ngFor="let data of refundconfiglist;">             
+                <td >{{data.head.fee_head_name}}</td>
+                <td >{{data.refund_on}}</td>
+                <td >{{data.refund_ratio}}</td>
+                <td>{{data.percentage_or_amount}}</td>
+                <td>{{data.day_of_refund_in_days}}</td>
+                
+                <td class="actionTd">
+                <a href="javascript:void(0)" (click)="configdetails(data.id);"><i class="fa fa-fw fa-pencil"></i></a>
+                <a  href="javascript:void(0)" (click)="deleteconfig(data.id);"><i class="fa fa-fw fa-trash-o"></i></a>
+                
+                </td>
+              </tr>
+     
+            <tr *ngIf="feeheadlistdata.length == 0">
+                <td colspan="10">
+                 <div class="text-center text-danger"> No record found...</div>
+                </td>
+            </tr>
+  
+        </tbody>
+    </table>
+  </div>
+     </div>

@@ -1,0 +1,72 @@
+{
+  "name": "user_sections",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "sectionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "sessionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true
+    },
+    "class_teacher": {
+      "type": "string",
+      "required": true,
+      "default": "No"
+    },
+    "roll_no": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "boardId": {
+      "type": "number"
+    },
+    "emscc_class_id": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assigned_users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "assigned_sections": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,18 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25"><h5  class="pull-left">{{'Course Assignment' | translate}}</h5></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+		<div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+	</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+		<div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+	</div>
+    <form class="form-signin" [formGroup]="courseForm" (ngSubmit)="assignCourse(courseForm.value)">
+        <div class="col-auto pull-left mt15" formArrayName="status" *ngFor="let board of boardList; index as i;">
+            <label class="checkBox"><input type="checkbox" class="cleanup validate-empty" [formControlName]='i' /> {{board.board_name}} <span class="checkmark"></span></label>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15 text-right mb15">
+			<hr>
+            <input class="btn btn-primary" value="Save" name="save" id="submit"  [disabled]="!courseForm.valid" type="submit">
+        </div>
+    </form>
+</div>

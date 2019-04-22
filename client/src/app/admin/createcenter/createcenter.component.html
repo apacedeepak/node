@@ -1,0 +1,149 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+        <h5 class="pull-left">{{'Create Center' | translate}}</h5>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+        <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+        <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+    </div>
+
+    <form class="form-signin" ngNativeValidate [formGroup]="centerForm" (ngSubmit)="createCenter(centerForm.value)">
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="state" #states (change)="selectcity(states.value)">
+                <option value="" disabled>--{{'Select State' | translate}}--</option>
+                <option *ngFor="let states of allstates | keyvalue;" value="{{states.value}}">{{states.value}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="city" #city (change)="selectCenterCode(city.value)">
+                <option value="" disabled>--{{'Select City' | translate}}--</option>
+                <option *ngFor="let city of cityArr  | keyvalue;" value="{{city.value}}">{{city.value}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <input type="text" class="form-control cleanup validate-empty width30" formControlName='center_name' placeholder="{{'center_name' | translate}}"
+                required="" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left sm-input inputItem">
+            <!-- <input type="text" class="form-control"  formControlName='code' readonly placeholder="{{'center_code' | translate}}" required=""/> -->
+            <input type="text" class="form-control"  formControlName='center_code' readonly placeholder="{{'center_code' | translate}}"
+                required=""/>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <input type="text" class="form-control cleanup validate-empty width30" formControlName='gstin_no' placeholder="GSTIN NO."
+                required="" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <input type="text" class="form-control cleanup validate-empty width30" formControlName='address' placeholder="{{'address' | translate}}"
+                required="" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="contact_person" #staff (change)="getContactNo(staff.value)">
+                <option value="" disabled>--{{'Select Contact Person' | translate}}--</option>
+                <option *ngFor="let staff of facultyArr | keyvalue;" value="{{staff.value.emp_code}}">{{staff.value.emp_code}}-{{staff.value.emp_name}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <input type="text" readonly class="form-control cleanup validate-empty width30" formControlName='mobile' placeholder="{{'Contact No' | translate}}"
+                required="" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="user_type" #userType (change)="getRole(userType.value)">
+                <option value="" disabled>--{{'Select User Type' | translate}}--</option>
+                <option *ngFor="let userType of userTypeList | keyvalue;" value="{{userType.value}}">{{userType.value}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="role">
+                <option value="" disabled>--{{'Select Role' | translate}}--</option>
+                <option *ngFor="let role of roleList | keyvalue;" value="{{role.value}}">{{role.value}}</option>
+            </select>
+        </div>
+
+        <!-- <div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+            <label class="control-label col-sm-12" for="course">Upload the image</label>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <input-file fileLimit="1" fileAccept="image/*" (acceptedFile)="onAccept($event)" class="cleanup validate-empty" formControlName="school_logo"></input-file>
+        </div>
+        <div *ngIf="global.logo" class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                <img src="{{global.domainUrlwithSlash}}schoolerp/{{global.logo}}">
+        </div> -->
+
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+            <input type="hidden" formControlName="id" value="" />
+            <input type="hidden" formControlName="image_path" value="" />
+            <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+            <!-- <button class="btn btn-info btn-sm mr10"  (click)="createCenter(centerForm.value)">Submit</button> -->
+            <hr/>
+        </div>
+    </form>
+
+    <div class="headBox mb25"><h5  class="pull-left">{{'Center List' | translate}}</h5></div>
+    <div id="leaveTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <span id ="success_message" class="span_success"></span>    
+        <table class="table table-striped table-bordered customTable">
+            <thead class="thheadbg">
+                <tr>            
+                    <!-- <th>{{'serial_no' | translate}}</th> -->
+                    <th>{{'State' | translate}}</th>
+                    <th>{{'City' | translate}}</th>
+                    <th>{{'center_name' | translate}}</th>
+                    <th>{{'center_code' | translate}}</th>
+                    <th>{{'GSTIN NO.' | translate}}</th>
+                    <th>{{'Address' | translate}}</th>
+                    <th>{{'Contact Person' | translate}}</th>
+                    <th>{{'Contact No.' | translate}}</th>
+                    <th>{{'User Type' | translate}}</th>
+                    <th>{{'Role' | translate}}</th>
+                    <th>{{'action' | translate}}</th>
+                    <!-- <th>{{'School Logo' | translate}}</th> -->
+                </tr>
+            </thead>
+            <tbody >
+                <ng-container  *ngFor="let center of schoolList | keyvalue | paginate: { itemsPerPage: 10, currentPage: page}; index as i">
+                <tr>     
+                    <!-- <td>{{i+1}}</td>         -->
+                    <td>{{center.value.state}}</td>
+                    <td>{{center.value.city}}</td>
+                    <td>{{center.value.school_name}}</td>
+                    <td>{{center.value.school_code}}</td>
+                    <td>{{center.value.gstin_no}}</td>
+                    <td>{{center.value.school_address}}</td>
+                    <td><span *ngIf="center.value.school_have_contact_users">{{center.value.school_have_contact_users.staff.name}} ({{center.value.school_have_contact_users.staff.staff_code}})</span></td>
+                    <td><span *ngIf="center.value.school_have_contact_users">{{center.value.school_have_contact_users.staff.mobile}}</span></td>
+                    <td><span *ngIf="center.value.school_have_contact_users">{{center.value.school_have_contact_users.user_type}}</span></td>
+                    <td><span *ngIf="center.value.school_have_contact_users">{{center.value.school_have_contact_users.role_name}}</span></td>
+                    <td>
+                        <a href="javascript:void(0)" (click)="editCenter(center.value.id)"><i class="fa fa-fw fa-pencil"></i></a>
+                    </td>
+
+                    <!-- <td><i *ngIf="center.school_logo" class="fa fa-fw fa-eye"></i></td> -->
+                    <!-- <td align="center"><span *ngIf="center.value.school_logo"><img width="50%" height="50%" src="{{global.domainUrlwithSlash}}schoolerp/{{center.value.school_logo}}"></span></td> -->
+                </tr>
+                </ng-container>
+                <tr>
+                    <!-- <td>Total Count</td>
+                    <td>120</td> -->
+                    <td colspan="11">
+                        <span  align="center">
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,35 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{'Assign class' | translate}}</h5>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+      <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+      <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+    </div>
+    <form class="form-signin" [formGroup]="classForm" (ngSubmit)="saveClass(classForm.value)">
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+          <input type="hidden" value="" formControlName='id' />
+          <select required class="form-control cleanup validate-empty width30" #board (change)="getClassList(board.value)" formControlName="board">
+              <option value="" disabled>--{{'Select Board' | translate}}--</option>
+              <option *ngFor="let board of boardList; index as i" value="{{board.id}}_{{board.boardId}}">{{board.board_name}}</option>
+          </select>
+        </div>
+		<div class="clearfix"></div>
+        <ng-container *ngIf="classList.length > 0" formArrayName="class_id">
+        <div class="col-xs-12 col-auto pull-left mt15" *ngFor="let classArr of classList; index as i;">
+			<label class="checkBox"><input type="checkbox" class="cleanup validate-empty inputbox" [formControlName]='i' /> {{classArr.rack_name}}<span class="checkmark"></span></label>            
+			
+            <!-- <select multiple required class="form-control cleanup validate-empty width30" formControlName="class_id">
+                <option value="" disabled>--{{'select_class' | translate}}--</option>
+                <option *ngFor="let class of classList; index as i;" value="{{class.rack_id}}_{{class.rack_name}}">{{class.rack_name}}</option>
+            </select> -->
+        </div>
+</ng-container>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt20">
+          <input class="btn btn-primary" value="Save" [value]="editOrUpadte?'Update':'Save'" name="save" id="submit" [disabled]="!classForm.valid"
+            type="submit">
+        </div>
+    </form>
+</div>

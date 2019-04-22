@@ -1,0 +1,42 @@
+{
+  "name": "group_users",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "groupsId": {
+      "type": "number",
+      "required": true
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user_groups": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "group_users": {
+      "type": "belongsTo",
+      "model": "groups",
+      "foreignKey": "groupsId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

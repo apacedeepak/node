@@ -1,0 +1,55 @@
+/*FEEDBACK*/
+.stepProgress{ width:100%; float:left; margin:30px 0;}
+#progressbar {counter-reset: step; width:850px; margin:0 auto; padding:0;}
+#progressbar li {
+	list-style-type: none;
+	color: #b2b2b2;
+	text-transform: capitalize;
+	font-size: 19px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+	text-align:center;
+	white-space: nowrap;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 50px;
+	height:50px;
+	line-height: 50px;
+	display: block;
+	font-size: 24px;
+	color: #fff;
+	background: #b2b2b2;
+	border-radius:80%;
+	margin: 0 auto 10px auto;
+	text-align:center;
+	position:relative;
+	z-index:2;
+	box-shadow: 0 0 0 3px #fff;
+}
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 5px;
+	background: #b2b2b2;
+	position: absolute;
+	left: -50%;
+	top: 25px;
+	z-index:0;
+}
+#progressbar li:first-child:after {content: none; }
+#progressbar li.active{ color:#3c3c3c;}
+#progressbar li.active:before,  #progressbar li.active:after{background: #20ae0c;color: white;}
+.radioContainer{ display:inline-block; position: relative; padding-left:30px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; font-weight: normal; margin-right: 15px; margin-top: 0px; margin-bottom:0;font-size: 14px; min-width:130px;}
+.radioContainer input { position: absolute; opacity: 0; }
+.radioContainer .checkmarks{position: absolute; left: 0px;top:0px;}
+.radioContainer .checkmarks:before {position: absolute; border:0; content:url(/assets/images/radiouncheck.png); top: 0px; left: 0;  display: inline-block; }
+.radioContainer input:checked ~ .checkmarks:before{content:url(/assets/images/radiocheck.png);border:0;}
+.mdTitel{ padding: 15px 25px; background: #f3f3f3; width: 100%; float: left; margin-top: 0px; color:#040303; font-size:17px; margin:0;}
+.pTitle{font-size: 18px;color: #333;margin:0;}
+.fBlock { width: 100%; float: left; padding: 30px 25px; }
+.fborder{ border-bottom:0;}
+.notBox { width: 100%; float: left; border: 2px solid #e6e6e6; padding: 15px; margin-bottom: 15px; background: #f2f2f2;}
+.notBox h4{font-size: 18px;}

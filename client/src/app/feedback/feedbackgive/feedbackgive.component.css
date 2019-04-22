@@ -1,0 +1,15 @@
+.btn-info.disabled, .btn-info:disabled{background-color: #004B80; border-color: #004B80;opacity:.5}
+/*grievancecorner Popup*/
+#grievancecorner .modal-header{background-color: #3c6ecd;border-radius: 5px 5px 0 0; color:#fff; margin-bottom:15px;}
+#grievancecorner .modal-header h4{ font-size:25px;}
+#grievancecorner .modal-dialog {width: 625px;}
+#grievancecorner .modal-body h4{ color:#000; margin-bottom:20px;}
+.radiocheckbox{ display:inline-block; position: relative; padding-left:30px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; font-weight: normal; margin-right: 15px; margin-top: 0px; margin-bottom:0;font-size: 18px; min-width:130px;}
+.radiocheckbox input { position: absolute; opacity:0; left: 0; width: 22px; height: 22px; z-index:0; top: 0; margin: 0; }
+.radiocheckbox .checkmarks{position: absolute; left: 0px;top: -1px;}
+.radiocheckbox .checkmarks:before {position:absolute; content:url(/assets/images/radiouncheck.png);  top: 0px; left: 0;  display: inline-block; border-radius:80%;}
+.radiocheckbox input:checked ~ .checkmarks:before{content:url(/assets/images/radiocheck.png); }
+.radiotabblock{ width:100%;padding:15px;background: #f4f4f4; margin-top: 20px;}
+.radiotabblock label{ font-weight:normal;}
+.radiotabblock .radiocheckbox{ margin-bottom:15px; font-size:14px; min-width: inherit;}
+.hide{display: none;}

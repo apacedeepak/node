@@ -1,0 +1,44 @@
+{
+  "name": "attendance_detail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "attendanceMasterId": {
+      "type": "number"
+    },
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "status": {
+      "type": "string",
+      "index": true
+    },
+    "attendanceStatus": {
+      "type": "string"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "modifiedDate": {
+      "type": "date"
+    },
+    "modifiedBy": {
+      "type": "number"
+    },
+    "addedDate": {
+      "type": "date"
+    },
+    "addedBy": {
+      "type": "number",
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

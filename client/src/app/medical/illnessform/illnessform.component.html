@@ -1,0 +1,40 @@
+<form [formGroup]="allergiesForm">
+    <div class="formArea marginbottom20">
+            <div class="col-sm-4 col-md-4 pull-left">
+                    <label class="blockLable"><b>Admission No.:</b> {{dataobj.adm_no}}</label>
+              </div>
+          <div class="col-sm-4 col-md-4  pull-left">
+                <label class="blockLable"><b>Name:</b> {{dataobj.name}}</label>
+          </div>
+          <div class="col-sm-4 col-md-4  pull-left">
+                <label class="blockLable"><b>Class:</b> {{dataobj.class}}</label>
+          </div>
+          <div class="clearfix"></div>
+          <hr/>
+       <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+          <label class="blockLable">Date <em class="error" *ngIf="allergiesForm.get('allergiesdate').hasError('required')">*</em></label>
+          <em class="error" *ngIf="allergiesForm.get('allergiesdate').hasError('pattern')">Date format is invalid</em>
+          <input type="text" class="form-control calenerIcon" formControlName="allergiesdate">
+       </div>
+       <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+            <label class="blockLable">Illness <em class="error" *ngIf="allergiesForm.get('allergiesselect').hasError('required')">*</em></label>
+            
+            <select class="form-control" formControlNamename="allergiesselect">
+                    <option value="" label="---Please Select---" selected="selected">---Please Select---</option>
+                    <option value="1" label="SKIN ALLERGY">SKIN ALLERGY</option>
+            </select>
+      </div>
+      <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+            <label class="blockLable">Treatment <em class="error" *ngIf="allergiesForm.get('allergiestreatment').hasError('required')">*</em></label>
+         <textarea formControlNamename="allergiestreatment" class="messagebox form-control"></textarea>
+      </div>
+      <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+         <label class="blockLable">Precaution <em class="error" *ngIf="allergiesForm.get('allergiesprecaution').hasError('required')">*</em></label>
+  
+         <textarea class="messagebox form-control" formControlName="allergiesprecaution"></textarea>
+      </div>
+       <div class="col-sm-12 col-md-12 text-right pull-left">
+          <input type="submit" (click)="submitForm()" [ngClass]="{'disable-btn': !allergiesForm.valid}" [disabled]="!allergiesForm.valid" value="SAVE" class="btn btn-info btn-sm">
+       </div>
+    </div>
+</form>

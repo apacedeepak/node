@@ -1,0 +1,97 @@
+<div  class="col-sm-12 col-md-12 padding-left-none">
+        <div class="communication pull-left" style="margin-top:15px;">
+           <div class="headBox marginbottom20">
+              <h5 class="h5 pull-left"> {{'faculty_feedback' | translate}}</h5>
+              &nbsp;
+              <div class="col-sm-4 col-md-4 pull-right text-right" style="margin-top: 15px;">
+                 <button type="button" id="grivbutton" class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#myModal" >
+                  {{'grievance_corner' | translate}}
+                 </button>
+              </div>
+           </div>
+           <div class="col-sm-4 col-md-4 pull-right" style="margin-top: 10px;">
+              <select [formControl]="batch" class="form-control">
+                 <option value="0" selected="selected"> {{'select_batch' | translate}}</option>
+                 <option *ngFor="let batchs of batchname" value="{{batchs.section_id}}">{{batchs.section_name}}</option>
+              </select>
+           </div>
+           <div class="col-sm-12 col-md-12 pull-left margintop20">
+              <table class="table tablestyle table-striped">
+                 <thead>
+                    <tr>
+                       <td> {{'subject' | translate}}</td>
+                       <td> {{'employee_code' | translate}}</td>
+                       <td style="width:150px;"> {{'action' | translate}}</td>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let user of userlist; let i = index">
+                       <td>{{user.subject_name}}</td>
+                       <td>{{user.staff_name}} -{{user.staff_code}}</td>
+                       <td><button routerLink="/feedback/main/{{user.subject_name}}/{{user.subject_id}}/{{user.staff_id}}" type="button" class="btn btn-primary btn-sm"
+                          [ngStyle]="{'opacity': disableall == true || submitted_sub_arr.indexOf(user.subject_name) >= 0 ? '0.25' : '1.00'}" [disabled]="disableall == true || submitted_sub_arr.indexOf(user.subject_name) >= 0 "> {{'feedback' | translate}}</button>
+                    </tr>
+                 </tbody>
+              </table>
+              <p *ngIf="feedbackflag == true" class="text-center text-info" style="margin-top:15px"> {{'no_record_found' | translate}}</p>
+           </div>
+        </div>
+     </div>
+     <!-- Button to Open the Modal -->
+     <!-- The Modal -->
+     <div class="modal" id="myModal">
+     <div class="modal-dialog">
+        <div class="modal-content">
+           <!-- Modal Header -->
+           <div  class="modal-header" style="background-color:royalblue;">
+              <h4 class="modal-title" style="color:white;" >  {{'grievance_corner' | translate}}</h4>
+              <button id="closebutton"type="button" class="close" data-dismiss="modal" (click)=" resetValues()">&times;</button>
+           </div>
+           <!-- Modal body -->
+           <div   class="modal-body" >
+              <div  *ngIf="closeflag == true"class="alert alert-success text-center">{{successMessage}}</div>
+              <form [formGroup]="myForm" >
+                 <label class="radiocheckbox"><input formControlName="grivance_type" name="grivance_type" [checked]="true" (click)="activestatus('Administration')" type="radio" value="Administration" >  {{'administration' | translate}} <span class="checkmarks"></span></label> 
+                 <label class="radiocheckbox"><input formControlName="grivance_type" name="grivance_type" (click)="activestatus('Faculty')" type="radio" value="Faculty">  {{'faculty' | translate}}  <span class="checkmarks"></span></label>
+                 <div class="radiotabblock">
+                    <div *ngIf="adminstratorflag == true && facultyflag == false">
+                       <label class="radiocheckbox">
+                       <input  formControlName="grivance_sub_type" type="radio"  value="classroom" name="grivance_sub_type" />  {{'classroom' | translate}} <span class="checkmarks">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                       </label>
+                       <label class="radiocheckbox">
+                       <input formControlName="grivance_sub_type" type="radio"  value="staff" name="grivance_sub_type" />  {{'staff' | translate}} <span class="checkmarks">&nbsp;</span></label>
+                       <label class="radiocheckbox">
+                       <input formControlName="grivance_sub_type" type="radio"  value="transportation" name="grivance_sub_type" />  {{'transportation' | translate}} <span class="checkmarks">&nbsp;</span></label>
+                       <label class="radiocheckbox">
+                       <input formControlName="grivance_sub_type" type="radio"  value="washroom" name="grivance_sub_type" />  {{'washroom' | translate}} <span class="checkmarks">&nbsp;&nbsp;</span></label>
+                       <label class="radiocheckbox">
+                       <input formControlName="grivance_sub_type" type="radio"  value="others" name="grivance_sub_type" />  {{'others' | translate}} <span class="checkmarks">&nbsp;</span></label>
+                    </div>
+                    <div *ngIf="facultyflag == true && adminstratorflag == false">
+                       <div class="col-sm-6 col-md-6 pull-left padding-left-none"><b> {{'center_code' | translate}}:</b>{{globalObj.school_code}}</div>
+                       <div class="col-sm-6 col-md-6 pull-left"><b> {{'center_name' | translate}}:</b>{{globalObj.school_name}}</div>
+                       <div class="col-sm-12 col-md-12 padding-left-none padding-right-none" style="margin:15px 0;">
+                          <label> {{'faculty_name' | translate}}</label>
+                          <em *ngIf="errorMessage" 
+                             style="color:red">{{errorMessage}}</em>
+                          <select [formControl]="facultyid" id="facultyval" class="form-control" >
+                             <option  value='0.1' selected="selected"> {{'select_faculty' | translate}}</option>
+                             <option   name="teacher_user_id" value="{{user.staff_id}}" *ngFor="let user of staffname">{{user}}</option>
+                          </select>
+                       </div>
+                    </div>
+                    <h5><b> {{'comment' | translate}}</b> <b class="redColor">*</b></h5>
+                    <em *ngIf="feedbackcomment.hasError('required')" 
+                       style="color:red"></em>
+                    <textarea  [formControl]="feedbackcomment" class="form-control"  placeholder=" {{'write_comment' | translate}}..." 
+                       style="height:100px; margin-bottom:15px"  name="comment"    ></textarea>
+                 </div>
+                 <!-- Modal footer -->
+                 <div  class="modal-footer" style="background-color:whitesmoke"  >
+                    <button type="button" id="submitgrievance" class="btn btn-primary" [ngClass]="{'disable-btn': feedbackcomment.hasError('required')}" 
+                    [disabled]="feedbackcomment.hasError('required')"  data-dismiss="modal" (click)="submitgrivance()"> {{'submit' | translate}}</button>
+                 </div>
+              </form>
+           </div>
+        </div>
+     </div>

@@ -1,0 +1,79 @@
+<ng-container>
+<div class="communication margin15">
+
+          <ul class="commnicationBox nav" *ngIf="globalObj.user_type !='School'">
+            <li id="mess" class=""><a class="active" href="#message" role="tab" (click)="messagelist('Inbox')" data-toggle="tab"> {{'message' | translate}} <span *ngIf="globalObj.countInbox != 0">({{globalObj.countInbox}})</span></a></li>
+            <li id="not" class=""><a href="#notice" role="tab" data-toggle="tab" (click)="announcementtype('Notice')"> {{'notice' | translate}} <span *ngIf="globalObj.noticeCount != 0">({{globalObj.noticeCount}})</span></a></li>
+            <li id="cir" class=""><a href="#circular" role="tab" data-toggle="tab" (click)="announcementtype('Circular')"> {{'circular' | translate}} <span *ngIf="globalObj.circularCount != 0">({{globalObj.circularCount}})</span></a></li>
+          </ul>
+
+          <ul class="commnicationBox nav" *ngIf="globalObj.user_type =='School'">
+            <li id="mess" class=""><a class="active" href="#message" role="tab" (click)="messagelist('Inbox')" data-toggle="tab"> {{'message' | translate}} <span *ngIf="globalObj.countInbox != 0">({{globalObj.countInbox}})</span></a></li>
+          
+
+          </ul>
+
+<div class="tab-content leftRightgap">
+<div id="message" role="tabpanel" class="tab-pane active">
+<div class="lBlock">
+              <ul class="messagetab">
+                 <li><a [routerLink]="['/communication/compose']"> {{'compose' | translate}}</a></li>
+                <li id="inboxing" class="active"><a (click)="messagelist('Inbox')" href="javascript:void(0)"> {{'inbox' | translate}} <span *ngIf="globalObj.countInbox != 0">({{globalObj.countInbox}})</span></a></li>
+                <li id="sent" class=""><a (click)="messagelist('Sent')" href="javascript:void(0)" > {{'sent' | translate}}</a></li>
+                <li id="draft" class=""><a (click)="messagelist('Draft')" href="javascript:void(0)"> {{'draft' | translate}}</a></li>
+                <li id="archive" class=""><a (click)="messagelist('Archived')" href="javascript:void(0)"> {{'archive' | translate}}</a></li>
+              </ul>
+
+            </div>
+ <div class="rBlock borderLeft">
+
+<app-messagelist [flag]='flag' (search)='filterData($event)' (countChanged)="countChangedHandler()" [parentGlobal]='globalObj' [listdata]='allMessageList'></app-messagelist>
+  </div>
+
+</div>
+<div id="notice" role="tabpanel" class="tab-pane fade">
+
+<ng-container *ngIf="globalObj.user_type !='School'">
+      <div class="mailBox submail" *ngFor="let announce of announcement" [ngClass]="(announce.isread) == '1' ? 'readMail' : ''">
+          <div  *ngIf="noticeflag==true" class="sunjectIcon"><img src="assets/images/english.png" alt=""> </div>
+          <a [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: announce.announce_id,place: 'Notice'}">
+          <h2 *ngIf="noticeflag==true"> {{'notice' | translate}}</h2>
+          <h3 *ngIf="noticeflag==true">{{announce.title}}</h3>
+          <h4  *ngIf="noticeflag==true" class="textLimit" [innerHTML]="announce.description"></h4>
+          </a>
+
+          <!-- ngIf: cirnot.file!="" -->
+        </div>
+
+          <div class="mailBox" *ngIf="noticemesageFlage == true">
+          <p class="text-center text-primary mt25">  {{'no_record_found' | translate}}</p>
+         </div>
+  <div class="clearfix"></div>
+</ng-container>
+
+</div>
+
+<div id="circular" role="tabpanel" class="tab-pane fade">
+
+  <ng-container *ngIf="globalObj.user_type !='School'">
+      <div class="mailBox submail" *ngFor="let announce of announcement" [ngClass]="(announce.isread) == '1' ? 'readMail' : ''">
+          <div  *ngIf="cicrularflag==true"class="sunjectIcon"><img src="assets/images/english.png" alt=""> </div>
+          <a [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: announce.announce_id,place: 'Circular'}">
+          <h2 *ngIf="cicrularflag==true"> {{'circular' | translate}}</h2>
+          <!-- <h3>{{announce.title}}</h3> -->
+          <h3  *ngIf="cicrularflag==true"[innerHTML]="announce.title"></h3>
+          <h4  *ngIf="cicrularflag==true" class="textLimit" [innerHTML]="announce.description"></h4>
+          </a>
+          <!-- ngIf: cirnot.file!="" -->
+
+        </div>
+         <div class="mailBox" *ngIf="circularmesageFlage == true">
+          <p class="text-center text-primary mt25">  {{'no_record_found' | translate}}</p>
+         </div>
+
+  <div class="clearfix"></div>
+  </ng-container>
+</div>
+</div>
+</div>
+

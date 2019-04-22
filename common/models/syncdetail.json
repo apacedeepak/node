@@ -1,0 +1,38 @@
+{
+  "name": "syncdetail",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "module_type": {
+      "type": "number",
+      "required": true
+    },
+    "module_key_id": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "response_data": {
+      "type": "Text",
+      "default": ""
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "updated_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

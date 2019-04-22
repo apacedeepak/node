@@ -1,0 +1,150 @@
+{
+  "name": "student",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "dob": {
+      "type": "string"
+    },
+    "emergency_number": {
+      "type": "string"
+    },
+    "student_photo": {
+      "type": "string"
+    },
+    "student_uidai": {
+      "type": "string"
+    },
+    "admission_no": {
+      "type": "string"
+    },
+    "board_registration_no": {
+      "type": "string"
+    },
+    "registration_no": {
+      "type": "string"
+    },
+    "guardian_name": {
+      "type": "string"
+    },
+    "guardian_address": {
+      "type": "string"
+    },
+    "guardian_contact": {
+      "type": "string"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "religion": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "house": {
+      "type": "string"
+    },
+    "parentId": {
+      "type": "number"
+    },
+    "sibling": {
+      "type": "string",
+      "required": true,
+      "default": "No"
+    },
+    "inactive_reason": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "index": true,
+      "default": "Active"
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "guardian_relation": {
+      "type": "string"
+    },
+    "guardian_telephone": {
+      "type": "number"
+    },
+    "dateofadmission": {
+      "type": "date"
+    },
+    "student_type": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "student_phone": {
+      "type": "string"
+    },
+    "student_email": {
+      "type": "string"
+    },
+    "blood_group": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "guardian_photo": {
+      "type": "string"
+    },
+    "remarks": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "students": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "school": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "schoolId"
+    },
+    "studentbelongtoparent": {
+      "type": "belongsTo",
+      "model": "parent",
+      "foreignKey": "parentId"
+    },
+    "have_leaves": {
+      "type": "hasMany",
+      "model": "leaveApplyStudent",
+      "foreignKey": "userId"
+    },
+    "receipt": {
+      "type": "hasMany",
+      "model": "receipt",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

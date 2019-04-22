@@ -1,0 +1,87 @@
+.custom-day {
+      text-align: center;
+      padding: 0.185rem 0.25rem;
+      display: inline-block;
+      height: 2rem;
+      width: 2rem;
+    }
+    .custom-day.focused {
+      background-color: #e6e6e6;
+    }
+    .custom-day.range, .custom-day:hover {
+      background-color: rgb(2, 117, 216);
+      color: white;
+    }
+    .custom-day.faded {
+      background-color: rgba(2, 117, 216, 0.5);
+    }
+    .homewrkMailing {padding: 10px 230px 10px 60px !important;}
+    .mailNote{right: 0;}
+     .alert-info {
+      color: #0c5460;
+      background-color: #d1ecf1;
+      border-color: #bee5eb;
+      width: 98%;
+      float: left;
+      padding: 5px 10px;
+      font-size: 14px;
+      text-align: center;
+      box-sizing: border-box;
+  }
+    .tabsytle{
+    float: left;
+    margin:14px 0 0 0;
+    padding: 0 15px;
+    width: 100%;
+    border-bottom: 1px solid #cdcdcd;
+    padding-bottom: 12px;
+}
+.plussing{top:10px;}
+.showDate{
+    padding: 4px 20px 4px 10px;
+    border: 1px solid #cdcdcd;
+    display: inline-block;
+    margin: 0px 0 0 0;
+    bottom: -18px;
+    font-size: 14px;  background: #f2f2f2;}
+.showDate label{margin:0;}.showDate .close{position: absolute; right: 0; margin: 0; top: 0px;font-weight: bold;}
+.ngCalendra ngb-datepicker{
+  position: absolute;
+    right: 0;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0 0 3px 2px rgba(109, 106, 106, 0.48);
+    top: 100%;
+    margin-top: 1px;}
+    .commnicationBox{border:0;padding: 0;}
+    .tablestyle thead td {color: #fff; font-size: 14px;}
+.col-sm-200{width: 200px; display: inline-block;}
+.col-sm-150{width: 150px;}
+.leftRightgap{width: 100%;}
+.margin-bottom-15{margin-bottom: 15px;}
+.calenerIcon,.fontSize14{font-size: 14px;}
+.alert-dismissible { padding-right: 20px; padding: 6px 20px 6px 15px;margin:0;font-size: 13px;}
+.alert-dismissible .close{padding: 5px 10px;}
+.modal-title{font-size: 16px;}
+.btnGroup{
+  margin-top: 18px;
+  margin-right: 15px;
+}
+.commnicationBox li{margin-left: 5px;}
+.commnicationBox li a{border: 1px solid #3C6ECD;background-color: transparent;}
+.commnicationBox li a.active{background-color: #3C6ECD;border-color: #3C6ECD;}
+.margin-top-15{margin-top:15px !important;}
+.dropContainer{ min-width: 100px;}
+.dropContainer a{color: #fff !important; text-decoration: none; font-size: 18px;}
+.radioContainer {display: block;margin-left: 15px;}
+.radioContainer input {left: -1px;top: 4px;}
+.modal-header{ background-color: #1F56BD; color:#fff; border-radius: 3px 3px 0 0;}
+.modal-header a,.modal-header a:hover{  color:#fff;}
+#viewProfileModal .table td,#viewProfileModal .table th{ padding: 6px 8px;vertical-align: top;  border-top: 1px solid #dee2e6;  font-size: 14px;
+}
+.infopro{font-size: 14px; padding:15px; border:1px solid #ddd;}
+.infopro p label{ margin: 0;}
+.infopro p label:first-child{width: 30%;}
+.infopro p label:last-child{width: 68%;}
+.infopro p{margin-top: 5px;margin-bottom: 0;}
+.modal-lg{width: 1024px;max-width:1024px}

@@ -1,0 +1,30 @@
+{
+  "name": "emscc_sync_log",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "emsccUserId": {
+      "type": "number"
+    },
+    "request_json": {
+      "type": "Text"
+    },
+    "response_json": {
+      "type": "Text"
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

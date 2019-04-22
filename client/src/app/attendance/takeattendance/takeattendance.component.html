@@ -1,0 +1,85 @@
+<!--Page Work Space-->
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">        
+<div class="boxModel pull-left maxHightOuto" style="margin-top:15px;"> 
+<div class="headBox">
+<h5 class="h5 pull-left"> {{'take_attendance' | translate}}</h5>
+   <div class="pull-right doneidbtn"><a href="javascript:void(0);"  class="sm-blue-btn pull-right" (click)='onSubmit($event)'>Done </a></div>
+</div>
+
+<div  class="tab-content" style="margin-top: 10px;">  
+<div id="takeattendance">    
+<div class="attendanceFillter">
+        <div class="col-sm-2 col-md-2 pull-left">
+          <p> {{'class' | translate}} {{'section' | translate}}:</p>
+          <h5>{{classection}}</h5>
+        </div>
+        <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+               <input class="calenerIcon" placeholder="target date" readonly
+              ngbDatepicker #d="ngbDatepicker" [formControl]="dpField" [value]="dp" >
+           
+	</div>
+        <div class="input-group-append col-sm-1 col-md-1 pull-left ">
+             <button class="btn btninfo" (click)="d.toggle()" type="button">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+             </button>
+        </div>
+        <div class="col-sm-1 col-md-1 pull-left">
+          <p> {{'total' | translate}}:</p>
+          <h5>{{ttlcount}}</h5>
+        </div>
+        <div class="col-sm-1 col-md-1 pull-left">
+          <p> {{'present' | translate}}:</p>
+          <h5>{{pcount}}</h5>
+        </div>
+<div class="col-sm-1 col-md-1 pull-left">
+          <p> {{'absent' | translate}}:</p>
+          <h5>{{acount}}</h5>   
+</div>
+<div class="col-sm-2 col-md-2 pull-left">
+          <p>  {{'partial_present' | translate}}:</p>
+          <h5>{{ppcount}}</h5>
+</div> 
+<div class="col-sm-2 col-md-2 pull-left">
+    <select class="select150" (change)='setAttendancefilter($event.target.value)'>              
+        <option selected="selected"> {{'default_attendance' | translate}}</option>
+        <option value="Present">{{'present' | translate}}</option>
+        <option value="Absent">{{'absent' | translate}}</option>
+        <option value="Partial Present">{{'partial_present' | translate}}</option>
+    </select>
+</div>
+</div>          
+
+<div class="filtertitle">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td width="130"> {{'roll_no' | translate}}</td>
+                <td width="230" class="tdBoldstyle"> {{'student_name' | translate}}</td>
+                <td class="tdBoldstyle"> {{'attended_class' | translate}}</td>
+            </tr>
+        </tbody>
+    </table>          
+</div>
+          
+<div class="attndfilterResult mxHightAuto">
+          <table class="table table-striped vmid">
+              <tbody *ngFor="let user of userlist; let i = index">
+                <tr>
+                <td width="130">{{user.user_id}}</td>
+                <td width="230">{{user.student_name}} </td>
+                <td>
+                    <select  #attendancestatus (change) = "setattendancestatus(attendancestatus.value, user.user_id, i)" class="select150" id="row{{user.user_id}}" style="width: 150px;"> 
+                      <option  value="O" selected="selected">--Select--</option>
+                      <option  value="P" [selected]="pselected == true"> {{'present' | translate}}</option>
+                      <option  value="A" [selected]="aselected == true"> {{'absent' | translate}}</option>
+                      <option  value="PP" [selected]="ppselected == true">{{'partial_present' | translate}}</option>
+                    </select>
+                </td>
+                </tr>
+              </tbody>
+          </table>          
+</div>
+</div>
+</div>
+</div>
+</div>

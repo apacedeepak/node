@@ -1,0 +1,14 @@
+<ng-container *ngIf="userType=='teacher'">
+  <app-teacher></app-teacher>
+</ng-container>
+<ng-container *ngIf="userType=='parent'">
+  <app-parent></app-parent>
+</ng-container>
+<ng-container *ngIf="userType=='student'">
+   <app-student></app-student>
+</ng-container>
+<ng-container *ngIf="userType=='management'">
+  <app-management></app-management>
+</ng-container>
+
+

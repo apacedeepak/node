@@ -1,0 +1,130 @@
+
+        <!--        <div class="loader hide" id="loader"><div class="spinner"></div></div>-->
+        <div class="col-sm-12 col-md-12 pull-left padding-left-none">
+            <div class="topFilterBlock">
+                <div class="col-sm-4 col-md-4  pull-left text-right">
+                    <h5>  {{'filter_by' | translate}}:</h5>
+                </div>
+                <div class="col-sm-2 col-md-2  pull-left">
+                    <select #class (change)="getassignedsection(class.value)">
+                    <option value="" *ngIf="product_type != 'emscc'" selected="selected"> {{'all' | translate}}  {{'class' | translate}}</option>
+                    <option value="" *ngIf="product_type == 'emscc'" selected="selected">  {{'all_course_type' | translate}}</option>
+                     <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+
+
+              </select>
+                </div>
+                <div class="col-sm-2 col-md-2  pull-left">
+                    <select #section (change)="getassignedsubject(section.value,section)">
+                    <option value="" *ngIf="product_type != 'emscc'" selected="selected"> {{'all' | translate}} {{'section' | translate}}</option>
+                   <option value="" *ngIf="product_type == 'emscc'" selected="selected"> {{'all' | translate}} {{'batch' | translate}}</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+
+
+              </select>
+                </div>
+                <div class="col-sm-2 col-md-2  pull-left">
+                    <select #subject (change)="setsubject(subject.value)">
+                    <option  value="" selected="selected"> {{'all' | translate}} {{'subject' | translate}}</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+
+
+              </select>
+                </div>
+
+                <div class="col-sm-2 col-md-2  pull-left  has-feedback ngCalendra">
+                    <input type="text" placeholder=" {{'select_date' | translate}}" class="calenerIcon" (click)="displaycal();">
+                    <ng-container *ngIf="showcalander">
+                        <ngb-datepicker #dp (select)="onDateChange($event)" [displayMonths]="0" [dayTemplate]="t">
+                        </ngb-datepicker>
+                    </ng-container>
+                    <ng-template #t let-date="date" let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+                    </ng-template>
+
+
+
+                </div>
+            </div>
+            <div class="boxModel pull-left maxHightOuto">
+                <div class="headBox">
+                    <h5 class="h5 pull-left"> {{'homework' | translate}}</h5>
+
+                    <div class="pull-right" style="padding-right: 55px;">
+                        <div *ngIf="showdaterange" class="alert showDate">
+                            <label>{{fromrange}}</label> <label><b>-</b></label> <label>{{torange}}</label> <a (click)="removerange()" aria-label="close" data-dismiss="alert" class="close">×</a>
+                        </div>
+                        <a title="{{'Create New homework'|translate}}" routerLink="/homework/createhomework" class="plussing"><i class="fa fa-fw fa-plus"></i></a></div>
+                </div>
+				<div class="col-sm-12 col-md-12 pull-left" style="padding: 0;">
+				 <ul class="nav commnicationBox tabsytle">
+                                <li><a [class]="homeclass" data-toggle="pill" href="#allhomework"> {{'homework' | translate}}</a> </li>
+                                <li><a [class]="draftclass" data-toggle="pill" href="#Draft"> {{'draft' | translate}}</a></li>
+                            </ul>
+				</div>
+
+				<div class="tab-content col-sm-12 col-md-12 pull-left">
+
+                                    <div role="tabpanel" id="allhomework" [class]="homeclassdiv" >
+                                       <ng-container  *ngIf="ishomeworkexist;else nohomedata">
+                                        <div class="col-sm-10 col-md-10 pull-left padding-left-none">
+                                        <div class="mailBox submail"  *ngFor="let homelist of homeworklist">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'"></div>
+                                            <a routerLink="/homework/teacherdetail/{{homelist.homework_id}}">
+                                                <h2>{{homelist.subject_name}} ({{homelist.class_section_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+
+                                            </a>
+                                            <div *ngIf="homelist.attachment_count==1" class="mailtime mailtimeSpace "><i class="fa fa-fw fa-paperclip ng-scope"></i></div>
+                                            <div class="reciveNotification">
+                                                <p><label> {{'received' | translate}} </label>: {{homelist.homework_received_count}}/{{homelist.homework_assigned_count}}</p>
+                                                <p><label> {{'checked' | translate}} </label>: {{homelist.homework_checked_count}}</p>
+                                            </div>
+
+                                        </div>
+                                        </div>
+                                       </ng-container>
+                             <ng-template #nohomedata>
+                                    <div *ngIf="displayafter" class="text-info text-center mt20">  {{'no_data_available' | translate}}</div>
+                            </ng-template>
+                                    </div>
+
+
+
+                                    <div role="tabpanel"  id="Draft" role="tabpanel" [class]="draftclassdiv"  >
+                                        <ng-container *ngIf="isdraftexist;else nodraftdata">
+
+                                        <div class="mailBox submail"  *ngFor="let draftdata of draftlist">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'draftdata.subject_image'" onError="this.src='assets/images/default-subject.png'"></div>
+                                            <a routerLink="/homework/teacherdraftdetail/{{draftdata.homework_id}}">
+                                                <h2>{{draftdata.subject_name}} ({{draftdata.class_section_name}})</h2>
+                                                <h3>{{draftdata.homework_title}}</h3>
+                                                <h4 [innerHTML]="draftdata.homework_content | slice:0:10 "></h4>
+
+                                            </a>
+                                            <div *ngIf="draftdata.attachment_count==1" class="mailtime mailtimeSpace "><i class="fa fa-fw fa-paperclip ng-scope"></i></div>
+                                            <!-- <div class="reciveNotification">
+                                <p ><label>RECEIVED </label>: {{draftlst.homework_received_count}}/{{homelist.homework_assigned_count}}</p>
+                                <p ><label>CHECKED </label>: {{homelist.homework_checked_count}}</p>
+                            </div> -->
+                                        </div>
+                                        </ng-container>
+                                <ng-template #nodraftdata>
+                                  <div *ngIf="displayafter" class="text-info text-center mt20"> {{'no_data_available' | translate}}</div>
+                                </ng-template>
+                                    </div>
+
+
+
+
+
+</div>                </div>
+
+        </div>
+

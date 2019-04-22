@@ -1,0 +1,126 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25"><h5  class="pull-left">Daily collection Report</h5></div>
+    
+    <form class="form-signin" ngNativeValidate [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm.value,false)" >
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15"><label>Class &amp; Section</label></div> 
+        <div formArrayName="class_section" class="col-xs-12 col-sm-12 col-md-12 pull-left padding-left-none">
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15">
+        <label class="checkBox mr15 mb15"  *ngFor="let item of sectionArrayList;index as i"> 
+        <input type="checkbox" class="cleanup validate-empty" [formControlName]='i' value="{{item.id}}"  autofocus="" /> {{item.section_name}} <span class="checkmark"></span>
+        </label>	  
+        </div>               
+        </div>  
+              
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+                    <label>Payment mode</label>
+                <select class="form-control" formControlName="payment_mode" #paymentmode   multiple>
+                    <!-- <option value="">Select payment mode</option> -->
+                    <option *ngFor="let item of paymentModeJson | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                </select>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+                <label>Fee Head</label>
+            <select class="form-control" formControlName="fee_head_id"   multiple>
+               <option *ngFor="let item of headlist" value="{{item.id}}">{{item.fee_head_name}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+            <label>Session</label>
+        <select class="form-control" formControlName="session_id"   multiple>
+           <option *ngFor="let item of sessionlist" value="{{item.id}}">{{item.session_name}}</option>
+        </select>
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <label>From Date</label>
+    <div class="has-feedback ngCalendra">
+    <div class="datBox">
+<input readonly type="text" class="calenerIcon form-control" ngbDatepicker #df="ngbDatepicker" formControlName="from_date"  value="" >
+<button class="btnover" (click)="df.toggle()" type="button"></button>
+ </div></div>
+</div>
+
+
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+    <label>To Date</label>
+            <div class="has-feedback ngCalendra">
+          <div class="datBox">
+        <input readonly type="text" class="calenerIcon form-control" ngbDatepicker #dt="ngbDatepicker" formControlName="to_date"  value="" >
+        <button class="btnover" (click)="dt.toggle()" type="button"></button>
+          </div></div>
+ </div>
+		<div><label class="checkBox">
+                      <input type="radio"  value="teacher">
+                      <span class="radioCheck"></span>
+                    </label></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt25">
+                       
+        <input class="btn btn-primary mr15" value="Search" name="submit" id="submit" type="submit"> 
+         <button class="btn btn-success" (click)="onSubmit(reportForm.value,true)" name="export" id="export"><i class="fa fa-file-excel-o"></i> Export</button>     
+       
+    </div>
+
+    
+
+                
+    </form>
+    
+    
+     <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+       <span id ="success_message" class="span_success"></span>  
+       <div class="table-responsive">
+      <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+              <tr>            
+                <th>Receipt Date</th>
+                <th class="text-center">Adm No.</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Class</th>
+                <th class="text-center">Receipt No.</th>
+                <th class="text-center">Payment Mode</th>
+                <th *ngFor="let th of tablehead;">{{th.fee_head_name}}</th>
+                <th class="text-center">Late Fine</th>
+                <th class="text-center">Cheque Bounce Fine</th>
+                <th class="text-center">Amount</th>
+                
+                
+              </tr>
+          </thead>
+          <tbody >
+              <tr  *ngFor="let data of report;">             
+                  
+                  <td >{{data.receiptdate | date}}</td>
+                  <td > {{data.admission_no}}</td>
+                  <td >{{data.name}}</td>
+                  <td >{{data.section_name}}</td>
+                  <td >{{data.feereceiptno}}</td>
+                  <td >{{data.payment_type}}</td>
+                  <td *ngFor="let td of data.detail;">{{td.amount}}</td>
+                  <td >{{data.fine_amount}}</td>
+                  <td >{{data.cheque_bounce_fine}}</td>
+                  <td >{{data.total_amount}}</td>
+                  <!-- <td>
+  
+                    <span *ngFor="let innerdata of data.fee_strcuture_master_map_fee_structure_detail;index as i" class="label label-primary">{{innerdata.section.section_name}} 
+                    <span *ngIf="i < data.fee_strcuture_master_map_fee_structure_detail.length-1"></span> 
+                    </span>
+  
+                  </td> -->
+                       
+                     
+                </tr>
+       
+              <tr *ngIf="report.length == 0">
+                  <td colspan="10">
+                   <div class="text-center text-danger">No record Found...</div>
+                  </td>
+              </tr>
+    
+          </tbody>
+      </table>
+    </div> 
+</div> 
+       </div>

@@ -1,0 +1,65 @@
+{
+  "name": "leave_details",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "leave_schemeId": {
+      "type": "number",
+      "required": true
+    },
+    "leave_masterId": {
+      "type": "number"
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "financial_yearId": {
+      "type": "number",
+      "required": true
+    },
+    "gain": {
+      "type": "number"
+    },
+    "taken": {
+      "type": "number"
+    },
+    "min_days_required": {
+      "type": "number"
+    },
+    "max_limit": {
+      "type": "number",
+      "default": 0
+    },
+    "carr_forward": {
+      "type": "number"
+    },
+    "canceled": {
+      "type": "number",
+      "default": 0
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leave_master": {
+      "type": "belongsTo",
+      "model": "leave_master",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

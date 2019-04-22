@@ -1,0 +1,61 @@
+{
+  "name": "tle_config",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "webpath": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "default": 0
+    },
+    "schoolerp_version": {
+      "type": "string"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "multiple_school": {
+      "type": "number",
+      "default": 0
+    },
+    "school_flag": {
+      "type": "number",
+      "default": 0
+    },
+    "lms_check": {
+      "type": "number",
+      "default": 0
+    },
+    "web_api_key": {
+      "type": "string"
+    },
+    "web_api_salt": {
+      "type": "string"
+    },
+    "ldap_status": {
+      "type": "number",
+      "default": 0
+    },
+    "ldap_url": {
+      "type": "string"
+    },
+    "ldap_api_key": {
+      "type": "string"
+    },
+    "ldap_salt": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,42 @@
+{
+  "name": "attendance_timetable_structure",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "days": {
+      "type": "number",
+      "required": true
+    },
+    "periods": {
+      "type": "number",
+      "required": true
+    },
+    "attend_flag": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "school_auto_id": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

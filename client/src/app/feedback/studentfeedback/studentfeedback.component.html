@@ -1,0 +1,115 @@
+        <div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+            <div class="boxModel pull-left maxHightOuto">
+                <div class="headBox">
+                    <h5 class="h5 pull-left"> {{'behavior_points_report' | translate}}</h5>          
+                </div>
+                <div class="pointReports">
+                    <div class="col-xs-12 col-sm-6 col-md-6 pull-left" *ngIf="showGraph">
+                        <h3> {{'biweekly_distribution_last_16_weeks' | translate}}</h3>
+                        <div class="hintscolor">
+                            <span class="positivecolor"> {{'positive' | translate}}</span>
+                            <span class="negativecolor"> {{'negative' | translate}}</span>
+                        </div>
+                        <canvas id="myChart" width="300" height="300"></canvas>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 pull-left" *ngIf="!showGraph">
+                        <h3> {{'biweekly_distribution_last_16_weeks' | translate}}</h3>
+                        <p class="text-center text-info" style="margin-top: 15px;"> {{'no_data_plot_graph' | translate}}</p>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+                        <h3> {{'behavior_details_latest_incidents' | translate}}</h3>
+                        <div class="text-center">
+                            <ul class="nav center-Tab pointtab">
+                                <li><a  class="active" data-toggle="tab" href="#positivepoint" > {{'positive_points' | translate}}</a></li>
+                                <li><a data-toggle="tab" href="#negativepoint" > {{'negative_points' | translate}}</a></li>
+                            </ul> 
+                        </div>
+                        <div class="tab-content">
+                            <div id="positivepoint" class="tab-pane active">
+                                <table class="table">                 
+                                    <tr class="theader">
+                                        <td class="col-sm-2 col-md-2" style="width: 16%;"> {{'rank' | translate}}</td>
+                                        <td class="col-sm-7 col-md-7"> {{'skills' | translate}}</td>
+                                        <td class="col-sm-3 col-md-3"> {{'frequency' | translate}}</td>
+                                    </tr>
+                                    <ng-container  *ngFor="let feedback of globalObj.feedbackDeatail.positive; index as i" >
+                                    <tr class="colsphd" (click)="accodfunc(i, 'positive')">
+                                        <td>{{i+1}}</td>
+                                        <td>{{feedback[0]?.remarks_name | ucfirst}}</td>
+                                        <td>{{feedback.length}}</td>
+                                    </tr>  
+                                    <tr *ngIf="positiveCheckArr[i]">
+                                        <td colspan="3" style="padding:0;">
+                                            <table class="colasptable">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="col-sm-2 col-md-2" style="width: 25%;"> {{'date' | translate}}</td>
+                                                        <td class="col-sm-4 col-md-4"  style="width: 25%;"> {{'teacher' | translate}}</td>
+                                                        <td class="col-sm-6 col-md-6"> {{'comment' | translate}}</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let feed of feedback">
+                                                        <td>{{feed.added_date| date: format : shortDate}}</td>
+                                                        <td>{{feed.name}}</td>
+                                                        <td>{{feed.comment}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </ng-container>
+                                     
+                                </table>
+                                    <ng-container *ngIf="globalObj.feedbackDeatail.positive.length == 0">
+                                        <p class="text-center text-info" style="margin-top: 15px;">  {{'no_record_found' | translate}}</p>
+                                    </ng-container> 
+
+                            </div> 
+                            <div id="negativepoint" class="tab-pane">
+                                <table class="table">
+                                    <tr class="theader">
+                                        <td class="col-sm-2 col-md-2"  style="width: 16%;"> {{'rank' | translate}}</td>
+                                        <td class="col-sm-7 col-md-7"> {{'skills' | translate}}</td>
+                                        <td class="col-sm-3 col-md-3"> {{'frequency' | translate}}</td>
+                                    </tr>      
+                                    <ng-container  *ngFor="let feedback of globalObj.feedbackDeatail.negative; index as j" >
+                                        <tr class="colsphd" (click)="accodfunc(j, 'negative')">
+                                            <td>{{j+1}}</td>
+                                            <td>{{ feedback[0]?.remarks_name | ucfirst }}</td>
+                                            <td>{{ feedback.length }}</td>
+                                        </tr>
+                                       <tr *ngIf="negativeCheckArr[j]">
+                                            <td colspan="3" style="padding:0;">
+                                                <table class="colasptable">
+                                                    <thead>
+                                                        <tr>
+                                                            <td class="col-sm-2 col-md-2" style="width: 25%;"> {{'date' | translate}}</td>
+                                                            <td class="col-sm-4 col-md-4" style="width: 25%;"> {{'teacher' | translate}}</td>
+                                                            <td class="col-sm-6 col-md-6"> {{'comment' | translate}}</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody> 
+                                                        <tr *ngFor="let feed of feedback">
+                                                            <td>{{feed.added_date| date: format : shortDate}}</td>
+                                                            <td>{{feed.name}}</td>
+                                                            <td>{{feed.comment}}</td>
+                                                        </tr>                
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                    
+                                </table>
+                                    <ng-container *ngIf="globalObj.feedbackDeatail.negative.length == 0">
+                                        <p class="text-center text-info" style="margin-top: 15px;">  {{'no_record_found' | translate}}</p>
+                                    </ng-container> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

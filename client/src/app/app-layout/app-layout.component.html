@@ -1,0 +1,314 @@
+<div class="page-wraper">
+  <div id="header">
+      <div class="pull-left">
+          <div class="logo">
+             <!-- <a routerLink="/dashboard/main"><img height="60" src="{{global.project_name}}/{{global.school_logo}}" alt="logo"></a>  -->
+            <a  routerLink="/dashboard/main"><img height="60" src="assets/images/loginLogo.png" alt="logo"></a>
+          </div>
+          <div class="schoolname"><a routerLink="/dashboard/main">{{global.school_name}}</a></div>
+          
+          <ng-container *ngIf="(ssoArr.length > 0 && global.ldap_status == 1)">
+              <img *ngFor="let sso of ssoArr" src="{{sso.sso_url}}/user/setcookies/{{global.username}}/{{global.ldap_token}}"  style="display:none;">
+          </ng-container>
+          
+  <!--        <img src="http://beta3.emilly.com/user/setcookies/{{global.username}}" style="display:none;">
+          <img src="http://developer.extramarks.com/user/setcookies/{{global.username}}" style="display:none;">-->
+          
+      </div>
+  
+      <div class="pull-right hdRightMenu {{global.setClass}}">
+              <!-- <span class="pull-left spacer"  *ngIf="(global.school_name && multingual_enable == 1)"  [ngClass]="myClass" >
+  
+                      <select [(ngModel)]="transLang" (click)="languagechange()" class="form-control" >  
+                          <option  [value]="language.identifier" [selected]="(languagechangeval == language.identifier)" *ngFor="let language of languageArr">{{language.name|translate }}</option>
+                      </select>
+              </span> -->
+      
+     <span  *ngIf="multischoolflag" class="pull-left" class="spacer">     
+     <select class="multischool form-control" (change)="multischoolChange($event)">
+         <option *ngFor="let multischool of multischoolArr" [selected]="selectschool==multischool.id" [value]="multischool.id" >{{multischool.school_name}}({{multischool.school_code}})</option>
+      </select>
+     </span>
+  
+        
+    <!-- <ng-container *ngIf="global.userType != 'teacher' && global.userType != 'Teacher'"> --> <!--to be commented on production-->
+  
+     <!-- <div *ngIf="global.userType == 'teacher' || global.userType == 'Teacher' || global.userType == 'Management'" class="erpViewbtn spacer">
+         <ng-container *ngIf="global.product_type == 'emscc'"> 
+        <a href="javascript:void(0)" (click)="switchToERP('emscc')" class="btn btn-default btn-info"> {{'switch_emscc' | translate}}</a>
+      </ng-container>
+      
+      <ng-container *ngIf="global.product_type != 'emscc'">
+        <a href="javascript:void(0)" (click)="switchToERP('erp')" class="btn btn-default btn-info"> {{'switch_erp' | translate}}</a>
+      </ng-container>
+      </div> -->
+  
+    
+      <!-- <div class="childNotification has-feedback ng-scope open" *ngIf="global.userType == 'Parent'">
+     <a href="javascript:void(0)" href="#" class="dropdown-icon ng-scope" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         <figure *ngIf="!global.childImagePath" style="background-image:url(assets/images/profile_img.jpg)"></figure>
+         <figure *ngIf="global.childImagePath"><img src="{{global.domainUrlwithSlash}}{{global.childImagePath}}"></figure>
+          <i class="fa fa-fw fa-caret-down"></i></a>
+  
+         <div class="dropdown-menu">
+          <ul>
+              <li *ngFor="let child of childArr" class="ng-scope"> <a (click)="siblingChange(child.user_id)" href="javascript:void(0)" class="ng-binding">
+  
+                <div *ngIf="child.profile_image" class="dp has-feedback"><img src="{{global.domainUrlwithSlash}}{{child.profile_image}}"></div>  
+                <div *ngIf="!child.profile_image" class="dp" style="background-image:url(assets/images/profile_img.jpg)"></div>  
+               {{child.name}}  </a>
+  
+              </li>
+  
+          </ul>
+      </div>
+  </div> -->
+    
+      <ng-container *ngIf="global.userType != 'Management' && global.userType != 'management'">
+          <div class="userNotification has-feedback"  ngbDropdown>
+              <a href="javascript:void(0)" id="notificationBell" (click)="updateallnotification()" class="dropdown-icon" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+                  <i  class="fa fa-fw fa-bell"></i> <span *ngIf="notificationcount>0" class="badge">{{notificationcount}}</span></a>
+  
+              <div *ngIf="notificationarray.length>0" class="dropdown-menu ngbDropdownMenu" ngbDropdownMenu aria-labelledby="notificationBell">
+                  <!--<div><h4 align="center">No Notifications</h4></div>-->
+                  <div *ngFor="let notification of notificationarray">
+                      <div *ngIf="notification.type==1" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''" >
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/communication.png)">&nbsp;</span></div>
+                          <a routerLink="/communication/main">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      <div *ngIf="notification.type==2" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/message-and-circular.png)">&nbsp;</span></div>
+                          <a routerLink="/communication/main" [queryParams]="{place: 'Notice'}">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      <div *ngIf="notification.type==3" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/message-and-circular.png)">&nbsp;</span></div>
+                          <a routerLink="/communication/main" [queryParams]="{place: 'Circular'}">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      <div *ngIf="notification.type==4" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/homework.png)">&nbsp;</span></div>
+                          <a routerLink="/homework/main">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      <div *ngIf="notification.type==5" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/fee-collection.png)">&nbsp;</span></div>
+                          <a href="javascript:void(0)">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      <div *ngIf="notification.type==6" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/attendance.png)">&nbsp;</span></div>
+                          <a routerLink="/attendance/subjectwiseattendance">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+  
+                       <div *ngIf="notification.type==7" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                          <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/attendance.png)">&nbsp;</span></div>
+                          <a (click)="moveto('school_lms/public/assessnew')"  href="javascript:void(0)">
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                              <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                          </a>
+                      </div>
+                      
+                      <div *ngIf="notification.type==8" class="mailBox" [ngClass]="notification.is_read==1?'readnotification':''">
+                        <div class="sunjectIcon"><span style="background-image:url(assets/images/icons/attendance.png)">&nbsp;</span></div>
+                              {{notification.title}} <br>
+                               {{notification.notification_text}}<br>
+                               <small>{{notification.created_date | date: 'dd-MM-yyyy'}}</small>
+                      </div>
+  
+                  </div>
+              </div>
+          </div>
+      </ng-container> 
+  
+      </div>
+  
+  
+        <!-- <span *ngIf="global.userType == 'Teacher'">
+          <a href="{{global.domain}}schoolerp/schoolerpangular/#/teacher/teacherdashboard/in">Switch to old portal</a>
+        </span>
+        <span *ngIf="global.userType == 'Student' || global.userType == 'Parent'">
+          <a href="{{global.domain}}schoolerp/schoolerpangular/#/portal/dashboard/out">Switch to old portal</a></span> -->
+  
+  </div>
+  
+  <!-- Header End -->
+  
+  <div class="sideBarNav">
+      <div class="lefttopNav">
+  
+          <div class="username">
+              <div class="pull-left btn-group" ngbDropdown>
+                 <a href="javascript:void(0)" class="dropdown-icon" id="dropdownBasic1" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+                   <span class="navbar-toggler-icon"></span>
+                   <span class="navbar-toggler-icon"></span>
+                   <span class="navbar-toggler-icon"></span>
+                  </a>
+                    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <ul>
+                          <li  *ngIf="global.userType != 'School'"> <a routerLink="/profile/main"><i class="fa fa-fw fa-user"></i>  {{'profile' | translate}}</a></li>
+                          <li> <a href="javascript:void(0)" (click)="popUpOpen()"><i class="fa fa-fw fa-key" data-backdrop="static"></i>  {{'change_password' | translate}}</a></li>
+                          <li> <a routerLink="/contact"><i class="fa fa-fw fa-phone"></i>  {{'Contact Us' | translate}}</a></li>
+                          <li><a style="cursor: pointer;" (click)="logout()"><i class="fa fa-fw fa-power-off"></i> {{'log_out' | translate}}</a></li>
+                          
+                      </ul>
+                    </div>
+              </div>
+  
+  
+              <div class="pull-right session">
+  
+                            <select>
+                              <option *ngFor="let sess of global.sessions" value="{{sess.session_id}}">{{sess.session_name}}</option>
+                            </select>
+              </div>
+          </div>
+      </div>
+      <div class="text-center userLoginInfo">
+          <!-- <a ng-if="staff_photo != '' && staff_photo != NULL" href="#/teacher/profile">  <div class="dp d-inline-block" style="background-image:url(../{{staff_photo}})"></div></a> -->
+          <a *ngIf="global.profile_image_path" routerLink="/profile/main"> <div class="dp d-inline-block has-feedback"><img src="{{global.profile_image}}"></div></a>
+          <a *ngIf="!global.profile_image_path" routerLink="/profile/main"> <div class="dp d-inline-block" style="background-image:url(assets/images/profile_img.jpg)" ></div></a>
+  
+          <h4>{{global.name}}</h4>
+          <h6>
+            <!-- <span *ngIf="global.userType == 'Teacher'">({{'faculty'|translate}})</span>
+            <span *ngIf="global.userType == 'School'">({{'Admin'|translate}})</span> -->
+          <!-- <span *ngIf="global.product_type == 'emscc' && global.userType != 'Teacher' && global.userType == 'School'">({{global.userType |translate}})</span> -->
+          <span>({{global.role_name|translate }})</span></h6>
+           <h6 class="h6" *ngIf="lastlogintme">{{'last_login' | translate}}-({{lastlogintme}})</h6>
+           <!-- <span *ngIf="global.product_type != 'emscc'">{{lastlogintme}}</span></h6> -->
+      </div>
+  
+      <div class="dashboardnav">
+          <ul *ngFor="let menu of menuList; let i = index;" class="accordion" >
+              <li class="{{menu.color}}  " data-toggle="collapse" [attr.data-target]="'#' + i" aria-controls="collapseExample" aria-expanded="false">
+<!--                <i *ngIf="!menu.path" class="plusminus">+</i>-->
+				  <i *ngIf="!menu.path" class="plusminus fa fa-chevron-down"></i>				  
+<!--                <span [ngStyle]="{'background-image': 'url('+menu.icon+')'}">&nbsp;</span>-->
+				  <span><i class="fa fa-bars"></i></span>
+                <a *ngIf="menu.sub_menu.length>0" href="javascript:void(0)" >{{menu.menu_name|translate}}</a>
+                <a *ngIf="menu.sub_menu.length==0  && menu.linkfor != 'out'" routerLink="{{menu.path}}" href="javascript:void(0)" >{{menu.menu_name|translate}}</a>
+                <a *ngIf="menu.sub_menu.length==0 && menu.linkfor == 'out' && menu.linkname!='myhr'" href="{{menu.path}}" target="_blank">{{menu.menu_name|translate}}</a>
+                <a *ngIf="menu.linkname=='myhr' && menu.linkfor == 'out'" href="{{myhrUrl}}" target="_blank">{{menu.menu_name|translate}}</a>
+              </li>
+  
+              <!--<li class="tabFreeCollection" ng-repeat="menu in leftmenu"><span style="background-image:url({{menu.module_image}})">&nbsp;</span><a href="#">{{menu.module_display_name}}</a></li>-->
+  
+              <ul class="panel collapse {{menu.navUrl}}" id={{i}}>
+                  <ng-container *ngFor="let submenu of menu.sub_menu">
+                  <li *ngIf="((submenu.linkfor == 'in' || submenu.linkfor == 'out') && submenu.linkname == 'classrecord' && global.isClassTeacher && global.isClassTeacher!='No')" class="{{menu.color}}">
+<!--                      <span [ngStyle]="{'background-image': 'url('+submenu.icon+')'}">&nbsp;</span>-->
+                  <a *ngIf="submenu.linkfor == 'out'" href="javascript:void(0)" (click)="sendTo(submenu.linkname,submenu.path)">{{submenu.menu_name|translate}}</a>
+                  <a *ngIf="(submenu.linkfor == 'in' && submenu.linkname == 'classrecord' && global.isClassTeacher && global.isClassTeacher!='No')" href="javascript:void(0)" routerLink="{{submenu.path}}">{{submenu.menu_name|translate}}</a>
+                  
+                  </li>
+                  <li *ngIf="((submenu.linkfor == 'in' || submenu.linkfor == 'out') && submenu.linkname != 'classrecord')" class="{{menu.color}}">
+<!--            <span [ngStyle]="{'background-image': 'url('+submenu.icon+')'}">&nbsp;</span>-->
+        <a *ngIf="submenu.linkfor == 'out'" href="javascript:void(0)" (click)="sendTo(submenu.linkname,submenu.path)">{{submenu.menu_name|translate}}</a>
+        <a *ngIf="(submenu.linkfor == 'in' && submenu.linkname != 'classrecord')" href="javascript:void(0)" routerLink="{{submenu.path}}">{{submenu.menu_name|translate}}</a>
+      
+        </li>
+                  </ng-container>
+              </ul>
+  
+  
+          </ul>
+      </div>
+  
+  </div>
+  
+  <div class="pageWorkArea ng-scope">
+          <div class="boxwraper">
+               <router-outlet (activate)="changeOfRoutes()"></router-outlet>
+              <!-- <router-outlet></router-outlet> -->
+          </div>
+      </div>
+        </div>
+  
+  
+  
+  
+  
+  <div class="modal fade" id="studyplanalert" style='pointer-events: none;'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+       <!-- <div class="modal-header">
+            <button type="button"  class="close" >&times;</button>
+         </div>-->
+        <div class="modal-body">
+          <p [innerHTML]="study_plan_alert_message" style="font-size: 14px;"></p>
+        </div>
+      <div class="modal-footer"><button data-dismiss="modal" aria-hidden="true" class="btn btn-primary btn-sm">SKIP</button></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Change Password Here -->
+  <div class="modal fade" id="changepass">
+      <div class="modal-dialog" style="width:350px;">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4>  {{'change_password' | translate}}</h4>
+              </div>
+              <div class="modal-body">
+                  <div *ngIf="alert_message" [ngClass]="global.success == 1 ? 'alert alert-success' : 'alert alert-danger'">{{alert_message}}</div>
+                  <form [formGroup]='form' (ngSubmit)="changePassword(form.value, $event)">
+                      <p><input class="form-control" type="password" value="" id="oldPass" formControlName="oldPass" placeholder="{{'current_password' | translate}}"></p>
+                       <p><input class="form-control" type="password" value="" id="newPass" formControlName="newPass" placeholder="{{'new_password' | translate}}"></p>
+                          <p><input class="form-control" type="password" value="" id="newcnfPass" formControlName="newcnfPass" placeholder="{{'confirm_password' | translate}}"></p>
+                       <p class="text-center"><button type="button" class="btn btn-primary" (click)="cancel()"> {{'cancel' | translate}}</button>
+                      <button type="submit" id="addmodal" value="SUBMIT" class="btn btn-success" > {{'submit' | translate}}</button></p>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Multi school popup -->
+  <div class="modal fade" id="multischoolpopup">
+      <div class="modal-dialog" style="width:350px;">
+          <div class="modal-content">
+              <div class="hdmodel">
+                   <button type="button" class="close pull-right"   data-dismiss="modal" aria-hidden="true">&times;</button>
+                                  <h5 *ngIf="global.product_type == 'emscc'"> {{'center_selection' | translate}}</h5>
+                  <h5 *ngIf="global.product_type != 'emscc'"> {{'school_selection' | translate}}</h5>
+              </div>
+              <div class="modal-body">
+               <select  *ngIf="multischoolflag" class="form-control slctbx" (change)="multischoolChangeVal($event)">
+         <option *ngFor="let multischool of multischoolArr" [selected]="selectschool==multischool.id" [value]="multischool.id" >{{multischool.school_name}}({{multischool.school_code}})</option>
+      </select>
+             <div class="modal-footer"><button data-dismiss="modal" aria-hidden="true" class="btn btn-primary btn-sm" (click)="multischoolSubmit()" >{{'submit' | translate}}</button></div>          
+                 
+              </div>
+          </div>
+      </div>
+  </div>
+          
+  
+  
+  
+  
+  
+  
+  

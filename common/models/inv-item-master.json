@@ -1,0 +1,66 @@
+{
+  "name": "inv_item_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "item_name": {
+      "type": "string",
+      "required": true
+    },
+    "inv_category_master_id": {
+      "type": "number",
+      "required": true
+    },
+    "price": {
+      "type": "number"
+    },
+    "unit_id": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "item_image": {
+      "type": "string",
+      "default": "status"
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "created_by": {
+      "type": "number",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "itemMasterUser": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "created_by"
+    },
+    "itemMasterCategory": {
+      "type": "belongsTo",
+      "model": "inv_category_master",
+      "foreignKey": "inv_category_master_id"
+    },
+    "itemMasterUnit": {
+      "type": "belongsTo",
+      "model": "inv_item_unit_master",
+      "foreignKey": "unit_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

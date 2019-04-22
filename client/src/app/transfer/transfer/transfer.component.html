@@ -1,0 +1,204 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none" style="margin-top:15px"  *ngIf="userType=='parent'||userType=='student'">
+  <div class="communication">
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''">
+      <span class="alert alert-success dblock mb25">{{successmsg}}</span>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+      <span class="alert alert-danger dblock mb25">{{errormsg}}</span>
+    </div>
+
+    <div class="headBox">
+      <h5 class="h5 pull-left"> Transfer</h5>
+    </div>
+    <div class="col-sm-12 col-md-12 pull-left">
+      <label>
+        <b>Transfer type</b>
+      </label>
+      <label class="checkcontainer" style=" margin:20px 0 0 0">
+        <input type="radio" name="batch" value="center" (click)="transfertype('center')" checked> Center Transfer
+        <span class="radiobtn"></span>
+      </label>
+      <label class="checkcontainer" style=" margin:20px 0 0 0px">
+        <input type="radio" name="batch" value="batch" (click)="transfertype('batch')"> Batch Transfer
+        <span class="radiobtn"></span>
+      </label>
+    </div>
+    <div *ngIf="transferFlag=='center'">
+      <label class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+        <b>Transfer to</b>
+      </label>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <select class="form-control" id="state" #states (change)="selectcity(states.value)">
+          <option value="" selected="selected"> Select State</option>
+          <option *ngFor="let states of jsonobj |keyvalue" value="{{states.key}}">{{states.key}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <select class="form-control" id="city" #city (change)="selectcenter(city.value)">
+          <option value="" selected="selected"> Select City</option>
+          <option *ngFor="let city of arrcity" value="{{city}}">{{city}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <select class="form-control" id="center" #school (change)="selectnewbatch(school.value)">
+          <option value=""> Select center</option>
+          <option *ngFor="let school of schooldetail" value="{{school.id}}">{{school.school_name}}</option>
+        </select>
+      </div>
+
+      <div *ngIf="center_batch_selection==true">
+        <form class="form-signin" ngNativeValidate [formGroup]="center_form" (ngSubmit)="onSubmitcenter(center_form.value)">
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="course" id="board" #board (change)="onboardchange(board.value)">
+              <option *ngFor="let list of boardlist" value="{{list.id}}">{{list.board_name}}</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="course_type" #class (change)="onclasschange(class.value)">
+              <option value="">Select course type</option>
+
+              <option *ngFor="let list of coursetype_list_center" value="{{list.id}}">{{list.class_name}}</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <select required class="form-control cleanup validate-empty width30" formControlName="batch">
+              <option value="" selected="selected"> --Select--</option>
+              <option *ngFor="let list of sectionlist_center" value="{{list.id}}">{{list.section_name}}</option>
+
+            </select>
+          </div>
+          <div>
+            <textarea class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem" placeholder="--reason--" formControlName="reason"></textarea>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+            <label> Proposed Start Date
+              <input type="date" placeholder="dd-mm-yyyy" id=start_{{i}} #startdate class="form-control cleanup validate-empty width30"
+                formControlName="start_date" />
+            </label>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+
+            <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+            <hr/>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+    <div *ngIf="transferFlag=='batch'">
+      <form class="form-signin" ngNativeValidate [formGroup]="batch_form" (ngSubmit)="onSubmitbatch(batch_form.value)">
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required class="form-control cleanup validate-empty width30" formControlName="course" id="board" #board (change)="onboardchange(board.value)">
+            <option *ngFor="let list of boardlistbatch" value="{{list.id}}">{{list.board_name}}</option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required class="form-control cleanup validate-empty width30" formControlName="course_type" #class (change)="onclasschangebatch(class.value)">
+            <option value="">Select course type</option>
+
+            <option *ngFor="let list of coursetype_list_batch" value="{{list.id}}">{{list.class_name}}</option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required class="form-control cleanup validate-empty width30" formControlName="batch">
+            <option value="" selected="selected"> --Select--</option>
+            <option *ngFor="let list of sectionlist_batch" value="{{list.id}}">{{list.section_name}}</option>
+
+          </select>
+        </div>
+        <div>
+          <textarea class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem" placeholder="--reason--" formControlName="reason"></textarea>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+
+          <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+          <hr/>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+  <div class="col-sm-12 col-md-12 pull-left">
+    <div  class="headBox"><h5 class="h5 pull-left">  Transfer</h5></div>
+    <div class="table-responsive"> 
+    <table class="table table-striped table-bordered" *ngIf="transferFlag=='batch'">
+        <thead>
+        <tr>
+        <td > Transfer Type</td>
+        <td> Assigned Batch</td>
+        <td> Requested Batch</td>
+     
+        <td> Transfer Reuest Date</td>
+        <td>  Transfer Accepted/Rejected Date</td>
+        <td> Transfer Status</td>
+        
+        
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transfer of batch_transfer_details" >
+            
+              <td > {{transfer.transfer_type}}</td>
+              <td > {{transfer.assigned_batch}}</td>
+              <td > {{transfer.requested_batch}}</td>
+              <td > {{transfer.request_date  |date:'dd-MM-yyyy'}}</td>
+              <td > {{transfer.approve_reject_date  |date:'dd-MM-yyyy'}}</td>
+              <td > {{transfer.status}}</td>
+
+
+       
+        </tr>
+        <tr *ngIf="batch_transfer_details.length==0">
+          <td  colspan="6">No Record Found</td>
+        </tr>
+        
+        <tbody>
+        </table> 
+        <table class="table table-striped table-bordered" *ngIf="transferFlag=='center'">
+          <thead>
+          <tr>
+          <td > Transfer Type</td>
+          <td> Assigned Center</td>
+          <td> Assigned Batch</td>
+          <td> Requested Center</td>
+          <td> Requested Batch</td>
+          <td> Transfer Reuest Date</td>
+          <td>  Transfer Accepted/Rejected Date</td>
+          <td> Transfer Status</td>
+          
+          
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transfer of center_transfer_details" >
+              <td > {{transfer.transfer_type}}</td>
+              <td > {{transfer.assigned_center}}</td>
+              <td > {{transfer.assigned_batch}}</td>
+              <td > {{transfer.requested_center}}</td>
+           
+              <td > {{transfer.requested_batch}}</td>
+              <td > {{transfer.request_date  |date:'dd-MM-yyyy'}}</td>
+              <td > {{transfer.approve_reject_date  |date:'dd-MM-yyyy'}}</td>
+              <td > {{transfer.status}}</td>
+
+  
+  
+         
+          </tr>
+          <tr *ngIf="center_transfer_details.length==0">
+            <td  colspan="8">No Record Found</td>
+          </tr>
+          
+          <tbody>
+          </table> 
+
+</div>
+</div>
+</div>

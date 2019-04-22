@@ -1,0 +1,62 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none" style="margin-top:15px"  >
+  <div class="communication">
+   
+
+    <!-- <div class="headBox">
+      <h5 class="h5 pull-left"> </h5>
+    </div> -->
+
+    <form class="form-signin" ngNativeValidate [formGroup]="search_from" (ngSubmit)="onSubmit(search_from.value)">
+
+      
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+        <select  class="form-control cleanup validate-empty" formControlName="course" id="board" #board (change)="classlist(board.value)">
+          <option value="">Select course </option>
+          <option *ngFor="let list of boardlist" value="{{list.id}}">{{list.board_name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+        <select  class="form-control cleanup validate-empty" formControlName="course_type">
+          <option value="">Select course type</option>
+
+          <option *ngFor="let list of coursetype_list" value="{{list.id}}">{{list.class_name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+        <select  class="form-control cleanup validate-empty" formControlName="center">
+          <option value="" selected="selected"> --Select center--</option>
+          <option *ngFor="let list of center_list" value="{{list.id}}">{{list.school_code}}({{list.city}})</option>
+
+        </select>
+      </div>
+     
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+        <input type="text"  class="form-control cleanup validate-empty width30" formControlName='adm_no' placeholder="Admission No."
+        autofocus="" />
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+      
+        <input type="text" class="form-control calenerIcon" formControlName="from_date" (click)="displaycal();" value="{{dateA |date:'dd-MM-yyyy'}}" placeholder="From Date">
+        <ng-container *ngIf="showcalander&&fromDateFlag==true">
+          <ngb-datepicker #dp (select)="onDateChange($event, 'from')" [displayMonths]="0" [dayTemplate]="t">
+          </ngb-datepicker>
+      </ng-container>    
+      
+      </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem ">
+      
+        <input type="text" class="form-control calenerIcon" (click)="displaycal2();" formControlName="to_date" value="{{today |date:'dd-MM-yyyy'}}" placeholder="To Date">
+        <ng-container *ngIf="showcalander&&toDateFlag==true">
+          <ngb-datepicker #dp (select)="onDateChange($event, 'to')" [displayMonths]="0" [dayTemplate]="t">
+          </ngb-datepicker>
+      </ng-container>  
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem ">
+        <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">       
+      </div>
+
+    </form>
+    </div>
+    </div>

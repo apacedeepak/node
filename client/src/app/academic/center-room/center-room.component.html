@@ -1,0 +1,138 @@
+<div class="col-sm-12 col-md-12 padding-left-none padding-right-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div id='mainContent' class="">
+      <div class="headBox">
+        <h5 class="pull-left">Add Room</h5>
+      </div>
+
+      <form [formGroup]="croomForm" (ngSubmit)="onSubmitDetail(croomForm.value)">
+        <input type="hidden" class="form-control" value="0" formControlName='id' />
+		  <div class="clearfix"></div>
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left ">
+        <div class="alert alert-success text-center mt15" *ngIf="globalObj.message">{{ globalObj.message}}</div>
+        <div class="alert alert-danger text-center mt15" *ngIf="globalObj.errorMessage">{{ globalObj.errorMessage}}</div>
+		  </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+          <label>Room Name
+            <b style="color:red">*</b>
+          </label>
+          <input class="form-control" type="text" formControlName="room_name" placeholder="Center Room Name" maxlength="50" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+          <label>Sitting Capacity
+            <b style="color:red">*</b>
+          </label>
+          <input class="form-control" type="number" formControlName="sitting_capacity" placeholder="Enter Sitting Capacity" max="1000"
+          />
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left mt15">
+          <label>Equipment
+            <b style="color:red">*</b>
+          </label>
+          <div formArrayName="equipment">
+            <ng-container *ngFor="let eqData of globalObj.equipmentList | keyvalue; index as i">
+              <label class="checkBox mr10" for="equipment{{eqData.value.id}}">
+                <input type="checkbox" [formControlName]="i" value="{{ eqData.value.id }}" id="equipment{{eqData.value.id}}"
+                />{{ eqData.value.equipment_name }}
+                <span class="checkmark"></span>
+              </label>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 pull-left mt20 mb15">
+          <ng-container *ngIf="id>0; else elseSub">
+            <input type="submit" value="Update" class="btn btn-primary mr10" [disabled]="(croomForm.valid)? false : true">
+          </ng-container>
+          <ng-template #elseSub>
+            <input type="submit" value="Save" class="btn btn-primary mr10" [disabled]="(croomForm.valid)? false : true"> &nbsp;
+          </ng-template>
+
+          <input type="button" value="Clear" class="btn btn-warning mr10 text-white" (click)="clearForm()" *ngIf="id > 0">
+        </div>
+
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-12 pull-left mt25">
+      <table class="table table-striped table-bordered customTable">
+        <thead class="thheadbg">
+          <tr>
+            <th align="center" class="text-center">S.No</th>
+            <th align="center" class="text-center">Room Name</th>
+            <th align="center" class="text-center">Sitting Capacity</th>
+            <th align="center" class="text-center">Added Date</th>
+            <th align="center" class="text-center">Equipments</th>
+            <th align="center" class="text-center">Status</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <ng-container *ngIf="totalRows >0 ;else nodata">
+          <tr *ngFor="let data of roomDetails | keyvalue | paginate: { itemsPerPage: 10, currentPage: page}; index as i;">
+            <td align="center" class="vam">{{ i+1 }}</td>
+            <td align="left" class="vam">{{ data.value.room_name}}</td>
+            <td align="center" class="vam bold">{{ data.value.sitting_capacity}}</td>
+            <td align="center" class="vam">{{ data.value.added_date | date:'yyyy-MM-dd'}}</td>
+            <td align="center" class="vam">
+              <!-- <button class="btn btn-xs btn-outline-primary" (click)="viewEquipments(data.value.id)">View</button> -->
+              <a href="javaScript:void(0);" (click)="viewEquipments(data.value.id)" class="blueBold">View</a>
+            </td>
+            <td align="center" class="vam">
+              <div *ngIf="data.value.status == 'Active'; else elseBlock">
+                <!-- <button (click)="roomStatusUpdate(data.value.id, 2, data.value.room_name)" class="btn btn-xs btn-success">&nbsp;Active&nbsp;</button> -->
+                <a href="javaScript:void(0);" (click)="roomStatusUpdate(data.value.id,2, data.value.room_name)" class="greenBold">Active</a>
+              </div>
+              <ng-template #elseBlock>
+                <!-- <button (click)="roomStatusUpdate(data.value.id,1,data.value.room_name)" class="btn btn-xs btn-danger">Inactive</button> -->
+                <a href="javaScript:void(0);" (click)="roomStatusUpdate(data.value.id,1, data.value.room_name)" class="redBold">Inactive</a>
+              </ng-template>
+            </td>
+
+            <td align="center" class="vam">
+              <a href="javascript:void(0)" (click)="roomMasterEdit(data.value.id)">
+                <i class="material-icons">edit</i>
+              </a>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #nodata>
+          <tr>
+            <td colspan="6" align="center">
+              <div class="text-center"> No record found..</div>
+            </td>
+          </tr>
+        </ng-template>
+      </table>
+      
+      <div class="mt15"  *ngIf="totalRows > 10">
+       
+              <div class="text-center vam">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
+           
+        </div>
+    </div>
+
+<div class="modal fade" id="showpopup">
+  <div class="modal-dialog" style='max-width: 900px;'>
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: #004b80;">
+          <h5 style="color: #fff !important;">Equipment Details </h5>
+          <button type="button"style="color: #fff !important;"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+
+        <table class="table tablestyle tabgap">
+          <tr><th class="textCenter">S. No</th> <th class="textCenter">Equipment Name</th></tr>
+          <tr *ngFor="let viewData of viewRoomEequipmentList | keyvalue; index as j;">
+            <td align="center">{{ j+1 }}</td>
+            <td align="left">{{ viewData.value.equipmentData.equipment_name }}</td>
+           </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+</div>

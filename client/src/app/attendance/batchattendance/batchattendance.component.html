@@ -1,0 +1,24 @@
+<div class="pageWorkArea" style="margin-top:18px;">
+<div class="boxwraper" style="padding-left: 0;">
+    <div class="col-sm-12 col-md-12 pull-left">
+        <div class="communication">
+      <div class="headBox">
+     <h5 class="h5 pull-left">Batch Attendance</h5>           
+     </div>
+<div class="clearfix"></div>
+<div class="tab-content">
+<div class="tab-pane active" id="monthlyattendance">
+<div class="col-sm-6 col-md-6 pull-left has-feedback">
+ <div  style="margin-top:15px" *ngIf="calendarOptions && userType == 'student'">   
+ <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+ </div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</div>

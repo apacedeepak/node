@@ -1,0 +1,70 @@
+{
+  "name": "class_subject",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "sectionId": {
+      "type": "number",
+      "required": true
+    },
+    "classId": {
+      "type": "number",
+      "index": true
+    },
+    "subjectId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "subject_type": {
+      "type": "string",
+      "required": true,
+      "default": "Main"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "subject_code": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "subjects": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    },
+    "class": {
+      "type": "belongsTo",
+      "model": "class",
+      "foreignKey": "classId"
+    },
+    "sections": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "subject_has_users": {
+      "type": "hasMany",
+      "model": "users",
+      "foreignKey": "class_subjectId",
+      "through": "user_subject"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

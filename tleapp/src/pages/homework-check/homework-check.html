@@ -1,0 +1,131 @@
+<!--
+  Generated template for the HomeworkCheckPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Homework Check</ion-title> 
+    <span class="addRemark"><button (click)="addRemark()" *ngIf="remarkhide" id="reply"><img src="assets/imgs/create-remark.png"></button></span>
+  </ion-navbar> 
+</ion-header>
+
+
+<ion-content>       
+    <ion-item>
+       <ion-label>{{subject}}: {{title}}</ion-label>
+    </ion-item>
+    <ion-grid class="mailhead">
+       <ion-row>
+          <ion-col col-2 class="profileimg">
+             <img [src]="teacherimage">
+          </ion-col>
+          <ion-col col-6>
+             <p>Me <span class="lightGray"></span></p>
+          </ion-col>
+          <ion-col col-4 class="text-right subdate">
+             <p><small>{{creationdate| date:'d MMM'}}</small></p>
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-2 class="profileimg">
+             <img [src]="studentimage">
+          </ion-col>
+          <ion-col col-6>
+             <p>To : {{studentName}}<span class="lightGray"></span></p>
+          </ion-col>
+          <ion-col col-4 class="text-right subdate"><small>Submission <b>{{targetdate| date:'d MMM'}}</b></small>          
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-12>
+           
+             <div *ngFor="let item of attachment"> 
+              <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+              <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+              </span> 
+          </div>
+          </ion-col>
+       </ion-row>
+       <ion-row>
+          <ion-col col-12 class="htmlcontent">
+             <title></title>
+             <div [innerHTML]="content">
+             </div>
+          </ion-col>
+       </ion-row>
+    </ion-grid>
+    <ng-container *ngIf="subexist">
+       <ion-grid class="mailhead">
+          <ion-row>
+             <ion-col col-2 class="profileimg">
+                <img [src]="studentimage">
+             </ion-col>
+             <ion-col col-6>
+                <p>{{studentName}} <span class="lightGray"></span></p>
+             </ion-col>
+             <ion-col col-4 class="text-right subdate">
+                <p><small>Submitted: <b>{{submitdate| date:'d MMM'}}</b></small></p>
+             </ion-col>
+          </ion-row>
+          <ion-row>
+             <ion-col col-2 class="profileimg">
+                <img [src]="teacherimage">
+             </ion-col>
+             <ion-col col-6>
+                <p>To : Me <span class="lightGray"></span></p>
+             </ion-col>
+             <ion-col col-4 class="text-right subdate">
+                <p><small>Submitted: <b>{{submitdate| date:'d MMM'}}</b></small></p>
+             </ion-col>
+          </ion-row>
+          <ion-row>
+             <ion-col col-12>
+               
+                <div *ngFor="let item of submitattachment"> 
+                  <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+                  <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+                  </span> 
+              </div>
+             </ion-col>
+          </ion-row>
+          <ion-row>
+             <ion-col col-12 class="htmlcontent">
+                <title></title>
+                <div [innerHTML]="submitcontent"> </div>
+             </ion-col>
+          </ion-row>
+       </ion-grid>
+    </ng-container>
+    <ng-container *ngIf="remarksexist">
+       <ion-grid class="mailhead">
+          <ion-row>
+             <ion-col col-2 class="profileimg">
+                <img [src]="teacherimage">
+             </ion-col>
+             <ion-col col-6>
+                <p>Me <span class="lightGray"></span></p>
+             </ion-col>
+             <ion-col col-4 class="text-right subdate">&nbsp;</ion-col>
+          </ion-row>
+          <ion-row>
+             <ion-col col-2 class="profileimg">
+                <img [src]="studentimage">
+             </ion-col>
+             <ion-col col-6>
+                <p>To :{{studentName}} <span class="lightGray"></span></p>
+             </ion-col>
+             <ion-col col-4 class="text-right subdate">
+                <p><small>Submitted: <b>{{remarkdate| date:'d MMM'}}</b></small></p>
+             </ion-col>
+          </ion-row>
+          <ion-row>
+             <ion-col col-12 class="htmlcontent">
+                <title></title>
+                <div [innerHTML]="remarkcontent"></div>
+             </ion-col>
+          </ion-row>
+       </ion-grid>
+    </ng-container>
+ </ion-content>
+ 

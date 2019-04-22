@@ -1,0 +1,4 @@
+.selectradio{width:100%;float:left; margin-top:30px;}
+.selectradio div.radio {display: inline-block;float: none; margin-left: 10px; margin-top: 0;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;}

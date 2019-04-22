@@ -1,0 +1,336 @@
+<!-- <div class="loader hide" id="loader"><div class="spinner"></div></div> -->
+
+ <div id="replyDiv" class="boxModel pull-left maxHightOuto margin-top-none" style="margin-top:15px;">
+        <div class="fullDescription">
+            <form [formGroup]='form'>
+          <div class="headBox">
+          <h5 class="h5 pull-left" style="margin-top:0;"> {{'create_message' | translate}}</h5>
+                <div  class="pull-right createMsg" style="margin-right:15px;">
+                    <a   href="javascript:void(0)" title="{{'draft' | translate}}" (click)="onSubmit(form.value,'draft')" > <img src="assets/images/save-draft.png" alt=""></a>
+                    <a id="send" href="javascript:void(0)" title="{{'send' | translate}}" (click)="onSubmit(form.value, 'message')">
+                        <img src="assets/images/send-mail.png" alt="">
+
+                        <!--<input type="submit" name="submit" value='Save' class="btn-sm" > <img src="images/icons/send-mail.png" alt=""> -->
+                      </a>
+                    <!-- <a ng-if="fromgroup==false" title="Back" class="back" href="#/teacher/communication"> <i class="fa fa-fw fa-arrow-left"></i></a> -->
+                    <a *ngIf="globalObj.flag != 'classrecord'" [routerLink]="['/communication/main']" [queryParams]="{place: globalObj.flag}"> <i class="fa fa-arrow-left"></i></a>
+                    <a *ngIf="globalObj.flag == 'classrecord'" [routerLink]="['/classrecord/main']" [queryParams]="{place: globalObj.flag}"> <i class="fa fa-arrow-left"></i></a>
+                </div>
+                </div>
+
+                  <div class="col-sm-12 col-md-12 pull-left" style="padding-top:15px;">
+                    <div class="inputBar crmsto">
+                    <label class="fieldName"> {{'to' | translate}}&nbsp;&nbsp;              </label>
+                    <ng-container *ngIf="globalObj.flag == 'reply'">
+                        <span>&nbsp;&nbsp;{{globalObj.displayname}}</span>
+                    </ng-container>
+                    <ng-container  *ngIf="globalObj.flag != 'reply'">
+                       <div class="seleced_item" style="min-height: 21px;" id="userDiv" data-keyboard="false" data-toggle="modal" data-target="#myModal">
+                         <div class="alert" *ngFor="let itemselected of studentname" id="{{itemselected.user_id}}">
+                          <a  href="javascript:void(0)" (click)="removefun(itemselected.user_id)" class="close"  aria-label="close">×</a>
+                          <input  type="hidden" id="message-to-hidden"/>{{itemselected.name}}
+                      </div>
+                    </div>
+                    </ng-container>
+                  </div>
+
+					          <div class="inputBar crmssub">
+                      <label class="fieldName"> {{'subject' | translate}}</label>
+                      <input formControlName='subject' type="text" maxlength="100" class="col-sm-8 col-md-8 valCl" name="subject" id="subject" value="">
+                    </div>  </div>
+                    <div class="col-sm-12 col-md-12 pull-left">
+                    <!-- <div class="alert alert-dismissible browsersBlock" *ngIf="isImage">
+                      <a href="#" class="close" data-dismiss="alert" (click)="removeAllFile(isImage)" aria-label="close">&times;</a>
+                      <div class="alert alert-dismissible fileContainer" *ngFor="let files of fileName; index as i;">
+                       <a href="#" class="close" data-dismiss="alert" (click)="removeFile(i,'draft')" aria-label="close">&times;</a>
+                       <div class="attchedContent">
+                          <img src="{{fileNameIcon[i]}}" alt="" >
+                       </div>
+                       <div class="itemTitle">{{files | split:'~':1}}</div>
+                      </div>
+
+                      <div class="alert alert-dismissible fileContainer" *ngFor="let files of filelist; index as i;">
+                       <a href="#" class="close" data-dismiss="alert" (click)="removeFile(i,'new')" aria-label="close">&times;</a>
+                       <div class="attchedContent">
+                         <img src="{{fileimage[i]}}" alt="" >
+                       </div>
+                       <div class="itemTitle">{{files.file.name}}</div>
+                      </div>
+
+                    </div> -->
+                  <div class='browsers '>
+                     <!-- <input id="input-id" type="file" class="file" data-preview-file-type="text" > -->
+                   <!-- <input-file
+                        minimal = true
+                        id="input-id"
+                        class="file"
+                        type="file"
+                        inputId="images"
+                        inputMaxFiles="5"
+                        disableUpload=true
+                        [(ngModel)]="inputFileModel"
+                        (acceptedFile)="onAccept($event)"
+                        (removedFile)="onRemove($event)">
+                  </input-file> -->
+                  <input-file fileAccept="*" (acceptedFile)="onAccept($event)"  formControlName="loadimage" (deletedFile)="onRemove($event)"></input-file>
+                    </div>
+                    </div>
+               <div class="col-sm-12 col-md-12 pull-left"  style="padding-top:15px;">
+  <div class='editors'>
+    <app-ngx-editor   minHeight="250px" placeholder=" {{'enter_text_here' | translate}}.." [spellcheck]="true" formControlName="htmlContent"></app-ngx-editor></div>
+</div>
+
+
+
+
+                    <div class="modal fade" id="myModal">
+                <div class="modal-dialog newDialog">
+                  <div class="modal-content">
+
+                        <div class="modal-header">
+                      <div class="radioBlock">
+                        <ng-container *ngIf="globalObj.user_type == 'Teacher'">
+                           <input type="radio" (click)="activestatus('Parent')"  name="mail_to" value="subjectTeacher"  id="3_subject"><label for="3_subject"> {{'parent' | translate}} </label>
+                          <input type="radio" (click)="activestatus('Student')" name="mail_to" value="subject"  id="4_subject"><label for="4_subject"> {{'student' | translate}}</label>
+                          <input type="radio" (click)="activestatus('Staff')"  name="mail_to"    value="admin" id="1_admin"><label for="1_admin"> {{'staff' | translate}}</label>
+                          <input type="radio" (click)="activestatus('Group')"  name="mail_to"    value="group" id="grouplist"><label for="grouplist"> {{'group' | translate}}</label>
+                          <!-- <input type="radio" (click)="activestatus('Other')"  name="mail_to"    value="other" id="otherlist"><label for="otherlist"> {{'other' | translate}}</label> -->
+                          <input type="radio"  name="mail_to"  (click)="activestatus('Admin')"  value="admin" id="admin"><label for="admin"> {{'other' | translate}}</label>
+                        </ng-container>
+
+                        <ng-container *ngIf="globalObj.user_type == 'School' || globalObj.user_type == 'Non_Teacher' || globalObj.user_type == 'Management'">
+                          <input type="radio" (click)="activestatus('Parent')"  name="mail_to" value="subjectTeacher"  id="3_subject"><label for="3_subject"> {{'parent' | translate}} </label>
+                         <input type="radio" (click)="activestatus('Student')" name="mail_to" value="subject"  id="4_subject"><label for="4_subject"> {{'student' | translate}}</label>
+                         <input type="radio" (click)="activestatus('Staff')"  name="mail_to"    value="admin" id="1_admin"><label for="1_admin"> {{'staff' | translate}}</label>
+                         <input type="radio"  name="mail_to"  (click)="activestatus('Admin')"  value="admin" id="admin"><label for="admin"> {{'other' | translate}}</label>
+                       </ng-container>
+
+                      <ng-container *ngIf="globalObj.user_type == 'Student' || globalObj.user_type == 'Parent'">
+                        <input type="radio"  name="mail_to" (click)="activestatus('ClassTeacher')"    value="admin" id="1_admin"><label for="1_admin"> {{'class_teacher' | translate}}</label>
+                          <input type="radio"  name="mail_to"  (click)="activestatus('Teacher')"  value="group" id="grouplist"><label for="grouplist"> {{'subject_teacher' | translate}}</label>
+                          <input type="radio"  name="mail_to"  (click)="activestatus('Admin')"  value="admin" id="admin"><label for="admin"> {{'other' | translate}}</label>
+                      </ng-container>
+                      </div>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <div >
+
+                          <ng-container *ngIf="globalObj.popupFlag == 'Admin'">
+                        <div formArrayName="admincheckBox">
+                        <ul class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let admdata of admindata; index as i;">
+
+                              <input type="checkbox" id="admincheck{{i}}" formControlName="{{i}}" (change)="adminchange(admdata.user_id, $event.target.checked,'Admin',i)">
+                                  <label for="admincheck{{i}}"> {{admdata.name}}</label>
+
+                            </li>
+                             <p *ngIf="admindata.length == 0" class="text-center text-info">{{'no_record_found' | translate}}</p>
+
+                        </ul>
+                          </div>
+                      </ng-container>
+                          
+                          <ng-container *ngIf="globalObj.popupFlag == 'Other'">
+                        <div formArrayName="othercheckBox">
+                        <ul class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let other of otherMode; index as i;">
+
+                              <input type="checkbox" id="othercheck{{i}}" formControlName="{{i}}" (change)="adminchange(other.id, $event.target.checked,'Other',i)">
+                                  <label for="othercheck{{i}}"> {{other.other_user_registration.name|translate}}({{other.role_name|translate}})</label>
+
+                            </li>
+                             <p *ngIf="otherMode.length == 0" class="text-center text-info">   {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                          </div>
+                      </ng-container>
+
+
+                    <ng-container *ngIf="globalObj.user_type == 'Teacher' || globalObj.user_type == 'School'  || globalObj.user_type == 'Non_Teacher' ||globalObj.user_type == 'Management'">
+
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Parent'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+                           <li class="checkBlock col-md-4">
+                              <input id="parents" type="checkbox" formControlName='isStudentCheck' >
+                              <label for='parents'>  {{'send_to_student' | translate}}</label></li>
+                           <li class="col-md-4">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentstudsection" (change)="getparentpopsec('parent')" >
+                            <option *ngFor="let seclist of sectionlist" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li class="col-md-4">
+                            <select multiple="true" style="width:100%;" formControlName="popupparentuserid">
+                                  <option *ngFor="let studlist of studentlists" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Student'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+                           <li class="col-md-6">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentsection" (change)="getparentpopsec('student')" >
+                            <option *ngFor="let seclist of sectionlists" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li class="col-md-6">
+                            <select multiple="true" style="width:100%;" formControlName="popupparentstudent">
+                                  <option *ngFor="let studlist of studentlist" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Staff'">
+                        <div formArrayName="staffcheckBox">
+                          <ul  class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let staff of staffList; index as i;">
+                                <input id="staff{{i}}" type="checkbox" value={{staff.userId}} formControlName="{{i}}" (change)="adminchange(staff.userId, $event.target.checked,'Staff',i)">
+                                  <label for="staff{{i}}"> {{staff.name}}</label>
+                            </li>
+                            <p *ngIf="staffList.length == 0" class="text-center text-info">  {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Group'">
+                          <p style="color: red" *ngIf="group_list.length == 0 && globalObj.grouplistflag && globalObj.product_type != 'emscc'"> {{'no_group_assign_class_section_subject' | translate}}</p>
+                          <p style="color: red" *ngIf="group_list.length == 0 && globalObj.grouplistflag && globalObj.product_type == 'emscc'"> {{'no_group_assign_course_batch_subject' | translate}}</p>
+                           <ul class="ulHide active" id="group" style="margin: 0; padding: 0;">
+                                    <li class="radioBlock liGroup">
+                                        <div *ngFor="let seclist of sectionlist; index as i"> 
+                                            <span>
+                                              <input type="radio" id="section{{i}}" [checked]="seclist.section_id == selectedsection.id"  (click)="getAssignSubject(seclist.section_id, i)"  class="rad" name="classall_to"> <label for="section{{i}}">{{seclist.section_name}}</label>
+                                            </span>
+                                            </div>
+                                    </li>
+                                     <li class="radioBlock liGroup" *ngIf="subFlag" >
+                                        <div *ngFor="let sublist of subjectlist; index as i;" > 
+                                        <input type="radio" id="subject{{i}}" class="rad"  [checked]="sublist.subject_id == selectedsubject.id" name="suball_to" (click)="getAssignGroup(sublist.subject_id)" > <label for="subject{{i}}">{{sublist.subject_name}}</label>
+                                        </div>
+                                       </li>
+                                      <li class="checkBlock liGroup" *ngIf="groupFlag"  formArrayName='groupnamecheckbox'>
+                                         <div *ngFor="let grplist of group_list; index as i;">
+                                         <input  type="checkbox"  formControlName={{i}}  id="grp_{{i}}" [checked]="grplist.id == selectedgroupname.groupid" (click)="getAssignStudToGroup(grplist.id, i, $event)">
+                                        <label for="grp_{{i}}" >{{grplist.group_name}}</label>
+                                         </div>
+                                    </li>
+                                     <li class="checkBlock liGroup" *ngIf="groupUserFlag" formArrayName='groupuserschechbox'>
+                                        <div *ngFor="let stufinallist of user_list; index as i;" class="has-feedback">
+                                          <ng-container *ngIf="stufinallist != ''">
+                                             <input  type="checkbox" formControlName={{i}} id='stu_list{{i}}'  (change)="adminchange(stufinallist.userId, $event.target.checked,'Group',i)" style="position:absolute;" >
+                                        <label for="stu_list{{i}}" >{{stufinallist.userName}}</label>
+                                         </ng-container>
+                                    </div>
+
+
+                                    </li>
+
+                        </ul>
+                      </ng-container>
+                      </ng-container>
+
+
+                      <ng-container *ngIf="globalObj.user_type == 'Student' || globalObj.user_type == 'Parent'">
+                        <ng-container *ngIf="globalObj.popupFlag == 'ClassTeacher'">
+                            <div formArrayName="classteachercheckBox">
+                          <ul class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let teacher of classTeacherList; index as i;">
+                              <input type="checkbox" id="classtecher{{i}}" value={{teacher.user_id}} formControlName="{{i}}" (change)="adminchange(teacher.user_id, $event.target.checked,'Staff',i)">
+                                  <label for='classtecher{{i}}'> {{teacher.name}}</label>
+                            </li>
+                        </ul>
+                          <p *ngIf="classTeacherList.length == 0" class="text-center text-info"> {{'no_record_found' | translate}}</p>
+                        </div>
+                        </ng-container>
+                        <ng-container *ngIf="globalObj.popupFlag == 'Teacher'">
+                            <div formArrayName="teachercheckBox">
+                          <ul class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let teacher of teacherList; index as i;">
+
+                                <input type="checkbox" id="techer{{i}}" value={{teacher.user_id}} formControlName="{{i}}" (change)="adminchange(teacher.user_id, $event.target.checked,'Staff',i)">
+                                  <label for='techer{{i}}'> {{teacher.name}}</label>
+                            </li>
+                                <p *ngIf="teacherList.length == 0" class="text-center text-info">  {{'no_record_found' | translate}}</p>
+                        </ul>
+                        </div>
+                        </ng-container>
+                      </ng-container>
+
+                      <!-- <ng-container *ngIf="globalObj.user_type == 'School'">
+                     
+                        <ng-container *ngIf="globalObj.popupFlag == 'Teacher'">
+                            <div formArrayName="teachercheckBox">
+                          <ul class="ulHide" style="margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li class="checkBlock" *ngFor="let teacher of teacherList; index as i;">
+
+                                <input type="checkbox" id="techer{{i}}" value={{teacher.user_id}} formControlName="{{i}}" (change)="adminchange(teacher.user_id, $event.target.checked,'Staff',i)">
+                                  <label for='techer{{i}}'> {{teacher.name}}</label>
+                            </li>
+                                <p *ngIf="teacherList.length == 0" class="text-center text-info">  {{'no_record_found' | translate}}</p>
+                        </ul>
+                        </div>
+                        </ng-container>
+                        <ng-container *ngIf="globalObj.popupFlag == 'Parent'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+                           <li class="checkBlock col-md-4">
+                              <input id="parents" type="checkbox" formControlName='isStudentCheck' >
+                              <label for='parents'>  {{'send_to_student' | translate}}</label></li>
+                           <li class="col-md-4">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentstudsection" (change)="getparentpopsec('parent')" >
+                            <option *ngFor="let seclist of sectionlist" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li class="col-md-4">
+                            <select multiple="true" style="width:100%;" formControlName="popupparentuserid">
+                                  <option *ngFor="let studlist of studentlists" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Student'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+                           <li class="col-md-6">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentsection" (change)="getparentpopsec('student')" >
+                            <option *ngFor="let seclist of sectionlists" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li class="col-md-6">
+                            <select multiple="true" style="width:100%;" formControlName="popupparentstudent">
+                                  <option *ngFor="let studlist of studentlist" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+                      </ng-container> -->
+                    </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer" style="justify-content:center">
+                      <button type="button" class="newclose btn btn-info btn-default btn-sm" data-dismiss="modal"> {{'close' | translate}}</button>
+                      <button type="button" class="newbtn btn btn-info btn-sm" (click)="okfun()" data-dismiss="modal"> {{'ok' | translate}}</button>
+                    </div>
+
+                  </div>
+                </div>
+                  </div>
+
+              </form>
+
+         </div>
+      </div>
+        <div *ngIf="responseMessage" id="successpop" class="successMessage">
+        <div><span class="has-feedback"><p>{{showMessage}}</p>
+                <a *ngIf="globalObj.flag != 'classrecord'" routerLink="/communication/main" class="msgclose sm-blue-btn" ng-click="closeme()"> {{'ok' | translate}}</a>
+                <a *ngIf="globalObj.flag == 'classrecord'" routerLink="/classrecord/main" class="msgclose sm-blue-btn" ng-click="closeme()"> {{'ok' | translate}}</a>
+            </span></div>
+</div>
+
+
+
+
+
+
+

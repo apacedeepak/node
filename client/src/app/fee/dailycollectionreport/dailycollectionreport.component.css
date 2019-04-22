@@ -1,0 +1,62 @@
+.checkBox {
+	display:inline-block;
+	position: relative;
+	padding-left: 25px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-weight: normal;
+	margin:0px;
+	font-weight:normal;
+	margin-top:0;
+    font-size:14px;
+    min-width: 88px;
+}
+.checkBox input {
+	position: absolute;
+	opacity: 0;
+}
+
+.checkmark:before {
+	position: absolute;
+	content: '';
+	/*content: "\f096";*/
+	top: 0px;
+	left: 0;
+	height:20px;
+	width: 20px;
+	border: 1px solid #818386;
+	display: inline-block;
+}
+.checkBox input:checked ~ .checkmark:before{border-color: #35a723;}
+.checkBox input:checked ~ .checkmark:after{
+content: '';
+/*content: "\f046";*/
+display: block;
+width: 5px;
+height: 12px;
+border: solid #35a723;
+border-width: 0 2px 3px 0;
+transform: rotate(45deg);
+position: absolute;
+top: 3px;
+left: 7px;}
+/*Basic*/
+.alert{padding:8px 10px;font-size: 14px;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;font-size: 14px}
+table td a, table th a{color:#333;}
+.form-control{font-size: 14px;}
+.inputItem{ min-height: 55px;}
+.mt20{margin-top:20px;}
+.mt25{margin-top:25px;}
+.mt15{margin-top:15px;}
+.mb15{margin-bottom:15px;}
+.mt8{margin-top: 8px;}
+.btn{border-radius: 4px;}
+.mt10{margin-top:10px;}
+.mr15{margin-right:15px;}
+ngb-datepicker{z-index: 99;}
+.btn-light{font-size: 12px !important;}

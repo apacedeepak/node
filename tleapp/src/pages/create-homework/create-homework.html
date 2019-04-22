@@ -1,0 +1,75 @@
+
+
+     <ion-header>
+        <ion-navbar>
+       <ion-title> Create Homework</ion-title>
+       <div class="htool">
+        <a href="javascript:void(0)" (click)="openAttachmentLocation()"><ion-icon class="paerclip iconfontsize"><img src="/assets/imgs/papperclip.png"></ion-icon></a> 
+        <ion-button type="submit"   class="leftmargin" (click)="onsubmitHomework('draft')"><ion-icon class="iconcolor iconfontsize" ios="ios-document" md="md-document"></ion-icon></ion-button>
+        <ion-button type="submit"   class="leftmargin" (click)="onsubmitHomework('homework')"><ion-icon class="sendmail iconfontsize"><img src="/assets/imgs/send-mail.png"></ion-icon></ion-button>
+
+        <!-- <ion-icon (click)="openAttachmentLocation()" class="paerclip iconfontsize"><img src="/assets/imgs/papperclip.png"></ion-icon>
+      <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'draft')"><ion-icon class="iconcolor iconfontsize" ios="ios-document" md="md-document"></ion-icon></ion-button>
+      <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'message')"><ion-icon class="sendmail iconfontsize"><img src="/assets/imgs/send-mail.png"></ion-icon></ion-button> -->
+       </div>
+        </ion-navbar>
+        </ion-header>
+
+<ion-content>
+        
+
+        <ion-grid class="gridcontent">
+            
+            <ion-item>
+                <ion-label>From</ion-label>
+                <ion-label>Me</ion-label>
+            </ion-item>
+          
+            <div class='rowborder tomail'>
+                    <ion-label class='toclass'>To</ion-label>
+                    
+                    <div class='text-input-div'>
+                    <span *ngFor="let obj of globalObj.homeworkSendTo"  class="maillable">{{obj}}</span><button  class='addMail' (click)="homeworkSendTo()"><ion-icon ios="ios-add" md="md-add"></ion-icon></button>
+                    </div>    
+                     </div>
+            
+            <ion-item >
+                <ion-label>Subject</ion-label>
+                <ion-textarea  [(ngModel)]="globalObj.assigment_subject"></ion-textarea>
+        </ion-item>
+            <ion-item>
+               <ion-label>Topic</ion-label>
+               <ion-textarea placeholder="Enter Topic" [(ngModel)]="globalObj.assigment_title" ></ion-textarea>
+            </ion-item>
+            
+            <ion-item>
+                    <ion-label>Submission Date</ion-label>
+<!--                    <ion-label >{{globalObj.pick_date | date:'d MMM'}}</ion-label>-->
+                     <ion-datetime displayFormat="DD MMM" min="{{globalObj.todatDate}}" max="{{globalObj.sessionEndDate}}" [(ngModel)]="globalObj.pick_date" pickerFormat="DD MMMM YYYY"></ion-datetime> 
+            </ion-item>
+            <div *ngIf = "globalObj.showDraftAttachments">
+
+                    <ion-col  class="paddingnone" *ngFor="let photo of globalObj.draftAttachments; let id = index">
+                         
+               <span class="attachport">{{photo | separator: '~': 1}} <button  class="removefile" type="button" (click)="removeDraftAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+                 </ion-col>
+                       
+            </div>
+            <div>
+                <ion-col class="paddingnone" *ngFor="let photo of globalObj.photos; let id = index">
+                    
+               <span class="attachport"><ion-icon class="paerclip"><img src="/assets/imgs/papperclip-black.png"></ion-icon> {{photo}} <button  class="removefile" type="button" (click)="removeAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+                 </ion-col>
+            </div>
+          <br>
+            <div contenteditable="true" id="contentText" (click)="clearPlaceholder()" [innerHTML]= "globalObj.enter_text | pipesRemovehtmltags" class="contentarea" ></div>
+            
+
+            
+        </ion-grid>
+
+</ion-content>
+     
+      
+      
+      

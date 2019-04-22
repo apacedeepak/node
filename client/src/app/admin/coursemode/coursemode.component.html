@@ -1,0 +1,52 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25"><h5  class="pull-left">{{'Add course mode' | translate}}</h5></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+		<div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+	</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+		<div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div></div>
+    <form class="form-signin" [formGroup]="coursemodeForm" (ngSubmit)="saveCourseMode(coursemodeForm.value)">
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+            <input type="hidden" value="" formControlName='id'/>
+            <input type="text" class="form-control cleanup validate-empty" value="" formControlName='course_mode_name' placeholder="{{'Course Mode Name' | translate}}" required="" autofocus="" />
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+            <label class="checkBox mt8">&nbsp;Is Active?<input type="checkbox" class="cleanup validate-empty" formControlName='status' /><span class="checkmark"></span></label>
+        </div>
+    
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+            <input class="btn btn-primary" value="Save" [value]="editOrUpadte?'Update':'Save'"  name="save" id="submit"  [disabled]="!coursemodeForm.valid" type="submit">
+        </div>
+    </form>
+
+    <div class="headBox mb25"><h5  class="pull-left">{{'Course Mode List' | translate}}</h5></div>
+    <div id="leaveTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <span id ="success_message" class="span_success"></span>    
+        <table class="table table-striped table-bordered customTable">
+            <thead class="thheadbg">
+                <tr>            
+                    <th style="width: 60px;">{{'serial_no' | translate}}</th>                    
+                    <th>{{'Course Mode Name' | translate}}</th>
+                    <th>{{'status' | translate}}</th>
+					<th style="width: 60px;">{{'action' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let courseMode of courseModeArr; index as i">     
+                    <td>{{i+1}}</td>      
+                    <td >{{courseMode.course_mode_name}}</td>
+                    <td>{{courseMode.status}}</td>
+					<td class="text-center">
+                     <a href="javascript:void(0)" (click)="editCourse(courseMode.id)"><i class="fa fa-fw fa-pencil"></i></a>
+                    </td>
+                </tr>
+        
+                <tr *ngIf="courseModeArr.length == 0">
+                    <td colspan="10">
+                    <div class="text-info text-center">No record found...</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

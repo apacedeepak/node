@@ -1,0 +1,62 @@
+{
+  "name": "fee_structure_term_master",
+  "plural": "fee_structure_term_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "term_name_id": {
+      "type": "number",
+      "required": true
+    },
+    "session_id": {
+      "type": "number",
+      "required": true
+    },
+    "fee_structure_id": {
+      "type": "number",
+      "required": true
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "fine_amount": {
+      "type": "number"
+    },
+    "fine_charge_basis": {
+      "type": "string"
+    },
+    "fine_applicable_from": {
+      "type": "number"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "term_fee": {
+      "type": "hasMany",
+      "model": "assign_term_fee",
+      "foreignKey": "fee_structure_term_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

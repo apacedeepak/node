@@ -1,0 +1,22 @@
+{
+  "name": "inv_item_unit_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "unit_name": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

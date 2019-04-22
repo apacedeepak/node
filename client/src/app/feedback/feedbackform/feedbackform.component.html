@@ -1,0 +1,909 @@
+<div class="pageWorkArea">
+       <form [formGroup]="myForm">
+   <!-- first page starts -->
+      
+   <div class="boxwraper padding-left-none" *ngIf="firstflag">
+      <div class="col-sm-12 col-md-12">
+         <div class="communication pull-left" style="margin-top:15px;">
+            <div class="headBox">
+               <h5 class="h5"> {{'feedback' | translate}}</h5>
+            </div>
+            <div class="stepProgress">
+               <ul id="progressbar">
+                  <li class="active"> {{'quality_of_teaching' | translate}}</li>
+                  <li> {{'course' | translate}}</li>
+                  <li> {{'administrative' | translate}} &amp;  {{'facilities_feedback' | translate}}</li>
+               </ul>
+            </div>
+            <div class="col-sm-12 col-md-12 padding-left-none padding-right-none pull-left">
+               <div id="qualityOfTeaching">
+                  <h4 class="mdTitel"> {{'knowledge_of_subject' | translate}}</h4>
+                  <div class="fBlock">  
+                      <label class="radioContainer">
+                     <input type="radio" id="poor" value="P" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="poor"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average" value="A" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="average"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good" value="G" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="good"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood" value="VG" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="verygood"></span>  {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent" value="E" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="excellent"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel"> {{'concept_of_delivery' | translate}}</h4>
+                  <div class="fBlock">
+                    <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="poor1"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="average1"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="good1"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="verygood1"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="excellent1"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel"> {{'doubt_solving_ability' | translate}}</h4>
+                  <div class="fBlock">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="poor1"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="average1"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="good1"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="verygood1"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="excellent1"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label> 
+                  </div>
+                  <h4 class="mdTitel"> {{'post_test_discussion' | translate}}</h4>
+                  <div class="fBlock">
+                    <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="posttest" formControlName="posttest" />
+                     <span for="poor1"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="posttest" formControlName="posttest" />
+                     <span for="average1"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="posttest" formControlName="posttest" />
+                     <span for="good1"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="Vg" name="posttest" formControlName="posttest" />
+                     <span for="verygood1"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="posttest" formControlName="posttest" />
+                     <span for="excellent1"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>  
+                  </div>
+                  <h4 class="mdTitel"> {{'pace_of_topic_coverage' | translate}}</h4>
+                  <div class="fBlock">
+                         <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="poor1"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A"  name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="average1"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="good1"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="verygood1"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="excellent1"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>  
+                  </div>
+                  <h4 class="mdTitel"> {{'discipline_in_class' | translate}}</h4>
+                  <div class="fBlock">
+                      <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P"  name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="poor1"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="average1"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="good1"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="verygood1"></span>  {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="excellent1"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel">  {{'communication_skills' | translate}}</h4>
+                  <div class="fBlock">
+                    <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="commskills" formControlName="commskills" />
+                     <span for="poor2"></span>   {{'poor' | translate}}<span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="commskills" formControlName="commskills" />
+                     <span for="average2"></span>   {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="commskills" formControlName="commskills" />
+                     <span for="good2"></span>   {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="commskills" formControlName="commskills" />
+                     <span for="verygood2"></span>  {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="commskills" formControlName="commskills" />
+                     <span for="excellent2"></span>   {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel">  {{'motivational_skills' | translate}}</h4>
+                  <div class="fBlock">
+                      <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="poor2"></span>   {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="average2"></span>   {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="good2"></span>   {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="verygood2"></span>    {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="excellent2"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label> 
+                  </div>
+                  <div class="text-right col-sm-12 col-md-12 fBlock" style="padding-top:0;"><a class="btn btn-info" (click)="secondeflagfun()" href="javascript:void(0)">{{'Next'|translate}}</a></div>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-12 pull-left">
+               <div class="notBox">
+                  <h4><b>  {{'feedback' | translate}}:</b> {{'poor_grade' | translate}}, {{'average_grade' | translate}},   {{'good_grade' | translate}}, {{'very_good_grade' | translate}},   {{'excellent_grade' | translate}}</h4>
+                  <p>  {{'feedback_suggestion_space_message' | translate}} </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- first page ends -->
+   <!-- second page -->
+   <div class="boxwraper padding-left-none" *ngIf="secondflag">
+      <div class="col-sm-12 col-md-12">
+         <div class="communication pull-left" style="margin-top:15px;">
+            <div class="headBox">
+               <h5 class="h5">{{'feedback' | translate}} </h5>
+            </div>
+            <div class="stepProgress">
+               <ul id="progressbar">
+                  <li class="active"> {{'quality_of_teaching' | translate}}</li>
+                  <li class="active"> {{'course' | translate}}</li>
+                  <li> {{'administrative' | translate}} &amp;   {{'facilities_feedback' | translate}}</li>
+               </ul>
+            </div>
+            <div class="col-sm-12 col-md-12 padding-left-none padding-right-none pull-left">
+               <div id="course">
+                  <h4 class="mdTitel"> {{'coverage_board_syllabus' | translate}}</h4>
+                  <div class="fBlock">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="poor2"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="average2"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="good2"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="verygood2"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="excellent2"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label> 
+                  </div>
+                  <h4 class="mdTitel"> {{'quality_of_course_content' | translate}}</h4>
+                  <div class="fBlock">
+                    <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="coursequality" formControlName="coursequality" />
+                     <span for="poor2"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="coursequality" formControlName="coursequality" />
+                     <span for="average2"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="coursequality" formControlName="coursequality" />
+                     <span for="good2"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="coursequality" formControlName="coursequality" />
+                     <span for="verygood2"></span>  {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="coursequality" formControlName="coursequality" />
+                     <span for="excellent2"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <div class="text-right col-sm-12 col-md-12 fBlock" style="padding-top:0;"><a class="btn btn-info" (click)= "firstflagfun()" href="javascript:void(0)">{{'Previous'|translate}}</a> <a class="btn btn-info" (click)="thirdflagfun()" href="javascript:void(0)">{{'Next'|translate}}</a></div>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-12 pull-left">
+               <div class="notBox">
+                <h4><b>  {{'feedback' | translate}}:</b> {{'poor_grade' | translate}}, {{'average_grade' | translate}},   {{'good_grade' | translate}}, {{'very_good_grade' | translate}},   {{'excellent_grade' | translate}}</h4>
+                <p>  {{'feedback_suggestion_space_message' | translate}} </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- second page ends -->
+   <!-- third page starts -->
+   <div class="boxwraper padding-left-none" *ngIf="thirdflag">
+      <div class="col-sm-12 col-md-12">
+         <div class="communication pull-left" style="margin-top:15px;">
+            <div class="headBox">
+               <h5 class="h5 text-center">{{'feedback' | translate}}</h5>
+            </div>
+            <div class="stepProgress">
+               <ul id="progressbar">
+                  <li class="active">   {{'quality_of_teaching' | translate}}</li>
+                  <li class="active"> {{'course' | translate}}</li>
+                  <li class="active"> {{'administrative' | translate}} &amp;   {{'facilities_feedback' | translate}}</li>
+               </ul>
+            </div>
+            <div class="col-sm-12 col-md-12 padding-left-none padding-right-none pull-left">
+               <div id="administrative-feedback">
+                  <h4 class="mdTitel"> {{'classroom' | translate}}</h4>
+                  <div class="fBlock">
+                   <label class="radioContainer">
+                     <input type="radio" id="poor3" value="P" name="classroom" formControlName="classroom" />
+                     <span for="poor3"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average3" value="A" name="classroom" formControlName="classroom" />
+                     <span for="average3"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good3" value="G" name="classroom" formControlName="classroom"/>
+                     <span for="good3"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood3" value="VG" name="classroom" formControlName="classroom" />
+                     <span for="verygood3"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent3" value="E" name="classroom" formControlName="classroom" />
+                     <span for="excellent3"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label> 
+                  </div>
+                  <h4 class="mdTitel"> {{'staff' | translate}}</h4>
+                  <div class="fBlock">
+                             <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="staff" formControlName="staff" />
+                     <span for="poor3"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="staff" formControlName="staff" />
+                     <span for="average4"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="staff" formControlName="staff" />
+                     <span for="good3"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="staff" formControlName="staff" />
+                     <span for="verygood3"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="staff" formControlName="staff" />
+                     <span for="excellent4"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>  
+                  </div>
+                  <h4 class="mdTitel"> {{'transportation' | translate}}</h4>
+                  <div class="fBlock">
+                   <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="transportation" formControlName="transportation" />
+                     <span for="poor3"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="transportation" formControlName="transportation" />
+                     <span for="average4"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="transportation" formControlName="transportation" />
+                     <span for="good3"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="transportation" formControlName="transportation" />
+                     <span for="verygood3"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="transportation" formControlName="transportation" />
+                     <span for="excellent4"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel"> {{'washroom' | translate}}</h4>
+                  <div class="fBlock">
+                      <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="washroom" formControlName="washroom" />
+                     <span for="poor3"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="washroom" formControlName="washroom" />
+                     <span for="average4"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="washroom" formControlName="washroom" />
+                     <span for="good3"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="washroom" formControlName="washroom" />
+                     <span for="verygood3"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="washroom" formControlName="washroom"/>
+                     <span for="excellent4"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+                  <h4 class="mdTitel"> {{'others' | translate}}</h4>
+                  <div class="fBlock">
+                   <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="others" formControlName="others" />
+                     <span for="poor3"></span>  {{'poor' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="others" formControlName="others" />
+                     <span for="average4"></span>  {{'average' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="others" formControlName="others" />
+                     <span for="good3"></span>  {{'good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="others" formControlName="others" />
+                     <span for="verygood3"></span>   {{'very_good' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="others" formControlName="others" />
+                     <span for="excellent4"></span>  {{'excellent' | translate}} <span class="checkmarks">&nbsp;</span>
+                     </label>  
+                  </div>
+                  <div class="text-right col-sm-12 col-md-12 fBlock" style="padding-top:0;"><a class="btn btn-info" (click) ="secondeflagfun()" href="javascript:void(0)">{{'Previous'|translate}}</a> <input   (click)="onsubmit($event)" type="submit" class="btn btn-info" value="{{'submit'|translate}}"></div>
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-12 pull-left">
+               <div class="notBox">
+                <h4><b>  {{'feedback' | translate}}:</b> {{'poor_grade' | translate}}, {{'average_grade' | translate}},   {{'good_grade' | translate}}, {{'very_good_grade' | translate}},   {{'excellent_grade' | translate}}</h4>
+                <p>  {{'feedback_suggestion_space_message' | translate}} </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- third page ends -->
+       </form>
+</div>
+
+ <!-- <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessage}}</p><a href="javascript:void(0)" class="msgclose sm-blue-btn" (click)="closeme(msg)">OK</a></span></div>
+</div>  -->
+  <!-- <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessage}}</p><a href="javascript:void(0)" class="msgclose sm-blue-btn" (click)="closeme(popmessage)">OK</a></span></div>
+</div>   -->
+<div *ngIf="responseMessagegrpexit" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessagegrp}}</p><a  class="msgclose sm-blue-btn" href="javascript:void(0)" (click)="closeme()">{{'ok' | translate}}</a></span></div>
+  </div>
+    <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessage}}</p><a routerLink="/feedback/submitfeedback" class="msgclose sm-blue-btn" (click)="closeme()">{{'ok' | translate}}</a></span></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Page Work Space old
+
+      <div class="col-sm-12 col-md-12 padding-left-none">
+         <div class="communication pull-left" style="margin-top:15px;">
+            <div class="headBox marginbottom20">
+               <div  *ngIf="success == true" class="alert alert-success">
+                    <strong>Successfully submitted the feedback.</strong>
+               </div>
+               <h5 class="h5 pull-left">Feedback Form</h5>
+            </div>
+            <form [formGroup]="myForm">
+            <div class="col-sm-12 col-md-12 padding-left-none padding-right-none pull-left">
+               <h4 class="mdTitel">Quality of Teaching</h4>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Knowledge of Subject</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor" value="P" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="poor"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average" value="A" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="average"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good" value="G" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="good"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood" value="VG" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="verygood"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent" value="E" name="keyofsubject" formControlName="keyofsubject" />
+                     <span for="excellent"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Concept Delivery</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="poor1"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="average1"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="good1"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="verygood1"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="conceptdelery" formControlName="conceptdelery" />
+                     <span for="excellent1"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Doubt Delivery</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="poor1"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="average1"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="good1"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="verygood1"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="doubtsolving" formControlName="doubtsolving" />
+                     <span for="excellent1"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Post Test Discussions</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="posttest" formControlName="posttest" />
+                     <span for="poor1"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="posttest" formControlName="posttest" />
+                     <span for="average1"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="posttest" formControlName="posttest" />
+                     <span for="good1"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="Vg" name="posttest" formControlName="posttest" />
+                     <span for="verygood1"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="posttest" formControlName="posttest" />
+                     <span for="excellent1"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Pace of Topic Coverage</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="poor1"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A"  name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="average1"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="good1"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="verygood1"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="topiccoverrage" formControlName="topiccoverrage" />
+                     <span for="excellent1"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Discipline in class</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor1" value="P"  name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="poor1"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average1" value="A" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="average1"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good1" value="G" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="good1"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood1" value="VG" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="verygood1"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent1" value="E" name="classdiscipline" formControlName="classdiscipline" />
+                     <span for="excellent1"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+
+
+               <h4 class="mdTitel">Course</h4>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Coverage of Board Syllabus</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="poor2"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="average2"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="good2"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="verygood2"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="boardcoverrage" formControlName="boardcoverrage" />
+                     <span for="excellent2"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+            <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Communicational Skills</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="commskills" formControlName="commskills" />
+                     <span for="poor2"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="commskills" formControlName="commskills" />
+                     <span for="average2"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="commskills" formControlName="commskills" />
+                     <span for="good2"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="commskills" formControlName="commskills" />
+                     <span for="verygood2"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="commskills" formControlName="commskills" />
+                     <span for="excellent2"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+             <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Motivational Skills</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="poor2"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="average2"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="good2"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="verygood2"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="motivationalskills" formControlName="motivationalskills" />
+                     <span for="excellent2"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20 fborder">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Quality of Course Content</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor2" value="P" name="coursequality" formControlName="coursequality" />
+                     <span for="poor2"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average2" value="A" name="coursequality" formControlName="coursequality" />
+                     <span for="average2"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good2" value="G" name="coursequality" formControlName="coursequality" />
+                     <span for="good2"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood2" value="VG" name="coursequality" formControlName="coursequality" />
+                     <span for="verygood2"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent2" value="E" name="coursequality" formControlName="coursequality" />
+                     <span for="excellent2"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <h4 class="mdTitel">Administrative &amp; Faculties</h4>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Classroom</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor3" value="P" name="classroom" formControlName="classroom" />
+                     <span for="poor3"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average3" value="A" name="classroom" formControlName="classroom" />
+                     <span for="average3"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good3" value="G" name="classroom" formControlName="classroom"/>
+                     <span for="good3"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood3" value="VG" name="classroom" formControlName="classroom" />
+                     <span for="verygood3"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent3" value="E" name="classroom" formControlName="classroom" />
+                     <span for="excellent3"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Staff</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="staff" formControlName="staff" />
+                     <span for="poor3"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="staff" formControlName="staff" />
+                     <span for="average4"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="staff" formControlName="staff" />
+                     <span for="good3"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="staff" formControlName="staff" />
+                     <span for="verygood3"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="staff" formControlName="staff" />
+                     <span for="excellent4"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Transport</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="transportation" formControlName="transportation" />
+                     <span for="poor3"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="transportation" formControlName="transportation" />
+                     <span for="average4"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="transportation" formControlName="transportation" />
+                     <span for="good3"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="transportation" formControlName="transportation" />
+                     <span for="verygood3"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="transportation" formControlName="transportation" />
+                     <span for="excellent4"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Washroom</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="washroom" formControlName="washroom" />
+                     <span for="poor3"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="washroom" formControlName="washroom" />
+                     <span for="average4"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="washroom" formControlName="washroom" />
+                     <span for="good3"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="washroom" formControlName="washroom" />
+                     <span for="verygood3"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="washroom" formControlName="washroom"/>
+                     <span for="excellent4"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="fBlock marginbottom20 fborder">
+                  <div class="col-sm-12 col-md-5 pull-left">
+                     <p class="pTitle">Others</p>
+                  </div>
+                  <div class="col-sm-12 col-md-7 pull-left">
+                     <label class="radioContainer">
+                     <input type="radio" id="poor4" value="P" name="others" formControlName="others" />
+                     <span for="poor3"></span> Poor <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="average4" value="A" name="others" formControlName="others" />
+                     <span for="average4"></span> Average <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="good4" value="G" name="others" formControlName="others" />
+                     <span for="good3"></span> Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="verygood4" value="VG" name="others" formControlName="others" />
+                     <span for="verygood3"></span> Very Good <span class="checkmarks">&nbsp;</span>
+                     </label>
+                     <label class="radioContainer">
+                     <input type="radio" id="excellent4" value="E" name="others" formControlName="others" />
+                     <span for="excellent4"></span> Excellent <span class="checkmarks">&nbsp;</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-12 col-md-12 pull-left">
+                  <div class="notBox">
+                     <h4><b>Feedback:</b> P-Poor (Below 60%), A-Average (60-70%), G-Good (70-80%), V-Very Good (80-90%), E-Excellent (90-100%)</h4>
+                     <p>We are leaving some space for your suggestions. We shall look into your suggestion and try to implement them as far as possible. Your response shall be kept confidential. </p>
+                  </div>
+
+               </div>
+        <div style="margin-bottom:20px" class="col-sm-12 col-md-12 pull-left text-right"><button class="btn btn-primary btn-sm" type="button" (click)="onsubmit($event)">Submit</button></div>
+            </div>
+            </form>
+         </div>
+      </div>
+ <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div></div>
+ </div> -->

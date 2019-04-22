@@ -1,0 +1,60 @@
+{
+  "name": "chat",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "chat_message": {
+      "type": "Text",
+      "required": true
+    },
+    "attachment": {
+      "type": "Text"
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "channel": {
+      "type": "string",
+      "required": true
+    },
+    "channel_id": {
+      "type": "Text",
+      "required": true
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "user_type": {
+      "type": "string"
+    },
+    "groupId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

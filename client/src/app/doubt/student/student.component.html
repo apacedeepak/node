@@ -1,0 +1,237 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+        <h5 class="pull-left">{{ ask_doubts | translate}}</h5>
+        <span class="float-right"><button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm customSearchTiTle mr10 mt15" >Ask your Doubt</button></span>
+    </div>
+    <div>{{globalObj.message}}</div>
+
+        <div *ngIf="show_add_doubt">
+
+  <form class="form-horizontal" [formGroup]="doubtsForm">
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+	 <label for="email">Title </label>      
+        <input type="hidden" class="form-control" value="" formControlName='id'  />
+        <input type="hidden" class="form-control" value="" formControlName='upload_file_old'  />
+        <input type="text" class="form-control required" value="" formControlName='title' placeholder="Title" title="Please insert doubts name" autofocus="" required/>
+      </div>
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+	 <label for="email" > Subject</label> 
+        <select [(ngModel)]="FormStatus" formControlName='subjectId' class="form-control required" title="Select Subject" placeholder="Select Subject">
+        <option [value]="0"> Select Subject</option>
+        <option [value]="subject.subject_id" *ngFor="let subject of globalObj.assignSubjectData">
+             {{subject.subject_name}}</option>
+        </select>
+        </div>
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+		  <label for="email"> Topic </label>
+          <input type="text" class="form-control required" value="" formControlName='topic' placeholder=" Topic" title="Please insert topic" autofocus=""/>
+      </div>
+  
+<div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+	 <label for="email"> Doubts </label>     
+        <input  type="text" class="form-control required" value="" formControlName='enter_doubts' placeholder=" Doubts" title="Please insert topic" autofocus="" >
+      </div>
+ 
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+    <input-file fileLimit="1" fileAccept="*" (acceptedFile)="onAccept($event)" class="cleanup validate-empty" formControlName="upload_file" placeholder="Upload File" title="Please file upload" ></input-file>
+
+        <label for="title">
+              <ng-template [ngIf]="this.upload_file_set!=''">
+          <a href="{{globalObj.DownloadRootURL}}/{{globalObj.doubtViewData.upload_file}}" target="_blank">
+                <button type="button" class="btn btn-info">
+                  <i class="material-icons">get_app</i> Download
+                </button>
+          </a>
+        </ng-template>
+             </label>
+       </div>
+ 
+<div class="col-xs-12 col-sm-12 col-md-12 pull-right mt15 mb15">
+      <button class="btn btn-primary mr10" [disabled]="doubtsForm.invalid"  (click)="onSubmit(doubtsForm.value)">Submit</button>
+      
+      <button class="btn btn-primary mr10"  (click)="getFromClose()">Close</button>
+  </div>
+
+</form>
+
+  </div>
+	
+	
+	
+	
+ <div *ngIf="show_view_doubt">
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left inputItem mt15">
+    
+      <label for="title">Subject: &nbsp; </label>
+      <label for="title"> {{globalObj.doubtViewData.doubtsSubject.subject_name}} </label>
+      </div>
+  
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left inputItem mt15">
+      <label for="title"> Posted On : &nbsp; </label>
+      <label for="title"> {{globalObj.doubtViewData.added_date  | date: 'dd-MM-yyyy' }} </label>
+      </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left  inputItem mt15">
+        <label for="title"> Title:  &nbsp; </label>   
+        <label for="title">{{globalObj.doubtViewData.title}} </label>
+    </div>
+    
+  <div class="col-xs-12 col-sm-6 col-md-6 pull-left  inputItem mt15">
+      <label for="title">Topic:  &nbsp;</label>
+      <label for="title"> {{globalObj.doubtViewData.topic}} </label>
+      </div>
+  
+ <div class="col-xs-12 col-sm-6 col-md-6 pull-left  inputItem mt15">
+      <label for="title">Doubt:  &nbsp;</label>
+      <label for="title"> {{globalObj.doubtViewData.enter_doubts}} </label>
+      </div>
+	  
+ <div class="col-xs-12 col-sm-6 col-md-6 pull-left  inputItem mt15">
+      <label for="title">My Attachment:  &nbsp; </label>     
+      <label for="title">
+        <ng-template [ngIf]="globalObj.doubtViewData.upload_file?.length">
+          <a href="{{globalObj.DownloadRootURL}}/{{globalObj.doubtViewData.upload_file}}" target="_blank">
+                <button type="button" class="btn btn-info btn-sm">
+                  <i class="material-icons">get_app</i> Download
+                </button>
+          </a>
+        </ng-template>
+</label>
+  </div>
+
+  <ng-template [ngIf]="globalObj.doubtViewData.status == 'Doubt Solved'">
+
+    <div class="headBox mb25">
+        <h5 class="pull-left">{{ "Solution" | translate}}</h5>
+    </div>
+    
+	 <div class="col-xs-12 col-sm-6 col-md-6 pull-left inputItem mt15">
+            <label for="title"> Solution:  &nbsp; </label>
+            <label for="title"> {{globalObj.doubtViewData.doubtsSolutioin.solution }} </label>
+            </div>
+
+     <div class="col-xs-12 col-sm-6 col-md-6 pull-left inputItem mt15">
+            <label for="title"> File Uploaded:  &nbsp; </label>
+            <label for="title">
+              <ng-template [ngIf]="globalObj.doubtViewData.doubtsSolutioin.upload_file?.length">
+          <a href="{{globalObj.DownloadRootURL}}/{{globalObj.doubtViewData.doubtsSolutioin.upload_file}}" target="_blank">
+                <button type="button" class="btn btn-info">
+                  <i class="material-icons">get_app</i> Download
+                </button>
+          </a>
+        </ng-template>
+             </label>
+           </div>
+
+  </ng-template>
+
+<div class="col-xs-12 col-sm-12 col-md-12 pull-right">
+	<button class="btn btn-primary mr10"  (click)="getFromClose()">Close</button>
+      </div>
+</div>
+
+	
+	
+	<div *ngIf="show_list_doubt">
+
+  <!--SEARCH START-->
+    <div id="searchTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+      <form class="form-horizontal" [formGroup]="doubtsSearchFormGroup">
+    <div class="searchForm">
+        <div id="searchTable" class="col-sm-12 col-md-12 pull-left customDivHead mb15">
+        <label class="customSearchTiTle">Search</label>
+        </div>
+        <div class="col-auto pull-left">
+            <label for="title">Subject: </label>
+        </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+            <select [(ngModel)]="FormSubjectSearch" formControlName='subject_id' class="form-control required" title="Select Subject" placeholder="Select Subject">
+            <option [value]="0"> Select Subject</option>
+            <option [value]="subject.subject_id" *ngFor="let subject of globalObj.assignSubjectData">
+                {{subject.subject_name}}</option>
+            </select>
+        </div>
+
+
+      <div class="w-auto pull-left">
+          <label for="title"> Status: </label>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+          <select [(ngModel)]="FormStatusSearch" formControlName='status_data' class="form-control required" title="Select Status" placeholder="Select Status">
+            <option value="0"> Select Status</option>
+          <option [value]="status.doubtStatusVal" *ngFor="let status of globalObj.doubtsStatus">{{status.doubtStatusVal}}</option>
+          </select>
+      </div>
+
+    <div class="w-auto pull-left">
+         <button class="btn btn-info"  (click)="onSubmitSearch(doubtsSearchFormGroup.value)">Submit</button>
+    </div>
+		  </div>
+    </form>
+   </div>
+  <!--SEARCH END-->
+    <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+    <span id="success_message" class="span_success"></span>
+    <table class="table table-striped table-bordered customTable">
+      <thead class="thheadbg">
+        <tr >
+          <th align="center">S&nbsp;No.</th>
+          <th>Doubt Posted On</th>
+          <th>Doubt Title</th>
+          <th>Topic</th>
+          <th>Faculty Replied</th>
+          <th>Status</th>
+          <th style="width: 187px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+<!--        <tr *ngFor="let doubts of globalObj.doubtsList; index as i">
+-->
+         <ng-container  *ngFor="let doubts of globalObj.doubtsList | keyvalue | paginate: { itemsPerPage: 10, currentPage: page}; index as i">
+         <tr>
+          <td align="center" >{{i+1}}</td>
+          <td>{{doubts.value.added_date | date: 'dd-MM-yyyy' }} </td>
+          <td>{{doubts.value.title}} </td>
+          <td>{{doubts.value.topic}} </td>
+          <td>{{doubts.value.studentFacultyUser}}</td>
+          <td>{{doubts.value.status}} </td>
+          <td>
+            <ng-template [ngIf]="doubts.value.status == 'Doubt Raised'">
+            <button class="btn btn-info btn-sm" (click)="doubtEdit(doubts.value.id)" >&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" (click)="doubtView(doubts.value.id)" >Doubt View</button>
+            </ng-template>
+            <ng-template [ngIf]="doubts.value.status == 'Doubt Owned'">
+            <button class="btn btn-info btn-sm" (click)="doubtView(doubts.value.id)" >Doubt View</button>
+            </ng-template>
+            <ng-template [ngIf]="doubts.value.status == 'Doubt Solved'">
+                  <button class="btn btn-info btn-sm" (click)="doubtView(doubts.value.id)" >Doubt Solution</button>
+            </ng-template>
+          </td>
+        </tr>
+         </ng-container>
+        <!--<div class="pull-center" *ngIf="globalObj.doubtsList.length==0">No Data Found</div>-->
+     <!--    <tr> 
+                    <td colspan="11">
+                        <span  align="center">
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        </span>
+                    </td>
+                </tr>-->
+
+      </tbody>
+    </table>
+    <div class="text-center mt20"><pagination-controls (pageChange)="page = $event"></pagination-controls></div>
+  </div>
+
+</div>
+
+
+</div>
+</div>

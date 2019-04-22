@@ -1,0 +1,36 @@
+{
+  "name": "chat_user",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "chatId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "channel": {
+      "type": "string"
+    },
+    "channel_id": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "user_type": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,84 @@
+page-layout {
+.toolbar-background-md{background: #3c6ecd;}
+.toolbar-title-md,.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{color:#fff!important;font-size: 1.7rem;}
+.header-md::after{display:none;}
+ion-header{box-shadow: 0 0 3px 1px rgba(7, 38, 98, 0.31);}
+.navuser{ position:relative;
+.profilethumb {
+width:5rem;
+height:5rem;
+display:inline-block;
+overflow:hidden;
+position: relative;
+border-radius:80%;
+box-shadow:0px 0 0px 2px #ffffff;
+margin-top:1rem;
+ img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+}
+.logedname{ color:#fff; font-size:1.3rem;}
+}
+
+ul.menuList{padding:0.5rem 0; margin:0;
+li{padding-left:0rem; list-style-type:none; position:relative;
+.menuICon{ position:absolute; left:1.6rem;top: 1rem;
+img{ width:2.2rem;}
+}
+.subMenuICon{ position:absolute; left:3.6rem;top: 1rem;
+img{ width:2.2rem;}
+}
+.subMenu{
+    width: 19rem;
+    float: right;
+}
+button{display: block;
+    text-decoration: none;
+    padding-left: 5rem;
+    color: #222;
+    font-size: 1.5rem;
+    padding-top:  0.7rem;
+    padding-bottom: 0.7rem;
+    padding-right: 3rem;border-bottom: 1px solid #ddd;width: 100%;background-color: #fff; text-align:left;line-height:2;
+	.icon{ position:absolute; right:1.5rem;color: #9f9999;top: 1.4rem;}
+	}
+	ul{padding:0; margin:0; background-color:#f9f8f8;}
+	.list-md{margin: 0;width: 100%;
+         button{background-color:#f9f9f9;}
+        }
+	.item-inner{min-height: inherit; padding:0 !important;}
+	.label-md {margin: 0;}
+	.item-md {padding-left: 0;}
+}
+}
+
+.online{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b4ddb4+0,83c783+17,52b152+33,008a00+67,005700+83,002400+100;Green+3D+%231 */
+background: rgb(180,221,180); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, rgb(180,221,180) 0%, rgb(131,199,131) 17%, rgb(82,177,82) 33%, rgb(0,138,0) 67%, rgb(0,87,0) 83%, rgb(0,36,0) 100%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, rgb(180,221,180) 0%,rgb(131,199,131) 17%,rgb(82,177,82) 33%,rgb(0,138,0) 67%,rgb(0,87,0) 83%,rgb(0,36,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, rgb(180,221,180) 0%,rgb(131,199,131) 17%,rgb(82,177,82) 33%,rgb(0,138,0) 67%,rgb(0,87,0) 83%,rgb(0,36,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4ddb4', endColorstr='#002400',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ width:16px; height:16px;border-radius:80%; display:inline-block;box-shadow: 0 0 0 1px #fff inset; margin-left:5px;}
+.offline{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff3019+0,cf0404+100;Red+3D */
+background: rgb(255,48,25); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, rgb(255,48,25) 0%, rgb(207,4,4) 100%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, rgb(255,48,25) 0%,rgb(207,4,4) 100%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, rgb(255,48,25) 0%,rgb(207,4,4) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */width:16px; height:16px;border-radius:80%; display:inline-block;box-shadow: 0 0 0 1px #fff inset; margin-left:5px;}
+
+#sidenav {
+	ion-item-group[sidemenu] {
+	  overflow: hidden;
+	  display: block;
+	  height: 0;
+	  transition: height .3s linear;
+	  &.visible {
+		  height: 300px;
+		  // this is just sample value, calculate how much space you need for your menu items
+	  }
+	}
+  }
+}

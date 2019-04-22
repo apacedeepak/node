@@ -1,0 +1,49 @@
+{
+  "name": "user_calendar",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "remarks": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "number",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "day": {
+      "type": "string"
+    },
+    "weekly_off": {
+      "type": "string",
+      "default": "No"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": [
+        "date"
+      ]
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "modified_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

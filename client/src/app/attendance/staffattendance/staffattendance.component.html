@@ -1,0 +1,62 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none" style="margin-top:15px">
+  <div class="communication">
+ 
+   <div *ngIf="product_type == 'emscc'" class="headBox"><h5 class="h5 pull-left">Attendance</h5></div>
+   <!-- <ng-container *ngIf="product_type != 'emscc'">
+   <ul class="nav commnicationBox" >
+       <li><a class="active" data-toggle="tab" href="#subjectattendance" >Attendance<span class="badge"></span>  </a></li>  
+       <li><a data-toggle="tab" href="#leaveapplication">Leave Application<span class="badge"></span></a></li>
+       <li><a data-toggle="tab" href="#schoolcalendar" >School Calendar<span class="badge"></span></a></li>    
+   </ul>
+ </ng-container> -->
+ 
+ <div class="clearfix"></div>
+ <div class="tab-content">
+ <div class="tab-pane active" id="subjectattendance">
+ 
+ <div class="col-sm-6 col-md-6 pull-left has-feedback">
+ <div  style="margin-top:15px" *ngIf="calendarOptions">
+   <ng-fullcalendar #ucCalendar1 [options]="calendarOptions" (clickButton)="clickButton1($event.detail)"></ng-fullcalendar>
+ 
+ 
+ </div> 
+ 
+   <div class="calendarDescription">
+           <ul>
+             <li>Weekend</li>
+             <li>Present</li>
+             <li>Leaves Taken</li>
+          
+             <li *ngIf="product_type != 'emscc'">Holiday</li>
+           </ul>
+         </div>
+ </div>
+ <div class="col-sm-6 col-md-6 pull-left">
+ <div class="attendaceScrore">
+ <h3>{{counts.monthName}}&nbsp;{{yyyy}}</h3>
+ </div>
+ <table class="table table-striped">
+           <tbody>
+             <tr>
+               <td align="left">Present</td>
+               <td align="right" class="ng-binding">{{counts.pcount}}&nbsp;Days</td>
+             </tr>
+             <tr>
+               <td align="left">Holiday</td>
+               <td align="right" class="ng-binding">{{counts.acount}}&nbsp;Days</td>
+             </tr>
+        
+             <tr >
+                 <td align="left">Leave Taken</td>
+                 <td align="right" class="ng-binding">{{counts.lcount}}&nbsp;Days</td>
+             </tr>
+             <!-- <tr>
+               <td align="left" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b>Total</b></td>
+               <td align="right" style="border-top:1px solid #ccc;border-Bottom:1px solid #ccc"><b class="ng-binding">{{counts.total}}&nbsp;Days</b></td>
+             </tr> -->
+           </tbody>
+         </table>
+ </div>
+ </div>
+
+ 

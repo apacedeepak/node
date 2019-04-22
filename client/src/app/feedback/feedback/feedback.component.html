@@ -1,0 +1,34 @@
+
+    <div class="col-sm-12 col-md-12 pull-left padding-right-none padding-left-none">
+      <div class="boxModel pull-left maxHightOuto">
+        <div class="headBox">
+          <h5 class="h5 pull-left"> {{'students_feedback' | translate}}</h5>
+          <div class="col-sm-5 col-md-5 pull-right text-right">
+            <div class="col-sm-5 col-md-5 padding-right-none  pull-left">
+                <select class="form-control selectClass" [(ngModel)]="classid" (ngModelChange)="getassignedsection()">
+                  <option [value]="">   {{'select' | translate}} {{'class' | translate}}</option>
+                  <option *ngFor="let class of classlist" [value]="class.class_id" [selected]="classid==class.class_id">{{class.class_name}}</option>
+                </select>
+            </div>
+   
+            <div class="col-sm-7 col-md-7 pull-left padding-right-none">
+              <select class="form-control selectClass"  [(ngModel)]="sectionid" (ngModelChange)="createStudentList()">
+                <option [value]="">{{'Select Section'|translate}}</option>
+                <option *ngFor="let section of sectionlist" [value]="section.section_id" [selected]="sectionid == section.section_id">{{section.section_name}}</option>
+              </select></div>
+          </div>
+          </div>
+          <div class="studentList">
+              <div class="col-xs-12 col-sm-2 col-md-2 pull-left" *ngFor="let student of students">
+                  <div class="stBox">
+                      <div class="text-center"><a (click)="setImage(student.user_id, student.image)"><span class="spic" [ngStyle]="{'background-image':student.image ? 'url('+globalObj.domainUrlwithoutSlash+project_name+'/'+student.image+')' : 'url(assets/images/profile_img.jpg)' }">&nbsp;</span></a></div>
+                      <div class="text-center stName">{{ student.name }}</div>
+                  </div>
+              </div>
+              <ng-container *ngIf="students.length == 0">
+                <p class="text-center text-info" style="margin-top: 15px;">  {{'no_record_found' | translate}}</p>
+              </ng-container>  
+            </div>
+      </div>
+    </div>
+ 

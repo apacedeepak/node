@@ -1,0 +1,117 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{globalObj.schoolName}}</ion-title>
+     <page-notification ></page-notification> 
+  </ion-navbar>
+</ion-header>
+<ion-content>
+   <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="pull to refresh">
+
+    </ion-refresher-content>
+  </ion-refresher>
+<ion-grid class="stundentInfo">
+  <ion-row>
+   <ion-col col-3 text-center><div class="profilethumb"><img [src]="globalObj.ProfileImage"></div></ion-col>
+   <ion-col col-9 class="userInfo">
+   <ion-row>
+   <ion-col col-4><p><label>{{'NAME' | translate}}</label><p></ion-col> 	
+   <ion-col col-8><p>: {{globalObj.loginName}}</p></ion-col>
+   
+   <ion-col col-4><p><label>{{'DEPARTMENT' | translate}}</label><p></ion-col> 	
+   <ion-col col-8><p>: {{globalObj.department}}</p></ion-col>
+
+  <ion-col col-4><p><label>{{'DESIGNATION' | translate}}</label><p></ion-col> 	
+   <ion-col col-8><p>: {{globalObj.designation}}</p></ion-col>
+  </ion-row> 
+   </ion-col>
+ </ion-row> 
+</ion-grid>
+
+<ion-grid class="padding10">
+   <div *ngIf="globalObj.showdashboard" class="twoColumn hometheme">
+<ion-row>
+   <!-- <ion-col col-2>
+   <div class="iconColumn"><span>  <ion-icon name="document"></ion-icon></span></div>
+   </ion-col> -->
+   <ion-col col-12 class="col9">
+    <div class="mailInfo">
+   <h4 (click)="redirectLocation('HomeworkPage')">{{'HOMEWORK' | translate}}</h4>
+   
+   <ng-container *ngIf="globalObj.homeworkExist;else nohomedata">
+   <div class="mailBlock" *ngFor="let homelistlist of globalObj.homework | slice:0:2" (click)="goToHomeworkDetail(homelistlist)">
+      <div class="hmblok">
+      <div class="mailStatus">
+          Received: {{homelistlist.homework_received_count}}/{{homelistlist.homework_assigned_count}}
+          Checked: {{homelistlist.homework_checked_count}}
+         </div>
+   <div class="mailername attachtomail textoverlap">{{homelistlist.subject_name}} <div class="mailinginfo"><ion-icon *ngIf="homelistlist.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>
+    {{homelistlist.added_date_app | date:homelistlist.displayTime=='0'?'d MMM':'h:mm a'}}</div></div>
+    <div class="subtitle textoverlap">{{homelistlist.class_section_name}}</div>
+   <div class="subtitle textoverlap" [innerHTML]= "homelistlist.homework_title"></div>
+   <div class="description textoverlap">Submission:{{homelistlist.target_date_app | date:'d MMM'}}</div>   
+   </div>
+  </div>
+   </ng-container>
+   
+    <ng-template #nohomedata><p class="text-info">No Record Found</p></ng-template>
+   </div>
+   </ion-col>
+   </ion-row>
+   </div>
+  
+<div *ngIf="globalObj.showdashboard"  class="twoColumn messagetheme">
+<ion-row>
+   <!-- <ion-col col-2>
+   <div class="iconColumn"><span><ion-icon name="mail"></ion-icon></span></div>
+   </ion-col> -->
+   <ion-col col-12 class="col9">
+    <div class="mailInfo">
+   <h4 (click)="redirectLocation('MessagelistPage','message')">{{'COMMUNICATION' | translate}} <ion-badge *ngIf = "globalObj.messagecount>0" color="danger">{{globalObj.messagecount}}</ion-badge></h4>
+   <ng-container *ngIf="globalObj.messageExist;else nomsgdata">
+   <div class="mailBlock"  *ngFor="let messagelist of globalObj.message | slice:0:2">
+     <div [ngClass]="(messagelist.message_isread) == 'Yes' ? 'readmail' : ''" (click)="messageDetails(messagelist.message_id, 'inbox')">
+   <div class="mailername textoverlap attachtomail">{{messagelist.display_name}} <div class="mailinginfo"><ion-icon *ngIf="messagelist.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>{{messagelist.message_date_app | date:messagelist.displayTime=='0'?'d MMM':'h:mm a'}}</div></div>
+   <div class="subtitle textoverlap">{{messagelist.message_subject}}</div>
+   <div class="description textoverlap" [innerHTML]= "messagelist.message_body"></div>
+   </div>
+  </div>
+   </ng-container>
+   <ng-template #nomsgdata><p class="text-info">No Record Found</p></ng-template>
+   </div>
+   </ion-col>
+   </ion-row>
+   </div>
+   <div *ngIf="globalObj.showdashboard"  class="twoColumn announcetheme">
+      <ion-row>
+         <!-- <ion-col col-2>
+         <div class="iconColumn"><span><ion-icon name="mail"></ion-icon></span></div>
+         </ion-col> -->
+         <ion-col col-12 class="col9">
+          <div class="mailInfo">
+         <h4 (click)="redirectLocation('MessagelistPage','notice')">{{'NOTICES_CIRCULARS' | translate}} <ion-badge *ngIf = "globalObj.noticeCircularCount>0" color="danger">{{globalObj.noticeCircularCount}}</ion-badge></h4>
+         <ng-container *ngIf="globalObj.noticeCircularExist;else nomsgdata">
+         <div class="mailBlock"  *ngFor="let announce of globalObj.noticeCircular | slice:0:2">
+           <div [ngClass]="(announce.isread) == 1 ? 'readmail' : ''" (click)="announceDetails(announce.announce_id, announce.displayName)" >
+         <div class="mailername textoverlap attachtomail">{{announce.displayName}} <div class="mailinginfo"><ion-icon *ngIf="announce.attachments!=''" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>{{announce.created_date_app | date:announce.displayTime=='0'?'d MMM':'h:mm a'}}</div></div>
+         <div class="subtitle textoverlap">{{announce.title}}</div>
+         <div class="description textoverlap" [innerHTML]= "announce.description"></div>
+         </div>
+        </div>
+               
+         </ng-container>
+         <ng-template #nomsgdata><p class="text-info">No Record Found</p></ng-template>
+         </div>
+         </ion-col>
+         </ion-row>
+         </div>
+   
+  
+   
+</ion-grid>
+  
+</ion-content>

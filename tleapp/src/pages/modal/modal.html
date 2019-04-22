@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Homework Detail</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()"><ion-icon class="iconsize" name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ng-container *ngIf="data">
+      <ion-item><b>Assignment Date:</b> {{data.creation_date | date:'d MMM'}}</ion-item>
+      <ion-item><b>Target Date:</b> {{data.target_date | date:'d MMM'}}</ion-item>
+      <ion-item><b>Assignment Title:</b> {{data.title}}</ion-item>
+      <div *ngFor="let item of data.attachments"> 
+        <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+        <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+        </span> 
+    </div>
+      <div [innerHTML]= "data.content | pipesRemovehtmltags"></div>
+  </ng-container>
+</ion-content>

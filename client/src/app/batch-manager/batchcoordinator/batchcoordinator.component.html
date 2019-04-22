@@ -1,0 +1,52 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none" style="margin-top:15px"  >
+  <div class="communication">
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''">
+      <span class="alert alert-success dblock mb25">{{successmsg}}</span>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''">
+      <span class="alert alert-danger dblock mb25">{{errormsg}}</span>
+    </div> -->
+
+    <div class="headBox">
+      <h5 class="h5 pull-left"> {{'Assign '|translate}}  {{'class_teacher'|translate}}</h5>
+    </div>
+
+    <form class="form-signin" ngNativeValidate [formGroup]="coordinatorform" (ngSubmit)="onSubmitbatch(coordinatorform.value)">
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty" formControlName="course" id="board" #board (change)="classlistfunctionbatch(board.value)">
+          <option value="">Select course </option>
+          <option *ngFor="let list of boardlistbatch" value="{{list.id}}">{{list.board_name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty" formControlName="course_type" #class (change)="onclasschangebatch(class.value)">
+          <option value="">Select course type</option>
+
+          <option *ngFor="let list of coursetype_list_batch" value="{{list.id}}">{{list.class_name}}</option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty" formControlName="batch" #section (change)="onchangesection(section.value)">
+          <option value="" selected="selected"> --Select Batch--</option>
+          <option *ngFor="let list of sectionlist_batch" value="{{list.id}}">{{list.section_name}}</option>
+
+        </select>
+      </div>
+     
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+        <select required class="form-control cleanup validate-empty" formControlName="staff" >
+          <option value="" selected="selected"> --Select Faculty--</option>
+          <option *ngFor="let list of staffList" value="{{list.userId}}">{{list.users.staff.name}}</option>
+
+        </select>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+        <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">       
+      </div>
+
+    </form>
+    </div>
+    </div>
+  

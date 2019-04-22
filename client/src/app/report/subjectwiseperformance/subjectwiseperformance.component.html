@@ -1,0 +1,133 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+	<div class="headBox" style="border:0;padding: 0; min-height: inherit"><h5 class="h5 pull-left"><a href="report/weeklytestperformance"><i class="fa fa-fw fa-arrow-left"></i></a> Subject Wise Analysis</h5></div>
+	<div class="col-sm-12 col-md-12 pull-left">
+	<ul class="nav navThemeborder">
+		<ng-container *ngFor="let subject of subjectArr; index as i;">
+			<li><a class="{{i==0?'active':''}}" data-toggle="tab" href="#{{subject.subject_name}}_{{subject.subject_id}}">{{subject.subject_name}}</a></li>
+		</ng-container>
+	</ul>
+	</div>
+	<div class="clearfix"></div>	
+	<div class="tab-content">	
+		<ng-container *ngFor="let subjectDetail of subjectWiseReport; index as j">
+			<div id="{{subjectDetail.subject_name}}_{{subjectDetail.subject_id}}" class="{{j==0?'tab-pane active':'tab-pane'}}">
+				<div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+					<div class="boxModel pull-left">
+						<div class="headBox"><h5 class="h5 pull-left">{{subjectDetail.subject_name}} Result</h5></div>
+						<div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-left-none text-center"><img src="assets/images/reports/rank.png"></div>
+						<div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-right-none">
+							<h4 class="mtp30">Rank 	:  <strong>{{subjectDetail.rank_info.get_rank}}</strong>/{{subjectDetail.rank_info.total_rank}}</h4>
+							<h4>Percentile :  <strong>{{subjectDetail.rank_info.percentile}}</strong></h4>
+						</div> 
+					</div>
+				</div>
+		
+				<div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+					<div class="boxModel pull-left">
+						<div class="headBox"><h5 class="h5 pull-left">Score</h5></div>
+						<div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-left-none text-center">
+							<p-chart type="doughnut" [options]="subjectDetail.score_option" [data]="subjectDetail.score_data"></p-chart>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 pull-left padding-right-none">
+							<h4 class="mtp13"><img src="assets/images/reports/correct.png"> <strong>{{subjectDetail.score_info.correct_que}}</strong> Correct</h4>
+							<h4><img src="assets/images/reports/incorrect.png"> <strong>{{subjectDetail.score_info.incorrect_que}}</strong> Incorrect</h4>
+							<h4><img src="assets/images/reports/skipped.png"> <strong>{{subjectDetail.score_info.skipped_que}}</strong> skipped</h4>
+						</div> 
+					</div>
+				</div>
+		
+				<div class="col-xs-12 col-sm-12 col-md-12 pull-left">
+					<div class="boxModel pull-left maxHightOuto">
+						<div class="headBox togglehead">
+							<h5 class="h5 pull-left">{{globalObj.graph_title}}
+								<div><small>{{globalObj.sub_heading}}</small></div>
+							</h5>
+							<div class="pull-right rightposition">
+								<div class="dropdown">
+									<a href="#" class="info-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-info-circle"></i></a>
+									<div class="dropdown-menu overveiwdrop">{{globalObj.info_text}} </div>
+								</div>
+
+							</div>	
+						</div>
+
+						<div class="table-view tableScroll">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<td><strong>Subject-Chapter</strong></td>	
+										<td><strong>Weightage (In IIT-JEE)</strong></td>
+										<td><strong>Performance Weightage (%)</strong></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let mastery of subjectDetail.mastery">
+										<td>{{mastery.chapter_name}}</td>
+										<td>{{mastery.weightage_in_jee}}</td>
+										<td>{{mastery.performance_upon_weightage_percentage}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+		
+				<div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+					<div class="boxModel pull-left">
+						<div class="headBox marginbottom20"><h5 class="h5 pull-left">Difficulty Wise Analysis</h5></div>
+						<div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+							<div class="text-center" *ngFor="let typegraph of subjectDetail.difficulty_data; index as k;">
+								<p-chart type="doughnut" [options]="subjectDetail.difficulty_option[k]" [data]="typegraph"></p-chart>
+							</div>
+						</div>
+						<div class="clearfix"></div>	
+						<div class="chartColorHind difficult">
+							<ul>
+								<li class="correctAns">Correct</li>
+								<li class="skippedQ">Skipped</li>
+								<li class="wrongAns">Incorrect</li>
+							</ul>
+						</div>	
+						<div class="text-center marginbottom20"><a href="report/questionsubjectanalysis" class="btn btn-sm btn-info">View Question Wise Analysis</a></div>
+					</div>
+				</div>
+		
+				<div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+					<div class="boxModel pull-left">
+						<div class="headBox" style="margin-bottom: 10px;"><h5 class="h5 pull-left">Mastery</h5>
+							<div class="pull-right dropdown"><a href="#" class="info-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-info-circle"></i></a>
+								<div class="dropdown-menu overveiwdrop">Chapters have been sorted according to its weightage in JEE exams. This analysis helps you to understand your performance in various chapters and helps you descending chapter’s priority in which you need to focus more.</div>
+							</div>	
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 pull-left">
+							<p class="text-right"><strong>Responses</strong></p>
+							<div class="divScroll">
+								<div class="pprogress-title" *ngFor="let mastery of subjectDetail.mastery">
+									<span class="pull-left">{{mastery.chapter_name}}</span>
+									<span class="pull-right">{{mastery.score_obtained}}/{{mastery.total_score}}</span>
+								
+									<div class="progress pprogress">
+										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:35%"></div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>		
+
+				<div class="col-xs-12 col-sm-6 col-md-6 pull-left">
+					<div class="boxModel pull-left">
+						<div class="headBox"><h5 class="h5 pull-left">Summary &amp; Suggestions</h5></div>
+						<div class="col-xs-12 col-sm-12 col-md-12 pull-left margintop20">
+							<p *ngFor="let expertAdvice of subjectDetail.expert_advice"><span class="title-blue-sm">{{expertAdvice.title}}</span><br>
+								<span [innerHTML]="expertAdvice.expert_comment"></span>
+							</p>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+</div>
+	

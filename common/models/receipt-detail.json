@@ -1,0 +1,102 @@
+{
+  "name": "receipt_detail",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "receiptId": {
+      "type": "number",
+      "index": true
+    },
+    "fee_head_id": {
+      "type": "number",
+      "index": true
+    },
+    "fee_head_name": {
+      "type": "string"
+    },
+    "sac_hsn_code": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "term_id": {
+      "type": "number",
+      "index": true
+    },
+    "term_name": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "number",
+      "index": true
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "section_id": {
+      "type": "number",
+      "index": true
+    },
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "fee_structure_id": {
+      "type": "number",
+      "index": true
+    },
+    "cgst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    },
+    "sgst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    },
+    "igst": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "index": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "map_receipt": {
+      "type": "belongsTo",
+      "model": "receipt",
+      "foreignKey": "receiptId"
+    },
+    "map_user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "dueshead": {
+      "type": "belongsTo",
+      "model": "fee_head_master",
+      "foreignKey": "fee_head_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

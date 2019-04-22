@@ -1,0 +1,37 @@
+
+<div class="pageWorkArea ng-scope">
+  <div class="boxwraper" style="padding-left:0px;">
+    <div class="boxModel pull-left maxHightOuto">
+      <div class="headBox">
+        <h5 class="h5 pull-left"> {{'study_plan' | translate}}</h5>
+      </div>
+      <div class="portalStudyPlan">
+        <div class="panel" id="accordion4">
+      <ng-container *ngFor="let subject of subjectarr;index as j">
+          <h4  class="has-feedback accordion_head" (click)="accodfunc(j)">{{subject.name}}</h4>
+          <div class="accordion_body" >
+              <div class="col-sm-4 col-md-4 pull-left bbb{{j}} " *ngFor="let attach of subject.attacharr"> 
+                  <div class="subjectFile" >         
+                    <h3>{{attach}}</h3>  
+                    <a class="download fa fa-download "  download="{{attach}}"
+                    target="_self" href="{{attach}}"></a>
+                  </div>
+               </div> 
+              </div>  
+          </ng-container>
+        </div>
+
+
+          
+      
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <!--Success Message after download File-->
+  <!-- <div class="successMessage hide">
+    <div><span style="border-radius: 51px;">Download file successfully</span></div>
+  </div> -->
+

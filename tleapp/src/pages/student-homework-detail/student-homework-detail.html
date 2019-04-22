@@ -1,0 +1,128 @@
+<ion-header>
+
+  <ion-navbar>
+     <div>
+         <span><ion-title>Homework Detail</ion-title></span>
+         <span class="replybtn" *ngIf="globalObj.userType=='student' && !globalObj.subexist" (click)="replyMessage()"><ion-icon class="icocolor" ios="ios-undo" md="md-undo"></ion-icon> Reply</span>
+     </div>
+
+    
+    
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>       
+  <ion-item>
+     <ion-label>{{globalObj.subjectName}}: {{globalObj.title}}</ion-label>
+  </ion-item>
+ 
+  <ion-grid class="mailhead">
+     <ion-row>
+        <ion-col col-2 class="profileimg">
+           <img [src]="globalObj.teacherImage">
+        </ion-col>
+        <ion-col col-6>
+           <p>{{globalObj.teacherName}} <span class="lightGray"></span></p>
+        </ion-col>
+        <ion-col col-4 class="text-right subdate">
+           <p><small>{{globalObj.creationDate | date:'d MMM'}}</small></p>
+        </ion-col>
+     </ion-row>
+     <ion-row>
+        <ion-col col-2 class="profileimg">
+           <img [src]="globalObj.studentImage">
+        </ion-col>
+        <ion-col col-6>
+           <p>To : Me<span class="lightGray"></span></p>
+        </ion-col>
+        <ion-col col-4 class="text-right subdate"><small>Submission: <b>{{globalObj.targetDate | date:'d MMM'}}</b></small>          
+        </ion-col>
+     </ion-row>
+     <ion-row>
+        <ion-col col-12>
+             <div *ngFor="let item of globalObj.attachment"> 
+            <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+            <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+            </span> 
+        </div>
+        </ion-col>
+     </ion-row>
+     <ion-row>
+        <ion-col col-12 class="htmlcontent">
+           <title></title>
+           <div [innerHTML]="globalObj.content | pipesRemovehtmltags">
+           </div>
+        </ion-col>
+     </ion-row>
+  </ion-grid>
+  <ng-container *ngIf="globalObj.subexist">
+     <ion-grid class="mailhead">
+        <ion-row>
+           <ion-col col-2 class="profileimg">
+              <img [src]="globalObj.studentImage">
+           </ion-col>
+           <ion-col col-6>
+              <p>Me <span class="lightGray"></span></p>
+           </ion-col>
+           <ion-col col-4 class="text-right subdate">
+              <p><small>Submitted: <b>{{globalObj.submitDate | date:'d MMM'}}</b></small></p>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+           <ion-col col-2 class="profileimg">
+              <img [src]="globalObj.teacherImage">
+           </ion-col>
+           <ion-col col-6>
+              <p>To : {{globalObj.teacherName}} <span class="lightGray"></span></p>
+           </ion-col>
+           </ion-row>
+        <ion-row>
+           <ion-col col-12>
+                <div *ngFor="let item of globalObj.submittedAttachment"> 
+                <span (click)="viewImage(item)" class="attachport"> {{item | separator: '~': 1}}
+                <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+                </span> 
+            </div>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+           <ion-col col-12 class="htmlcontent">
+              <title></title>
+              <div [innerHTML]="globalObj.submittedContent | pipesRemovehtmltags"> </div>
+           </ion-col>
+        </ion-row>
+     </ion-grid>
+  </ng-container>
+  <ng-container *ngIf="globalObj.remarksexist">
+     <ion-grid class="mailhead">
+        <ion-row>
+           <ion-col col-2 class="profileimg">
+              <img [src]="globalObj.teacherImage">
+           </ion-col>
+           <ion-col col-6>
+              <p>{{globalObj.teacherName}} <span class="lightGray"></span></p>
+           </ion-col>
+           <ion-col col-4 class="text-right subdate">
+              <p><small>Remark Date: <b>{{globalObj.remarkDate | date:'d MMM'}}</b></small></p>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+           <ion-col col-2 class="profileimg">
+              <img [src]="globalObj.studentImage">
+           </ion-col>
+           <ion-col col-6>
+              <p>To :Me <span class="lightGray"></span></p>
+           </ion-col>
+          
+        </ion-row>
+        <ion-row>
+           <ion-col col-12 class="htmlcontent">
+              <title></title>
+              <div [innerHTML]="globalObj.remarkContent | pipesRemovehtmltags"></div>
+           </ion-col>
+        </ion-row>
+     </ion-grid>
+  </ng-container>
+</ion-content>
+

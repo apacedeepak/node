@@ -1,0 +1,62 @@
+<div class="col-sm-12 col-md-12">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox">
+      <h5 class="h5 pull-left">
+        <a routerLink="/group/grouplist">
+          <i class="fa fa-fw fa-arrow-left"></i></a> {{'update_group' | translate}}
+      </h5>
+      <div class="pull-right creatNewGrp">
+        <a href="javascript:void(0);" (click)="updategroup()"> {{'update' | translate}}</a>
+      </div>
+    </div>
+    <section class="createGroupForm colorDarkBlue hdStyle">
+
+      <div class="col-sm-3 col-md-3 pull-left">
+        <h5> {{'subject' | translate}}:</h5>
+        <h4 class="ng-binding">{{subjectname}}</h4>
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <h5> {{'class' | translate}} - {{'section' | translate}}:</h5>
+        <h4 class="ng-binding">{{sectionname}}</h4>
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <h5> {{'total_members' | translate}}:</h5>
+        <h4 class="ng-binding">{{studentdetail.length}}</h4>
+      </div>
+      <div class="col-sm-3 col-md-3 pull-left">
+        <h5> {{'last_updated' | translate}}:</h5>
+        <h4 class="ng-binding">{{updateddatetime}}</h4>
+      </div>
+    </section>
+
+    <div class="filterStatus">
+      <form [formGroup]='form' class="ng-pristine ng-valid">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-right allcheck">
+                <input type="checkbox" name="all" id="allcheck" (click)="allstudentckd($event.target.checked)" style="vertical-align: middle;margin: 0 5px 0 0"> {{'all' | translate}}</th>
+              <th>  {{'admission_no' | translate}}</th>
+              <th *ngIf="product_type != 'emscc'" class="studentName"> {{'roll_no' | translate}}</th>
+              <th class="studentName">  {{'student_name' | translate}}</th>
+              <!-- <th class="studentName">Parent Name</th>       -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let details of studentdetail; index as i;">
+              <td class="text-center" formArrayName="admincheck">
+                <input type="checkbox" id="details.user_id" formControlName={{i}} (change)="adminchange(details.user_id, $event.target.checked)">
+              </td>
+              <td>{{details.admission_no}}</td>
+              <td *ngIf="product_type != 'emscc'">{{details.roll_no}}</td>
+              <td>{{details.student_name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="responseMessage" id="successpop" class="successMessage">
+    <div><span class="has-feedback"><p>{{popmessage}}</p><a  class="msgclose sm-blue-btn" routerLink="/group/grouplist"  (click)="closeme()"> {{'ok' | translate}}</a></span></div>
+  </div>
+</div>

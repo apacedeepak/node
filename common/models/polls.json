@@ -1,0 +1,115 @@
+{
+  "name": "polls",
+  "plural": "poll",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "poll_title": {
+      "type": "string",
+      "required": true
+    },
+    "poll_question": {
+      "type": "string"
+    },
+    "question_type": {
+      "type": "string"
+    },
+    "total_answer": {
+      "type": "number"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "poll_status": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "userId": {
+      "type": "number"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "Text"
+    },
+    "correct_answer": {
+      "type": "number"
+    },
+    "classId": {
+      "type": "number"
+    },
+    "sectionId": {
+      "type": "number"
+    },
+    "subjectId": {
+      "type": "number"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "channel_id": {
+      "type": "Text"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "data": {
+      "type": "Text"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "modified_date": {
+      "type": "date",
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user_polls": {
+      "type": "hasMany",
+      "model": "poll_users",
+      "foreignKey": "pollId"
+    },
+    "class": {
+      "type": "belongsTo",
+      "model": "class",
+      "foreignKey": "classId"
+    },
+    "section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "subject": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

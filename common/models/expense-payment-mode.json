@@ -1,0 +1,26 @@
+{
+  "name": "expense_payment_mode",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "payment_mode": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

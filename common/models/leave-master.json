@@ -1,0 +1,44 @@
+{
+  "name": "leave_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "leave_name": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "default": "Both"
+    },
+    "abbrevation": {
+      "type": "string"
+    },
+    "halfday_applicable": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

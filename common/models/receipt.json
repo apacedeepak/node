@@ -1,0 +1,139 @@
+{
+  "name": "receipt",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "feereceiptid": {
+      "type": "number"
+    },
+    "feereceiptno": {
+      "type": "string"
+    },
+    "receiptdate": {
+      "type": "date"
+    },
+    "cheque_date": {
+      "type": "date"
+    },
+    "challan_date": {
+      "type": "date"
+    },
+    "dd_date": {
+      "type": "date"
+    },
+    "userId": {
+      "type": "number"
+    },
+    "section_name": {
+      "type": "string"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "payment_type": {
+      "type": "string"
+    },
+    "cheque_dd_no": {
+      "type": "string"
+    },
+    "challan_no": {
+      "type": "string"
+    },
+    "account_no": {
+      "type": "string"
+    },
+    "card_no": {
+      "type": "string"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "transaction_date": {
+      "type": "date"
+    },
+    "serial_no": {
+      "type": "string"
+    },
+    "rrn_no": {
+      "type": "string"
+    },
+    "loan_no": {
+      "type": "string"
+    },
+    "proforma_on_name_of": {
+      "type": "string"
+    },
+    "name_on_proforma": {
+      "type": "string"
+    },
+    "total_amount": {
+      "type": "number"
+    },
+    "taxable_amount": {
+      "type": "number"
+    },
+    "fine_amount": {
+      "type": "number"
+    },
+    "waive_off_amount": {
+      "type": "number"
+    },
+    "cheque_bounce_fine": {
+      "type": "number"
+    },
+    "bank_name": {
+      "type": "string"
+    },
+    "bank_branch": {
+      "type": "string"
+    },
+    "cheque_dd_status": {
+      "type": "string"
+    },
+    "cheque_payble_fine": {
+      "type": "number"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "bounce_date": {
+      "type": "date"
+    },
+    "remark": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "receipt_detail": {
+      "type": "hasMany",
+      "model": "receipt_detail",
+      "foreignKey": "receiptId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "createdby": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "created_by"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

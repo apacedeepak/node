@@ -1,0 +1,35 @@
+{
+  "name": "student_homework",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "homeworkId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "homework": {
+      "type": "belongsTo",
+      "model": "homework",
+      "foreignKey": "homeworkId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

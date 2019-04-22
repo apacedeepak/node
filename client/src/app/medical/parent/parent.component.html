@@ -1,0 +1,386 @@
+
+     <div class="col-sm-12 col-md-12 pull-left padding-left-none">
+        <div class="communication pull-left" style="margin-top:15px;">
+           <div class="headBox marginbottom20">
+              <h5 class="h5 pull-left"> {{'medical_record' | translate}}</h5>
+              <ul class="nav commnicationBox pull-right" style="padding: 20px 10px 0 0; border:0;">
+                 <li><a data-toggle="tab" href="#medicationdetails"  class="active"> {{'medication_details' | translate}} </a></li>
+                 <li><a data-toggle="tab" href="#medicalhistory"> {{'medical_history' | translate}}</a></li>
+              </ul>
+           </div>
+           <div class="tab-content col-sm-12 col-md-12 pull-left ">
+              <div id="medicationdetails" class="tab-pane fade show active" >
+                 <table class="table tablestyle table-striped">
+                    <thead>
+                       <tr>
+                          <td style="width:80px;" class="text-center">{{'serial_no' | translate}}</td>
+                          <td> {{'date' | translate}}</td>
+                          <td> {{'problem' | translate}}</td>
+                          <td> {{'treatment' | translate}}</td>
+                          <td> {{'name_of_medicine' | translate}}</td>
+                       </tr>
+                    </thead>
+                    <tbody>
+                              <tr *ngFor="let list of infirmarylist; let i = index">
+                                          <td class="text-center"><b>{{i+1}}.</b></td>
+                                          <td>{{list.entry_date}}</td>
+                                          <td>{{list.problem}} </td>
+                                          <td>{{list.treatment}}</td>
+                                          <td>{{list.medicine}}</td>
+                                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+              <div id="medicalhistory" class="tab-pane fade">
+                 <ul class="nav nav-pills nav-gray">
+                    <li><a data-toggle="tab" (click)="change_medical_type('illness')" href="#illness"  class="active">  {{'illness' | translate}}</a></li>
+                    <li><a data-toggle="tab" (click)="change_medical_type('allergies')" href="#allergies">{{'allergies' | translate}}</a></li>
+                    <li><a data-toggle="tab" (click)="change_medical_type('vaccination')" href="#vaccination"> {{'vaccination' | translate}}</a></li>
+                    <li><a data-toggle="tab" (click)="change_medical_type('other')" href="#otherdetail"> {{'other_detail' | translate}}</a></li>
+                    <li><a data-toggle="tab" (click)="change_medical_type('prescription')" href="#prescription"> {{'prescription' | translate}}</a></li>
+                 </ul>
+                 <div class="tab-content">
+                    <div id="illness" class="tab-pane fade show active">
+                        <div class="text-right marginbottom20">
+                     <button type="button" (click)="changeshow()" [ngClass]="{'disable-btn': show}" [disabled]="show" class="btn btn-info btn-sm"> {{'add_more_prescription' | translate}}</button>   
+                    </div>
+                     <div *ngIf="show">
+                       <form [formGroup]="illnessForm">
+                       <div class="formArea marginbottom20">
+                            <div class="col-sm-4 col-md-4 pull-left" *ngIf="userType=='Parent'">
+                                    <label class="blockLable"><b> {{'admission_no' | translate}}:</b> {{dataobj.adm_no}}</label>
+                              </div>
+                          <div class="col-sm-4 col-md-4  pull-left" *ngIf="userType=='Parent'">
+                                <label class="blockLable"><b> {{'name' | translate}}:</b> {{dataobj.name}}</label>
+                          </div>
+                          <div class="col-sm-4 col-md-4  pull-left" *ngIf="userType=='Parent'">
+                                <label class="blockLable"><b> {{'class' | translate}}:</b> {{dataobj.class}}</label>
+                          </div>
+                          <div class="clearfix"></div>
+                          <hr/>
+                          <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                             <label class="blockLable"> {{'date' | translate}} <em class="error" *ngIf="illnessForm.get('illnessdate').hasError('required')">*</em></label>
+                             <em class="error" *ngIf="illnessForm.get('illnessdate').hasError('pattern')"> {{'date_format_invalid' | translate}}  &nbsp; (yyyy-mm-dd)</em>
+                             <input type="text" class="form-control calenerIcon"  formControlName="illnessdate">
+                          </div>
+                          <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                <label class="blockLable"> {{'illness' | translate}}<em class="error" *ngIf="illnessForm.get('illnessselect').hasError('required')">*</em></label>
+                                <select formControlName="illnessselect" class="form-control">
+                                        <option value="" label="---{{'select' | translate}}---" selected="selected">---{{'select' | translate}}---</option>
+                                        <option *ngFor="let list of illnesslst">{{list.illness_name}}</option>
+                                </select>
+                          </div>
+                          <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                <label class="blockLable"> {{'treatment' | translate}} <em class="error" *ngIf="illnessForm.get('illnesstreatment').hasError('required')">*</em></label>
+                             
+                                <textarea class="form-control messagebox" formControlName="illnesstreatment"></textarea>
+                          </div>
+                          <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                             <label class="blockLable"> {{'precaution' | translate}} <em class="error" *ngIf="illnessForm.get('illnessprecaution').hasError('required')">*</em></label>
+                             
+                             <textarea class="form-control messagebox" formControlName="illnessprecaution"></textarea>
+                          </div>
+                          <div class="col-sm-12 col-md-12 text-right pull-left">
+                             <input type="submit" value="{{'save' | translate}}" (click)="submitForm()" [ngClass]="{'disable-btn': !illnessForm.valid}" [disabled]="!illnessForm.valid" class="btn btn-info btn-sm">
+                          </div>
+                       </div>
+                       </form>
+                     </div>
+                       <table class="table tablestyle table-striped">
+                          <thead>
+                             <tr>
+                                <td style="width:80px;" class="text-center"> {{'serial_no' | translate}}</td>
+                                <td style="width:195px;"> {{'date' | translate}}</td>
+                                <td> {{'reason' | translate}}</td>
+                                <td> {{'treatment' | translate}}</td>
+                                <td> {{'precaution' | translate}}</td>
+                             </tr>
+                          </thead>
+                          <tbody>
+                             <tr *ngFor="let list of medicallist; let i = index;">
+                                <td class="text-center"><b>{{i+1}}.</b></td>
+                                <td>{{list.illness_date}}</td>
+                                <td>{{list.illness_name}}</td>
+                                <td>{{list.treatment}}</td>
+                                <td>{{list.precaution}}</td>
+                             </tr>
+                             <tr *ngIf="not_found">
+                                    <td colspan="5" class="text-center text-info">   {{'no_record_found' | translate}}</td>
+                                 </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div id="allergies" class="tab-pane fade">  
+                        <div *ngIf="show">
+                        <form [formGroup]="allergiesForm">
+                            <div class="formArea marginbottom20">
+                                    <div class="col-sm-4 col-md-4 pull-left">
+                                            <label class="blockLable"><b> {{'admission_no' | translate}}:</b> {{dataobj.adm_no}}</label>
+                                      </div>
+                                  <div class="col-sm-4 col-md-4  pull-left">
+                                        <label class="blockLable"><b> {{'name' | translate}}:</b> {{dataobj.name}}</label>
+                                  </div>
+                                  <div class="col-sm-4 col-md-4  pull-left">
+                                        <label class="blockLable"><b> {{'class' | translate}}:</b> {{dataobj.class}}</label>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <hr/>
+                               <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                  <label class="blockLable"> {{'date' | translate}} <em class="error" *ngIf="allergiesForm.get('allergiesdate').hasError('required')">*</em></label>
+                                  <em class="error" *ngIf="allergiesForm.get('allergiesdate').hasError('pattern')">  {{'date_format_invalid' | translate}}    &nbsp;(yyyy-mm-dd)</em>
+                                  <input type="text" class="form-control calenerIcon" formControlName="allergiesdate">
+                               </div>
+                               <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                    <label class="blockLable"> {{'illness' | translate}} <em class="error" *ngIf="allergiesForm.get('allergiesselect').hasError('required')">*</em></label>
+                                    
+                                    <select class="form-control" formControlName="allergiesselect">
+                                            <option value="" label="---{{'select' | translate}}---" selected="selected">---{{'select' | translate}}---</option>
+                                            <option *ngFor="let list of allergieslst">{{list.allergies_name}}</option>
+                                    </select>
+                              </div>
+                              <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                    <label class="blockLable"> {{'treatment' | translate}} <em class="error" *ngIf="allergiesForm.get('allergiestreatment').hasError('required')">*</em></label>
+                                 <textarea formControlName="allergiestreatment" class="messagebox form-control"></textarea>
+                              </div>
+                              <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                 <label class="blockLable"> {{'precaution' | translate}} <em class="error" *ngIf="allergiesForm.get('allergiesprecaution').hasError('required')">*</em></label>
+                          
+                                 <textarea class="messagebox form-control" formControlName="allergiesprecaution"></textarea>
+                              </div>
+                               <div class="col-sm-12 col-md-12 text-right pull-left">
+                                  <input type="submit" (click)="submitForm()" [ngClass]="{'disable-btn': !allergiesForm.valid}" [disabled]="!allergiesForm.valid" value="{{'save' | translate}}" class="btn btn-info btn-sm">
+                               </div>
+                            </div>
+                        </form>
+                     </div>
+                        <table class="table tablestyle table-striped">
+                                <thead>
+                                   <tr>
+                                      <td style="width:80px;" class="text-center"> {{'serial_no' | translate}}</td>
+                                      <td style="width:195px;"> {{'date' | translate}}</td>
+                                      <td> {{'reason' | translate}}</td>
+                                      <td> {{'treatment' | translate}}</td>
+                                      <td> {{'precaution' | translate}}</td>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of medicallist; let i = index;">
+                                        <td class="text-center"><b>{{i+1}}.</b></td>
+                                        <td>{{list.illness_date}}</td>
+                                        <td>{{list.allergies_name}}</td>
+                                        <td>{{list.treatment}}</td>
+                                        <td>{{list.precaution}}</td>
+                                   </tr>
+                                </tbody>
+                                <tr *ngIf="not_found">
+                                          <td colspan="5" class="text-center text-info">   {{'no_record_found' | translate}}</td>
+                                       </tr>
+                             </table>
+                    </div>
+                    <div id="vaccination" class="tab-pane fade"> 
+                         <div *ngIf="show">
+                                <form [formGroup]="vaccinationForm">
+                                        <div class="formArea marginbottom20">
+                                                <div class="col-sm-4 col-md-4 pull-left">
+                                                        <label class="blockLable"><b> {{'admission_no' | translate}}:</b> {{dataobj.adm_no}}</label>
+                                                  </div>
+                                              <div class="col-sm-4 col-md-4  pull-left">
+                                                    <label class="blockLable"><b> {{'name' | translate}}:</b> {{dataobj.name}}</label>
+                                              </div>
+                                              <div class="col-sm-4 col-md-4  pull-left">
+                                                    <label class="blockLable"><b> {{'class' | translate}}:</b> {{dataobj.class}}</label>
+                                              </div>
+                                              <div class="clearfix"></div>
+                                              <hr/>
+
+                                           <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                              <label class="blockLable"> {{'date' | translate}} <em class="error" *ngIf="vaccinationForm.get('vaccinationdate').hasError('required')">*</em></label>
+                                            <em class="error" *ngIf="vaccinationForm.get('vaccinationdate').hasError('pattern')"> {{'date_format_invalid' | translate}}   &nbsp;(yyyy-mm-dd)</em>
+                                              <input type="text" class="form-control calenerIcon" formControlName="vaccinationdate">
+                                           </div>
+                                           <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                                <label class="blockLable">{{'illness' | translate}} <em class="error" *ngIf="vaccinationForm.get('vaccinationselect').hasError('required')">*</em></label>
+                                                <select class="form-control" formControlName="vaccinationselect">
+                                                        <option value="" label="---{{'select' | translate}}---" selected="selected">---  {{'select' | translate}}---</option>
+                                                        <option *ngFor="let list of vaccinationlst">{{list.vaccination_name}}</option>
+                                                </select>
+                                          </div>
+                                          <div class="col-sm-12 col-md-12 marginbottom20 pull-left">
+                                             <label class="blockLable"> {{'precaution' | translate}} <em class="error" *ngIf="vaccinationForm.get('vaccinationprecaution').hasError('required')">*</em></label>
+                                            
+                                             <textarea class="messagebox form-control" formControlName="vaccinationprecaution"></textarea>
+                                          </div>
+                                           <div class="col-sm-12 col-md-12 text-right pull-left">
+                                              <input type="submit" (click)="submitForm()" [ngClass]="{'disable-btn': !vaccinationForm.valid}" [disabled]="!vaccinationForm.valid" value="{{'save' | translate}}" class="btn btn-info btn-sm">
+                                           </div>
+                                        </div>
+                                    </form>
+                         </div>
+                        <table class="table tablestyle table-striped">
+                                <thead>
+                                    <tr>
+                                        <td style="width:80px;" class="text-center"> {{'serial_no' | translate}}</td>
+                                        <td style="width:195px;"> {{'date' | translate}}</td>
+                                        <td> {{'reason' | translate}}</td>
+                                        <td> {{'precaution' | translate}}</td>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of medicallist; let i = index;">
+                                        <td class="text-center"><b>{{i+1}}.</b></td>
+                                        <td>{{list.illness_date}}</td>
+                                        <td>{{list.vaccination_name}}</td>
+                                        <td>{{list.precaution}}</td>
+                                   </tr>
+                                   <tr *ngIf="not_found">
+                                          <td colspan="4" class="text-center text-info">   {{'no_record_found' | translate}}</td>
+                                       </tr>
+                                </tbody>
+                             </table>
+                    </div>
+                    <div id="otherdetail" class="tab-pane fade"> 
+                        <div *ngIf="show">
+                        <form [formGroup]="otherForm">
+                            <div class="formArea marginbottom20">
+                                    <div class="col-sm-4 col-md-4 pull-left">
+                                            <label class="blockLable"><b> {{'admission_no' | translate}}:</b> {{dataobj.adm_no}}</label>
+                                      </div>
+                                  <div class="col-sm-4 col-md-4  pull-left">
+                                        <label class="blockLable"><b> {{'name' | translate}}:</b> {{dataobj.name}}</label>
+                                  </div>
+                                  <div class="col-sm-4 col-md-4  pull-left">
+                                        <label class="blockLable"><b> {{'class' | translate}}:</b> {{dataobj.class}}</label>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <hr/>
+                               <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                  <label class="blockLable"> {{'date' | translate}} <em class="error" *ngIf="otherForm.get('otherdate').hasError('required')">*</em></label>
+                                  
+                                  <em class="error" *ngIf="otherForm.get('otherdate').hasError('pattern')">    {{'date_format_invalid' | translate}}   &nbsp;(yyyy-mm-dd)</em>
+                                  <input type="text" class="form-control calenerIcon" formControlName="otherdate">
+                               </div>
+                               <div class="col-sm-12 col-md-12 marginbottom20 pull-left">
+                                    <label class="blockLable" > {{'operation' | translate}} <em class="error" *ngIf="otherForm.get('otheroperation').hasError('required')">*</em></label>
+                                   <textarea class="messagebox form-control" formControlName="otheroperation"></textarea>
+                                </div>
+                                <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                        <label class="blockLable" > {{'injury' | translate}} <em class="error" *ngIf="otherForm.get('otherinjury').hasError('required')">*</em></label>
+                                       
+                                        <textarea class="messagebox form-control" formControlName="otherinjury"></textarea>
+                                </div>
+                                <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                        <label class="blockLable" > {{'family_medical_history' | translate}} <em  class="error" *ngIf="otherForm.get('otherfmh').hasError('required')">*</em></label>
+                                        
+                                        <textarea class="messagebox form-control" formControlName="otherfmh"></textarea>
+                                </div>
+                               <div class="col-sm-12 col-md-12 text-right pull-left">
+                                  <input type="submit" (click)="submitForm()" [ngClass]="{'disable-btn': !otherForm.valid}" [disabled]="!otherForm.valid" value="{{'save' | translate}}" class="btn btn-info btn-sm">
+                               </div>
+                            </div>
+                        </form> </div>
+                        <table class="table tablestyle table-striped">
+                                <thead>
+                                   <tr>
+                                      <td style="width:80px;" class="text-center"> {{'serial_no' | translate}}</td>
+                                      <td style="width:195px;"> {{'date' | translate}}</td>
+                                      <td> {{'operation' | translate}}</td>
+                                      <td> {{'injury' | translate}}</td>
+                                      <td>   {{'family_medical_history' | translate}}</td>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of medicallist; let i = index;">
+                                        <td class="text-center"><b>{{i+1}}.</b></td>
+                                        <td>{{list.illness_date}}</td>
+                                        <td>{{list.Operation}}</td> 
+                                        <td>{{list.injury}}</td>
+                                        <td>{{list.family_medical_history}}</td>
+                                   </tr>                                 
+                                   <tr *ngIf="not_found">
+                                          <td colspan="5" class="text-center text-info">   {{'no_record_found' | translate}}</td>
+                                       </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="prescription" class="tab-pane fade">
+                        <div *ngIf="show">
+                            <form [formGroup]="prescriptionForm" enctype="multipart/form-data" (ngSubmit)="prescriptionFormSubmit(prescriptionForm.value)">
+                               
+                                <div class="formArea marginbottom20">
+                                        <div class="col-sm-4 col-md-4 pull-left">
+                                                <label class="blockLable"><b>{{'admission_no' | translate}}:</b> {{dataobj.adm_no}}</label>
+                                          </div>
+                                      <div class="col-sm-4 col-md-4  pull-left">
+                                            <label class="blockLable"><b> {{'name' | translate}}:</b> {{dataobj.name}}</label>
+                                      </div>
+                                      <div class="col-sm-4 col-md-4  pull-left">
+                                            <label class="blockLable"><b> {{'class' | translate}}:</b> {{dataobj.class}}</label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <hr/>
+                                   <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                        <label class="blockLable"> {{'upload_prescription' | translate}} <em class="error" *ngIf="prescriptionForm.get('fileupload').hasError('required')">*</em></label>
+                                      <input type="file" #fileupload formControlName="fileupload" />
+                                   </div>
+                                   <div class="col-sm-4 col-md-4 marginbottom20 pull-left">
+                                        <label class="blockLable"> {{'prescription' | translate}} <em class="error" *ngIf="prescriptionForm.get('prescriptionselect').hasError('required')">*</em></label>
+                                        
+                                        <select class="form-control" formControlName="prescriptionselect">
+                                                <option value="" selected="selected">---  {{'select' | translate}}---</option>
+                                                <option  >{{'skin_allergy' | translate}}</option>
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                     <label class="blockLable"> {{'precaution' | translate}} <em class="error" *ngIf="prescriptionForm.get('prescriptionprecaution').hasError('required')">*</em></label>
+                                     
+                                     <textarea class="messagebox form-control" formControlName="prescriptionprecaution"></textarea>
+                                  </div>
+                                  <div class="col-sm-6 col-md-6 marginbottom20 pull-left">
+                                        <label class="blockLable"> {{'treatment' | translate}}<em class="error" *ngIf="prescriptionForm.get('prescriptiontreatment').hasError('required')">*</em></label>
+                                       
+                                        <textarea class="messagebox form-control" formControlName="prescriptiontreatment"></textarea>
+                                     </div>
+                                   <div class="col-sm-12 col-md-12 text-right pull-left">
+                                      <input type="submit" [ngClass]="{'disable-btn': !prescriptionForm.valid}" [disabled]="!prescriptionForm.valid" value="{{'save' | translate}}" class="btn btn-info btn-sm">
+                                   </div>
+                                </div>
+                            
+                            </form>  
+                        </div>
+                            <table class="table tablestyle table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td style="width:80px;" class="text-center"> {{'serial_no' | translate}}</td>
+                                            <td style="width:195px;"> {{'date' | translate}}</td>
+                                            <td> {{'reason' | translate}}</td>
+                                            <td style="width:210px;">  {{'upload_prescription' | translate}}</td>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let list of medicallist; let i = index;">
+                                            <td class="text-center"><b>{{i+1}}.</b></td>
+                                            <td>{{list.illness_date}}</td>
+                                            <td>{{list.illness_name}}</td>
+                                            <td class="text-center">
+                                             <button  class="btn btn-default btn-sm" (click)="downloadprescription(list.prescription_path)"><i class="fa fa-fw fa-download"></i>Download</button> 
+                                            </td>
+                                       </tr>
+                                       <tr *ngIf="not_found">
+                                          <td colspan="4" class="text-center text-info">   {{'no_record_found' | translate}}</td>
+                                       </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+   
+        
+     <script>
+      document.getElementById("uploadBtn").onchange = function () {
+      document.getElementById("uploadFile").value = this.value;
+      };
+     </script>

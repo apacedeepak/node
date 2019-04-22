@@ -1,0 +1,206 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>My Profile</ion-title>
+      </ion-navbar>
+    <div class="profileHead">
+       <div class="profilethumb"><span *ngIf="profileData"><img src="{{globalObj.profileImage}}"></span></div>
+   
+    <span *ngIf="parentflag && globalObj.wardType == 'parent'" (click)="profileImage()" class="floatright iconround">
+        <ion-icon class="iconedit" ios="ios-create" md="md-create"></ion-icon>
+    </span>
+    
+    </div>
+    <div style="background: #fff; position: relative;" *ngIf="(globalObj.userType == 'student' || globalObj.userType == 'Student')">
+      <ion-segment [(ngModel)]="tabIdentifier" color="primary" (ionChange)="segmentChanged($event)">
+        <ion-segment-button (click)="wardType('ward')" value="ward">
+          WARD
+        </ion-segment-button>
+        <ion-segment-button (click)="wardType('parent')" value="parent">
+          PARENT
+        </ion-segment-button>
+        <ion-segment-button (click)="wardType('guardian')" value="guardian">
+          GUARDIAN
+        </ion-segment-button>
+      </ion-segment>   
+    </div>
+ </ion-header>
+
+ <ion-content class="background">
+ <div class="padding10">
+  <ion-grid *ngIf="profileData && (globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')" class="twoColumn">
+             
+    <div class="fieldcover">
+              <div class="label-md">{{ 'NAME' | translate }}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.name) ? profileData.staffdetail.name: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'EMPLOYEE' | translate }} {{'ID' | translate}}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.staff_code) ? profileData.staffdetail.staff_code: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'DESIGNATION' | translate }}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.designation) ? profileData.staffdetail.designation: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'EMAIL' | translate }} {{ 'ID' | translate }}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.email) ? profileData.staffdetail.email: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'CONTACT' | translate }} {{'NUMBER' | translate}}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.mobile) ? profileData.staffdetail.mobile: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'DATE_OF_JOINING' | translate }}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.date_of_join) ? profileData.staffdetail.date_of_join: '-'}}</div>
+              <ion-input type="text" value="" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'CLASS_TEACHER' | translate }}</div>
+              <div class="inputvalue">{{(profileData.staffdetail.class_teacher!='No') ? profileData.staffdetail.class_teacher: '-'}}</div>
+              <ion-input type="text" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'CLASS_SECTION' | translate }}</div>
+              <div class="inputvalue">{{(section)? section:'--'}}</div>
+              <ion-input type="text" class="hide"></ion-input>
+           </div>
+           <div class="fieldcover">
+              <div class="label-md">{{ 'SUBJECTS_ASSIGNED' | translate }}</div>
+              <div class="inputvalue">{{subject}}</div>
+              <ion-input type="text" class="hide"></ion-input>
+           </div>
+        </ion-grid>
+  <ion-grid *ngIf="tabIdentifier=='ward' && profileData && (globalObj.userType == 'Parent' || globalObj.userType == 'parent' || globalObj.userType == 'student' || globalObj.userType == 'Student')" class="twoColumn">
+         <div class="fieldcover">
+          <div class="label-md">{{ 'NAME' | translate }}</div>
+          <div class="inputvalue">{{(profileData.name) ? profileData.name: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md">{{ 'CLASS_SECTION' | translate }}</div>
+          <div class="inputvalue">{{(profileData.class_section) ? profileData.class_section: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md">{{ 'ADDRESS' | translate }}</div>
+          <div class="inputvalue">{{(profileData.address) ? profileData.address: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md"> {{ 'EMERGENCY' | translate }} {{ 'CONTACT' | translate }} {{ 'NUMBER' | translate }}</div>
+          <div class="inputvalue">{{(profileData.emergency_number) ? profileData.emergency_number: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md">{{ 'HOUSE' | translate }}House</div>
+          <div class="inputvalue">{{(profileData.house) ? profileData.house: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md">{{ 'TRANSPORT' | translate }}</div>
+          <div class="inputvalue">{{(profileData.transport) ? profileData.transport: '-'}}</div>
+          <ion-input type="text" value="" class="hide"></ion-input>
+       </div>
+       <div class="fieldcover">
+          <div class="label-md">{{ 'HOSTEL' | translate }}</div>
+          <div class="inputvalue">{{(profileData.hostel) ? profileData.hostel: '-'}}</div>
+          <ion-input type="text" class="hide"></ion-input>
+       </div>
+    </ion-grid>
+
+
+ <ion-grid *ngIf="tabIdentifier=='parent' && profileData && (globalObj.userType == 'Parent' || globalObj.userType == 'parent' || globalObj.userType == 'student' || globalObj.userType == 'Student')" class="twoColumn">
+     <!--<input type="text" name="fname" (click)="demo()" [(ngModel)]="globalObj.message">-->
+     <form [formGroup]="profileForm">
+   
+     <div class="fieldcover">
+         
+        <div class="label-md">{{ 'FATHER' | translate }} {{ 'NAME' | translate }}</div>
+        <div [ngClass]="(editUpdateFlag) == true ? 'editcolor':''" class="inputvalue">{{(profileData.father_name) ? profileData.father_name: '-'}}</div>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'FATHER' | translate }} {{ 'OCCUPATION' | translate }}</div>
+        <div [ngClass]="(editUpdateFlag) == true ? 'editcolor':''" class="inputvalue">{{(profileData.father_occupation) ? profileData.father_occupation: '-'}}</div>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'FATHER' | translate }} {{ 'CONTACT' | translate }} {{ 'NUMBER' | translate }}</div>
+        <div *ngIf="!editUpdateFlag" class="inputvalue">{{(profileData.father_contact) ? profileData.father_contact: '-'}}</div>
+        <ion-input minlength="10" maxlength="10" formControlName="father_contact" type="text" value="{{(profileData.father_contact) ? profileData.father_contact: ''}}" *ngIf="editUpdateFlag"></ion-input>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'FATHER' | translate }} {{ 'EMAIL' | translate }} {{ 'ID' | translate }}</div>
+        <div *ngIf="!editUpdateFlag" class="inputvalue">{{(profileData.father_email) ? profileData.father_email: '-'}}</div>
+        <ion-input formControlName="father_email" *ngIf="editUpdateFlag" type="text" value="{{(profileData.father_email) ? profileData.father_email: ''}}"></ion-input>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'MOTHER' | translate }} {{ 'NAME' | translate }}</div>
+        <div [ngClass]="(editUpdateFlag) == true ? 'editcolor':''" class="inputvalue">{{(profileData.mother_name) ? profileData.mother_name: '-'}}</div>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'MOTHER' | translate }} {{ 'OCCUPATION' | translate }}</div>
+        <div [ngClass]="(editUpdateFlag) == true ? 'editcolor':''" class="inputvalue">{{(profileData.mother_occupation) ? profileData.mother_occupation: '-'}}</div>
+     </div>
+     <div class="fieldcover">
+      <div class="label-md">{{ 'MOTHER' | translate }} {{ 'CONTACT' | translate }} {{ 'NUMBER' | translate }}</div>
+      <div *ngIf="!editUpdateFlag" class="inputvalue">{{(profileData.mother_contact) ? profileData.mother_contact: '-'}}</div>
+      <ion-input minlength="10" maxlength="10" formControlName="mother_contact" *ngIf="editUpdateFlag" type="text" value="{{(profileData.mother_contact) ? profileData.mother_contact: ''}}"></ion-input>
+   </div>
+   <div class="fieldcover">
+      <div class="label-md">{{ 'MOTHER' | translate }} {{ 'EMAIL' | translate }} {{ 'ID' | translate }}</div>
+      <div *ngIf="!editUpdateFlag" class="inputvalue">{{(profileData.mother_email) ? profileData.mother_email: '-'}}</div>
+      <ion-input formControlName="mother_email" *ngIf="editUpdateFlag" type="text" value="{{(profileData.mother_email) ? profileData.mother_email: ''}}"></ion-input>
+   </div>
+ 
+  <!--<button class="editprofilebtn" *ngIf="parentflag" (click)="toggleEditUpdate()">
+    <ion-icon name="editUpdateFlag?add:build"><img src="assets/imgs/edit.png"></ion-icon>
+  </button>-->
+  
+  
+  
+</form>
+     <button class="editprofilebtn" *ngIf="parentflag" (click)="toggleEditUpdate()">
+    <ng-container *ngIf="!editUpdateFlag"><img src="assets/imgs/edit.png"></ng-container>
+    <ng-container *ngIf="editUpdateFlag"><img src="assets/imgs/save.png"></ng-container>
+
+  </button>
+</ion-grid>
+
+<ion-grid *ngIf="tabIdentifier=='guardian' && profileData && (globalObj.userType == 'Parent' || globalObj.userType == 'parent' || globalObj.userType == 'student' || globalObj.userType == 'Student')" class="twoColumn">
+ 
+     <div class="fieldcover">
+        <div class="label-md">{{ 'NAME' | translate }}</div>
+        <div class="inputvalue">{{(profileData.mother_email) ? profileData.mother_email: '-'}}</div>
+        <ion-input type="text" value="" class="hide"></ion-input>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'CONTACT' | translate }} {{ 'NUMBER' | translate }}</div>
+        <div class="inputvalue">{{(profileData.guardian_contact) ? profileData.guardian_contact: '-'}}</div>
+        <ion-input type="text" value="" class="hide"></ion-input>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'RELATION_SHIP' | translate }}</div>
+        <div class="inputvalue">{{(profileData.guardian_relation) ? profileData.guardian_relation: '-'}}</div>
+        <ion-input type="text" value="" class="hide"></ion-input>
+     </div>
+     <div class="fieldcover">
+        <div class="label-md">{{ 'ADDRESS' | translate }}</div>
+        <div class="inputvalue">{{(profileData.guardian_address) ? profileData.guardian_address : '-'}}</div>
+        <ion-input type="text" value="" class="hide"></ion-input>
+     </div>
+ </ion-grid>
+</div>
+ </ion-content>

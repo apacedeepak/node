@@ -1,0 +1,37 @@
+.datBox {margin-top: 10px;}
+calenerIcon {
+    width: 100%;
+    background: url(/assets/images/icons/calendar.png) no-repeat 95% center !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 35px;
+    padding-left: 10px;
+    position: static !important;
+    box-shadow: none !important;
+}
+.hide{display: none;}
+.swithCase{width: 100%;float: left;margin:20px 0 10px 0;}
+.swithCase span{display: inline-block;vertical-align: top; padding: 7px;}
+.filterBox{width: 100%; float: left; background: #f2f2f2; padding: 10px; border-bottom: 1px solid #ddd;}
+.filterBox .form-control{font-size: 13px;padding: 10px;}
+.labelTitle{font-size: 14px;    padding-top: 8px;}
+input:checked + .slider {background-color: #2196F3;}
+.swithCase .slider:before{left: 4px;}
+.swithCase input:checked + .slider:before {left: 29px;}
+.attendanceFillter .form-control{font-size: 13px; padding: 10px;}
+.margin-top-15{margin-top:15px}
+.margin-bottom-15{margin-bottom:15px}
+.d-inlinle{display: inline-block; vertical-align: top;}
+/*Basic*/
+.alert{padding:8px 10px;font-size: 14px;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;font-size: 14px}
+table td a, table th a{color:#333;}
+.form-control{font-size: 14px;}
+.inputItem{ min-height: 55px;}
+.mt15{margin-top:15px;}
+.mb15{margin-bottom:15px;}
+.mt8{margin-top: 8px;}
+.btn{border-radius: 4px;}
+.mt10{margin-top:10px;}
+.mr10{margin-right: 10px}

@@ -1,0 +1,46 @@
+<!--
+  Generated template for the HomeworkRemarkPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title> Remark</ion-title>
+    <ion-buttons left>
+        <button ion-button (click)="discardAlert()"><ion-icon class="iconsize" name="close"></ion-icon></button>
+      </ion-buttons>
+    <span class="addRemark">
+    <!-- <button (click)="discardremark()"><img src="assets/imgs/trash-remark.png"></button> -->
+    <button (click)="remarkhomework()"><img src="assets/imgs/send-remark.png"> </button>
+    </span>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="boxModel pull-left maxHightOuto" style="margin-top: 15px;">
+       
+        <div class="col-sm-12 col-md-12 pull-left">
+           <div class="mailBlock padding-left-none" style="margin-top:10px;">
+              <ion-item>
+                 <div class="mailTitleLable">From</div>
+                 <h4><b>Me</b> <span class="lightGray"></span></h4>
+              </ion-item>
+              <ion-item>
+                 <div class="mailTitleLable">To </div>
+                 <h4><b >{{globalObj.studentName}}</b></h4>
+              </ion-item>
+              <ion-item>
+                 <div class="mailTitleLable">Subject</div>
+                 <h4><b >{{globalObj.subject}}</b></h4>
+              </ion-item>
+              <ion-item>
+                 <div class="mailTitleLable">Topic</div>
+                 <h4><b >{{globalObj.title}}</b></h4>
+              </ion-item>
+               <textarea placeholder="Enter text here..." rows="10" cols="30" name="htmlContent" [(ngModel)]="htmlContent" maxLength="500" ></textarea>
+            
+           </div>
+        </div>
+     </div>
+</ion-content>

@@ -1,0 +1,66 @@
+{
+  "name": "leaveApplyStudent",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "sessionId": {
+      "type": "number",
+      "index": true
+    },
+    "fromDate": {
+      "type": "date"
+    },
+    "toDate": {
+      "type": "date"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "number"
+    },
+    "modefiedDate": {
+      "type": "date"
+    },
+    "addedBy": {
+      "type": "number"
+    },
+    "addedDate": {
+      "type": "date"
+    },
+    "action": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "index": true,
+      "default": "Pending"
+    },
+    "rejectReason": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leave_belongs_user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

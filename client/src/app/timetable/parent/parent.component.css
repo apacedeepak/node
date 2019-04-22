@@ -1,0 +1,60 @@
+.attendaceScrore {
+    background: #0b3fa2;
+    color: rgb(255, 255, 255);   
+    padding: 11px;
+}
+.attendaceScrore h3 {
+    margin: 0px;
+    font-size: 16px;
+    text-align: center;
+}
+.table td, .table th {
+    padding: 8px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+.calendarDescription {
+    background: none repeat scroll 0 0 #fff;
+    text-align: center;
+    width: 100%;
+    float: left;
+    margin-top: 18px;
+}
+.calendarDescription ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.calendarDescription ul li {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 0 none !important;
+    display: inline-block !important;
+    font-family: "robotoregular" !important;
+    font-size: 14px !important;
+    margin: 0 4px 0 0 !important;
+    padding: 0 0 0 13px !important;
+    position: relative;
+}
+.calendarDescription ul li:before{content: "";
+    display: inline-block;
+    height:13px;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    width: 12px;}
+.calendarDescription ul li:first-child::before {
+    background: none repeat scroll 0 0 #ec940a;
+}
+.calendarDescription ul li:nth-child(2)::before {
+    background: none repeat scroll 0 0 #009d56;
+}
+.calendarDescription ul li:nth-child(3)::before {
+    background: none repeat scroll 0 0 #e91e63;
+}
+.calendarDescription ul li:last-child::before {
+    background: none repeat scroll 0 0 #2991ff;
+}
+.mb15{margin-bottom: 15px;}
+.mt15{margin-top: 15px;}

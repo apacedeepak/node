@@ -1,0 +1,43 @@
+{
+  "name": "otp_information",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "otp_for": {
+      "type": "string",
+      "required": true
+    },
+    "otp_number": {
+      "type": "number",
+      "required": true
+    },
+    "otp_sendto": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "pending"
+    },
+    "created_date_time": {
+      "type": "date",
+      "required": true
+    },
+    "expires": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

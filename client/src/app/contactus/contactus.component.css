@@ -1,0 +1,41 @@
+.contact-body{ width: 100%; padding-left: 300px;}
+.contactLeft{ width:300px; position: fixed; left: 0; top:0; height: 100%; padding: 20px;color: #fff;font-size: 15px;
+background: #1067be; /* Old browsers */
+background: -moz-linear-gradient(top,  #1067be 0%, #247bd2 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #1067be 0%,#247bd2 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #1067be 0%,#247bd2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1067be', endColorstr='#247bd2',GradientType=0 ); /* IE6-9 */
+}
+.contact-right-pannel{ position: relative; margin-top:-60px;}
+.corporatTitle{font-size: 20px; text-transform: uppercase;font-family: 'robotobold'; padding-bottom: 15px;border-bottom: 1px solid #95b6d8; margin-bottom: 20px;}
+.centerName{font-family: 'robotomedium';}
+.addressText,.contactText,.emailText{ position: relative; padding-left: 35px; margin-top: 15px; font-size: 14px;}
+.addressText img,.contactText img,.emailText img{ position: absolute;left: 0; top:0;}
+.contactLeft a{ color: #ffa000 ; text-decoration: underline;}
+.backTologin{ position: absolute; width: 100%; text-align: center; bottom: 30px;left: 0;}
+.backTologin a{ text-decoration: none; padding: 10px 15px; text-align: center; border:1px solid #fff; color: #fff; font-size: 14px; border-radius: 4px; display: inline-block;}
+.backTologin a:hover{ background: #ffa000 ; border-color: orange;}
+.backTologin img{ vertical-align: bottom; margin-right: 5px;}
+.branchOffcieTitle{ background:#1067BE; padding: 10px 10px 10px 20px; color: #fff; border-radius: 4px;font-family: 'robotomedium';font-size: 18px; width: 100%;float: right; margin-bottom: 15px;}
+.branchOffcieTitle img{ vertical-align: bottom; margin-right: 5px;}
+.contactRight{ padding: 20px;}
+.contactRight h4{ margin-bottom: 20px;}
+.searchCenter{float: right;}
+.searchCenter input[type=text]{ background: #fff  no-repeat calc(100% - 10px) center; border-radius: 4px; padding:0 15px 0 10px; height: 35px;font-size: 14px; color: #828383; border: 0;}
+.iconBar{ margin-bottom: 10px;}
+.iconBar span{ background: #0e7be9  no-repeat center center; width:60px; height:60px; display: inline-block; border-radius: 80%;}
+.contactAddress{ background: #efeeee; border-radius: 4px; padding: 15px; border:1px solid #ddd;font-size: 14px;}
+.contactAddress .centerName{font-size:15px;}
+.contactAddress p{ margin-bottom:5px;}
+.inCoheading{font-family: 'robotomedium';font-size: 24px;margin: 12px 0 0 0;}
+.inCoheading-sm{font-family: 'robotomedium';font-size: 19px; margin: 20px 0;font-weight: bold;}
+.mainBranch {background-color: #1773d0; border-bottom: 1px solid #ddd; color: #fff;border-radius: 4px 4px 0 0;box-shadow: 0 0 5px 4px #ccc;text-align: center;}
+.mainBranch .mainBranchName{ color:#fff; font-weight:bold;}
+.mainBranch a{color: #fff; text-decoration: underline;}
+.mainBranch address{ line-height: 23px;}
+.subBranches .searchCenter input[type=text]{border:1px solid #ced2d2; margin-bottom:20px;font-family: 'robotoregular';font-weight: normal;}
+.subBranches .contactAddress{ background:#fdfcfc; height: 100%;}
+.subBranches .contactAddress p { margin-bottom: 3px;}
+.mb20{ margin-bottom:20px;}
+.mb18{margin-bottom: 18px;}
+.padding10{padding:0 10px;}

@@ -1,0 +1,165 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+    <div class="boxModel pull-left" style="max-height: inherit;">
+        <div class="headBox">
+            <h5 class="h5 pull-left"><a [routerLink]="['/dashboard/main']"><i class="fa fa-fw fa-arrow-left"></i></a>  {{'usage_tracker' | translate}}</h5>
+            <div class="pull-right btnGroup">    
+                <!--<button id='all' class="showall btn btn-sm  btn-defult btn-info">View All</button>-->
+                <button id='student' class="showall btn btn-sm btn-defult  btn-info" (click)="clickOn('student')"> {{'student' | translate}}</button>
+                <button id='parent' class="showall btn btn-sm btn-defult"  (click)="clickOn('parent')"> {{'parent' | translate}}</button>
+                <button id='teacher' class="showall btn btn-sm btn-defult" (click)="clickOn('teacher')"> {{'teacher' | translate}}</button>
+            </div>
+        </div>
+        <div class="sAttandSerchpan">
+            <div class="col-sm-3 com-md-3 pull-left">
+
+                <!--      <div class="datBox">
+                        <input class="calenerIcon" placeholder="target date" readonly
+                        ngbDatepicker #d="ngbDatepicker" [formControl]="dpField" [value]="dp"  id="dp">
+                        <button class="btnover" (click)="d.toggle()" type="button"></button>
+                   </div>-->
+            </div>
+
+
+        </div>
+        <div class="col-sm-12 col-md-12 pull-left"> 
+            <table class="table tablestyle margin-top-10 table-hover">
+                <thead>
+                    <tr>
+                        <td align="left" rowspan="2"> {{'class' | translate}}</td> 
+                        <td align="left" rowspan="2"> {{'user_type' | translate}}</td> 
+                        <td rowspan="2"> {{'total_user' | translate}}</td> 
+                        <td colspan="2" class="text-center"> {{'mobile_android' | translate}}</td> 
+                        <td colspan="2" class="text-center"> {{'web_portal' | translate}}</td> 
+                    </tr>
+                    <tr>
+                        <td> {{'active' | translate}}</td>
+                        <td>  {{'not_active' | translate}}</td>
+                        <td> {{'active' | translate}}</td>
+                        <td>  {{'not_active' | translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let usagelist of usageDetailArr.usagelist; index as i;" class="ng-scope">
+                        <ng-container *ngIf="usagelist.user_type">
+                            <td  class="ng-binding ng-scope">{{usagelist.classSection}}</td>
+                            <td  class="ng-binding ng-scope">{{usagelist.user_type}}</td>
+                            <td  class="ng-binding ng-scope">{{usagelist.userCount}}</td>                  
+                            <td class="ng-binding ng-scope">
+                                <span *ngIf="usagelist.mobileActive!=0"><a href="javascript:void(0)" (click)="showPopUp(usagelist.class_section_id,'1', 'M',this.globalObj.user_type)" >{{usagelist.mobileActive}}</a></span>
+                                <span *ngIf="usagelist.mobileActive == 0">{{usagelist.mobileActive}}</span>
+                            </td>
+                            <td class="ng-binding ng-scope">
+                                <span *ngIf="usagelist.mobileInactive!=0"><a href="javascript:void(0)" (click)="showPopUp(usagelist.class_section_id,'0', 'M',this.globalObj.user_type)" >{{usagelist.mobileInactive}}</a></span>
+                                <span *ngIf="usagelist.mobileInactive == 0">{{usagelist.mobileInactive}}</span>
+                            </td>                  
+                            <td class="ng-binding ng-scope">
+                                <span *ngIf="usagelist.erpActive!=0"><a href="javascript:void(0)" (click)="showPopUp(usagelist.class_section_id,'1', 'E',this.globalObj.user_type)" >{{usagelist.erpActive}}</a></span>
+                                <span *ngIf="usagelist.erpActive == 0">{{usagelist.erpActive}}</span>
+                            </td>
+                            <td class="ng-binding ng-scope">
+                                <span *ngIf="usagelist.erpInactive!=0"><a href="javascript:void(0)" (click)="showPopUp(usagelist.class_section_id,'0', 'E',this.globalObj.user_type)" >{{usagelist.erpInactive}}</a></span>
+                                <span *ngIf="usagelist.erpInactive == 0">{{usagelist.erpInactive}}</span>
+                            </td>
+                        </ng-container>
+                        <ng-container *ngIf="!usagelist.user_type">
+                            <td style="background-color:#ABABAB;color:#FFFFFF" colspan="3" align="right"  class="ng-binding ng-scope"> {{'summary_of_class' | translate}}- {{usagelist.class_name}}</td>
+                                             
+                            <td style="background-color:#ABABAB;color:#FFFFFF" class="ng-binding ng-scope">
+                                <span>{{usagelist.mobileActive}}</span>
+                            </td>
+                            <td style="background-color:#ABABAB;color:#FFFFFF" class="ng-binding ng-scope">
+                                <span>{{usagelist.mobileInactive}}</span>
+                            </td>                  
+                            <td style="background-color:#ABABAB;color:#FFFFFF" class="ng-binding ng-scope">
+                                <span>{{usagelist.erpActive}}</span>
+                            </td>
+                            <td style="background-color:#ABABAB;color:#FFFFFF" class="ng-binding ng-scope">
+                                <span>{{usagelist.erpInactive}}</span>
+                            </td>
+                        </ng-container>
+                    </tr>
+
+                    <tr style="background-color:#99ca3d;color:#333">
+                        <td>&nbsp;</td>
+                        <td><b> {{'total' | translate}}</b></td>
+                        <td>{{usageDetailArr.totalUserCount}}</td>
+
+                        <td>{{usageDetailArr.totalMobileActive}}</td>
+                        <td>{{usageDetailArr.totalMobileInactive}}</td>
+
+                        <td>{{usageDetailArr.totalErpActive}}</td>
+                        <td>{{usageDetailArr.totalErpInactive}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showpopup">
+    <div class="modal-dialog" style='max-width: 700px;'>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>   {{'class' | translate}} {{'section' | translate}}</h5>   
+
+                <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="overFlowY">
+                    <table class="table tablestyle">
+                        <thead>
+                            <tr *ngIf="globalObj.user_type=='Teacher'">
+                                <!--<td width="60px" align="center">S No.</td>-->
+                                <td align="center"> {{'name' | translate}}</td> 
+                                <td align="center"> {{'username' | translate}}</td> 
+                                <td align="center"> {{'email_id' | translate}}</td> 
+                                <td align="center"> {{'mobile_no' | translate}}</td>
+                            </tr>
+                            <tr *ngIf="globalObj.user_type=='Student'">
+                                <!--<td width="60px" align="center">S No.</td>-->
+                                <td align="center"> {{'name' | translate}}</td> 
+                                <td align="center"> {{'username' | translate}}</td> 
+                                <td align="center"> {{'email_id' | translate}}</td> 
+                                <td align="center"> {{'mobile_no' | translate}}</td>
+                            </tr>
+                            <tr *ngIf="globalObj.user_type=='Parent'">
+                                <!--<td width="60px" align="center">S No.</td>-->
+                                <td align="center"> {{'name' | translate}}</td> 
+                                <td align="center"> {{'username' | translate}}</td> 
+                                <td align="center"> {{'email_id' | translate}}</td> 
+                                <td align="center"> {{'mobile_no' | translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container  *ngFor="let userlist of userListArr; index as i;">
+                                <tr *ngIf="globalObj.user_type=='Teacher'">
+                                    <!--<td align="center" class="ng-binding">{{i+1}}</td>-->
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.name}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.username}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.email}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.mobile_no}}</td>
+                                </tr>
+                                <tr *ngIf="globalObj.user_type=='Student'">
+                                    <!--<td align="center" class="ng-binding">{{i+1}}</td>-->
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.name}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.username}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.email}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.mobile_no}}</td>
+                                </tr>
+                                <tr *ngIf="globalObj.user_type=='Parent'">
+                                    <!--<td align="center" class="ng-binding">{{i+1}}</td>-->
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.name}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.username}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.email}}</td>
+                                    <td align="center" class="ng-binding ng-scope">{{userlist.mobile_no}}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

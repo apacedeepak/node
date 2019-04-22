@@ -1,0 +1,52 @@
+<!--
+  Generated template for the GroupDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Group Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Group Name: </ion-label><ion-label>{{globalObj.groupName}}</ion-label>
+   </ion-item> 
+   <ion-item>
+    <ion-label>Subject: </ion-label><ion-label>{{globalObj.subject}}</ion-label>
+   </ion-item>
+   <ion-item>
+    <ion-label>Class-Section: </ion-label><ion-label>{{globalObj.classSection}}</ion-label>
+   </ion-item>
+   <ion-item>
+    <ion-label>Total Members: </ion-label><ion-label>{{globalObj.totalMember}}</ion-label>
+   </ion-item>
+   <ion-item>
+    <ion-label>Last Updated: </ion-label><ion-label>{{globalObj.updateDateTime | date : 'd MMM, h:mm a'}}</ion-label>
+   </ion-item> 
+ 
+<ion-grid class="allStudent">
+    <ion-row >
+       <ion-col class = "{{globalObj.setClass}}" col-3>Add/Del.</ion-col>
+       <ion-col col-3>Roll No.</ion-col>
+       <ion-col col-6>Student Name</ion-col>
+       
+    </ion-row>
+   
+    <ion-row *ngFor="let student of globalObj.memberData; index as i" (click)="getValue(student.user_id)" >
+       <ion-col class = "{{globalObj.setClass}}" col-3><ion-checkbox color="dark" [checked]="student.chkflag" (click)="getValue(student.user_id)" ></ion-checkbox></ion-col>
+       <ion-col  col-3>{{student.roll_no}}</ion-col>
+       <ion-col  col-6>{{student.student_name}}</ion-col>
+            
+    </ion-row>
+
+ </ion-grid>
+<button ion-button  (click)="updateGroup()">
+  Update
+ </button>
+</ion-content>

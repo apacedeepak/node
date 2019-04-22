@@ -1,0 +1,41 @@
+{
+  "name": "mail_configuration",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "ssl": {
+      "type": "string"
+    },
+    "port_no": {
+      "type": "number"
+    },
+    "smtp_detail": {
+      "type": "string"
+    },
+    "mail_from_name": {
+      "type": "string"
+    },
+    "reply_to": {
+      "type": "string"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,45 @@
+{
+  "name": "master_user_log",
+  "plural": "masteruserlog",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "user_id": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "login_time": {
+      "type": "date",
+      "required": true
+    },
+    "logout_time": {
+      "type": "date"
+    },
+    "login_status": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "last_activity_time": {
+      "type": "date"
+    },
+    "user_session_id": {
+      "type": "string"
+    },
+    "login_return": {
+      "type": "text"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

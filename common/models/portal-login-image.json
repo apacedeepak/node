@@ -1,0 +1,30 @@
+{
+  "name": "portal_login_image",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "attachment_path": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "default": 1
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "created_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

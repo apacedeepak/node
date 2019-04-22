@@ -1,0 +1,181 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div id='mainContent'>
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{'Manage Section' | translate}}</h5>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="alert alert-success text-center mt10" *ngIf="globalObj.message">{{ globalObj.message}}</div>
+    <div class="alert alert-danger text-center mt10" *ngIf="globalObj.errorMessage">{{ globalObj.errorMessage}}</div>
+    <div class="clearfix"></div>
+
+    <div>
+      <form [formGroup]="manageBatchForm" (ngSubmit)="onSubmitDetail(manageBatchForm.value)">
+        <input type="hidden" class="form-control" value="0" formControlName='id' />
+        <div id="form">
+
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15  has-feedback">
+            <label>Session
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="academic_session_id" class="form-control required" #acdsession (change)="getBacthDateDetails(acdsession.value)">
+              <option value="">-- Select Session --</option>
+              <option *ngFor="let acadSession of globalObj.sessionList | keyvalue" value="{{acadSession.value.id}}">{{ acadSession.value.session_name }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>Batch Start Date
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="batch_start_date_id" class="form-control required">
+              <option value="">-- Batch Start Date --</option>
+              <option *ngFor="let batchDate of globalObj.batchDateList | keyvalue" value="{{batchDate.value.id}}">{{ batchDate.value.batch_start_date | date:'yyyy-MM-dd' }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>Course Mode
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="course_mode" class="form-control required">
+              <option value="">-- Course Mode --</option>
+              <option *ngFor="let courseMode of globalObj.courseModeList | keyvalue" value="{{courseMode.value.id}}">{{ courseMode.value.course_mode_name }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>{{ 'Board' | translate}}
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="course_name" class="form-control required" #courseNameId (change)="getCourseType(courseNameId.value)">
+              <option value="">-- Select {{ 'Board' | translate}} --</option>
+              <option *ngFor="let courseName of globalObj.courseNameList | keyvalue" value="{{courseName.value.id}}">{{ courseName.value.board_name }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>{{ 'Class' | translate}}
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="course_type" class="form-control required">
+              <option value="">-- Select {{ 'Class' | translate}} --</option>
+              <option *ngFor="let courseType of globalObj.courseTypeList | keyvalue" value="{{courseType.value.id}}">{{ courseType.value.class_name }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>{{ 'Section Name' | translate}}
+              <b style="color:red">*</b>
+            </label>
+            <input formControlName="batch_name" type="text" maxlength="50" class="form-control" required>
+          </div>
+
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+            <label>Room
+              <b style="color:red">*</b>
+            </label>
+            <select formControlName="room_id" class="form-control required">
+              <option value="">-- Select Room --</option>
+              <option *ngFor="let roomData of globalObj.centerRoomList | keyvalue" value="{{roomData.value.id}}">{{ roomData.value.room_name }} ({{ roomData.value.sitting_capacity }})</option>
+            </select>
+          </div>
+
+          <ng-container *ngIf="id>0">
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15 has-feedback">
+              <label>Status
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="status" class="form-control required">
+                <option value="Active" selected>Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+          </ng-container>
+
+
+          <div class="col-xs-12 col-sm-12 col-md-12  pull-left mt15 mb15">
+            <ng-container *ngIf="id>0; else elseSub">
+              <input type="submit" value="Update" class="btn btn-primary mr10" [disabled]="(id>0)? false : true">
+            </ng-container>
+            <ng-template #elseSub>
+              <input type="submit" value="Save" class="btn btn-primary mr10" [disabled]="(manageBatchForm.valid)? false : true">
+            </ng-template>
+
+            <input type="reset" value="Cancel" class="btn btn-warning mr10" (click)="clearForm()" *ngIf="id >0">
+
+          </div>
+
+        </div>
+      </form>
+
+      <div class="col-sm-12 col-md-12 pull-left mt25">
+        <!-- <h5>{{'Section' | translate}} List</h5> -->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered customTable">
+            <thead>
+              <tr>
+                <th align="center">S. No.</th>
+                <th align="center">{{'Section' | translate}} Name</th>
+                <th align="center">Session&nbsp;Name</th>
+                <th align="center">Start&nbsp;Date</th>
+                <th align="center">Course&nbsp;Mode </th>
+                <th align="center">{{"Board" | translate}}</th>
+                <th align="center">{{"Class" | translate }}</th>
+                <th align="center">Room</th>
+                <th align="center">Students</th>
+                <th align="center">Status</th>
+                <th style="width: 75px" align="center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="globalObj.batchSummary.length >0 ;else nodata">
+                <tr *ngFor="let batchData of globalObj.batchSummary | keyvalue | paginate: { itemsPerPage: 10, currentPage: page}; index as i;">
+                  <td align="center">{{i+1}}</td>
+                  <td align="center" class="success">
+                    <strong>{{batchData.value.section_name}}</strong>
+                  </td>
+                  <td align="center">{{batchData.value.session_name}}</td>
+                  <td align="center">{{batchData.value.batch_start_date | date:'dd-MMM-yy'}}</td>
+                  <td align="center">{{batchData.value.course_mode}}</td>
+                  <td align="center">{{batchData.value.board_name }}</td>
+                  <td align="center">{{batchData.value.class_name}}</td>
+
+                  <td align="center">{{batchData.value.room_name}}({{batchData.value.seating_capacity}})</td>
+                  <td align="center">{{batchData.value.total_students}}</td>
+                  <td align="center">
+                    <span *ngIf="batchData.value.status=='Active'" style="color:#008000;">{{batchData.value.status}}</span>
+                    <span *ngIf="batchData.value.status=='Inactive'" style="color:#800000;">{{batchData.value.status}}</span>
+                  </td>
+                  <td align="center">
+                    <a href="javascript:void(0)" (click)="batchEdit(batchData.value.id)">
+                      <i class="material-icons">edit</i>
+                    </a>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-template #nodata>
+                <tr>
+                  <td colspan="10" align="center">
+                    <span style="color:red;text-align: center;"> No record found..</span>
+                  </td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered" *ngIf="globalObj.batchSummary.length > 10">
+            <tbody>
+              <tr>
+                <td class="textCenter vam" style="padding-top: 25px;">
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

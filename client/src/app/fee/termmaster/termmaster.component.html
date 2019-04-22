@@ -1,0 +1,66 @@
+<div class="col-sm-12 col-md-12 padding-left-none padding-right-none">
+  <div class="boxModel pull-left maxHightOuto">
+  
+<div class="headBox mb25"><h5  class="pull-left">Add Term Name</h5></div>
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''">
+	<div class="alert alert-success mb15 mt15">{{successmsg}}</div></div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorsmsg !=''">
+<div class="alert alert-danger mb15 mt15">{{errorsmsg}}</div></div>
+<div>
+<form ngNativeValidate [formGroup]="termform" (ngSubmit)="onSubmitDetail(termform.value)"  class="form-signin">
+  <!-- <span id ="success_message" class="span_success"></span>
+  <span id ="leave_erro" class="td_error_leave" ></span> -->
+
+
+
+    <div class="col-xs-12 col-sm-3 col-md-3 mt15 pull-left inputItem">
+      <!-- <label>  <b style="color:red">*</b></label> -->
+      <input type="text" class="form-control"  formControlName='termname' placeholder="Term name">
+    </div>
+    <div class="col-xs-12 col-sm-3 col-md-3 mt15 pull-left inputItem">
+      <!-- <label>  <b style="color:red">*</b></label> -->
+      <input type="number"  min="0" max="100" class="form-control"  formControlName='priority' placeholder="Priority">
+    </div>
+    <div class="col-xs-12 col-sm-3 col-md-3 mt15 pull-left inputItem">
+   
+      <label class="checkBox mt8"><input type="checkbox" class="cleanup validate-empty " formControlName='status'autofocus="" value="1" /> Is Active?<span class="checkmark"></span></label>
+      <input type="hidden" formControlName="id" value=""> 
+    </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left text-left"><input type="submit" value="Submit" class="btn btn-primary"></div>
+  </form>
+  </div>
+
+  <div id="leaveTable" class="col-xs-12 col-sm-12 col-md-12 pull-left mt25">
+      <span id ="success_message" class="span_success"></span>    
+    <table class=" table table-striped table-bordered customTable">
+      <thead>   
+   <tr>    
+     <th class="text-center" style="width:200px">Term Name</th>
+     <th class="text-center" style="width:100px"> Status </th>
+     <th class="text-center" style="width:50px">Priority</th>
+   <th class="text-center" style="width:50px">Action</th>
+
+   </tr>
+</thead>
+    <tbody>
+        <tr *ngFor="let term of termlist">
+          <input type="hidden" value="{{term.id}}">            
+           <td class="text-center">{{term.term_name}}</td>
+            <td class="text-center">{{term.status}}</td>
+            <td class="text-center">{{term.priority}}</td>
+			<td class="text-center"> <a href="javascript:void(0)" (click)="editerm(term.id);"><i class="fa fa-fw fa-pencil"></i></a>
+        </tr>
+          <tr *ngIf="termlist.length==0">
+        <td colspan="3"><div class="text-center text-danger">No record Found...</div></td>
+        
+        </tr>
+
+         
+
+</tbody>
+</table>  
+</div>
+
+</div>
+</div>

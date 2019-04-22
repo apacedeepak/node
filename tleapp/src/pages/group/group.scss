@@ -1,0 +1,46 @@
+page-group {
+.content-md{background-color:#f4f4f4 !important;}
+.groupBlock{ background: #ffffff; box-shadow:0 0px 3px 1px #ececec; margin-bottom: 10px; overflow: hidden;
+  padding-top: 1rem; padding-bottom: 1rem; position: relative; padding-right:10rem; padding-left: 1rem;
+.col{ padding-bottom: 0; padding-top: 0;}
+.mailername {
+	font-size: 1.7rem;
+        color: #222;
+}
+.subtitle {
+	font-size: 1.4rem;
+	font-weight: 500;
+        color: #525252;
+        
+}
+ .description {
+	display: block;
+	font-size: 1.2rem;
+	color: #525252;
+ p{margin:0}
+ h1{margin:0}
+ h2{margin:0}
+ h3{margin:0}
+ h4{margin:0}
+ h5{margin:0}
+ h6{margin:0}
+ td{font-size:1.2rem; height: auto !important;
+font{font-size:1.2rem !important;}
+}
+}
+.textoverlap {
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 20px;
+    line-height: 20px;
+}
+.rblock{width:9.5rem; position: absolute; right: 0; top:0; background: #3c6ecd; height: 100%;
+display: flex;justify-content: center;text-align: center; align-items: center;color:#fff;font-size: 2rem;
+button{ position: absolute; right:0; top:0; background: transparent; border:0; color: #fff;}
+}
+}
+.text-info{color: #3c6ecd; padding: 5px 12px; margin: 0;}
+.creatGrop{position: absolute; right: 15px; top:17px; font-size: 1.5rem; padding:5px; border-radius:14px;border: 1px solid #cccccc !important; background: #285ab9 !important;color: #5385e4;color: #fff;}
+}

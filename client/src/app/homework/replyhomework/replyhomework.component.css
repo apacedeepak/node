@@ -1,0 +1,40 @@
+.browsers h5{font-size:17px;}
+.headBox,.browsers{margin-bottom:20px;}
+.uploadFiles{margin-top:15px; width:100%;}
+.hdboxcontroller .fa-arrow-left {
+    color: #3c6ecd;
+    font-size: 25px;
+}
+.hdboxcontroller a{ display: inline-block; vertical-align:top;margin-left: 5px;}
+.browsersBlock{border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow: auto;
+
+    padding: 5px;
+    width: 100%;}
+.browsersBlock .fileContainer{
+  border: 1px solid #ddd;
+    -webkit-box-shadow: 1px 1px 5px 0 #a2958a;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+    float: left;
+    margin: 5px;
+    padding: 6px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+    min-height: 135px;
+  }
+.browsersBlock .attchedContent{height: 83px; background: #fff;margin-top: 12px;}
+.browsersBlock .attchedContent img{max-height:85px; width: 85px;}
+.browsersBlock .itemTitle{font-size: 11px; color: #8C8888; margin-top: 6px; overflow: hidden;
+    white-space: nowrap; text-overflow: ellipsis}
+.browsersBlock .close {right: 5px !important; padding: 0 !important;font-size: 20px !important;}
+.headBox{min-height:50px;}
+li.checkBlock{margin:0;}
+.liGroup{padding: 0 14px; float: left;width:25%; list-style-type: none;margin: 0;}
+.liGroup label{font-weight: normal !important;  font-size: 12px;margin-right:0;}
+.liGroup input{ position: absolute;}
+.newDialog{max-width: inherit !important; width:45%;}
+.ulHide{list-style-type: none;}
+.col-md-4,.col-md-6{float: left;}

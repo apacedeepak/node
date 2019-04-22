@@ -1,0 +1,69 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb15"><h5  class="pull-left">Student search List</h5></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successmsg !=''"><span class="alert alert-success dblock mb25">{{successmsg}}</span></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errormsg !=''"><span class="alert alert-danger dblock mb25">{{errormsg}}</span></div>
+    <div class="clearfix"></div>
+    <form class="form-signin" ngNativeValidate [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" >
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem"><input type="text" class="form-control cleanup validate-empty width30" formControlName='student_name' placeholder="Student Name"  autofocus="" /></div>
+    
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem"><input type="text" class="form-control cleanup validate-empty width30" formControlName='admission_number' placeholder="Admission Number"  autofocus="" /></div>            
+                
+                <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                        <select  class="form-control cleanup validate-empty width30" formControlName="class_id" #class (change)="getSectionList(class.value);">
+                                <option value="">Select class</option>
+                                
+                                <option *ngFor="let item of classArrayList" value="{{item.id}}"  >{{ item.class_name }}</option>
+                        </select>
+                </div>  
+                
+                
+                <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                  <select class="form-control cleanup validate-empty width30" formControlName="section_id">
+                          <option value="">Select section</option>
+                          <option *ngFor="let item of sectionArrayList" value="{{item.id}}"  >{{ item.section_name }}</option>
+                  </select>
+                </div>  
+            
+             
+                 <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15 text-right">
+                     
+                        <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">   
+                        <hr/>
+                </div>
+                
+    </form>
+    
+    
+    <div id="leaveTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+       <span id ="success_message" class="span_success"></span>    
+      <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+              <tr>            
+                <th>Admission Number</th>
+                <th>Student Name</th>
+                <th>class</th>
+                <th>Action</th>
+              </tr>
+          </thead>
+          <tbody >
+              <tr  *ngFor="let data of studentlistdata;">             
+                  <td >{{data.admission_no}}</td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.students.user_have_sections[0].section_name}}</td>
+                  <td>
+                  <a href="javascript:void(0)" [routerLink]="['/fee/payment',data.userId]"><i class="fa fa-fw">Make Payment</i></a>
+                 
+                  </td>      
+                     
+                </tr>
+       
+              <tr *ngIf="studentlistdata.length == 0">
+                  <td colspan="10">
+                    No record found...
+                  </td>
+              </tr>
+    
+          </tbody>
+      </table>
+    </div>
+       </div>

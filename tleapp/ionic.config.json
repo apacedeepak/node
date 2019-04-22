@@ -1,0 +1,7 @@
+{
+  "name": "tleapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

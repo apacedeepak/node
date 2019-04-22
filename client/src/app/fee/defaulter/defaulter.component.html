@@ -1,0 +1,104 @@
+  <div class="sAttandSerchpan">
+        <div class="col-sm-3 com-md-3 pull-left  padding-left-none padding-right-none">
+                <label> {{'term' | translate}}</label>
+                <select class="form-control" #terms (change)="defaultercollection(terms.value,feehead,classname)">
+                        <option value="" selected="selected"> {{'select' | translate}} </option>
+                        <option *ngFor="let terms of termnames" value="{{terms.term_name}}">{{terms.term_name}}</option>
+                     </select>
+            </div>
+     
+      <div class="col-sm-3 com-md-3 pull-left padding-left-none padding-right-none">
+          <label> {{'fee_head' | translate}}</label>
+          <select  class="form-control" #head (change)="defaultercollection(term,head.value,classname)">
+                  <option value="" selected="selected"> {{'select' | translate}} </option>
+                  <option *ngFor="let head of headName" value="{{head.fee_head_name}}">{{head.fee_head_name}}</option>
+               </select>
+      </div>
+      <div class="col-sm-3 com-md-3 pull-left padding-left-none padding-right-none">
+            <label> {{'course type' | translate}}</label>
+            <select  class="form-control" #classs (change)="defaultercollection(term,feehead,classs.value)">
+                    <option value="" selected="selected"> {{'select' | translate}} </option>
+                    <option *ngFor="let classs of classes" value="{{classs}}">{{classs}}</option>
+                 </select>
+        </div>
+</div>
+
+
+      <div  class="col-sm-12 col-md-12 pull-left"> 
+          <table class="table tablestyle">
+                        <thead>
+                        <tr>
+                            <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                            <td align="center"> {{'course type' | translate}}</td> 
+                            <td align="center"> {{'number_of_defaulter' | translate}}</td> 
+                            <td align="center"> {{'amount' | translate}}</td> 
+                          
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let defaulter of defaulterCollect; index as i;" class="ng-scope">
+                                 <td align="center" class="ng-binding">{{i+1}}</td>
+                                 <td align="center" class="ng-binding">{{defaulter.class_name}}</td>
+                                 <td align="center" class="ng-binding">
+                                     <a href="javascript:void(0)" (click) = "miscDetails(defaulter.class_name)"> {{defaulter.user_count}}</a>
+                                 </td>
+                                 <!-- <td align="center" class="ng-binding">{{defaulter.user_count}}</td> -->
+                                 <td align="center" class="ng-binding">{{defaulter.due_amount}}</td>
+                            </tr>
+                        </tbody>
+                        <tr *ngIf="defaulterCollect.length!=0" style="background-color: #004b80;">
+                            <td colspan="3" align="right" style="color: #fff !important;" class="ng-binding ng-scope"> {{'total_amount_due' | translate}}</td>
+                            <td  align="center" style="color: #fff !important;" class="ng-binding ng-scope">{{totalamountdue}}</td>
+                      </tr>
+                      <tr *ngIf="defaulterCollect.length==0">
+                          <td  align="center" colspan="4" class="ng-binding ng-scope">{{'no_record_found' | translate}}</td>
+                      </tr>
+                    </table>
+           </div>
+            
+ 
+
+<div class="modal fade" id="showpopupdef">
+    <div class="modal-dialog" style='max-width: 700px;'>
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #004b80;">
+              <h5  style="color: #fff !important;"> {{'class_defaulter_detail' | translate}}</h5>   
+                
+       <button type="button"  style="color: #fff !important;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+            <div class="modal-body">
+                <div class="overFlowY">
+                <table class="table tablestyle">
+              <thead>
+              <tr>
+                  <td width="60px" align="center"> {{'serial_no' | translate}}</td>
+                  <td align="center"> {{'admission_no' | translate}}</td> 
+                  <td align="center">  {{'student_name' | translate}}</td> 
+                
+                  <td align="center"> {{'term' | translate}}</td> 
+                 
+                  <td align="center"> {{'amount' | translate}}</td> 
+              </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let detail of detailerecipt; index as i;" class="ng-scope">
+                          <td align="center" class="ng-binding">{{i+1}}</td>
+                         <td  align="center" class="ng-binding ng-scope">{{detail.admission_no}}</td>
+                         <td  align="center" class="ng-binding ng-scope">{{detail.name}}</td>
+                         <td  align="center" class="ng-binding ng-scope">{{detail.term_name}}</td>
+                         <td  align="center" class="ng-binding ng-scope">{{detail.amount}}</td>
+                         
+                        
+                        
+                      </tr>
+                      <tr  >
+                          <td colspan="4" align="right"  class="ng-binding ng-scope">  {{'total_amount_due' | translate}}</td>
+                          <td  align="center"  class="ng-binding ng-scope">{{totalamount}}</td>
+                    </tr>
+            </tbody>
+          </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

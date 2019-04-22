@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{globalObj.place}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  padding>
+    <div class="mailBlock">
+<div class="mailIndex">{{globalObj.place | slice:0:1}}</div>
+   <div class="mailername"><div class="textoverlap">{{globalObj.place}}</div> </div>
+   <div class="subtitle textoverlap">{{globalObj.title}}</div>
+   <div class="description">Sent on {{globalObj.created_date | date : 'd MMM, y h:mm:ss a'}}</div>
+</div>
+    
+    
+     <span *ngIf ="globalObj.attachments" (click)="viewImage(globalObj.attachments)" class="attachport"> 
+        {{globalObj.attachments | separator: '~': 1}}
+      <!-- <span class="downloadfile"><ion-icon ios="ios-download" md="md-download"></ion-icon></span> -->
+      </span>
+    
+<!--    <span *ngIf ="globalObj.attachments" class="attachport">
+        <ion-icon ios="ios-attach" md="md-attach"></ion-icon> {{globalObj.attachments | separator: '~': 1}}
+      <a download="{{globalObj.downloadUrl}}{{globalObj.attachments}}" target="_self" href="{{globalObj.downloadUrl}}{{globalObj.attachments}}" class="downloadfile">
+          <ion-icon ios="ios-download" md="md-download"></ion-icon></a>
+      </span> -->
+  
+<div class="mailreply" [innerHTML]="(globalObj.description) == ''? '': globalObj.description"></div>
+</ion-content>

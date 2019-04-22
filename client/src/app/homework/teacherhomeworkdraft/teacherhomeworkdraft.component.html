@@ -1,0 +1,173 @@
+
+  <!--Page Work Space-->
+ <div class="row" style="margin-right:0;">
+        <!--<div class="loader hide" id="loader"><div class="spinner"></div></div>-->
+      <form [formGroup]='form'>
+        <div class="col-sm-12 col-md-12">
+          <div class="topFilterBlock">
+    <div class="col-sm-2 col-md-2 text-right pull-left">
+            <h5> {{'filter_by' | translate}}:</h5>
+    </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+                <select  #class (change)="getassignedsection(class.value)" >
+                    
+                    <option value="" *ngIf="product_type != 'emscc'" selected="selected">  {{'all' | translate}} {{'class' | translate}}</option>
+                    <option value="" *ngIf="product_type == 'emscc'" selected="selected">  {{'all_course_type' | translate}}</option>
+                     <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+
+
+              </select>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+            <select #section (change)="getassignedsubject(section.value,section)">
+                <option value="" *ngIf="product_type != 'emscc'" selected="selected"> {{'all' | translate}} {{'section' | translate}}</option>
+               <option value="" *ngIf="product_type == 'emscc'" selected="selected"> {{'all' | translate}} {{'batch' | translate}}</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+
+
+              </select>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+            <select #subject (change)="getassignedclasssecandgroup(subject.value)">
+                    <option  value="" selected="selected"> {{'all' | translate}} {{'subject' | translate}}</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+
+
+              </select>
+            </div>
+            <div class="col-sm-2 col-md-2 pull-left">
+
+        <div class="dropdown">
+        <div class="checkBlock groupCheckbox">
+       <button class="dropdown-toggle slcgroup" type="button" data-toggle="dropdown"> {{'select_group' | translate}}</button>
+       <div formArrayName="groupscheckBox">
+    <ul class="dropdown-menu dropdown-menu-form">
+         <li  *ngFor="let grplist of group_list;index as i;"  aria-haspopup="false" aria-expanded="false"><input [id]="grplist.id"  type="checkbox"  formControlName="{{i}}" (click)="addtosendlist(grplist.id,grplist.group_name,'group',$event)"  [value]="grplist.id"><label [for]="grplist.id">{{grplist.group_name}}</label></li>
+
+    </ul>
+       </div>
+        </div>
+       </div>
+
+            </div>
+           <div class="col-sm-2 col-md-2 pull-left">
+		   <div class="datBox">
+             <input class="calenerIcon" placeholder="target date" [value] = "target_date_val|date:'dd-MM-yyyy'" readonly
+             name="dp" formControlName="targetdate"  ngbDatepicker #d="ngbDatepicker" [minDate]="minDate"><div class="input-group-append">
+        <button class="btnover" (click)="d.toggle()" type="button"></button>
+		</div>
+      </div>
+            </div>
+        </div>
+          <div class="boxModel pull-left maxHightOuto">
+          <div class="headBox"><h5 class="h5 pull-left"><a routerLink="/homework/main"><i class="fa fa-fw fa-arrow-left"></i></a> {{'create_homework' | translate}}</h5>
+          <div  id="doneid" class="pull-right doneidbtn">
+            <a  (click)="$event.preventDefault();createhomework('draft')" href="javascript:void(0)" title="{{'draft'|translate}}"> <img src="assets/images/save-draft.png" alt=""></a>
+            <a (click)="$event.preventDefault();createhomework('homework')" title="{{'send'|translate}}" href="javascript void(0);"><img src="assets/images/send.png" alt=""/></a>
+          </div></div>
+       <div id="replyDiv" class="comnicationBlock">
+        <div class="fullDescription">
+
+          <div class="col-sm-12 col-md-12 pull-left">
+    <div class="inputBar addClssPan" style="min-height: 40px;">
+   <label class="fieldName"> {{'send_to' | translate}}</label>  <div *ngFor="let sendtoall of sendtolist" class="alert" id="showing">{{sendtoall.value}}<a (click)="removelist(sendtoall.type,sendtoall.unique_id)" aria-label="close" data-dismiss="alert" class="close">×</a></div>
+  </div>
+ <div class="inputBar">
+ <label class="fieldName">  {{'assignment_title' | translate}}</label>
+ <input type="text" style="width: 80%;" maxlength="100" class="valCl"  formControlName="title" >
+  </div>
+ <div  class="inputBar addMail">
+                  
+                  <label *ngIf="product_type != 'emscc'" class="fieldName">  {{'all' | translate}} {{'class' | translate}}</label>
+                  <label *ngIf="product_type == 'emscc'" class="fieldName">  {{'all' | translate}} {{'batch' | translate}}</label>
+
+                   <div class="checkBlock groupCheckbox addClassBlock">
+<!--       <button class="dropdown-toggle slcgroup" type="button" data-toggle="dropdown">Select Group</button>-->
+      <a href="" class="addID dropdown-toggle pull-right"  data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i></a>
+    <div formArrayName="classseccheckBox">
+      <ul class="dropdown-menu dropdown-menu-form">
+        
+        <li *ngIf="product_type != 'emscc'" style="color: #23527c;">  {{'class' | translate}} {{'section' | translate}}</li>
+        <li *ngIf="product_type == 'emscc'" style="color: #23527c;"> {{'batch_selection' | translate}}</li>
+
+
+        <li  *ngFor="let multiclass of class_sec_list;index as i;" aria-haspopup="false" aria-expanded="false"><input [id]="multiclass.section_id" type="checkbox"  formControlName="{{i}}" (click)="addtosendlist(multiclass.section_id,multiclass.section_name,'classsec',$event)" [value]="multiclass.section_id"><label [for]="multiclass.section_id">{{multiclass.section_name}}</label></li>
+
+    </ul>
+       </div>
+        </div>
+</div>
+</div>
+      <!-- <div class="" style="">
+                             <div *ngFor="let aatt of attachments" class="alert"><a  download="{{serverurl}}{{aatt}}" target="_self" href="{{serverurl}}{{aatt}}" >
+                                 <i class="fa fw fa-paperclip"></i> {{aatt | split: '~':1}}</a><a (click)="removeattachment(aatt)" aria-label="close" data-dismiss="alert" class="close">×</a> </div>
+
+                        </div>
+            <div class="clearfix"></div>
+  <app-ngx-editor  [spellcheck]="true" formControlName="htmlContent"></app-ngx-editor>
+<input-file
+                inputId="images"
+                inputMaxFiles="10"
+                [(ngModel)]="inputFileModel"
+                (acceptedFile)="onAccept($event)"
+                (removedFile)="onRemove($event)">
+</input-file>  -->
+              <div class="col-sm-12 col-md-12 pull-left">
+                    <!-- <div class="alert alert-dismissible browsersBlock" *ngIf="isImage">
+                      <a href="#" class="close" data-dismiss="alert" (click)="removeattachmentall(isImage)" aria-label="close">&times;</a>
+                      <div class="alert alert-dismissible fileContainer" *ngFor="let files of attachments; index as i;">
+                       <a href="#" class="close" data-dismiss="alert" (click)="removeattachment(i,'draft')" aria-label="close">&times;</a>
+                       <div class="attchedContent">
+                        <img src="{{fileNameIcon[i]}}" alt="" >
+                       </div>
+                       <div class="itemTitle">{{files | split: '~':1}}</div>
+                      </div>
+
+                      <div class="alert alert-dismissible fileContainer" *ngFor="let files of filelist; index as i;">
+                       <a href="#" class="close" data-dismiss="alert" (click)="removeattachment(i,'new')" aria-label="close">&times;</a>
+                       <div class="attchedContent">
+                          <img src="{{fileimage[i]}}" alt="" >
+                       </div>
+                       <div class="itemTitle">{{files.file.name}}</div>
+                      </div>
+
+                    </div> -->
+                  <div class='browsers '>
+                     <!-- <input id="input-id" type="file" class="file" data-preview-file-type="text" > -->
+                   <!-- <input-file
+                        minimal = true
+                        id="input-id"
+                        class="file"
+                        type="file"
+                        inputId="images"
+                        inputMaxFiles="5"
+                        disableUpload=true
+                        [(ngModel)]="inputFileModel"
+                        (acceptedFile)="onAccept($event)"
+                        (removedFile)="onRemove($event)">
+
+                  </input-file> -->
+                  <input-file fileAccept="*" (acceptedFile)="onAccept($event)"  formControlName="loadimage" (deletedFile)="onRemove($event)"></input-file>
+
+                    </div>
+                    </div>
+               <div class="col-sm-12 col-md-12 pull-left"  style="padding-top:15px;">
+  <div class='editors'>
+    <app-ngx-editor   minHeight="250px" [spellcheck]="true" formControlName="htmlContent"></app-ngx-editor></div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+      </form>
+ </div>
+<div *ngIf="responseMessage" id="successpop" class="successMessage">
+        <div><span class="has-feedback"><p>{{popmessage}}</p><a routerLink="/homework/main" class="msgclose sm-blue-btn" ng-click="closeme()"> {{'ok' | translate}}</a></span></div>
+</div>
+
+
+
+
+

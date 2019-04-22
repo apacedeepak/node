@@ -1,0 +1,52 @@
+{
+  "name": "other_registration",
+  "plural": "other_registration",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "mobile_number": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "created_by": {
+      "type": "number",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_by": {
+      "type": "number"
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

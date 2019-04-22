@@ -1,0 +1,167 @@
+
+<ion-header>
+  <ion-navbar hideBackButton="true" can-swipe-back="false">
+    <button ion-button menuToggle enable-menu-with-back-views="true">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Communication</ion-title>
+    <ng-container *ngIf="globalObj.tabSelected == 'message'">
+    <ion-icon class="sIcon" (click)="search()" name="search"></ion-icon>
+    </ng-container>
+    <!-- <page-sibling *ngIf="(globalObj.userType == 'parent' || globalObj.userType == 'Parent')" (siblingChange)="siblingChange()" ></page-sibling> -->
+    <page-notification callFromType=1></page-notification>
+  </ion-navbar>
+    <div id="ListBackdrop" *ngIf="!fabButtonOpened"></div>
+    <div style="background: #fff; position: relative;">
+  <ion-segment [(ngModel)]="globalObj.tabSelected">
+      <ion-segment-button value="message">
+        {{globalObj.placeholder}}
+        <span *ngIf="globalObj.inboxCount != 0 && globalObj.placeholder=='Inbox'">({{globalObj.inboxCount}})</span>
+      </ion-segment-button>
+      <ion-segment-button value="noticeCircular">
+         Notice & Circular
+        <span *ngIf="globalObj.noticeCirCount != 0">({{globalObj.noticeCirCount}})</span>
+      </ion-segment-button>
+<!--      <ion-segment-button value="circular">
+        Circular
+      </ion-segment-button>-->
+    </ion-segment>
+    </div>
+
+<!--    <div style="background: #fff; position: relative;">
+            {{globalObj.placeholder}}
+    </div>-->
+</ion-header>
+
+
+<ion-content [scrollEvents]="true">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="pull to refresh">
+
+    </ion-refresher-content>
+  </ion-refresher>
+    <ng-container *ngIf="globalObj.tabSelected == 'message'">
+    <span *ngIf="globalObj.fromDate" class="maillable">{{globalObj.fromDate | date:'d MMM'}}<span *ngIf="globalObj.toDate">To {{globalObj.toDate | date:'d MMM'}}</span>
+    <button type="button" (click)="removeDate()">
+        <ion-icon name="close"></ion-icon></button></span>
+    
+    <span *ngFor="let itemname of globalObj.receipentName"  class="maillable">{{itemname.name}} 
+    <button type="button" (click)="removeReceipient(itemname.user_id)">
+        <ion-icon name="close"></ion-icon></button></span>
+        </ng-container>
+   
+   
+ <div class="paddingTop" [ngSwitch]="globalObj.tabSelected">
+   <ion-list *ngSwitchCase="'message'">
+     <ng-container *ngIf="globalObj.messageExist;else nomsgdata">
+<div *ngFor="let mess of messageList" class="mailBlock">
+    
+    <div [ngClass]="(mess.message_isread) == 'Yes' ? 'readmail' : ''" (click)="messageDetails(mess.message_id, mess.place)">  
+<div class="mailIndex">{{mess.display_name | slice:0:1}}</div>
+<div *ngIf="mess.display_name" class="mailIndex">{{mess.display_name | slice:0:1}}</div>
+<div *ngIf="!mess.display_name" class="mailIndex">N</div>
+   <div *ngIf="mess.display_name" class="mailername textoverlap attachtomail">{{mess.display_name}} 
+       <div class="mailinginfo"><ion-icon *ngIf="mess.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{mess.message_date_app | date:mess.displayTime=='0'?'d MMM':'h:mm a'}}</div>
+   </div>
+   <div *ngIf="!mess.display_name" class="mailername textoverlap attachtomail">No Recipient 
+       <div class="mailinginfo"><ion-icon *ngIf="mess.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{mess.message_date_app | date:mess.displayTime=='0'?'d MMM':'h:mm a'}}</div>
+   </div>
+   <div class="subtitle textoverlap">{{(mess.message_subject) == '' ? '': mess.message_subject}}</div>
+   <!-- <div class="description textoverlap" [innerHTML]="(mess.message_body) == ''? '': mess.message_body"></div> -->
+   <div class="description textoverlap" [innerHTML]= "mess.message_body | pipesRemovehtmltags"></div>
+</div>  
+    
+</div>
+      
+
+     </ng-container>
+<ng-template #nomsgdata><p class="text-info">No Record Found</p></ng-template>
+</ion-list>
+     
+     
+<!--<ion-list *ngSwitchCase="'notice'">
+  <ng-container *ngIf="globalObj.noticeExist;else nonoticedata">
+<div *ngFor="let notice of globalObj.notice" class="mailBlock">
+    <div (click)="announceDetails(notice.announce_id, 'Notice')">  
+<div class="mailIndex">N</div>
+   <div class="mailername textoverlap attachtomail">Notice <div class="mailinginfo"><ion-icon *ngIf="notice.attachments"  class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{notice.created_date | date:'d MMM, y'}}</div></div>
+   <div class="subtitle textoverlap">{{notice.title}}</div>
+   <div class="description textoverlap" [innerHTML]="(notice.description) == ''? '': notice.description"></div> 
+   <div class="description textoverlap">{{notice.description | pipesRemovehtmltags}}</div>
+</div>  
+</div>
+      
+</ng-container>
+<ng-template #nonoticedata><p class="text-info">No Record Found</p></ng-template>
+</ion-list>-->
+     
+     
+     
+<!--<ion-list *ngSwitchCase="'circular'">
+  <ng-container *ngIf="globalObj.circularExist;else nocirculardata">
+<div *ngFor="let circular of globalObj.circular" class="mailBlock">
+    <div (click)="announceDetails(circular.announce_id, 'Circular')">  
+<div class="mailIndex">C</div>
+   <div class="mailername textoverlap attachtomail">Circular <div class="mailinginfo"><ion-icon *ngIf="circular.attachments"  class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{circular.created_date | date:'d MMM, y'}}</div></div>
+   <div class="subtitle textoverlap">{{circular.title}}</div>
+   <div class="description textoverlap" [innerHTML]="(circular.description) == ''? '': circular.description"></div>
+</div>  
+</div>
+      
+</ng-container>
+<ng-template #nocirculardata><p class="text-info">No Record Found</p></ng-template>
+</ion-list>-->
+     
+     <ion-list *ngSwitchCase="'noticeCircular'">
+  <ng-container *ngIf="globalObj.noticeCircular.length != 0;else nocirculardata">
+<div *ngFor="let circular of globalObj.noticeCircular" class="mailBlock">
+    <div [ngClass]="(circular.isread) == '1' ? 'readmail' : ''" (click)="announceDetails(circular.announce_id, circular.displayName)">  
+<div class="mailIndex">{{circular.displayName | slice:0:1}}</div>
+   <div class="mailername textoverlap attachtomail">{{circular.displayName}}<div class="mailinginfo"><ion-icon *ngIf="circular.attachments"  class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon> {{circular.created_date_app | date:'d MMM'}}</div></div>
+   <div class="subtitle textoverlap">{{circular.title}}</div>
+   <!-- <div class="description textoverlap" [innerHTML]="(circular.description) == ''? '': circular.description"></div> -->
+   <div class="description textoverlap" [innerHTML]= "circular.description | pipesRemovehtmltags"></div>
+</div>  
+</div>
+      
+</ng-container>
+<ng-template #nocirculardata><p class="text-info">No Record Found</p></ng-template>
+</ion-list>
+     
+     
+</div>
+
+</ion-content>
+
+<ion-fab *ngIf="globalObj.tabSelected=='message'"  right bottom #fab>
+         <button id="fabbutton" ion-fab (click)="openFabButton()">
+       <ion-icon name="add"></ion-icon>
+    </button>
+   <ion-fab-list id="fablist" side="top">
+   <ul class="floatList" >
+   <li class="fablabeldraft">
+   <ion-label class="floatLable">Draft</ion-label>
+   <button class="draft" ion-fab (click)="getMessageList('Draft','click',fab)">
+         <img class="width100" src="assets/imgs/draft.png"> 
+     </button></li>
+     
+   <li class="fablabelsendmail"><ion-label class="floatLable">Sent</ion-label>  
+   <button class="sent" ion-fab (click)="getMessageList('Sent','click',fab)">
+         <img class="width100" src="assets/imgs/sendmail.png"> 
+     </button></li>
+     
+      <li class="fablabelinbox"><ion-label class="floatLable">Inbox</ion-label>
+     <button class="inbox"  ion-fab (click)="getMessageList('Inbox','click',fab)">
+         <img class="width100" src="assets/imgs/inbox.png"> 
+     </button></li>
+     
+     <li class="fablabelcompose">
+     <ion-label class="floatLable">Compose</ion-label>
+     <button class="compose" (click)="redirectTo(fab)" ion-fab>
+             <img class="width100" src="assets/imgs/compose.png">
+     </button>
+     </li>
+     </ul>
+   </ion-fab-list>
+ </ion-fab>

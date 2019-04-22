@@ -1,0 +1,77 @@
+{
+  "name": "user_notes",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "notesId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "sender": {
+      "type": "number"
+    },
+    "receiver": {
+      "type": "number"
+    },
+    "shared_with": {
+      "type": "string"
+    },
+    "groupsId": {
+      "type": "number"
+    },
+    "sectionId": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "shared_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "notes": {
+      "type": "belongsTo",
+      "model": "notes",
+      "foreignKey": "notesId"
+    },
+    "sender_user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "sender"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

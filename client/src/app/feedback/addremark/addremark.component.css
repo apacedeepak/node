@@ -1,0 +1,98 @@
+.selectClass{ margin-top: 14px;}
+.labelmargin{ margin-top:20px;}
+.studentList{ width: 100%;float: left;padding:30px 10px 0px 10px}
+.stBox{ min-height: 140px; border-radius:4px; background: #fff; box-shadow:0 0 13px 4px rgba(221, 221, 221, 0.63); margin-bottom:15px; padding:20px 10px 10px 10px; position: relative;}
+.spic{ width: 60px; height:60px; background-repeat: no-repeat; background-position: center top; background-size: cover; display:inline-block; border-radius:80%;box-shadow:0 0 0px 4px #fff;}
+.spic:hover{box-shadow:0 0 0px 4px #66bb6a;}
+.picContainer{width: 67px; position:  relative; margin: 0 auto;}
+.stName{ font-weight: 500; margin-top:6px; font-size: 14px; color: #222;}
+.stName a{ color: #222;}
+.stName a:hover{ color: #3c6ecd;}
+.stName .badge{font-weight: normal;background-color: #a4a3a3;}
+.linkBx{position: absolute; width: 100%; bottom: 10px; left: 0; text-align: center; border-top: 1px solid #ddd; padding-top: 19px;}
+.linkBx a{ display: inline-block;color: #706c6c; margin:0 12px;}
+.linkBx i{font-size:22px;}
+.linkBx span{margin-top: -40px;min-height: 20px;min-width: 20px;margin-left: -5px; background-color: transparent !important;color: #222; font-weight:normal;}
+.likebtn span{ background-color:#5ca982}
+.unlikebtn span{ background-color:#ca386a;margin-left: -8px;}
+.commentbtn span{ background-color:#2f5baf;margin-left: -10px;}
+.center-Tab{ min-width: 320px;max-width: 470px; margin:15px auto 35px auto; overflow: hidden; border-radius: 28px; list-style-type: none; border:1px solid #004b80; padding:0; background: #004b80;}
+.center-Tab li{ width:50%;float: left; text-align: center;font-size: 16px;background: #fff;}
+.center-Tab li a{ display: block; padding:10px; color: #222; text-decoration: none;}
+.center-Tab li a.active{ background:#004b80; color: #fff;}
+.studentpage{ margin-top: 15px;}
+.studentpage .spic{ width: 70px; height:70px;}
+.studentpage .spic:hover{box-shadow:none;}
+.fIcon{ width:80px; height: 80px; background-color: #66bb6a; background-repeat: no-repeat; background-position: center center; display:inline-block; border-radius:80%;}
+.fIcontainer{ width:80px; margin:0 auto; position: relative;}
+.tabPadding{padding-right: 15px; padding-left: 15px;}
+.tabPadding .stName{font-size: 14px;}
+.tabPadding .stBox a{ width: 100%;float: left;}
+.tabPadding .stBox label{ font-weight: normal; margin: 0;}
+.checkIcon{width: 35px; height: 35px; background: #fff; color: #66bb6a; text-align: center; border-radius: 80%; position: absolute; top: -5px; right: -15px; line-height: 34px;font-size: 23px;}
+.negativeBg{ background-color:#eb7472 !important}
+.points{ min-width: 25px; height: 25px; line-height: 25px; border-radius: 80%; position: absolute; top:-5px; right:-8px; background: #42a7f5; color: #fff; font-size:11px;}
+.addction{min-height: 140px; display: flex; justify-content: center; max-width: 150px; align-items: center;text-align: center;}
+.addction span{ width: 60px; height: 60px; display: inline-block; font-size: 30px; background:#3C6ECD; border-radius: 80%;line-height: 60px; margin-bottom:6px;}
+.addction button{ border:0; background: transparent;}
+.addction button span{color: #fff;}
+.addction p{ font-size: 15px;}
+.addction button p{ color: #305caf;}
+.addction button:hover span{background:#245cc5;}
+.inputbehaviou{ position:relative; padding-right: 95px;border-radius:4px; width: 100%; float: left; margin-bottom:40px;}
+.inputbehaviou input[type=text]{ padding: 12px 10px; border: 0; background:  transparent;border: 1px solid #ccc; display:block; width:100%; height: 49px; vertical-align: top;border-radius:4px;}
+.inputbehaviou input[type=file]{ padding: 12px 10px; border: 0; background:  transparent;border: 1px solid #ccc; display: inline-block; width:100%; vertical-align: top;border-radius:4px;}
+.inputbehaviou label{font-weight: normal;}
+.inputbehaviou input[type=submit]{ position: absolute; right:8px; color:#fff;font-size: 18px;bottom:0px; background: #3c6ecd;width: 80px; border:0;height: 49px;border-radius:4px;}
+.horizental{ position: relative; padding-left:95px; min-height: 80px;margin-bottom: 15px;}
+.horizental .fIcon{height:60px;width:60px; position: absolute; left: 15px; top:10px; background-size: 80%;background-size: 60%;}
+.horizental .fIcon{}
+.horizental .stName{ margin-top: 8px;}
+.editb a{color:#3c6ecd; font-size:25px; float:none !important; width: inherit !important;}
+.stBox:hover .fIcon{background-color: #58ae5c; box-shadow:0 0 0 2px #fff, 0 0 0 6px #58ae5c}
+.stBox:hover .negativeBg{ box-shadow:0 0 0 2px #fff, 0 0 0 6px #ea615f}
+.overhiden{overflow: hidden;}
+.sturemarksbox{ position: static; bottom:0px; background: #fff; left: 0; width: 100%; padding:0px;-moz-transition: all 0.3s ease-in-out 0s;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-o-transition: all 0.3s ease-in-out 0s; }
+.stBox:hover .sturemarksbox{ bottom:0;}
+.sturemarksbox textarea{ margin-bottom: 0px; border: 1px solid #ddd; width: 100%;height:60px;padding: 5px;font-size: 12px;resize: none;color: #222;line-height: 17px;}
+.checkskill{ display:block; position: relative; cursor: pointer;-webkit-user-select: none; -moz-user-select: none;-ms-user-select: none;user-select: none;font-weight:normal; color:#414141 !important; font-size:15px;}
+.checkskill input{position: absolute;opacity: 0;left: 0; width: 26px;height: 26px; z-index:1;top: 0; margin: 0;}
+.checkskill .checkbtn:before{ position: absolute; content: "";font-family: 'FontAwesome';
+width: 35px; height: 35px; background: #fff; color: #66bb6a; text-align: center; border-radius: 80%; position: absolute; top: -5px; right: -15px; line-height: 34px;font-size: 23px;
+ display: none;
+}
+.checkskill input:checked ~ .checkbtn:before{content: "\f00c"; display: block;}
+.maxh{ height: 200px;}
+.btnBlue{border-radius: 28px; text-decoration: none; color:#fff !important; background-color: #2196f3; border:0; margin-bottom: 20px; margin-top: 20px; padding:10px 15px;}
+.btnBlue:hover{ background-color: #1787e0; color: #fff !important;}
+.tabPadding div[class*="col-"],.studentList div[class*="col-"]{padding-left: 8px; padding-right: 8px;}
+.disabledbtn{ pointer-events: none; opacity: .5;}
+.pointReports{ padding:10px 0 15px 0; width: 100%;float: left;}
+.pointReports h3{ margin: 15px 0 25px 0;font-size: 18px;color: #161c26;}
+.theader td{color: #333 !important; font-family: 'robotomedium'; padding-top: 10px; border-top: 0!important;}
+.btn-info:hover { color: #fff;background-color:#265bbf !important; border-color:#265bbf !important;}
+.colasptable{ width: 100%;background: #f8f8f8;}
+.colasptable td{ padding:8px; border-bottom:1px solid #ddd !important}
+.colasptable thead td{color: #333 !important; font-family: 'robotomedium'; background-color: #e7e6e6; }
+.colasptable tbody td{vertical-align: top; font-size: 13px;}
+.pointReports .btn{border: 1px solid #ddd;color: #333;}
+.pointReports .btn:hover{ background-color: #f2f2f2;}
+.pointtab{ border-radius:6px; margin-bottom: 15px; max-width: 100%;}
+.colsphd{ background-color: #3c6ecd !important; border-color:#c7d7f5 !important; color: #fff; cursor: pointer;}
+.colsphd:hover{ background-color:#3161bc  !important;}
+.colsphd td{color: #fff !important; vertical-align: middle;}
+.brosefile{ cursor: pointer; width: 30px; height:30px; border-radius:80%; position: absolute; text-align: center; line-height: 30px; overflow: hidden; bottom:0; right: -10px; background:#FE4080; color: #fff;}
+.brosefile input[type=file]{ position: absolute; left: 0; top:0; z-index: 1; height: 40px; opacity:0;}
+.horizental input[type=text]{border: 1px solid #ddd; padding: 5px; display: none;margin-top: -3px;}
+.horizental .savebehave{color: #58ae5c; display: none;}
+.horizental .savebehave:hover{ color:#46a24a;}
+.horizental .brosefile{ display:none;}
+.editBehaviour .editbehave{ display: none;}
+.editBehaviour .savebehave{ display: inline-block;}
+.editBehaviour .stName label{ display: none;}
+.editBehaviour .brosefile{ display:inline-block;}
+.editBehaviour input[type=text]{ display:inline-block;width:80%;}
+.firstLetter{height: 100%; width: 100%; color: #fff; position: absolute; left: 0; top: 0;font-weight: bold;
+    text-align: center;display: flex; justify-content: center;align-items: center;font-size: 30px;}

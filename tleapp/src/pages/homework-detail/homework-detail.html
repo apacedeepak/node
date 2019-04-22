@@ -1,0 +1,109 @@
+<!--
+   Generated template for the HomeworkDetailPage page.
+   
+   See http://ionicframework.com/docs/components/#navigation for more info on
+   Ionic pages and navigation.
+   -->
+   <ion-header>
+      <ion-navbar>
+         <ion-title>Homework Detail</ion-title>
+      </ion-navbar>
+        <div style="background: #fff;">
+<!--       <div *ngIf="globalObj.result && (globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')">
+         <div *ngIf="!globalObj.actionFlag && !globalObj.remarkFlag">-->
+       <ion-segment [(ngModel)]="detail_filter" color="primary" (ionChange)="segmentChanged()">
+            <ion-segment-button value="allhome">
+               All
+            </ion-segment-button>
+            <ion-segment-button value="checked">
+                  Checked
+            </ion-segment-button>
+            <ion-segment-button value="unchksubmit">
+                  Unchecked
+            </ion-segment-button>
+            <ion-segment-button value="nsubmit">
+                  Not Submitted
+            </ion-segment-button>
+            <!-- <ion-segment-button value="submit">            
+               Submitted
+            </ion-segment-button> -->
+            <ion-segment-button value="latesubmit">
+               Late
+            </ion-segment-button>
+            </ion-segment>
+   </div>
+         <!--</div></div>-->
+   </ion-header>
+   
+   
+   <ion-content padding>
+      <!-- Teacher case  -->
+      <div *ngIf="globalObj.result && (globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')">
+         <div *ngIf="!globalObj.actionFlag && !globalObj.remarkFlag">
+            
+            <ion-item class='text-input-div'>
+               Topic: <span>{{globalObj.result.title}}</span>
+               <button class='addMail' (click)="openEyeModal(globalObj.result)">
+                  <ion-icon class="ios-eye" item-right><img src="/assets/imgs/eye.png"></ion-icon>
+               </button>
+            </ion-item>
+            <!--<ion-grid class="gridinfo">
+               <ion-row>
+                  <ion-col col-4>
+                     Subject<br>
+                     <b>{{globalObj.result.subject}}</b>
+                  </ion-col>
+                  <ion-col col-4>
+                     Class Section <br><b>{{globalObj.result.class_section_name}}</b>
+                  </ion-col>
+                  <ion-col col-4>
+                     Last Updated <br><b>{{globalObj.result.target_date}}</b>
+                  </ion-col>
+               </ion-row>
+            </ion-grid>-->
+            <ion-item class="itemTitle">All Students</ion-item>
+            <ion-grid class="allStudent">
+               <ion-row *ngIf="globalObj.student_detail.length > 0">
+                  <ion-col col-2>R.No.</ion-col>
+                  <ion-col col-3>Student<br> Name</ion-col>
+                  <ion-col col-5>Submitted <br>Date</ion-col>
+                  <ion-col col-2>Check</ion-col>
+                  </ion-row>
+               <ion-row *ngFor="let obj of globalObj.student_detail; index as i" (click)="actionFunc(obj.user_id, obj.name)">
+                  <ion-col  col-2>{{obj.roll_no}}</ion-col>
+                  <ion-col  col-3>{{obj.name}}</ion-col>
+                  <ion-col  col-5 *ngIf = "obj.submitted_date == ''">
+                     
+                        <ion-select (ionChange)="changeSubmitStatus($event, obj.user_id, detail_filter)">
+                           <ion-option [selected]="(obj.submitted_date == '')" value="not_submit">Not Submitted</ion-option>
+                           <ion-option [selected]="(obj.submitted_date != '')" value="submit">Submitted</ion-option>
+                        </ion-select>
+                                         
+                  </ion-col>
+                  <ion-col  col-5 *ngIf = "obj.submitted_date != ''">{{obj.submitted_date | date:'d MMM'}}</ion-col>
+                  <ion-col  col-2 class='textcenter'>
+                     <!-- <button ion-button (click)="changeremarkstatus($event, obj.user_id, detail_filter)"> -->
+                        <ion-icon (click)="changeremarkstatus($event, obj.user_id, detail_filter)" [ngClass]= "closeFlag[obj.user_id]" name = "{{closeFlag[obj.user_id]}}"></ion-icon>
+                     <!-- </button> -->
+                  </ion-col>
+                 </ion-row>               
+            </ion-grid>
+            <ion-item class="notfound" *ngIf="globalObj.student_detail.length == 0">
+                  No Record Found
+            </ion-item>
+            
+            <ion-item *ngIf="globalObj.student_detail.length > 0" class="btnITem">
+               <ion-buttons><button ion-button (click)="$event.preventDefault(); submitdata(detail_filter);">Done</button></ion-buttons>
+            </ion-item>
+         </div>
+      </div>
+      <!-- Parent & student case -->
+      <div *ngIf="globalObj.data && (globalObj.userType == 'parent' || globalObj.userType == 'Parent' || globalObj.userType == 'student' || globalObj.userType == 'Student' )">
+         <ion-item>{{globalObj.data.subject_name}}: {{globalObj.data.homework_title | pipesRemovehtmltags}}</ion-item>
+         <ion-item>{{globalObj.data.teacher_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{globalObj.data.added_date_app | date:'d MMM, y'}}</ion-item>
+         <ion-item>To : Me &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submission: {{globalObj.data.target_date_app | date:'d MMM, y'}}</ion-item>
+         <ion-icon *ngIf="globalObj.data.attachment_count>0"  ios="ios-link" md="md-link" class=""></ion-icon>
+         <ion-item>{{globalObj.data.homework_content | pipesRemovehtmltags}} </ion-item>
+      </div>
+   </ion-content>
+   

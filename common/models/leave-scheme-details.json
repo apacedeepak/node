@@ -1,0 +1,59 @@
+{
+  "name": "leave_scheme_details",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "leave_schemeId": {
+      "type": "number"
+    },
+    "financial_yearId": {
+      "type": "number"
+    },
+    "leave_masterId": {
+      "type": "number"
+    },
+    "accumulation": {
+      "type": "string"
+    },
+    "no_of_days": {
+      "type": "number"
+    },
+    "min_days": {
+      "type": "number"
+    },
+    "max_limit": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "schoolId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leavemaster": {
+      "type": "belongsTo",
+      "model": "leave_master",
+      "foreignKey": "leave_masterId"
+    },
+    "leavescheme": {
+      "type": "belongsTo",
+      "model": "leave_scheme",
+      "foreignKey": "leave_schemeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

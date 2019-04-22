@@ -1,0 +1,71 @@
+    <div class="col-sm-12 col-md-12 padding-left-none">
+<!--      <div class="topFilterBlock">
+        <div class="col-sm-6 col-md-6 text-right pull-left">
+            <h5>Filter by :</h5>
+    </div>
+          <div class="col-sm-2 col-md-2 pull-left">
+            <select #class (change)="getassignedsection(class.value)">
+              <option value="" *ngIf="product_type != 'emscc'" selected="selected">All Class</option>
+               <option value="" *ngIf="product_type == 'emscc'" selected="selected">All Course Type</option>
+             <option *ngFor="let class of classlist" [selected]="class_id==class.class_id" [value]="class.class_id" >{{class.class_name}}</option>
+
+            </select>
+          </div>
+          <div class="col-sm-2 col-md-2 pull-left">
+               <select #section (change)="getassignedsubject(section.value,section)">
+               <option value="" *ngIf="product_type != 'emscc'" selected="selected">All Section</option>
+               <option value="" *ngIf="product_type == 'emscc'" selected="selected">All Batch</option>
+                    <option *ngFor="let section of sectionlist" [selected]="section_id==section.section_id" [value]="section.section_id" >{{section.section_name}}</option>
+
+              </select>
+          </div>
+          <div class="col-sm-2 col-md-2 pull-left">
+          <select #subject (change)="getassignedclasssecandgroup(subject.value)">
+                    <option  value="" selected="selected">All Subject</option>
+                    <option *ngFor="let subject of subjectlist" [selected]="subject_id==subject.subject_id" [value]="subject.subject_id" >{{subject.subject_name}}</option>
+
+              </select>
+          </div>
+      </div>-->
+       <div class="boxModel pull-left maxHightOuto" style="padding-bottom:15px;">
+         <div class="headBox"><h5 class="h5 pull-left"> {{'groups' | translate}}</h5>
+        <div class="pull-right creatNewGrp"><a title="{{'New Group'|translate}}" class="plussing" routerLink="/group/creategroup"><i class="fa fa-fw fa-plus"></i></a></div>
+          </div>
+      <div class="leftRightgap">
+          <div class="col-sm-12 col-md-6 pull-left" *ngFor="let grpdata of grouplists">
+            <div class="mailBox teacherGrup" >
+              <a routerLink="/group/updategroup/{{grpdata.groupId}}">
+                <h2>{{grpdata.group_name}}</h2>
+                <h3>{{grpdata.section_name}}</h3>
+                <h3>{{grpdata.subject_name}}</h3>
+                <h4> {{'last_updated' | translate}}: {{grpdata.updated_date_time}}</h4>
+              </a>
+              <div class="homeRvmail tgroupSbmenu">
+                <a href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="overflowMenu pull-right">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+                <div class="dropdown-menu" >
+                <ul style="margin:0;">
+                 <li><a [routerLink]="['/homework/createhomework']" [queryParams]="{groupid: grpdata.groupId}"> {{'assign_homework' | translate}}</a></li> 
+                  <li><a [routerLink]="['/communication/compose']" [queryParams]="{groupid: grpdata.groupId}"> {{'send_message' | translate}}</a></li>   
+                <li style="margin:0;"><a href="javascript:void(0)" (click)="deletegroup(grpdata.groupId)"> {{'delete' | translate}}</a></li>
+                </ul>
+                </div>
+              <div class="studentCount">
+                <span>{{grpdata.count}}</span>  {{'student' | translate}}
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+                <div *ngIf="grouplistsdisplay && grouplists.length == 0">
+                   <div class="text-info text-center">  {{'no_data_available' | translate}}</div>
+                </div>
+       </div>
+
+   <div *ngIf="responseMessage" id="successpop" class="successMessage">
+        <div><span class="has-feedback"><p>{{popmessage}}</p><a  class="msgclose sm-blue-btn" href="javascript:void(0)"  (click)="closeme()"> {{'ok' | translate}}</a></span></div>
+ </div>
+</div>

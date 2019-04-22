@@ -1,0 +1,9 @@
+<ng-container *ngIf="userType=='parent'">
+  <app-parent></app-parent>
+</ng-container>
+<ng-container *ngIf="userType=='student'">
+  <app-student></app-student>
+</ng-container>
+<ng-container *ngIf="userType!='student' && userType!='parent'">
+  <app-teacher></app-teacher>
+</ng-container>

@@ -1,0 +1,198 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+     <h5 class="pull-left">Batch Planning</h5>
+     <!--<span class="float-right"><button (click)="addToggle()" id="btToggle" class="btn btn-info btn-xs customSearchTiTle" >Add</button></span>-->       
+  </div>
+  <div class="clearfix"></div>
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15" *ngIf="globalObj.successMessage != ''">               
+    <div class="alert alert-success text-center">{{ globalObj.successMessage}}</div>             
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15" *ngIf="globalObj.errorMessage != ''">               
+  <div class="alert alert-danger text-center">{{ globalObj.errorMessage}}</div>             
+  </div>
+  
+  <div id="show_add_batch_planning">
+     <!-- *ngIf="show_add_batch_planning"-->       
+    <form class="form-horizontal" [formGroup]="batchPlanningForm" (ngSubmit)="onSubmitDetail(batchPlanningForm.value)">      
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+        <label class="control-label" for="course">Board/Course: </label>
+           <input type="hidden" class="form-control" value="" formControlName='id'   />           
+        <select formControlName="course" class="form-control required" #courseIds (change)="getCourseTypeList(courseIds.value)">      <option value="">Select Course</option>
+           <option [value]="course.id" *ngFor="let course of globalObj.boardCourseList">{{course.board_name}}</option>           
+        </select>         
+        </div>
+    
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+        <label class="control-label" for="class">Class /Course Type: </label>
+           <select formControlName="course_type" class="form-control required" #classIds (change)="getSectionList(classIds.value)">           
+           <option value="">Select Course Type</option>
+           <option [value]="course_type.id" *ngFor="let course_type of globalObj.CoursetypeList">               {{course_type.class_name	}}</option>           </select>         
+        </div>
+     
+    
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+        <label class="control-label" for="batch">Batch: </label>
+           <select formControlName="batch" class="form-control required" #sectionIds (change)="getSubjectListBySection(sectionIds.value)">           
+           <option value="">Select Batch</option>
+           <option [value]="section.id" *ngFor="let section of globalObj.sectionList">               {{section.section	}}</option>           
+        </select>         
+        </div>
+   
+    
+     
+         <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+        <label class="control-label" for="batch">Select Days: </label>
+           <div formArrayName="days" >
+              <ng-container *ngFor="let eqData of globalObj.weekdaysList | keyvalue; index as i">
+         <label class="checkBox mr10">
+        <input class="form-control-" type="checkbox" [formControlName]="i" #check (change)="dayselect(check.checked,i)"/>{{eqData.value.name}} <span class="checkmark"></span>   
+        </label>
+        </ng-container>
+           </div>
+        </div>
+     
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15"><hr></div>
+    
+     <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorchange !=''">
+        <div class="alert alert-danger mb15 mt15">{{errorchange}}</div>
+     </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left">
+    <div class="row mb15">  
+     <div class="col-xs-12 col-sm-2 col-md-2 pull-left"><strong>Lecturer Type</strong></div> 
+     <div class="col-xs-12 col-sm-2 col-md-2 pull-left"><strong>Subject</strong></div>  
+     <div class="col-xs-12 col-sm-2 col-md-2 pull-left"><strong>Teacher</strong></div>  
+     <div class="col-xs-12 col-sm-2 col-md-2 pull-left"><strong>Start Time</strong></div>  
+     <div class="col-xs-12 col-sm-2 col-md-2 pull-left"><strong>End Time</strong></div>
+     </div>
+	</div>
+    
+     <div class="col-xs-12 col-sm-12 col-md-12 pull-left">
+        <div class="row mb15" *ngFor="let item of length_arr; let i=index" >
+           <!--[formGroupName]="pointIndex"-->         
+           <div class="col-xs-12 col-sm-2 col-md-2 pull-left" id="lecher_type">
+              <div formArrayName="lecher_type">
+                 <select   class="form-control required" [formControlName]="i" placeholder="Lecher Type" title="Lecher Type" #lectype (change)="addstarttime(lectype.value,i)" >           
+                 <option value=""> Select Type </option>
+                 <option value="{{duration.duration_name}}" *ngFor="let duration of globalObj.getDurationListFilter"  [attr.disabled]="i==0 && duration.duration_name=='Lunch Break'  ? 'disabled' : null"  >               {{duration.duration_name	}}</option>
+                 </select>         
+              </div>
+           </div>
+			
+           <div class="col-xs-12 col-sm-2 col-md-2 pull-left" id="subject">
+              <div formArrayName="subject">
+                 <select    class="form-control required" [formControlName]="i" placeholder="Subject"  title="Subject" #subjectIds [attr.disabled]="disable_teacher_subject.includes(i) ? 'disabled' : null"  (change)="getStaffListBySchool()">           
+                 <option value=""> Select Subject</option>
+                 <option value="{{subject.class_subjectId}},{{subject.subjectId}}" *ngFor="let subject of globalObj.subjectList;index as j"  >               {{subject.subjectName	}}</option>
+                 </select>           
+              </div>
+           </div>
+			
+           <div class="col-xs-12 col-sm-2 col-md-2 pull-left" id="teacher">
+              <div formArrayName="teacher">
+                 <select    class="form-control required" [formControlName]="i" placeholder="teacher" title="teacher" #staff [attr.disabled]="disable_teacher_subject.includes(i) ? 'disabled' : null" (change)=teacherchange(staff.value,i) >
+                    <option value=""> Select Teacher</option>
+                    <option value="{{staff.user_id}}" *ngFor="let staff of globalObj.staffList;index as k"  >{{staff.name	}} ({{staff.staff_code}})</option>           
+                 </select>
+              </div>
+           </div>
+			
+           <div class="col-xs-12 col-sm-2 col-md-2 pull-left" id="start_time">
+              <div formArrayName="start_time">
+        <input type="time" class="form-control required" value="" [formControlName]='i'  placeholder="start time" title="Please insert start time" autofocus=""  [attr.disabled]="i!=0 ? 'disabled' : null" #starttimezero (change)="setEndTimeOld(starttimezero.value, lectype.value,i,staff.value)" />        </div>
+           </div>
+			
+           <div class="col-xs-12 col-sm-2 col-md-2 pull-left" id="end_time">
+              <div formArrayName="end_time"><input type="time" class="form-control required" [attr.disabled]="true" value="" [formControlName]='i' placeholder="end time"          title="Please insert end time" autofocus=""   />         </div>
+           </div>
+		   
+			<div class="col-xs-12 col-sm-2 col-md-2 pull-left">
+			 <button type="button" class="btn btn-success mr10" (click)="addSellingPoint()"><i class="fa fa-plus"></i> </button>
+			 <button type="button" class="btn btn-danger"  (click)="deleteSellingPoint()"><i class="fa fa-minus"></i></button>
+			</div>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 pull-right mt15">     
+     <input type="submit" value="Save" class="btn btn-primary" />    
+     
+    </div>
+     
+     </form> 
+  </div>
+  <div id="show_list_batch_planning">
+     <!-- *ngIf="show_list_batch_planning"-->    
+     <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt30">
+        <span id="success_message" class="span_success"></span>      
+        <table class="table table-striped table-bordered customTable">
+           <thead class="thheadbg">
+              <tr >
+                  <th>S.No</th>
+                 <th>Created On</th>
+                 <th>Course</th>
+                 <th>Batch</th>
+                 <th>Days</th>
+                 <th>Time</th>
+                 <th>Action</th>
+              </tr>
+           </thead>
+           <tbody>
+              <tr *ngFor="let batch of batchPlanningListtable; index as i">
+                  <td>{{i+1 }} </td> 
+                <td>{{batch.date | date: 'dd-MM-yyyy' }} </td>
+                 <td>{{batch.course}}</td>
+                 <td>{{batch.batch}} </td>
+                 <td>{{batch.days}} </td>
+                 <td>{{batch.time}} </td>
+                 <td>           <a href="javascript:void(0)" (click)="showPopUp(batch.id)" >View</a>           </td>
+              </tr>
+         <tr *ngIf="batchPlanningListtable.length==0">
+              <td colspan="6" class="text-center text-info" >No Data Found</td>
+         </tr>
+           </tbody>
+        </table>
+     </div>
+     <div>   </div>
+  </div>
+  <!--   MODEL -->  
+  <div class="modal fade" id="showpopup">
+     <div class="modal-dialog" style='max-width: 900px;'>
+        <div class="modal-content">
+           <div class="modal-header" style="background-color: #004b80;">
+              <h5 style="color: #fff !important;"> Batch Planning Details </h5>
+              <button type="button"style="color: #fff !important;"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>         
+           </div>
+           <div class="modal-body">
+              <div class="overFlowY">
+                 <table class="table tablestyle">
+                    <thead>
+                       <tr>
+                          <td  align="center">S. No</td>
+                          <td  align="center">Section Name</td>
+                          <td  align="center">Board Name</td>
+                          <td  align="center">Subject Name</td>
+                          <td  align="center">Day</td>
+                          <td  align="center">Start Time</td>
+                          <td  align="center">End Time</td>
+                          <td  align="center">Faculty</td>
+                       </tr>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let batchDetail of globalObj.batchPlaningPopUpListData; index as i">
+                          <td  align="center">{{i+1}}</td>
+                        <td  align="center">{{batchDetail.section_name}}</td>
+                          <td  align="center">{{batchDetail.board_name}}</td>
+                          <td  align="center">{{batchDetail.subject_name}}</td>
+                          <td  align="center">{{batchDetail.day}}</td>
+                          <td  align="center">{{batchDetail.start_time}}</td>
+                          <td  align="center">{{batchDetail.end_time}}</td>
+                          <td  align="center">{{batchDetail.faculty_info}}</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  

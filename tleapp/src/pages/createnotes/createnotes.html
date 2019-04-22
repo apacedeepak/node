@@ -1,0 +1,92 @@
+
+<!-- <ion-header>
+
+    <ion-navbar>
+    <ion-title>
+    <ion-grid>
+  <ion-row>
+  <ion-col col-4>Create New Notes</ion-col> 
+  <ion-col col-8 text-right><a href="javascript:void(0)" >
+      <ion-icon class="paerclip"><img src="/assets/imgs/papperclip.png"></ion-icon></a> 
+      <ion-button *ngIf="globalObj.place != 'draft'" type="submit"   class="leftmargin" (click)="onSubmit(form.value,'created')"><ion-icon ios="ios-document" md="md-document"></ion-icon></ion-button>
+      <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'shared')"><ion-icon name="send"></ion-icon></ion-button>
+  </ion-col> 
+  </ion-row>
+ </ion-grid>
+ </ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header>
+    <ion-navbar>
+   <ion-title> Create New Notes</ion-title>
+   <div class="htool">
+        <a href="javascript:void(0)" (click)="openAttachmentLocation()">
+            <ion-icon class="paerclip"><img src="/assets/imgs/papperclip.png"></ion-icon></a> 
+<!--        <ion-button *ngIf="globalObj.place != 'draft'" type="submit"   class="leftmargin" (click)="onSubmit(form.value,'created')">
+            <ion-icon class="colorwhite" ios="ios-document" md="md-document"></ion-icon></ion-button>-->
+        <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'shared')"><ion-icon class="colorwhite" name="send"></ion-icon></ion-button>
+   </div>
+    </ion-navbar>
+    </ion-header>
+
+
+<ion-content padding>
+    <ion-grid>
+        <form [formGroup]="form">
+            <div class='rowborder tomail'>
+                
+                <div class='text-input-div paddingleft'>
+                    <ion-label class='toclass'>To</ion-label>
+                <ng-container *ngIf="globalObj.selectedType=='classsection'">
+                    <span  class="maillable" >{{globalObj.className}}-{{globalObj.sectionName}} </span>
+                    </ng-container>
+                    <ng-container *ngIf="globalObj.selectedType!='classsection'">
+                <span  class="maillable" *ngFor="let itemname of globalObj.receipentName">{{itemname.name}}
+                    <button type="button" (click)="removeReceipient(itemname.user_id)">
+                        <ion-icon name="close"></ion-icon></button></span>
+                </ng-container>
+                    <button (click)="notesRecepient()" class='addMail'><ion-icon ios="ios-add" md="md-add"></ion-icon></button>
+                </div>    
+             </div>
+            
+            
+            <div class='rowborder' *ngIf="globalObj.selectedType && (globalObj.selectedType=='teachers' || globalObj.selectedType =='individuals')">
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-label>Subject</ion-label>
+                    </ion-col>
+                    <ion-col col-8>
+                        <ion-item (click)="getSubject()">{{globalObj.selectSubjectName}}</ion-item>
+                        
+                    </ion-col>
+                </ion-row>
+            </div> 
+            <div class='rowborder' *ngIf="globalObj.selectedType && globalObj.selectedType !='teachers' && globalObj.selectedType !='individuals'">
+                <ion-row>
+                 <ion-col col-4>
+                        <ion-label>Subject</ion-label>
+                </ion-col>
+                 <ion-col col-8>
+                        <ion-item class="bordernone">{{globalObj.subjectName}}</ion-item>
+                </ion-col>
+                    </ion-row>
+            </div> 
+            
+            <div class='rowborder'>
+               <ion-input type="text" formControlName="topic"  placeholder="Topic"></ion-input>
+            </div>
+            <div class="margin15">
+                <ion-col class="paddingnone" *ngFor="let photo of globalObj.photos; let id = index">
+                    
+               <span class="attachport"><ion-icon class="paerclip"><img src="/assets/imgs/papperclip-black.png"></ion-icon> {{photo}} <button  class="removefile" type="button" (click)="removeAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+                 </ion-col>
+            </div>
+            <!--<div class=''>-->
+                <div contenteditable="true" id="contentText" (click)="clearPlaceholder()" [innerHTML]= "globalObj.enter_text | pipesRemovehtmltags" class="contentarea" ></div>
+                <!--<ion-textarea class="contentarea" formControlName="htmlContent" placeholder="Enter a text"></ion-textarea>-->
+            <!--</div>-->
+             
+        </form>
+    </ion-grid>
+</ion-content>

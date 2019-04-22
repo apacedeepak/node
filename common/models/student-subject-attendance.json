@@ -1,0 +1,90 @@
+{
+  "name": "student_subject_attendance",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "sectionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "subjectId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "schoolId": {
+      "type": "number",
+      "index": true
+    },
+    "sessionId": {
+      "type": "number",
+      "index": true
+    },
+    "attendance_status": {
+      "type": "string",
+      "required": true,
+      "index": true,
+      "default": "PP"
+    },
+    "attendance_date": {
+      "type": "date",
+      "required": true
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "batch_start_time": {
+      "type": "string",
+      "default": "0"
+    },
+    "batch_end_time": {
+      "type": "string",
+      "default": "0"
+    },
+    "lecture_id": {
+      "type": "string",
+      "default": "0"
+    },
+    "leaveapplyId": {
+      "type": "number",
+      "default": "0"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "sectionId"
+    },
+    "applyleave": {
+      "type": "belongsTo",
+      "model": "leaveApplyStudent",
+      "foreignKey": "leaveapplyId"
+    },
+    "subject": {
+      "type": "belongsTo",
+      "model": "subject",
+      "foreignKey": "subjectId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

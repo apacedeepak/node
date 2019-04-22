@@ -1,0 +1,146 @@
+<!--
+  Generated template for the RecepientpopupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <div>
+          <span class="backclass">
+              <ion-icon class='backbutton' (click)="dismiss()" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          </span>
+          <span class="aligncenter"><ion-title>{{globalObj.selectedTypes}}</ion-title></span>
+          
+          <!--<div class='hdMenu'>-->
+            <!--<ion-icon class='marginright15' ios="ios-close" md="md-close" (click)="dismiss()"></ion-icon>-->
+              <span class='hdMenu' (click)="okFunction()" >Done</span>
+          <!--<ion-icon ios="ios-checkmark" md="md-checkmark" ></ion-icon>-->
+<!--          </div>-->
+          
+      </div>
+
+ </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  
+    
+    <ion-item class="fontStyle" *ngIf="globalObj.parentStudBoth">
+        <ion-label class="fontStyle">Send to student</ion-label>
+        <ion-checkbox class="fontStyle" [checked]="globalObj.parentStudCheck" (click)="sendToStud(globalObj.parentStudCheck)" color="dark"></ion-checkbox>
+      </ion-item>
+   
+    
+    <ng-container *ngIf="globalObj.parentStud && globalObj.parentStudBoth">
+        <ion-list class="marginzero" *ngFor="let seclist of sectionlists; index as i">
+            
+             <ion-grid>
+            <ion-row class="bordernone">
+            <ion-col class="bordernone" col-7>
+                <ion-item class="fontStyle bordernone" *ngIf="!seclist.check">
+                    <ion-checkbox [checked]="seclist.check" (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)" color="dark"></ion-checkbox>
+                 <ion-label>  {{seclist.section_name}}</ion-label></ion-item>
+                <ion-item class="bordernone fontStyle" *ngIf="seclist.check">
+                    <!--<ion-checkbox [checked]="seclist.check" (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)" color="dark"></ion-checkbox>-->
+                 <ion-label (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)">  {{seclist.section_name}}</ion-label></ion-item>
+            </ion-col>
+            <ion-col col-5 class="text-right fontStyle">
+                <ng-container *ngIf="seclist.check">
+                <ion-item><ion-checkbox class="fontStyle" [(ngModel)]="checkedItems[i]" color="dark" (click)="allSelandUnsel(globalObj.parentStudBoth, seclist.section_id,i)"></ion-checkbox>
+                <ion-label class="fontStyle">All</ion-label></ion-item>
+                    </ng-container>
+            </ion-col>
+            </ion-row>
+            </ion-grid>
+           <ng-container *ngIf="seclist.check">
+            <ion-item class="fontStyle" *ngFor="let student of seclist.assignStudent;index as j" class="itemList">
+                <ion-label class="fontStyle">{{student.student_name}}</ion-label>
+                <ion-checkbox class="fontStyle" [checked]="student.check" (click)="checkedStudent(globalObj.parentStudBoth,student.user_id,i,j)"  color="dark"></ion-checkbox>
+              </ion-item>
+            </ng-container>
+    </ion-list>
+        <div class='aligncenter fontStyle' *ngIf="sectionlists.length == 0">No record found.</div>
+    
+    </ng-container>
+    
+    
+    <ng-container *ngIf="globalObj.parentStud && !globalObj.parentStudBoth">
+        <ion-list class="marginzero"  *ngFor="let seclist of sectionlist; index as i">
+            
+                <!--<ion-grid>-->
+            <ion-row class="bordernone">
+            <ion-col col-7 class="bordernone">
+                <ion-item *ngIf="!seclist.check">
+                    <ion-checkbox [checked]="seclist.check" (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)" color="dark"></ion-checkbox>
+                <ion-label class="fontStyle">{{seclist.section_name}}</ion-label></ion-item>
+                <ion-item *ngIf="seclist.check">
+                    <!--<ion-checkbox [checked]="seclist.check" (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)" color="dark"></ion-checkbox>-->
+                <ion-label class="fontStyle" (click)="getStudent(globalObj.parentStudBoth, seclist.section_id,i)">{{seclist.section_name}}</ion-label></ion-item>
+            </ion-col>
+            <ion-col col-5 class="text-right">
+                <ng-container *ngIf="seclist.check">
+                <ion-item class="fontStyle"><ion-checkbox class="fontStyle" [(ngModel)]="checkedItems[i]" color="dark" (click)="allSelandUnsel(globalObj.parentStudBoth, seclist.section_id,i)"></ion-checkbox>
+                <ion-label class="fontStyle">All</ion-label></ion-item>
+                    </ng-container>
+            </ion-col>
+            </ion-row>
+            <!--</ion-grid>-->
+            <ng-container *ngIf="seclist.check">
+            <ion-item *ngFor="let student of seclist.assignStudent; index as j" class="itemList">
+                <ion-label class="fontStyle">{{student.student_name}}</ion-label>
+                <ion-checkbox class="fontStyle" [checked]="student.check" (click)="checkedStudent(globalObj.parentStudBoth,student.user_id, i, j)"  color="dark"></ion-checkbox>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+         <div class='aligncenter fontStyle' *ngIf="sectionlist.length == 0">No record found.</div>
+
+    </ng-container>
+    
+    <ng-container *ngIf="!globalObj.parentStud && globalObj.selectedType != 'group'">  
+        <ion-item  *ngFor="let resp of displayRecepient; index as i">
+        <ion-label class="fontStyle">{{resp.name}}</ion-label>
+        <ion-checkbox class="fontStyle" [checked]="resp.check" (click)="addFinalReceipent(resp.user_id, i,resp.check)" color="dark"></ion-checkbox>
+      </ion-item>
+        <div class='aligncenter fontStyle' *ngIf="displayRecepient.length == 0">No record found.</div>
+        </ng-container>
+    
+    <ng-container *ngIf="globalObj.selectedType == 'group'">
+        <div class="backgroundblue">
+           <ion-grid>
+               <ion-row class="selectrow">
+                   <ion-col col-6>
+                       <ion-select class="selectall" (ionChange)="getSubject()" [(ngModel)]="globalObj.selectClassSec">
+                            <ion-option value="">Select Class</ion-option>
+                            <ion-option *ngFor="let seclist of sectionlist" [value]="seclist.section_id">{{seclist.section_name}}</ion-option>
+                            
+                       </ion-select>
+                      </ion-col>
+                   <ion-col col-6>
+                       <ion-select class="selectall" (ionChange)="getGroup()" [(ngModel)]="globalObj.selectSub">
+                            <ion-option  value="">Select Subject</ion-option>
+                            <ion-option *ngFor="let sub of globalObj.groupSubject"  [value]="sub.subject_id">{{sub.subject_name}}</ion-option>
+                       </ion-select>
+                       </ion-col>
+                  
+               </ion-row>
+           </ion-grid>
+       </div>
+        
+        <ion-item  *ngFor="let resp of globalObj.groupAll; index as i">
+        <ion-label class="fontStyle">{{resp.group_name}}</ion-label>
+        <ion-checkbox class="fontStyle" [checked]="resp.check" (click)="groupSelect(i)"  color="dark"></ion-checkbox>
+      </ion-item>
+        
+        <div class='aligncenter fontStyle groupmessage' *ngIf="globalObj.groupFlag && globalObj.selectSub && globalObj.groupAll.length == 0">No group assign to this class-section and subject.</div>
+        
+        
+    </ng-container>
+    
+        
+   
+</ion-content>

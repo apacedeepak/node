@@ -1,0 +1,155 @@
+{
+  "name": "section",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "section_name": {
+      "type": "string",
+      "required": true
+    },
+    "classId": {
+      "type": "number",
+      "index": true
+    },
+    "class_name": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "class_order": {
+      "type": "number"
+    },
+    "stream_name": {
+      "type": "string",
+      "required": true
+    },
+    "section_seats": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "course_mode_id": {
+      "type": "number"
+    },
+    "boardId": {
+      "type": "number"
+    },
+    "section": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "number",
+      "index": true
+    },
+    "batch_start_date_id": {
+      "type": "number",
+      "index": true
+    },
+    "room_id": {
+      "type": "number",
+      "index": true
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "number"
+    },
+    "updated_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "schools": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "schoolId"
+    },
+    "section_have_users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "sectionId",
+      "through": "user_sections"
+    },
+    "section_groups": {
+      "type": "hasMany",
+      "model": "groups",
+      "foreignKey": "sectionId"
+    },
+    "section_subjects": {
+      "type": "hasMany",
+      "model": "class_subject",
+      "foreignKey": "class_subjectId",
+      "through": "user_subject"
+    },
+    "user_have_subject": {
+      "type": "hasMany",
+      "model": "user_subject",
+      "foreignKey": "sectionId"
+    },
+    "board": {
+      "type": "belongsTo",
+      "model": "boards",
+      "foreignKey": "boardId"
+    },
+    "section_class": {
+      "type": "belongsTo",
+      "model": "class",
+      "foreignKey": "classId"
+    },
+    "startdateData": {
+      "type": "belongsTo",
+      "model": "batch_date_master",
+      "foreignKey": "batch_start_date_id"
+    },
+    "sessionData": {
+      "type": "belongsTo",
+      "model": "session",
+      "foreignKey": "session_id"
+    },
+    "roomData": {
+      "type": "belongsTo",
+      "model": "center_room_master",
+      "foreignKey": "room_id"
+    },
+    "userData": {
+      "type": "hasMany",
+      "model": "user_sections",
+      "foreignKey": "sectionId"
+    },
+    "coursemode": {
+      "type": "belongsTo",
+      "model": "course_mode",
+      "foreignKey": "course_mode_id"
+    },
+    "user_sections": {
+      "type": "hasMany",
+      "model": "user_sections",
+      "foreignKey": "sectionId"
+    },
+    "section_board": {
+      "type": "belongsTo",
+      "model": "boards",
+      "foreignKey": "boardId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

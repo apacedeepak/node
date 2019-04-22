@@ -1,0 +1,52 @@
+<div class="col-sm-6 col-md-6 pull-left has-feedback">
+   <div  style="margin-top:15px" >
+   <!-- <div appFullcalendar class="basic-full-calendar fc fc-unthemed fc-ltr"></div>  -->
+   <div class="basic-full-calendar fc fc-unthemed fc-ltr" id="schoolcalendarbasic"></div>
+</div> 
+        <div class="calendarDescription">
+              <ul>
+                <li> {{'event' | translate}}</li>
+                <li> {{'holiday' | translate}}</li>
+              </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6 pull-left">
+      <div class="pull-left" style="max-height: inherit;width: 100%;">
+          <div class="attendaceScrore fullwith-left"><div class="pull-left"><h3> {{'event_list' | translate}}</h3></div>
+              <div class="pull-right"><h3>{{month}}&nbsp;{{yyyy}}</h3></div></div> 
+          <div class="eventListBlock">
+              <table class="table table-striped">
+                  <tbody>
+                     <tr *ngFor="let event of event_arr"><td align="left"><a  href="#" class="pull-right">
+                          </a><h5 >{{event.event_remark}}</h5> <h6 >{{event.event_date}}</h6> </td>
+                     </tr>
+                     <tr *ngIf="!event_arr[0]">
+                         <td align="left">
+                            <p class="text-info text-center">  {{'no_record_found' | translate}}</p> 
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="fullwith-left">
+          <div class="attendaceScrore fullwith-left"><div class="pull-left"><h3> {{'holiday_list' | translate}}</h3></div>
+              <div class="pull-right"><h3 class="ng-binding">{{month}}&nbsp;{{yyyy}}</h3></div>
+               </div>
+          <div class="holydayList" id="showhide5">
+              <table class="table table-striped">
+                  <tbody>
+                     <tr *ngFor="let holiday of holiday_arr"><td align="left">  <h5>{{holiday.holiday_remark}}</h5> <h6>{{holiday.holiday_date}}</h6> </td></tr>
+                     <tr *ngIf="!holiday_arr[0]">
+                            <td align="left">
+                               <p class="text-info text-center">   {{'no_record_found' | translate}}</p> 
+                           </td>
+                       </tr>   
+                 </tbody>
+              </table> 
+          </div>
+      </div>
+  </div>
+
+
+ 

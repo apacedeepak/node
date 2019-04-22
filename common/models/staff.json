@@ -1,0 +1,107 @@
+{
+  "name": "staff",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "profile_image": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "designation": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "date_of_join": {
+      "type": "date"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "staff_code": {
+      "type": "string"
+    },
+    "old_user_id": {
+      "type": "number"
+    },
+    "email": {
+      "type": "string"
+    },
+    "bank_acc_no": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "reporting_role": {
+      "type": "number"
+    },
+    "inactive_date": {
+      "type": "date",
+      "required": false
+    },
+    "online_test": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assigned_leaves": {
+      "type": "hasMany",
+      "model": "leave_details",
+      "foriegnKey": "userId",
+      "through": "staff",
+      "keyThrough": "userId"
+    },
+    "assigned_user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "reporter": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "reporting_role"
+    },
+    "staff_users_list": {
+      "type": "belongsTo",
+      "model": "user_school",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,255 @@
+<div id="inbox" class="inboxTab">
+        <a  href="javascript:void(0)" class="searhIcon sbtnsetting" data-keyboard="false" data-toggle="modal" data-target="#myModal">
+          <i class="fa fa-search" aria-hidden="true"></i></a>
+
+
+          <div class="srchResult" *ngIf="fromrange">
+                      <div class="alert alert-dismissable"><span *ngIf="fromrange">{{fromrange}}</span> <span *ngIf="torange">{{'to' | translate}} {{torange}}</span>
+                        <a href="javascript:void(0)" class="close" (click)="removerange('date')"  data-dismiss="alert" aria-label="close">×</a></div>
+
+                </div>
+            <div class="srchResult">
+                      <div class="alert alert-dismissable" *ngFor="let user of username; index as i;">
+                       {{user.name}}
+                      <a href="javascript:void(0)" class="close" (click)="removerange('usename',user.user_id)"  data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+
+                </div>
+
+      <!-- <div class="mailBox" *ngFor="let data of listdata | paginate: { itemsPerPage: 10, currentPage: p }"> -->
+        
+      <ng-container *ngIf="fromrange">
+          <ng-container *ngFor="let data of listdata">
+              
+              <ng-container *ngIf="data.message_searchdate >= fromrange  && data.message_searchdate <= torange">
+          <div class="mailBox mailHovershow"  [ngClass]="(data.message_isread) == 'Yes' ? 'readMail' : ''"  style="padding-right: 75px;">
+               
+                    <div class="capsletter">{{data.display_name | slice:0:1}}</div>
+                <a *ngIf="data.place == 'Draft'" [routerLink]="['/communication/compose']" [queryParams]="{mesgeId: data.message_id,place: data.place, flag: 'draft'}">
+                  <h2>{{data.display_name}}</h2>
+                  <h3>{{(data.message_subject) == '' ? '...':data.message_subject}}</h3>
+                  <h4 class="textLimit" [innerHTML]="(data.message_body) == ''? '...':data.message_body"></h4>
+                </a>
+                <a *ngIf="data.place != 'Draft'" [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: data.message_id,place: data.place}">
+                <h2>{{data.display_name}}</h2>
+                <h3>{{(data.message_subject) == '' ? '...':data.message_subject}}</h3>
+                <h4 class="textLimit" [innerHTML]="(data.message_body) == ''? '...':data.message_body"></h4>
+                </a>
+                <div  class="mailtime hdboxcontroller mControllerOverhide">
+                <div class="mailinkDiv text-right">
+                  <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)' (click)="movetoarchive(data.message_id)"><img src="assets/images/icons/archive1.png" alt=""></a>
+                  <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)' (click)="markasimp(data.message_id, data.message_isimportant)">
+                    <i class="myFavrite" id='message_{{data.message_id}}' [ngClass]="(data.message_isimportant) == 'Yes' ? 'redColor' : ''" ></i></a>
+                  <span *ngIf="data.attachments.length != 0"><i class="fa fa-fw fa-paperclip"></i> </span>
+                           <span class="d-block dBlock"> {{data.message_date}}</span>
+                          </div>
+                </div>
+      </div>
+                                </ng-container>
+
+          </ng-container>
+      </ng-container>
+      
+      <ng-container *ngIf="!fromrange">
+          
+          <div class="mailBox mailHovershow" *ngFor="let data of listdata" [ngClass]="(data.message_isread) == 'Yes' ? 'readMail' : ''"  style="padding-right: 75px;">
+               <div *ngIf="data.place != 'Draft'" class="capsletter">{{data.display_name | slice:0:1}}</div>
+           <div *ngIf="data.place == 'Draft'" class="capsletter">D</div>
+        <a *ngIf="data.place == 'Draft'" [routerLink]="['/communication/compose']" [queryParams]="{mesgeId: data.message_id,place: data.place, flag: 'draft'}">
+          <h2>[{{'draft' | translate}}]
+            <ng-container *ngIf="data.display_name == ''"> {{'no_recipient' | translate}}</ng-container>
+             <ng-container *ngIf="data.display_name != ''">{{data.display_name}}</ng-container>
+          </h2>
+          <h3>{{(data.message_subject) == '' ? '...':data.message_subject}}</h3>
+          <h4 class="textLimit" [innerHTML]="(data.message_body) == ''? '...':data.message_body"></h4>
+        </a>
+        <a *ngIf="data.place != 'Draft'" [routerLink]="['/communication/commdetail']" [queryParams]="{messageId: data.message_id,place: data.place}">
+        <h2>{{data.display_name}}</h2>
+        <h3>{{(data.message_subject) == '' ? '...':data.message_subject}}</h3>
+        <h4 class="textLimit" [innerHTML]="(data.message_body) == ''? '...':data.message_body"></h4>
+        </a>
+        <div  class="mailtime hdboxcontroller mControllerOverhide">
+        <div class="mailinkDiv text-right">
+		  <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)' (click)="movetoarchive(data.message_id)"><img src="assets/images/icons/archive1.png" alt=""></a>
+          <a *ngIf="data.place == 'Inbox'" href='javascript:void(0)' (click)="markasimp(data.message_id, data.message_isimportant)">
+          <i class="myFavrite" id='message_{{data.message_id}}' [ngClass]="(data.message_isimportant) == 'Yes' ? 'redColor' : ''" ></i></a>
+          <span *ngIf="data.attachments.length != 0"><i class="fa fa-fw fa-paperclip"></i></span>
+		   <span class="d-block dBlock">{{data.message_date}}</span>
+		  </div>
+		  </div>
+      </div>
+      </ng-container>
+     
+     <p *ngIf="listdata.length == 0" class="text-center text-primary">{{parentGlobal.message | translate}}</p>
+
+      <div class="clearfix"></div>
+       <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+
+
+    <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header"><h4 class="modal-title"> {{'search' | translate}}</h4></div>
+                       <ul class="senderTab">
+                        <li id='userwise' class="active" (click)="userordata('user')"><a href="javascript:void(0)"> {{'userwise' | translate}}</a></li>
+                        <li id='datewise' (click)="userordata('date')"><a href="javascript:void(0)"> {{'datewise' | translate}}</a></li>
+                    </ul>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                         <form [formGroup]='form' (ngSubmit)="onSubmit(form.value, $event)">
+                          <ng-container *ngIf="globalObj.userwise">
+                        <div class="radioBlock">
+                        <input type="radio"  name="mail_to" (click)="activestatus('Admin')"   value="classTeacher" id="2_class"><label for="2_class"> {{'admin' | translate}}</label>
+                        <ng-container *ngIf="globalObj.user_type == 'Teacher'">
+                           <input type="radio" (click)="activestatus('Parent')"  name="mail_to" value="subjectTeacher"  id="3_subject"><label for="3_subject"> {{'parent' | translate}}</label>
+                          <input type="radio" (click)="activestatus('Student')" name="mail_to" value="subject"  id="4_subject"><label for="4_subject"> {{'student' | translate}}</label>
+                          <input type="radio" (click)="activestatus('Staff')"  name="mail_to"    value="admin" id="1_admin"><label for="1_admin"> {{'staff' | translate}}</label>
+
+                        </ng-container>
+
+
+                      <ng-container *ngIf="globalObj.user_type == 'Student' || globalObj.user_type == 'Parent'">
+                        <input type="radio"  name="mail_to" (click)="activestatus('ClassTeacher')"    value="admin" id="1_admin"><label for="1_admin">  {{'class_teacher' | translate}}</label>
+                          <input type="radio"  name="mail_to"  (click)="activestatus('Teacher')"  value="group" id="grouplist"><label for="grouplist"> {{'subject_teacher' | translate}}</label>
+                      </ng-container>
+                      </div>
+
+                      <div class="checkBlock">
+
+                          <ng-container *ngIf="globalObj.popupFlag == 'Admin'">
+                         <div formArrayName="admincheckBox">
+
+                        <ul class="" style="margin: 0; padding: 0;max-height: 265px; width: 100%;float: left; overflow-y: auto;">
+                            <li *ngFor="let admdata of admindata; index as i;">
+
+                              <input type="checkbox" id="admincheck{{i}}" formControlName="{{i}}" (change)="adminchange(admdata.user_id, $event.target.checked,'Admin',i)">
+                                  <label for="admincheck{{i}}"> {{admdata.name}}</label>
+                            </li>
+                            <p *ngIf="admindata.length == 0" class="text-center text-info">  {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                          </div>
+                      </ng-container>
+
+
+                     <ng-container *ngIf="globalObj.user_type == 'Teacher'">
+
+
+                       <ng-container *ngIf="globalObj.popupFlag == 'Parent'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+<!--                           <li style="width:32%; display: inline-block;vertical-align: top;">
+                              <input id="parents" type="checkbox" formControlName='isStudentCheck' >
+                              <label for='parents'> Send To Student</label></li>-->
+                           <li style="width:45%; display: inline-block;vertical-align: top;">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentsection" (change)='getparentpopsec()' >
+                            <option *ngFor="let seclist of sectionlist" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li style="width:54%; display: inline-block;vertical-align: top;">
+                            <select multiple="true" style="width:100%;" formControlName="popupparent">
+                                  <option *ngFor="let studlist of studentlist" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Student'">
+                          <ul class="ulHide" style="margin: 0; padding: 0;">
+                           <li style="width:45%; display: inline-block;vertical-align: top;">
+                               <select  multiple="true"  style="width:100%;" formControlName="popupparentsection" (change)='getparentpopsec()' >
+                            <option *ngFor="let seclist of sectionlist" [ngValue]="seclist.section_id" >{{seclist.section_name}}</option>
+                           </select></li>
+                           <li style="width:54%; display: inline-block;vertical-align: top;">
+                            <select multiple="true" style="width:100%;" formControlName="popupstudent">
+                                  <option *ngFor="let studlist of studentlist" value="{{studlist.user_id}}">{{studlist.name}}({{studlist.admission_no | slice: 4}})</option>
+                           </select>
+                           </li>
+                      </ul>
+                      </ng-container>
+
+                      <ng-container *ngIf="globalObj.popupFlag == 'Staff'">
+                        <div formArrayName="staffcheckBox">
+                          <ul class="ulHide" style=" width: 100%;float: left;margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li *ngFor="let staff of staffList; index as i;">
+                                <input id="staff{{i}}" type="checkbox" value={{staff.userId}} formControlName="{{i}}" (change)="adminchange(staff.userId, $event.target.checked,'Staff',i)">
+                                  <label for="staff{{i}}"> {{staff.name}}</label>
+                            </li>
+                            <p *ngIf="staffList.length == 0" class="text-center text-info"> {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                        </div>
+                      </ng-container>
+
+
+                       </ng-container>
+
+
+                       <ng-container *ngIf="globalObj.user_type == 'Student' || globalObj.user_type == 'Parent'">
+                        <ng-container *ngIf="globalObj.popupFlag == 'ClassTeacher'">
+                            <div formArrayName="classteachercheckBox">
+                          <ul class="ulHide" style=" width: 100%;float: left;margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li *ngFor="let teacher of classTeacherList; index as i;">
+                              <input type="checkbox" id="classtecher{{i}}" value={{teacher.user_id}} formControlName="{{i}}" (change)="adminchange(teacher.user_id, $event.target.checked,'classteacher',i)">
+                                  <label for='classtecher{{i}}'> {{teacher.name}}</label>
+                            </li>
+                            <p *ngIf="classTeacherList.length == 0" class="text-center text-info"> {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                        </div>
+                        </ng-container>
+                        <ng-container *ngIf="globalObj.popupFlag == 'Teacher'">
+                            <div formArrayName="teachercheckBox">
+                          <ul class="ulHide" style=" width: 100%;float: left;margin: 0; padding: 0;max-height: 265px; overflow-y: auto;">
+                            <li *ngFor="let teacher of teacherList; index as i;">
+
+                                <input type="checkbox" id="techer{{i}}" value={{teacher.user_id}} formControlName="{{i}}" (change)="adminchange(teacher.user_id, $event.target.checked,'teacher',i)">
+                                  <label for='techer{{i}}'> {{teacher.name}}</label>
+                            </li>
+                            <p *ngIf="teacherList.length == 0" class="text-center text-info">   {{'no_record_found' | translate}}</p>
+
+                        </ul>
+                        </div>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                      </ng-container>
+                         </form>
+                      <ng-container *ngIf="globalObj.datewise">
+                        <!-- <div class="row">
+                        <ul class="nav nav-tabs">
+                            <li id="fromdate" (click)="fromtodate('from')" class="active"><a href="javascript:void(0)">From <span> Date</span></a></li>
+                            <li id="todate" (click)="fromtodate('to')"><a href="javascript:void(0)">To <span> Date</span></a></li>
+                        </ul>
+</div> -->
+                         <div class="tab-content">
+
+                            <div class="text-center">
+                                <ngb-datepicker #dp ngModel (ngModelChange)="onDateChange($event)" [displayMonths]="0" [dayTemplate]="t">
+                        </ngb-datepicker>
+                                <ng-template #t let-date="date" let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+                    </ng-template>
+
+                            </div>
+
+                            </div>
+                      </ng-container>
+
+
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer" style="justify-content: center;">
+                      <button type="button" class="newclose btn btn-info btn-default" (click)="closeSearch()" data-dismiss="modal"> {{'close' | translate}}</button>
+                      <button type="button" class="newbtn btn btn-info" (click)="okfun()" data-dismiss="modal"> {{'ok' | translate}}</button>
+                    </div>
+
+                  </div>
+                </div>
+                  </div>
+
+                </div>

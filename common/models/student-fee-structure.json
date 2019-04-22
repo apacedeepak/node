@@ -1,0 +1,59 @@
+{
+    "name": "student_fee_structure",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "fee_structure_id": {
+            "type": "number",
+            "required": true
+        },
+        "userId": {
+            "type": "string",
+            "required": true
+        },
+        "session_id": {
+            "type": "number",
+            "required": true
+        },
+        "school_id": {
+            "type": "number",
+            "required": true
+        },
+        "applicable_from_term": {
+            "type": "number"
+        },
+        "advance_amount": {
+            "type": "number"
+        },
+        "fee_type": {
+            "type": "number"
+        },
+        "status": {
+            "type": "string",
+            "required": true,
+            "default": "Active"
+        },
+        "assign_date": {
+            "type": "date"
+        },
+        "discount_category": {
+            "type": "string"
+        },
+        "discount_subCategory": {
+            "type": "string"
+        },
+        "reason": {
+      "type": "string"
+    }
+    },
+    "validations": [],
+    "relations": {
+        
+
+    },
+    "acls": [],
+    "methods": {}
+}

@@ -1,0 +1,93 @@
+{
+  "name": "leave_apply",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "leave_schemeId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "leave_masterId": {
+      "type": "number",
+      "required": true
+    },
+    "leave_date": {
+      "type": "date",
+      "required": false
+    },
+    "financial_yearId": {
+      "type": "number",
+      "required": true
+    },
+    "halfday_start": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "halfday_end": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "reporting_to": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "index": true,
+      "default": "Active"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "cause": {
+      "type": "string"
+    },
+    "reject_reason": {
+      "type": "string"
+    },
+    "from_date": {
+      "type": "date"
+    },
+    "to_date": {
+      "type": "date"
+    },
+    "day": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "leave_master": {
+      "type": "belongsTo",
+      "model": "leave_master",
+      "foreignKey": ""
+    },
+    "leave_details": {
+      "type": "hasMany",
+      "model": "user_attendance",
+      "foreignKey": "leave_applyId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foriegnKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

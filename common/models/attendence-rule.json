@@ -1,0 +1,24 @@
+{
+  "name": "attendence_rule",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "leave_rule": {
+      "type": "string",
+      "required": true
+    },
+    "half_day_rule": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

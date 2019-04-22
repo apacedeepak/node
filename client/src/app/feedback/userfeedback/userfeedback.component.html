@@ -1,0 +1,470 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+    <div class="communication pull-left" style="margin-top:15px; overflow: hidden;">
+        <div class="headBox">
+            <h5 class="h5 pull-left">{{'Feedback Form' | translate}}</h5>
+        </div>
+        <ul class="nav navLineTheme">
+            <li>
+                <a data-toggle="tab" href="#facultyTab" class="active">{{'Faculty' | translate}}</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#courseTab">{{'Course' | translate}}</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#administrationTab">{{'Administration & Facilities Feedback' | translate}}</a>
+            </li>
+
+        </ul>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+            <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+            <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left">
+            <div class="tab-content">
+                <div id="facultyTab" class="tab-pane active">
+
+                    <form class="form-signin" ngNativeValidate [formGroup]="facultyFeedbackForm" (ngSubmit)="facultyFeedbackSubmit(facultyFeedbackForm.value)">
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                            <select required class="form-control cleanup validate-empty width30" formControlName="studentsubject" #studentsubject (change)="getsubjectassignedfaculty(studentsubject.value)">
+                                <option value="">Select Subject</option>
+                                <option *ngFor="let studentsubject of globalObj.studentassignsubject; index as i;" value="{{studentsubject.subject_id}}">{{studentsubject.subject_name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                            <select required [(ngModel)]="model.subjectFacultyModel" class="form-control cleanup validate-empty width30" formControlName="subjectfaculty" #subjectfaculty (change)="getFacultyFeedback(studentsubject.value,subjectfaculty.value)">
+                                <option value="">Select Faculty</option>
+                                <option *ngFor="let assignSubject of assignSubjectList; index as i;" value="{{assignSubject.userId}}">{{assignSubject.name}}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="facultyfeedbackui">
+                            <div id="leaveTable" class="col-sm-12 col-md-12 pull-left">
+                                <table class="table table-striped table-bordered customTable">
+                                    <thead class="thheadbg">
+                                        <tr>
+                                            <th align="center">{{'Quality of Teaching' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Knowledge Of Subject</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='knowledgeOfSubject' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Concept delivery</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='conceptDelivery' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Doubt solving ability</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='doubtSolvingAbility' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Post test discussion</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='postTestDiscussion' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Pace of topic coverage</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='paceOfTopicCoverage' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Discipline in class</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='disciplineInClass' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Communication Skills</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='communicationSkills' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Motivational Skills</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='motivationalSkills' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15 text-right">
+                                <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+                                <hr/>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div *ngIf="facultyfeedbackview">
+                        <div class="clearfix"></div>
+                        <div class="mt10">
+                            <b>Faculty Name:</b>
+                            <span>{{facultyFeedbackList[0].staff_name}}</span>
+                        </div>
+                        <div class="mt10">
+                            <b>Date of Feedback:</b>
+                            <span>{{facultyFeedbackList[0].feedback_date | date : "MMMM d, y"}}</span>
+                        </div>
+                        <table class="table table-striped table-bordered customTable mt10">
+                            <thead class="thheadbg">
+                                <tr>
+                                    <th align="center">Parameter</th>
+                                    <th align="center" *ngFor="let facultyFeedback of facultyFeedbackList[0].feedback_json.feedbackJsonArr; index as i">
+
+                                        {{facultyFeedback.feedbackparams}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td *ngFor="let facultyFeedback of facultyFeedbackList[0].feedback_json.feedbackJsonArr; index as i">
+                                        <span *ngIf="facultyFeedback.feedbackparamvalue==''">NA</span>
+                                        <span *ngIf="facultyFeedback.feedbackparamvalue !=''"> {{facultyFeedback.feedbackparamvalue}}</span>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="courseTab" class="tab-pane fade">
+                    <div *ngIf="coursefeedbackui">
+                        <form class="form-signin" ngNativeValidate [formGroup]="courseFeedbackForm" (ngSubmit)="courseFeedbackSubmit(courseFeedbackForm.value)">
+                            <div id="leaveTable" class="col-sm-12 col-md-12 pull-left">
+                                <table class="table table-bordered customTable">
+                                    <thead class="thheadbg">
+                                        <tr>
+                                            <td rowspan="2" style="width: 200px;">Subject</td>
+                                            <td colspan="5" class="text-center">Coverage if board syllabus</td>
+                                            <td colspan="5" class="text-center">Quality of course content</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" *ngFor="let feedbackparameter of feedbackDefineCourseparameter; index as i">
+                                                <span>{{feedbackparameter}}</span>
+                                            </td>
+                                            <td class="text-center" *ngFor="let feedbackparameter of feedbackDefineCourseparameter; index as i">
+                                                <span>{{feedbackparameter}}</span>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let subjectObject of globalObj.studentassignsubject; let j=index">
+                                            <td>{{subjectObject.subject_name}}</td>
+
+                                            <td colspan="5" style="padding:0">
+                                                <table class="table">
+                                                    <tr formArrayName="boardSyllabusFeedback">
+                                                        <td *ngFor="let feedbackparameter of feedbackDefineCourseparameter; index as i">
+                                                            <span>
+                                                                <label class="radioContainer">
+                                                                    <input type="radio" class="cleanup validate-empty width30" value="{{feedbackparameter}}" [formControlName]="j" />
+                                                                    <span class="checkmarks">&nbsp;</span>
+                                                                </label>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+
+                                            <td colspan="5" style="padding:0">
+                                                <table class="table">
+                                                    <tr formArrayName="qualityCourseFeedback">
+                                                        <td *ngFor="let feedbackparameter of feedbackDefineCourseparameter; index as i">
+                                                            <span>
+                                                                <label class="radioContainer">
+                                                                    <input type="radio" class="cleanup validate-empty width30" value="{{feedbackparameter}}" [formControlName]="j" />
+                                                                    <span class="checkmarks">&nbsp;</span>
+                                                                </label>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                            <div formArrayName="subjectIds">
+                                                <input type="hidden" class="form-control form-control-inline" [formControlName]="j" value="{{subjectObject.subject_id}}"
+                                                    numbersOnly/>
+                                            </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <span>
+                                    <b>Feedback:</b>P-Poor,A-Average,G-Good,V-Very Good,E-Excellent</span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15 text-right">
+                                <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+                                <hr/>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="coursefeedbackview">
+                        <div class="clearfix"></div>
+                        <div>
+                            <b>Course:</b>
+                            <span>{{globalObj.courseStringList}}</span>
+                        </div>
+                        <div class="mt10">
+                            <b>Date of Feedback:</b>
+                            <span>{{globalObj.courseFeedbackList[0].feedback_date | date : "MMMM d, y"}}</span>
+                        </div>
+                        <table class="table table-striped table-bordered customTable mt15">
+                            <thead class="thheadbg">
+                                <tr>
+                                    <th align="center">Course Parameter</th>
+                                    <th>
+                                        Coverage of board syllabus
+                                    </th>
+                                    <th>
+                                        Quality of course content
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let courseFeedback of globalObj.courseFeedbackList; index as i">
+                                    <td>
+                                        {{courseFeedback.subject_name}}
+                                    </td>
+                                    <td>
+                                        <span *ngIf="courseFeedback.feedback_json.feedbackJsonArr.coverageOfBoardSyllabus==''">NA</span>
+                                        <span *ngIf="courseFeedback.feedback_json.feedbackJsonArr.coverageOfBoardSyllabus !=''"> {{courseFeedback.feedback_json.feedbackJsonArr.coverageOfBoardSyllabus}} </span>
+
+                                    </td>
+                                    <td>
+                                        <span *ngIf="courseFeedback.feedback_json.feedbackJsonArr.qualityOfCourseContent==''">NA</span>
+                                        <span *ngIf="courseFeedback.feedback_json.feedbackJsonArr.qualityOfCourseContent !=''"> {{courseFeedback.feedback_json.feedbackJsonArr.qualityOfCourseContent}} </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="administrationTab" class="tab-pane fade">
+                    <div *ngIf="administrationfeedbackui">
+                        <form class="form-signin" ngNativeValidate [formGroup]="facilitiesFeedbackForm" (ngSubmit)="facilitiesFeedbackSubmit(facilitiesFeedbackForm.value)">
+                            <div id="leaveTable" class="col-sm-12 col-md-12 pull-left">
+                                <table class="table table-striped table-bordered customTable">
+                                    <thead class="thheadbg">
+                                        <tr>
+                                            <th align="center">{{'Administration & Facilities Feedback' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Classroom</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='classroom' value="{{feedbackparameter}}" /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Staff</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='staff' value="{{feedbackparameter}}" /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Transportation</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='transportation' value="{{feedbackparameter}}"
+                                                        /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Washroom</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='washroom' value="{{feedbackparameter}}" /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Others</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="col-auto pull-left" *ngFor="let feedbackparameter of feedbackDefinefacultyparameter; index as i">
+                                                    <label class="radioContainer">
+                                                        <input type="radio" class="cleanup validate-empty width30" formControlName='others' value="{{feedbackparameter}}" /> {{feedbackparameter}}
+                                                        <span class="checkmarks">&nbsp;</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15 text-right">
+                                <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+                                <hr/>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="administrationfeedbackview">
+                        <div class="clearfix"></div>
+                        <div>
+                            <b>Date of Feedback:</b>
+                            <span>{{administrationFeedbackList[0].feedback_date | date : "MMMM d, y"}}</span>
+                        </div>
+                        <table class="table table-striped table-bordered customTable mt15">
+                            <thead class="thheadbg">
+                                <tr>
+                                    <th align="center">Parameter</th>
+                                    <th align="center" *ngFor="let administrationFeedback of administrationFeedbackList[0].feedback_json.feedbackJsonArr; index as i">
+                                        <span> {{administrationFeedback.feedbackparams}}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td *ngFor="let administrationFeedback of administrationFeedbackList[0].feedback_json.feedbackJsonArr; index as i">
+                                        <span *ngIf="administrationFeedback.feedbackparamvalue==''">NA</span>
+                                        <span *ngIf="administrationFeedback.feedbackparamvalue !=''">{{administrationFeedback.feedbackparamvalue}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

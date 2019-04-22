@@ -1,0 +1,46 @@
+{
+  "name": "center_room_master",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "schoolId": {
+      "type": "number",
+      "required": true
+    },
+    "room_name": {
+      "type": "string",
+      "required": true
+    },
+    "sitting_capacity": {
+      "type": "number",
+      "required": true
+    },
+    "added_by": {
+      "type": "number",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "updated_by": {
+      "type": "number",
+      "required": true
+    },
+    "updated_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

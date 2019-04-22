@@ -1,0 +1,72 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25"><h5  class="pull-left"> Category</h5></div>
+ <div>
+ 
+  <form class="form-signin" ngNativeValidate [formGroup]="category" (ngSubmit)="onSubmitcategory(category.value)" >
+	  <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15"><label>Add Category</label></div>
+  <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem"><input type="text" class="form-control cleanup validate-empty" formControlName='category_name' placeholder="Category" required="" autofocus="" />
+	</div>
+  
+  <div  *ngFor="let item of addsubcategory;index as i;"class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem" formArrayName="sub_category"><input type="text" class="form-control cleanup validate-empty width30" [formControlName]='i' placeholder="Sub Category" required="" autofocus="" /></div>
+  
+ <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+                <button class="btn btn-primary mr10" (click)="addmoresub()"> Add New Sub Category</button>
+                 <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">   
+    </div>
+              
+  </form>
+</div>
+<!-- <div>
+    <div class="headBox mb25"><h5  class="pull-left"> Add Sub Category</h5></div>
+  <form class="form-signin" ngNativeValidate [formGroup]="subcategory" (ngSubmit)="onSubmitsubcategory(subcategory.value)" >
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+      <select required class="form-control cleanup validate-empty width30" formControlName="category_name">
+          <option value="">--Select Category--</option>
+     
+          <option *ngFor="let item of category_obj| keyvalue" value="{{item.key}}"> {{item.key}}</option>
+                
+      </select>
+    </div> 
+    
+    <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem"> <label></label><input type="text"   class="form-control cleanup validate-empty width30" formControlName='sub_category' placeholder="Sub Category" required="" autofocus="" /></div>
+    
+     
+                 <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+                  
+                        <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">   
+                        <hr/>
+                    </div>
+                
+    </form>
+
+  </div> -->
+<div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+   <span id ="success_message" class="span_success"></span>    
+  <table class="table table-striped table-bordered customTable">
+      <thead class="thheadbg">
+          <tr>            
+            <th>S.no</th>
+            <th>Category</th>
+            <th>Sub-Category </th>
+          
+          </tr>
+      </thead>
+      <tbody  *ngIf="categoryList" >
+          <tr  *ngFor="let data of categoryList|keyvalue; index as i;">             
+              <td >{{i+1}}</td>
+              <td >{{data ?data.key:"No record Found"}}</td>
+              <td >{{data ? data.value :""}}</td>
+            
+            </tr>
+   
+          
+      </tbody>
+      <tr  *ngIf="!categoryList">
+        <td colspan="3" >No record Found</td>
+      </tr>
+   
+  </table>
+</div>
+</div>  
+
+

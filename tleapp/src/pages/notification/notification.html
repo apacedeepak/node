@@ -1,0 +1,33 @@
+ <div class="notificationIcon">
+ <ion-icon class="notificationbell" (click)="redirectToDetail('NotificationPage')" *ngIf="globalObj.displayBell" name="notifications"></ion-icon>
+ <ion-badge class="posti" color="danger" *ngIf = "globalObj.notificationCount>0">{{globalObj.notificationCount}}</ion-badge>
+ </div>
+
+<ion-header *ngIf="globalObj.display" >
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notification</ion-title>
+     
+  </ion-navbar>
+</ion-header>
+<ion-content *ngIf="globalObj.display">
+    <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="pull to refresh">
+
+    </ion-refresher-content>
+  </ion-refresher> -->
+  <ng-container *ngIf="globalObj.notfExist;else nomsgdata">
+ <div *ngFor="let notification of globalObj.notification" class="mailBlock">
+    <div [class]="notification.is_read==1?'readmail':''" (click)="notificationRedirect(notification.type,notification.module_key_id)">  
+      <div><span class="menuICon"><img [src]="globalObj.notificationImagePath[notification.type]"></span></div>
+   <div class="mailername">{{notification.title}} </div>
+   <div class="subtitle textoverlap">{{notification.notification_text}} </div>
+   <div class="description">{{notification.created_date | date: 'd MMM'}}</div>
+   </div>  
+</div>
+  </ng-container>
+<ng-template #nomsgdata><p class="text-info">No Record Found</p></ng-template>
+</ion-content>
+

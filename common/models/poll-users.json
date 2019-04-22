@@ -1,0 +1,56 @@
+{
+  "name": "poll_users",
+  "plural": "poll_users",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "pollId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "channel": {
+      "type": "string",
+      "required": true
+    },
+    "channelId": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "student_answer": {
+      "type": "Text"
+    },
+    "user_submission_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "getgroup": {
+      "type": "belongsTo",
+      "model": "groups",
+      "foreignKey": "channelId"
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "polls": {
+      "type": "belongsTo",
+      "model": "polls",
+      "foreignKey": "pollId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,49 @@
+<div class="col-sm-6 col-md-6 pull-left has-feedback mb15">
+ <div *ngIf="calendarOptions">
+    <ng-fullcalendar #ucCalendar (dayClick)="onDayCLick($event.detail)" [options]="calendarOptions" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-6 pull-left mb15"> 
+            <div class="attendaceScrore fullwith-left">
+                <h3><span class="pull-left">{{'Batch Schedule'|translate}}</span>
+                    <span class="pull-left" style="float: right;">{{dd}} {{mon}} {{yyyy}}</span>
+                </h3>
+
+            </div>
+            <div class="timeTableOverFlow">
+            <table class="table table-striped timetableColender">
+                <thead class="tbleHead">
+                    <tr>
+                        <td align="left">{{'Time (Lecture)'|translate}}</td>
+                        <td align="left">{{'subject'|translate}}</td>
+                        <td align="left">{{'Batch Name'|translate}}</td>
+                        <td align="center">{{'Concept'|translate}}</td>
+                        <!-- <td align="center">Faculty Name</td> -->
+                        <!-- <td align="center">Status</td> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ngRepeat: timetable in timetablelist -->
+                     <tr *ngFor="let timetable of timetablelist">
+                     <!-- <ng-container *ngFor="let timetable of time"> -->
+                     <td align="right">{{timetable.start_time}}-{{timetable.end_time}}</td>
+                     <td align="left">{{timetable.subject_name}}</td>
+                     <td align="left">{{timetable.batch_name}}</td>
+                     <td align="left">{{timetable.concept}}</td>
+                     <!-- <td align="left"></td> -->
+                     <!-- <td align="left">
+                     <span *ngIf="timetable.paper_id"> <input class='btn btn-primary btn-sm' (click)="isComplete(timetable.paper_id, timetable.is_completed)"  [value]="(timetable.is_completed) == '0' ? 'Pending' : 'Completed'" type="button" name="complete" value="Pending">
+                     </span>
+                    </td> -->
+
+                     <!-- </ng-container> -->
+                      </tr>
+                    <tr>
+                        <!-- ngIf: timetablelist =='' --><td colspan="6" align="center" *ngIf="timetablelist.length == 0" class="ng-scope">{{'no_record_found'|translate}}</td><!-- end ngIf: timetablelist =='' -->
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+  </div>
+

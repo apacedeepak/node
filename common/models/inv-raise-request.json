@@ -1,0 +1,95 @@
+{
+  "name": "inv_raise_request",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "required": true
+    },
+    "inv_category_master_id": {
+      "type": "number",
+      "required": true
+    },
+    "inv_item_master_id": {
+      "type": "number",
+      "required": true
+    },
+    "quantity": {
+      "type": "number",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "total_price": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "image_path": {
+      "type": "string"
+    },
+    "inv_request_status": {
+      "type": "number",
+      "required": true
+    },
+    "center_id": {
+      "type": "number",
+      "required": true
+    },
+    "approval_user_id": {
+      "type": "number"
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    },
+    "created_by": {
+      "type": "number",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date"
+    },
+    "modified_by": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "created_by"
+    },
+    "itemMasterCategory": {
+      "type": "belongsTo",
+      "model": "inv_category_master",
+      "foreignKey": "inv_category_master_id"
+    },
+    "itemMaster": {
+      "type": "belongsTo",
+      "model": "inv_item_master",
+      "foreignKey": "inv_item_master_id"
+    },
+    "school": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "center_id"
+    },
+    "inv_request_status": {
+      "type": "belongsTo",
+      "model": "inv_request_status",
+      "foreignKey": "inv_request_status"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

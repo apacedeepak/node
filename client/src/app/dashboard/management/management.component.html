@@ -1,0 +1,360 @@
+<!--Page Work Space-->
+<div class="rowout">
+    <div class="managementHeadRight">
+       <!-- <div class="pull-left swipToggle">
+          <label class="switch">
+          <input (change)="switchFlagFunc()" class="switchflagevt" type="checkbox">
+          <span class="slider round"></span>
+          </label>
+       </div> -->
+       <div class="headToggle pull-right" *ngIf="!switchFlag">
+          <a href="javascript:void()" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-fw fa-circle"></i>
+          <i class="fa fa-fw fa-circle"></i>
+          <i class="fa fa-fw fa-circle"></i>
+          </a>
+          <ul class="dropdown-menu">
+             <li><a href="#" (click)="dropdownfilter($event, 'days')">  {{'last_five_days' | translate}}</a></li>
+             <li><a href="#" (click)="dropdownfilter($event, 'month')">  {{'month' | translate}}</a></li>
+             <li><a href="#" data-toggle="modal" data-target="#daterange">  {{'date_range' | translate}}</a></li>
+          </ul>
+       </div>
+    </div>
+   
+    <div class="" *ngIf="!switchFlag && moduleviewall">
+       <div *ngIf="delayFlag && moduleviewtype=='comm'" class="col-sm-12 col-md-12 pull-left">
+          <div class="boxModel pull-left" style="max-height:inherit">
+             <h5 class="h5 freeCollectionTitle">
+                <a href="javascript:void(0)" (click)="backviewall()"><i class="fa fa-fw fa-arrow-left"></i></a>   {{'communication' | translate}}
+                <div class="pull-right btnGroup">    
+                   <button id="comm" class="cmclass btn btn-sm  btn-defult btn-info"  (click)="viewall('comm')">  {{'view_all' | translate}}</button>
+                   <button id="message" class="cmclass btn btn-sm btn-defult" (click)="individualview('message')">  {{'message' | translate}}</button>
+                   <button id="circular" class="cmclass btn btn-sm btn-defult" (click)="individualview('circular')">  {{'circular' | translate}}</button>
+                   <button id="notice" class="cmclass btn btn-sm btn-defult" (click)="individualview('notice')">  {{'notice' | translate}}</button>
+                </div>
+             </h5>
+             <div class="col-sm-12 col-md-12 pull-left has-feedback">
+                <p-chart type="line" (onDataSelect)="selectData($event)" [data]="commdata" [options]="chartOptions"></p-chart>
+             </div>
+          </div>
+       </div>
+       <div *ngIf="delayFlag && moduleviewtype=='fee'" class="col-sm-12 col-md-12 pull-left">
+          <div class="boxModel pull-left" style="max-height:inherit">
+             <h5 class="h5 attandanceTitle">
+                <a href="javascript:void(0)" (click)="backviewall()"><i class="fa fa-fw fa-arrow-left"></i></a>  {{'fee_collection' | translate}}
+                <div class="pull-right btnGroup"> 
+                   <button type="button" id="fee" class="cmclass btn btn-sm  btn-defult btn-info" (click)="viewall('fee')">  {{'view_all' | translate}}</button>
+                   <button type="button" id="feecollect"  class="cmclass btn btn-sm btn-defult" (click)="individualview('feecollect')">  {{'fee_collection' | translate}}</button>
+                   <button type="button" id="misc"  class="cmclass btn btn-sm btn-defult" (click)="individualview('misc')"> {{'miscellaneous' | translate}}</button>
+                   <button type="button" id="defaulter"  class="cmclass btn btn-sm btn-defult" (click)="individualview('defaulter')"> {{'defaulter' | translate}}</button>
+                </div>
+             </h5>
+             <div class="col-sm-12 col-md-12 has-feedback pull-left">
+                <div *ngIf="miscBool || feecollectBool || individualtype == ''" id="piefeedata" style="width:58%;position:relative;display:inline-block;vertical-align: middle;">
+                   <p-chart type="pie" [data]="feedata" [options]="pieoptions" width="265px" height="230px"></p-chart>
+                </div>
+                <div *ngIf="defaulterBool || individualtype == ''" style="width:40%;position:relative;display:inline-block;vertical-align: middle;">
+                   <p-chart type="pie" [data]="defaulterdata" [options]="pieoptions" width="180px" height="150px"></p-chart>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div *ngIf="delayFlag && moduleviewtype=='attend'" class="col-sm-12 col-md-12 pull-left">
+          <div class="boxModel pull-left" style="max-height:inherit">
+             <h5 class="h5 hostelTitle">
+                <a href="javascript:void(0)" (click)="backviewall()"><i class="fa fa-fw fa-arrow-left"></i></a>   {{'attendance' | translate}}
+                <div class="pull-right btnGroup"> 
+                   <button type="button" id="attend" class="cmclass btn btn-sm btn-defult btn-info" (click)=" viewall('attend')">  {{'view_all' | translate}}</button>
+                   <button type="button" id="overall" class="cmclass btn btn-sm btn-defult" (click)="individualview('overall')"> {{'overall' | translate}}</button>
+                   <button type="button" id="present" class="cmclass btn btn-sm btn-defult" (click)="individualview('present')"> {{'present' | translate}}</button>
+                   <button type="button" id="absent" class="cmclass btn btn-sm btn-defult" (click)="individualview('absent')"> {{'absent' | translate}}</button>
+                   <!-- <button type="button" id="leave" class="cmclass btn btn-sm btn-defult" (click)="individualview('leave')"> {{'leave' | translate}}</button> -->
+                   <button type="button" id="nottaken" class="cmclass btn btn-sm btn-defult" (click)="individualview('nottaken')"> {{'attendance_not_taken' | translate}}</button>
+                </div>
+             </h5>
+             <div class="col-sm-12 col-md-12 has-feedback pull-left">
+                <table style="width:100%;">
+                   <tr>
+                      <td *ngIf="overallBool || individualtype == ''" id="attendata" rowspan="2"><p-chart [options]="doughnoutoptionsoverall" width="300px" height="300px" [class.single-pos]="attendBool" type="doughnut" [data]="attendata" ></p-chart></td>
+                      <td *ngIf="presentBool || individualtype == ''" id="presentdata"><p-chart [options]="doughnoutoptionspresent" [class.single-pos]="presentBool" type="doughnut" [data]="presentdata" ></p-chart></td>
+                      <td *ngIf="absentBool || individualtype == ''" id="absentdata"><p-chart [options]="doughnoutoptionsabsent" [class.single-pos]="absentBool" type="doughnut" [data]="absentdata"></p-chart></td>
+                   </tr>
+                   <tr>
+                      <!-- <td *ngIf="leaveBool || individualtype == ''" id="leavedata"><p-chart [options]="doughnoutoptionsleave" [class.single-pos]="leaveBool" type="doughnut" [data]="leavedata" ></p-chart></td> -->
+                      <td *ngIf="nottakenBool || individualtype == ''" ><p-chart [options]="doughnoutoptionsnottaken" [class.single-pos]="nottakenBool" type="doughnut" [data]="nottakendata" ></p-chart></td>
+                   </tr>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="" *ngIf="!switchFlag && !moduleviewall">
+       <div class="srchResult" *ngIf="fromrange">
+          <div class="alert alert-dismissable"><span *ngIf="fromrange"> {{'from' | translate}} {{fromrange}}</span> <span *ngIf="torange"> {{'to' | translate}} {{torange}}</span>
+             <a href="javascript:void(0)" class="close" (click)="removerange()"  data-dismiss="alert" aria-label="close">×</a>
+          </div>
+       </div>
+       <div *ngIf="delayFlag" class="col-sm-6 col-md-6 pull-left">
+          <div class="boxModel pull-left maxHeightBox">
+             <h5 class="h5 freeCollectionTitle">
+                <span class="hdSpan spanblock" style="background-image:url(assets/images/icons/communication.png)">&nbsp;</span>  {{'communication' | translate}}
+                <div class="btnGroup pull-right" style="margin-top:0;"> <button type="button" class="btn btn-sm  btn-defult" (click)="viewall('comm')"> {{'view_all' | translate}}</button></div>
+             </h5>
+             <div class="col-sm-12 col-md-12 has-feedback">
+                    <div class="codeIndicator">
+                            <label><span class="span5"></span>  {{'message' | translate}}</label>
+                            <label><span class="span1"></span>  {{'notice' | translate}}</label>
+                            <label><span class="span6"></span>  {{'circular' | translate}}</label>                            
+                       </div>
+                <a href="#" (click)="prevFilter($event, 'comm')" class="previous controllArrowLeft"><i class="fa fa-angle-left"></i></a>
+                <p-chart type="line" [data]="commdata" [options]="chartOptions"></p-chart>
+                <a href="#" (click)="nextFilter($event, 'comm')" id="commnext" class="next controllArrowRight"><i class="fa fa-angle-right"></i></a>
+             </div>
+          </div>
+       </div>
+       <div *ngIf="delayFlag" class="col-sm-6 col-md-6 pull-left">
+          <div class="boxModel pull-left maxHeightBox">
+             <h5 class="h5 attandanceTitle">
+                <span class="hdSpan spanblock" style="background-image:url(assets/images/icons/fee-collection.png)">&nbsp;</span> {{'fee_collection' | translate}}
+                <div class="btnGroup pull-right" style="margin-top:0;"> <button type="button" class="btn btn-sm  btn-defult" (click)="viewall('fee')"> {{'view_all' | translate}}</button></div>
+             </h5>
+             <div class="col-sm-12 col-md-12 has-feedback">
+                    <div class="codeIndicator">
+                            <label><span class="span1"></span>    {{'fee_collection' | translate}}</label>
+                            <label><span class="span2"></span>   {{'miscellaneous' | translate}}</label>
+                            <label><span class="span3"></span>   {{'defaulter' | translate}}</label> 
+                            <label><span class="span7"></span>  {{'no_collection' | translate}}</label>                        
+                       </div>
+                <a href="#" (click)="prevFilter($event, 'fee')" class="previous controllArrowLeft"><i class="fa fa-angle-left"></i></a>
+                <div style="width:58%;position:relative;display:inline-block;vertical-align: middle;">
+                   <p-chart type="pie" [data]="feedata" [options]="pieoptions" width="265px" height="230px"></p-chart>
+                </div>
+                <div style="width:40%;position:relative;display:inline-block;vertical-align: middle;">
+                   <p-chart type="pie" [data]="defaulterdata" [options]="pieoptions" width="180px" height="150px"></p-chart>
+                </div>
+                <a href="#" (click)="nextFilter($event, 'fee')" id="feenext" class="next controllArrowRight"><i class="fa fa-angle-right"></i></a>
+             </div>
+          </div>
+       </div>
+       <div *ngIf="delayFlag" class="col-sm-12 col-md-12 pull-left">
+          <div class="boxModel pull-left" style="max-height:inherit">
+             <h5 class="h5 hostelTitle">
+                <span class="hdSpan spanblock" style="background-image:url(assets/images/icons/attendance.png)">&nbsp;</span>   {{'student_attendance' | translate}}
+                <div class="btnGroup pull-right" style="margin-top:0;"> <button type="button" class="btn btn-sm  btn-defult" (click)="viewall('attend')">   {{'view_all' | translate}}</button></div>
+             </h5>
+             <div class="col-sm-12 col-md-12 has-feedback">
+                 <div class="codeIndicator">
+                     <label><span class="span1"></span>   {{'present' | translate}}</label>
+                     <label><span class="span2"></span>   {{'absent' | translate}}</label>
+                     <!-- <label><span class="span3"></span>   {{'leave' | translate}}</label> -->
+                     <label><span class="span4"></span>   {{'attendance_not_taken' | translate}}</label>
+                </div>
+                <a href="#" (click)="prevFilter($event, 'attend')" class="previous controllArrowLeft"><i class="fa fa-angle-left"></i></a>
+                <table style="width:100%;">
+                   <tr>
+                      <td rowspan="2">
+                         <p-chart type="doughnut" [options]="doughnoutoptionsoverall" [data]="attendata" width="300px" height="300px"></p-chart>
+                      </td>
+                      <td>
+                         <p-chart type="doughnut" [options]="doughnoutoptionspresent" [data]="presentdata"></p-chart>
+                      </td>
+                      <td>
+                         <p-chart type="doughnut" [options]="doughnoutoptionsabsent" [data]="absentdata" ></p-chart>
+                      </td>
+                   </tr>
+                   <tr>
+                      <td>
+                         <p-chart type="doughnut" [options]="doughnoutoptionsleave" [data]="leavedata"></p-chart>
+                      </td>
+                      <td>
+                         <p-chart type="doughnut" [options]="doughnoutoptionsnottaken" [data]="nottakendata" ></p-chart>
+                      </td>
+                   </tr>
+                </table>
+                <a href="#" (click)="nextFilter($event, 'attend')" id="attendnext" class="next controllArrowRight"><i class="fa fa-angle-right"></i></a>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="" *ngIf="switchFlag && !moduleviewall">
+       <div class="col-sm-6 col-md-6 pull-left">
+          <div class="boxModel pull-left">
+             <h5 class="h5 freeCollectionTitle"><span class="hdSpan spanblock" style="background-image:url(assets/images/icons/communication.png)">&nbsp;</span>  {{'communication' | translate}}</h5>
+             <table class="table">
+                <thead>
+                   <tr>
+                      <th>&nbsp;</th>
+                      <th>  {{'today' | translate}}</th>
+                      <th>  {{'last_month' | translate}} </th>
+                      <th>  {{'till_date' | translate}}</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr *ngFor="let obj of commarr">
+                      <td>{{obj.key|translate}}</td>
+                      <td><span *ngIf="obj.value.today != 0"><a [routerLink]="['/communication/management',obj.type,'today']">{{obj.value.today}}</a></span><span *ngIf="obj.value.today == 0">{{obj.value.today}}</span></td>
+                      <td><span *ngIf="obj.value.last_month != 0"><a [routerLink]="['/communication/management',obj.type,'lastmonth']">{{obj.value.last_month}}</a></span><span *ngIf="obj.value.last_month == 0">{{obj.value.last_month}}</span></td>
+                      <td><span *ngIf="obj.value.till_date != 0"><a [routerLink]="['/communication/management',obj.type,'tilldate']" >{{obj.value.till_date}}</a></span><span *ngIf="obj.value.till_date == 0">{{obj.value.till_date}}</span></td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
+       <div class="col-sm-6 col-md-6 pull-left">
+          <div class="boxModel pull-left">
+             <h5 class="h5 attandanceTitle"><span class="hdSpan spanblock" style="background-image:url(assets/images/icons/fee-collection.png)">&nbsp;</span> {{'fee_collection' | translate}}</h5>
+             <table class="table">
+                <thead>
+                   <tr>
+                      <th>&nbsp;</th>
+                      <th>  {{'today' | translate}}</th>
+                      <th>  {{'last_month' | translate}}</th>
+                      <th>  {{'till_date' | translate}}</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr *ngFor="let obj of feearr">
+                      <td>{{obj.key|translate}}</td>
+                      <td><span *ngIf="obj.value.today != 0 && obj.value.today != 'NA'"><a [routerLink]="['/fee/main']" [queryParams]="{type: obj.type, flag: 'today'}">{{obj.value.today}}</a></span><span *ngIf="obj.value.today == 0 || obj.value.today == 'NA'">{{obj.value.today}}</span></td>
+                      <td><span *ngIf="obj.value.last_month != 0 && obj.value.last_month != 'NA'"><a [routerLink]="['/fee/main']" [queryParams]="{type: obj.type, flag: 'lastmonth'}">{{obj.value.last_month}}</a></span><span *ngIf="obj.value.last_month == 0 || obj.value.last_month == 'NA'">{{obj.value.last_month}}</span></td>
+                      <td><span *ngIf="obj.value.till_date != 0 && obj.value.till_date != 'NA'"><a [routerLink]="['/fee/main']" [queryParams]="{type: obj.type, flag: 'tilldate'}">{{obj.value.till_date}}</a></span><span *ngIf="obj.value.till_date == 0 || obj.value.till_date == 'NA'">{{obj.value.till_date}}</span></td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
+       <div class="col-sm-6 col-md-6 pull-left">
+          <div class="boxModel pull-left">
+             <h5 class="h5 hostelTitle"><span class="hdSpan spanblock" style="background-image:url(assets/images/icons/attendance.png)">&nbsp;</span>  {{'student_attendance' | translate}}</h5>
+             <table class="table">
+                <thead>
+                   <tr>
+                      <th>&nbsp;</th>
+                      <th>  {{'today' | translate}}</th>
+                      <th>  {{'last_month' | translate}}</th>
+                      <th>  {{'till_date' | translate}}</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                      <td>  {{'present' | translate}}</td>
+                      <td>
+                         <span *ngIf="globalObj.todaypresentCount != 0">
+                         <a [routerLink]="['/attendance/main']" [queryParams]="{status: 'P'}" >{{globalObj.todaypresentCount}}</a>
+                         </span>
+                         <span *ngIf="globalObj.todaypresentCount == 0">{{globalObj.todaypresentCount}}</span>
+                      </td>
+                      <td>{{globalObj.lastMonthpresentCount}}</td>
+                      <td><a>{{globalObj.tillPresentCount}}</a></td>
+                   </tr>
+                   <tr>
+                      <td>  {{'absent' | translate}}</td>
+                      <td>
+                         <span *ngIf="globalObj.todayabsentCount != 0">
+                         <a [routerLink]="['/attendance/main']" [queryParams]="{status: 'A'}">{{globalObj.todayabsentCount}}</a>
+                         </span>
+                         <span *ngIf="globalObj.todayabsentCount == 0">{{globalObj.todayabsentCount}}</span>
+                      </td>
+                      <td>{{globalObj.lastMonthabsentCount}}</td>
+                      <td>{{globalObj.tillAbsentCount}}</td>
+                   </tr>
+                   <!-- <tr>
+                      <td>   {{'leave' | translate}}</td>
+                      <td>
+                         <span *ngIf="globalObj.todayleaveCount != 0">
+                         <a [routerLink]="['/attendance/main']" [queryParams]="{status: 'L'}">{{globalObj.todayleaveCount}}</a>
+                         </span>
+                         <span *ngIf="globalObj.todayleaveCount == 0">{{globalObj.todayleaveCount}}</span>
+                      </td>
+                      <td>{{globalObj.lastMonthleaveCount}}</td>
+                      <td>{{globalObj.tillLeaveCount}}</td>
+                   </tr> -->
+                   <tr>
+                      <td>    {{'attendance_not_taken' | translate}}</td>
+                      <td><span *ngIf="globalObj.todayAttNotTakenCount != 0">
+                          <a href="javascript:void(0)" (click)="attNotTaken('today')">{{globalObj.todayAttNotTakenCount}}</a>
+                        </span>
+                        <span *ngIf="globalObj.todayAttNotTakenCount == 0">
+                              {{globalObj.todayAttNotTakenCount}}
+                              </span>
+                        </td>
+                      <td><span *ngIf="globalObj.lastMonthAttNotTakenCount != 0">
+                          <a href="javascript:void(0)" (click)="attNotTaken('previous')">{{globalObj.lastMonthAttNotTakenCount}}</a>
+                        </span>
+                        <span *ngIf="globalObj.lastMonthAttNotTakenCount == 0">
+                            {{globalObj.lastMonthAttNotTakenCount}}
+                              </span>
+                        </td>
+                      <td><span *ngIf="globalObj.tillDateAttNotTakenCount != 0">
+                          <a href="javascript:void(0)" (click)="attNotTaken('till')">{{globalObj.tillDateAttNotTakenCount}}</a>
+                        </span>
+                        <span *ngIf="globalObj.tillDateAttNotTakenCount == 0">
+                               {{globalObj.tillDateAttNotTakenCount}}
+                              </span>
+                    </td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
+
+       <div class="col-sm-6 col-md-6 pull-left">
+         <div class="boxModel pull-left">
+            <h5 class="h5 attandanceTitle"><span class="hdSpan spanblock" style="background-image:url(assets/images/icons/fee-collection.png)">&nbsp;</span> {{'Doubt Asked' | translate}}</h5>
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>&nbsp;</th>
+                     <th>  {{'today' | translate}}</th>
+                     <th>  {{'last_month' | translate}}</th>
+                     <th>  {{'till_date' | translate}}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let obj of doubtarr">
+                     <td>{{obj.key|translate}}</td>
+                     <td>
+                        <!----<span *ngIf="obj.value.today != 0 && obj.value.today != 'NA'"><a [routerLink]="['']" [queryParams]="{type: obj.type, flag: 'today'}">{{obj.value.today}}</a></span>-->
+                        <span *ngIf="obj.value.today != 0 && obj.value.today != 'NA'">{{obj.value.today}}</span>
+                        <span *ngIf="obj.value.today == 0 || obj.value.today == 'NA'">{{obj.value.today}}</span>
+                     </td>
+                     <td>
+                        <!---- <span *ngIf="obj.value.lastMonth != 0 && obj.value.lastMonth != 'NA'"><a  [queryParams]="{type: obj.type, flag: 'lastmonth'}">{{obj.value.lastMonth}}</a></span>-->
+                        <span *ngIf="obj.value.lastMonth != 0 && obj.value.lastMonth != 'NA'">{{obj.value.lastMonth}}</span>
+                        <span *ngIf="obj.value.lastMonth == 0 || obj.value.lastMonth == 'NA'">{{obj.value.lastMonth}}</span>
+                     </td>
+                     <td>
+                         <!----<span *ngIf="obj.value.tillDate != 0 && obj.value.tillDate != 'NA'"><a [routerLink]="['']" [queryParams]="{type: obj.type, flag: 'tilldate'}">{{obj.value.tillDate}}</a></span>-->
+                         <span *ngIf="obj.value.tillDate != 0 && obj.value.tillDate != 'NA'">{{obj.value.tillDate}}</span>
+                        <span *ngIf="obj.value.tillDate == 0 || obj.value.tillDate == 'NA'">{{obj.value.tillDate}}</span>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+
+    </div>
+ </div>
+ <div id="daterange" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="max-width: 235px;">
+       <div class="modal-content">
+          <div class="">
+             <div class="has-feedback ngCalendra">
+                <ngb-datepicker #dp (select)="onDateChange($event)" [displayMonths]="0" [dayTemplate]="t">
+                </ngb-datepicker>
+                <ng-template #t let-date="date" let-focused="focused">
+                   <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                   [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                   {{ date.day }}
+                   </span>
+                </ng-template>
+             </div>
+          </div>
+          <div class="text-right">
+             <a href="javascript:void()" class="text-info" data-dismiss="modal">{{'cancel' | translate}}</a>
+             <a href="javascript:void()" class="text-info" data-dismiss="modal">{{'ok' | translate}}</a>
+          </div>
+       </div>
+    </div>
+ </div>

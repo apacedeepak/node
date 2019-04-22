@@ -1,0 +1,85 @@
+<!--
+  Generated template for the ParentfeePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+       <button ion-button menuToggle enable-menu-with-back-views="true">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fee</ion-title>
+    <!-- <page-sibling (siblingChange)="siblingChange()" ></page-sibling> -->
+    <page-notification callFromType=1></page-notification>
+  </ion-navbar>
+    
+     <div id="ListBackdrop" *ngIf="!fabButtonOpened"></div>
+    <div style="background: #fff; position: relative;">
+  <ion-segment [(ngModel)]="globalObj.tabSelected">
+      <ion-segment-button value="duedetails">
+        DUE FEE DETAILS
+      </ion-segment-button>
+      <ion-segment-button value="paiddetail">
+        FEE PAID DETAILS
+       </ion-segment-button>
+
+    </ion-segment>
+    </div>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="paddingTop" [ngSwitch]="globalObj.tabSelected">
+    <ion-list *ngSwitchCase="'duedetails'">
+    
+        <table class="dueclass fontsize">
+            <tbody class="tbobystyle">
+                <th>Term</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <!--<th>Select</th>-->
+            </tbody>
+            <tr class="aligncenter" *ngFor="let due of globalObj.dueList; index as i;">
+                <td>{{due.term_name}}</td>
+                <td>{{due.due_date  | date:'d MMM yyyy'}}</td>
+                <td>{{due.due_amount}}</td>
+                <!--<td><ion-icon [ngClass]="(due.status)== 'close' ? 'redclass':'greenclass'" (click)="changeStatus(i)"  name="{{ due.status }}"></ion-icon></td>-->
+            </tr>
+        </table>
+    
+    </ion-list>
+    
+    <ion-list *ngSwitchCase="'paiddetail'">
+        <ion-card class="fontsize" *ngFor="let paid of globalObj.paidFee">
+            <ion-card-content>
+                <div class="receptcard">
+                    <span>Receipt No.: &nbsp; {{paid.receiptno}}</span>
+                    <span class="right">{{paid.totalAmount}}</span>
+                </div>
+                <div  class="fontsize">
+                    Term: &nbsp;<span class="spancolor">{{paid.term_name}}</span>
+                </div>
+                <div  class="fontsize">
+                    Payment Mode: &nbsp;<span class="spancolor">{{paid.paymentMode}}</span>
+                </div>
+                <div  class="fontsize"><span class="spancolor"> {{paid.receipt_date  | date:'d MMM yyyy'}}</span></div>
+                <div class="fontsize margin10">
+                    <span (click)="viewReceipt(paid.receipt_id)">
+                        <ion-icon ios="ios-document" md="md-document"></ion-icon>&nbsp;View Receipt</span>
+                </div>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+    </div>
+    
+<!--    <ion-fab *ngIf="globalObj.tabSelected == 'duedetails'"  right bottom #fab>
+        <button (click)="getduedetails()" id="fabbutton" ion-fab mini>
+       <ion-icon ios="ios-information" md="md-information"></ion-icon>
+        </button>
+    </ion-fab>-->
+    
+    
+</ion-content>

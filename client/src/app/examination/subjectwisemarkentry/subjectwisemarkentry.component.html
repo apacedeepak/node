@@ -1,0 +1,124 @@
+
+        <div class="form">
+          <div id="successmsg" class="success" *ngIf='edited'> &nbsp; Record Submitted Successfully</div>
+          <div id="updatesuccess" class="success" *ngIf='updated'> &nbsp; Record Updated Successfully</div>
+
+        </div>
+          <form  [formGroup]='form' (ngSubmit)="onSubmit(form.value,$event)">
+              <div class="fmGroup">
+              <div class="col-sm-2 col-md-2 pull-left">
+                  <label>Class:</label>   
+                  <select class="form-control" formContrform-olName='allClass' #class (change)='classChange(class.value)'>
+                        <option value="">Please Select</option>
+                        <option *ngFor="let clas of classlist" value="{{clas.class_auto_id}}">{{clas.class_name}}</option>
+                      </select>
+              </div>
+              
+              <div class="col-sm-2 col-md-2 pull-left">
+                  <label>Section:</label>
+                  <select class="form-control" formControlName='allClassSections' #section (change)='sectionChange(section.value)'>
+                        <option value="">Please Select</option>
+                        <option *ngFor="let sect of sectionval" value="{{sect.section_id}}">{{sect.group_name}}</option>
+                      </select>
+              </div>
+              
+              <div class="col-sm-2 col-md-2 pull-left">
+              <label>Exam:</label>              
+                    <select id="examSelect" class="form-control" formControlName='examSelect' #exams (change)='examChange(exams.value)'>
+                        <option value="">Please Select</option>
+                        <option *ngFor="let exm of allExam" value="{{exm.exam_id}}">{{exm.exam_name}}</option>
+                      </select>
+                  </div>
+              
+              <div class="col-sm-3 col-md-3 pull-left">
+                  <label>Subject Group:</label>
+                   <select id="examSelect" class="form-control" formControlName='subjectGroup' #subGrp (change)='subjectGruopChange(subGrp.value)'>
+                        <option value="">Please Select</option>
+                        <option *ngFor='let subGroup of subjectgroup'  value="{{subGroup.sub_group_id}}">{{subGroup.group_name}}</option>
+                      </select>
+              </div>
+              
+              <div class="col-sm-3 col-md-3 pull-left">
+                  <label>Subject:</label>
+                  <select class="form-control" formControlName='ddlSubject' #subAll (change)='allSubjectChange(subAll.value)'>
+                       <option value="">Please Select</option>
+                          <option *ngFor="let subjectdetails of namedata"  value="{{subjectdetails.subject_id}}">{{subjectdetails.subject_name}}</option>
+                      </select>
+              </div>
+    </div>
+              
+
+              <div *ngIf="typval == 1 && flag == 1" class="displayfun" id="displayshow" >
+                  <div class="col-sm-2 col-md-2 pull-left font14">
+                   <b>Max Marks:</b> {{maxval}}   
+                  </div>  
+                  <div class="col-sm-2 col-md-2 pull-left"><b>Pass Marks:</b> {{passval}}</div>
+              </div>
+              <div class="col-sm-12 col-md-12 pull-left text-center margin-bottom-20">
+                  <hr>
+               <input type="button" name="display" class="btn btn-primary btn-sm" (click)="displayfun()"  value="Display">
+                      <input type="submit" name="submit" value='Save' class="btn btn-primary btn-sm" [ngClass]="(flag) == 0 ? 'disabled' : ''" [value]="(editOrUpadte) == 0 ? 'Save' : 'Update'" >   
+              </div>
+             
+
+       <!-- <div class="formRow" *ngIf="typval == 1 && flag == 1" style="text-align: right;" >
+           <span style="color:green;">Please press "Alt + Down Arrow key" to enter mark Abbreviation and "Backspace" to again enter marks.</span></div> -->
+  <div class="col-sm-12 col-md-12 pull-left">        
+       <table #myDiv id="dataval" *ngIf='flag == 1' border="0" class="table table-striped timetableColender margin-bottom-20" id="display">
+            <thead>
+              <tr>
+                  <th>S No.</th>
+                <th>Roll No.</th>
+                <th> Adm. No.</th>
+                <th>Student Name</th>
+                <th>Enter Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let studentdetails of studentdataall; index as i;">
+                  <td>{{i + 1}}</td>
+                <td align="center">{{(studentdetails.roll_no) == null ? '--' : studentdetails.roll_no}}</td>
+                <td align="left">{{studentdetails.admission_no | slice:4}}</td>
+                <td align="left"><div formArrayName='studentsIds'>{{studentdetails.fname}}  {{studentdetails.mname}} {{studentdetails.lname}}
+                 <input type="hidden" [formControlName]='i' value="{{studentdetails.id}}" ></div>
+                </td>
+                <td align="left" *ngIf="typval == 1" class="">
+                  <div formArrayName='studentsMarks'>
+                      <input type="text" #txtFname autocomplete="off" class="validate filter-input disjam" (blur)="checkonblur($event, studentdetails.id, i)" (focus)="blurfo($event, studentdetails.id, i)" style='width: 50%;' [formControlName]='i' (click)='setdisplay($event, studentdetails.id, i)'
+                      id="{{studentdetails.id}}">
+
+
+                    <div class="suggestions" tabindex="-1" *ngIf="allmarkabbreviation.length > 0" id="{{studentdetails.id}}-{{i}}" style='display: none;'>
+                    <ul class='autodrop' tabindex="-1">
+                    <li tabindex="-1" *ngFor="let markabb of autoLoaderArr | autosearch: txtFname.value" (click)="select(markabb.value, i)">
+                    {{markabb.value}}
+                     </li>
+                     <li tabindex="-1" *ngIf="(autoLoaderArr | autosearch: txtFname.value) == false">No results found</li>
+                    </ul>
+                    </div>
+
+                  </div>
+                </td>
+                <td align="left" *ngIf="typval == 2"><div formArrayName='studentsGrade'>
+                    <select [formControlName]='i' class="selectBox">
+                            <option value="">---Please Select---</option>
+                            <option *ngFor="let gradedetails of gradeval"  value="{{gradedetails.grade_id}}">{{gradedetails.grade_master}} </option>
+                    </select>
+                  </div>
+                </td>
+                <td align="left" *ngIf="typval == 3"><div formArrayName='studentsComment'>
+                    <select [formControlName]='i'>
+                            <option value="">---Please Select---</option>
+                            <option *ngFor="let commentval of commentdata"  value="{{commentval.comment_id}}">{{commentval.comment}} </option>
+                    </select></div>
+                </td>
+                <td align="left" *ngIf="typval == 4" formArrayName='studentsGFreeStyle'><div>
+                  <input type="text" [formControlName]='i' name="free_style" id="free_style">
+                  </div>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+  </div>
+  </form>
+   

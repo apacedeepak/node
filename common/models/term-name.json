@@ -1,0 +1,43 @@
+{
+  "name": "term_name",
+  "plural": "term_name",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "term_name": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "priority": {
+      "type": "number",
+      "required": true
+     
+    },
+    "session_id": {
+      "type": "number",
+      "required": true
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

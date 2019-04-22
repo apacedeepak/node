@@ -1,0 +1,410 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none">
+      <div class="boxModel pull-left maxHightOuto" style="margin-top:15px;">
+        <div class="headBox">            
+          <h5 class="h5 pull-left"> <a [routerLink]="['/classrecord/main']"> <i style="color:black;" class="fa fa-arrow-left"></i></a> {{'view_profile' | translate}}</h5>
+          <div class="col-sm-2 col-md-1 pull-right text-right" style="margin-top: 19px;"><a [routerLink]="['/communication/compose']" [queryParams]="{flag:'classrecord',id: globalObj.id}"><i style="color: rgba(80,210,120,1);" class="fa fa-fw fa-envelope"></i></a></div>
+        </div>
+        <ul class="nav studentProfileTab">
+          <li id="atten"><a class="active" role="tab" data-toggle="tab" href="#attendancerecord"> {{'attendance' | translate}}</a></li>
+          <li id="library"><a role="tab" data-toggle="tab" href="#libraryrecord"> {{'library' | translate}}</a></li>
+          <li id="indis"><a role="tab" data-toggle="tab" href="#inDisciplinerecord"> {{'special_remarks' | translate}}</a></li>
+          <li id="exam"><a role="tab" data-toggle="tab" href="#examrecord"> {{'exam' | translate}}</a></li>
+          <li id="fee"><a role="tab" data-toggle="tab" href="#feerecord"> {{'fee' | translate}}</a></li>
+          <li id="homework"><a role="tab" data-toggle="tab" href="#homeworkrecord"> {{'homework' | translate}}</a></li>
+        </ul>
+          <div class="clearfix"></div>
+        <div class="tab-content" style="padding-left:15px; padding-right:15px;">
+          <div id="attendancerecord" role="tabpanel" class="tab-pane active">
+            <div class="col-xs-3 col-sm-3 col-md-3 pull-left">
+              <div class="studentProfile">
+                <figure>
+                    <div *ngIf="globalObj.student_photo_path != ''"  class="text-center" style="background: #f2f2f2;padding: 2px;margin-bottom: 5px">
+                        <img src="{{globalObj.student_photo}}" alt="">
+                    </div>
+                    <div *ngIf="globalObj.student_photo_path == ''"  class="text-center" style="background: #f2f2f2;padding: 2px;margin-bottom: 5px">
+                        <img src="assets/images/profile_img.jpg" alt="">
+                    </div>
+                  <figcaption>
+                    <p>
+                      <label> {{'name' | translate}}</label>
+                      :&nbsp;&nbsp; {{globalObj.name}}</p>
+                    <p>
+                      <label>{{'admission_no' | translate}}</label>
+                      :&nbsp;&nbsp; {{globalObj.admission_no | split:'_':1}}</p>
+                    <p>
+                      <label>  {{'class' | translate}} {{'section' | translate}}</label>
+                      :&nbsp;&nbsp; {{globalObj.classSec}}</p>
+                    <p>
+                      <label> {{'roll_no' | translate}}</label>
+                      :&nbsp;&nbsp; {{(globalObj.roll_no) == 0 ? 'NA': globalObj.roll_no}} </p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 rightpaddnone  pull-left">
+              <div class="brifStatus row">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <h5 style="font-size: 14px;"> {{'total_attendance' | translate}}: <b>{{ (globalObj.totalpresent != undefined && globalObj.totalpresent != null) ? globalObj.totalpresent : 0 }}</b>/{{(globalObj.total != undefined && globalObj.total != null) ? globalObj.total : 0}}</h5>
+                  <div class="sinfo parsentBlock" style="background:'rgba(0,255,0,0.3)'"> <span class="pull-left"> {{'present' | translate}}</span> <span class="pull-right">{{ (counts.pcount != undefined && counts.pcount != null) ? counts.pcount : 0 }}</span> </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <h5>&nbsp;</h5>
+                  <div class="sinfo absentBlock" style="background:'rgba(251,122,103,0.6)'"> <span class="pull-left"> {{'absent' | translate}}</span> <span class="pull-right">{{ (counts.acount != undefined && counts.acount != null) ? counts.acount : 0}}</span></div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <h5 style="font-size: 14px;"> {{'attendance_percentage' | translate}}: {{((globalObj.percentage != undefined && globalObj.percentage != null ) ? globalObj.percentage : 0) | number:'2.2-2'  }}%</h5>
+                  <div class="sinfo leaveBlock" style="background:'rgba(248, 202,85,0.6)'"> <span class="pull-left"> {{'leave' | translate}}</span> <span class="pull-right">{{ (counts.lcount != undefined && counts.lcount != null) ? counts.lcount : 0}}</span> </div>
+                </div>
+              </div>
+              <!--<div class="calendersection">-->
+              <div class="col-sm-12 col-md-12 pull-left has-feedback padding-left-none" style="margin-top:15px;">
+                  <div class="text-center">
+                      <div id='calendar' style='display: none;'></div>
+                      <div id='caljump' style='position: relative'>
+                        <label for='months'></label>
+                        <select class="form-control selectDrop" id='months' (change)='monthChange()'></select>
+                    </div>
+              
+                  </div><!--
+-->                  <div *ngIf="calendarOptions">
+                
+               <ng-fullcalendar id='calendar' #ucCalendar4 (eventDrop)="updateEvent($event.detail)" [options]="calendarOptions" (clickButton)="clickButton4($event.detail)"></ng-fullcalendar>
+           
+                </div>
+           <!--<div appClassdashboardcalendar [config]="config" class="basic-full-calendar fc fc-unthemed fc-ltr"></div>-->
+            
+            
+</div>
+              <!--</div>-->
+            </div>
+          </div>
+          <div id="libraryrecord" role="tabpanel" class="tab-pane fade">
+              <div class="col-sm-12 col-md-12">
+              <h3 class="text-center">  {{'coming_soon' | translate}}...</h3>
+            </div>
+<!--            <div class="col-sm-12 col-md-12" style="margin-top:15px;">
+              <h4>Books Not Returned:</h4>
+              <table class="table tablestyle text-center marginbot30">
+                <thead>
+                  <tr>
+                    <td>Accession No.</td>
+                    <td>Book Title</td>
+                    <td>Issue Date</td>
+                    <td>Due Date</td>
+                    <td>Days Late</td>
+                    <td>Fine</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Issue History:</h4>
+              <table class="table tablestyle text-center">
+                <thead>
+                  <tr>
+                    <td>Accession No.</td>
+                    <td>Book Title</td>
+                    <td>Issue Date</td>
+                    <td>Due Date</td>
+                    <td>Days Late</td>
+                    <td>Fine</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                  <tr>
+                    <td>1223</td>
+                    <td>Lorem ipsum dolor </td>
+                    <td>12 Sept, 2017</td>
+                    <td>30 Sept, 2017</td>
+                    <td>2</td>
+                    <td><i class="fa fa-fw fa-rupee"></i>100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>-->
+          </div>
+          <div id="inDisciplinerecord" role="tabpanel" class="tab-pane fade">
+            <div  class="col-sm-12 col-md-12 accordinMonth">
+                <div style="margin-bottom: 32px;" class="radioBlock text-center">
+                    <input type="radio" name="remark" id="indiscipline" (click)="specialRemarks('indiscipline')"> <label for="indiscipline"> {{'in_discipline' | translate}}</label>
+                    <input type="radio" name="remark" id="achievement" (click)="specialRemarks('achievement')"><label for="achievement"> {{'achievements' | translate}}</label>
+                </div>
+                
+                <ng-container *ngFor="let remark of remarksList; index as j;">
+                <ng-container *ngFor="let rem of remark | keyvaluepair;">
+              <h4  class="has-feedback accordion_head aaa{{j}}" (click)="togledata(j)">{{rem.key}}</h4>
+              <div class="accordion_body bbb{{j}}">
+                <table class="table tablestyle text-center">
+                  <thead>
+                    <tr>
+                      <td style="width:100px"> {{'serial_no' | translate}}</td>
+                      <td style="width:150px"> {{'date' | translate}}</td>
+                      <td> {{'issue' | translate}}</td>
+                      <td style="width:250px">   {{'reported_by' | translate}}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let remarks of rem.value; index as i;"> 
+                      <td>{{i + 1}}.</td>
+                      <td>{{remarks.remark_date}}</td>
+                      <td>{{remarks.remark}}</td>
+                      <td>{{remarks.senderName}}</td>
+                    </tr>
+   
+                  </tbody>
+                </table>
+              </div>
+              
+              </ng-container>
+            </ng-container>
+                <h3 *ngIf="globalObj.remarkFlag && remarksList.length == 0" class="text-center">   {{'no_record_found' | translate}}</h3>
+                
+            </div>
+          </div>
+          <div id="examrecord" role="tabpanel" class="tab-pane fade">
+            <div class="col-sm-12 col-md-12">
+              <h3 class="text-center">   {{'coming_soon' | translate}}...</h3>
+            </div>
+          </div>
+          <div id="feerecord" role="tabpanel" class="tab-pane fade">
+              
+            <div class="col-sm-6 col-md-6 pull-left">
+              <div class="smTable">
+                <div class="headB"> {{'due_fee_details' | translate}}</div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>{{'serial_no' | translate}}</th>
+                      <th class="text-center"> {{'term' | translate}}</th>
+                      <th class="text-right"> {{'amount' | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let fee of feeDues; index as i">
+                      <td>{{i + 1}}.</td>
+                      <td class="text-center">{{fee.term_name}}</td>
+                      <td class="text-right">{{fee.due_amount}}</td>
+                    </tr>
+                    <tr *ngIf="feeDues.length == 0">
+                      <td style="text-align: center;" colspan="3">  {{'no_record_found' | translate}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 pull-left">
+              <div class="smTable">
+                <div class="headB"> {{'paid_fee_details' | translate}}</div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th> {{'fee_reciept' | translate}}</th>
+                      <th class="text-center"> {{'terms' | translate}}</th>
+                      <th class="text-right"> {{'amount' | translate}}</th>
+                    </tr>
+                    
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let fee of feePaid; index as i">
+                      <td>{{fee.receiptno}}</td>
+                      <td class="text-center">{{fee.term_name}}</td>
+                      <td class="text-right">{{fee.total_amount}}</td>
+                    </tr>
+                    <tr *ngIf="feePaid.length == 0">
+                      <td style="text-align: center;" colspan="3">  {{'no_record_found' | translate}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="homeworkrecord" role="tabpanel" class="tab-pane">
+              <div class="tab-content leftRightgap">
+                  <ul class="nav commnicationBox">
+                        <li id="allhome"><a class="active"  data-toggle="pill" href="#all"> {{'all' | translate}}</a> </li>
+                        <li id="allpending"><a data-toggle="pill" href="#pending"> {{'pending' | translate}}</a></li>
+                        <li id="allsubmitted"><a data-toggle="pill" href="#submitted"> {{'submitted' | translate}}</a></li>
+                        <li id="alluncheck"><a data-toggle="pill" href="#unchecked"> {{'unchecked' | translate}}</a></li>
+                        <li id="allcheck"><a data-toggle="pill" href="#checked"> {{'checked' | translate}}</a></li>
+                    </ul>
+                  <div class="tab-content">
+                        <div class="tab-pane active" id="all">
+                            <ng-container *ngIf="allHomework;else allhomenodata">
+                            <div class="mailBox submail" *ngFor="let homelist of allHomework">
+                                <div class="sunjectIcon"> 
+                                    <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                </div>
+                                <a [style.color] = "homelist.lateflag ? 'red' : ''" routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/normal/{{globalObj.id}}/classrecord/{{globalObj.name}}/{{globalObj.classSec}}">
+                                    <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                    <h3>{{homelist.homework_title}}</h3>
+                                    <h4 style="font-size: 15px;" [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                </a>
+                                <div class="mailtime ng-binding">
+                                    <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i> {{homelist.added_date}}
+                                </div>
+                            </div>
+                            </ng-container>
+                        <ng-template #allhomenodata>
+                                    <div class="text-info text-center">  {{'no_record_found' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div class="tab-pane" id="pending">
+                            <ng-container *ngIf="globalObj.pendingcond;else pendingnodata">
+                                <div *ngFor="let homelist of allHomework">
+                                    <ng-container *ngIf="homelist.submitted == 0" class="sunjectIcon">
+                                        <div class="mailBox submail  pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a [style.color] = "homelist.lateflag ? 'red' : ''"  routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/pending/{{globalObj.id}}/classrecord/{{globalObj.name}}/{{globalObj.classSec}}">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 style="font-size: 15px;" [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace ">
+                                                    <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                   {{homelist.added_date}}
+                                                
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #pendingnodata>
+                                    <div class="text-info text-center">  {{'no_record_found' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div class="tab-pane" id="submitted">
+                            <ng-container *ngIf="globalObj.submittedcond;else submittednodata">
+                                <div *ngFor="let homelist of allHomework">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 0" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/submitted/{{globalObj.id}}/classrecord/{{globalObj.name}}/{{globalObj.classSec}}">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 style="font-size: 15px;" [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "> <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #submittednodata>
+                                <div class="text-info text-center">{{'no_record_found' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div class="tab-pane" id="unchecked">
+                            <ng-container *ngIf="globalObj.uncheckedcond;else uncheckednodata">
+                                <div *ngFor="let homelist of allHomework">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 0" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/unchecked/{{globalObj.id}}/classrecord/{{globalObj.name}}/{{globalObj.classSec}}">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 style="font-size: 15px;" [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "><i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                              
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #uncheckednodata>
+                                    <div class="text-info text-center">  {{'no_record_found' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div class="tab-pane" id="checked">
+                            <ng-container *ngIf="globalObj.checkedcond;else checkednodata">
+                                <div *ngFor="let homelist of allHomework">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 1" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/checked/{{globalObj.id}}/classrecord/{{globalObj.name}}/{{globalObj.classSec}}">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 style="font-size: 15px;" [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "><i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                             
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #checkednodata>
+                                    <div class="text-info text-center">  {{'no_record_found' | translate}}</div>
+                            </ng-template>
+
+                        </div>
+                    </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,213 @@
+{
+  "name": "user",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "role_name": {
+      "type": "string"
+    },
+    "roleId": {
+      "type": "number"
+    },
+    "user_name": {
+      "type": "string",
+      "required": true
+    },
+    "old_user_id": {
+      "type": "number"
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "index": true,
+      "default": "Active"
+    },
+    "user_login_mobileapp": {
+      "type": "number",
+      "default": 0
+    },
+    "user_login_ctp": {
+      "type": "number",
+      "default": 0
+    },
+    "user_login_erp": {
+      "type": "number",
+      "default": 0
+    },
+    "web_user_id": {
+      "type": "number"
+    },
+    "is_excel": {
+      "type": "string"
+    },
+    "website_auth": {
+      "type": "number",
+      "required": true,
+      "description": [
+        "0 => Not Register",
+        "1 => Mobile",
+        "2 => Email",
+        "3 => Admission No"
+      ],
+      "default": 0
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "website_user_id": {
+      "type": "number"
+    },
+    "web_session_key": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "have_notes": {
+      "type": "hasMany",
+      "model": "notes",
+      "foreignKey": "userId",
+      "through": "user_notes"
+    },
+    "user_belongs_to_groups": {
+      "type": "hasMany",
+      "model": "groups",
+      "foreignKey": "userId",
+      "through": "group_users"
+    },
+    "user_have_sections": {
+      "type": "hasMany",
+      "model": "section",
+      "foreignKey": "userId",
+      "through": "user_sections"
+    },
+    "user_have_subjects": {
+      "type": "hasMany",
+      "model": "subject",
+      "foreignKey": "userId",
+      "through": "user_subject"
+    },
+    "user_belongs_to_staff": {
+      "type": "hasOne",
+      "model": "staff",
+      "foreignKey": "userId"
+    },
+    "user_messages": {
+      "type": "hasMany",
+      "model": "communication",
+      "foreignKey": "userId",
+      "through": "message_recipient"
+    },
+    "user_have_homework": {
+      "type": "hasMany",
+      "model": "homework",
+      "foreignKey": "userId"
+    },
+    "students": {
+      "type": "hasOne",
+      "model": "student",
+      "foreignKey": "userId"
+    },
+    "staff": {
+      "type": "hasOne",
+      "model": "staff",
+      "foreignKey": "userId"
+    },
+    "parents": {
+      "type": "hasOne",
+      "model": "parent",
+      "foreignKey": "userId"
+    },
+    "user_belongsto_subjects": {
+      "type": "hasMany",
+      "model": "user_subject",
+      "foreignKey": "userId"
+    },
+    "user_have_schools": {
+      "type": "hasMany",
+      "model": "school",
+      "foreignKey": "userId",
+      "through": "user_school"
+    },
+    
+    "user_attendance": {
+      "type": "hasMany",
+      "model": "student_subject_attendance",
+      "foreignKey": "userId"
+    },
+    "user_role": {
+      "type": "belongsTo",
+      "model": "role",
+      "foreignKey": "roleId"
+    },
+    "other_user_registration": {
+      "type": "hasOne",
+      "model": "other_registration",
+      "foreignKey": "userId"
+    },
+    "user_have_attendance": {
+      "type": "hasMany",
+      "model": "student_subject_attendance",
+      "foreignKey": "userId"
+    },
+    "user_have_leaves": {
+      "type": "hasMany",
+      "model": "leaveApplyStudent",
+      "foreignKey": "userId"
+    },
+    "user_have_section": {
+      "type": "hasOne",
+      "model": "user_sections",
+      "foreignKey": "userId"
+    },
+    "user_have_multiple_section": {
+      "type": "hasMany",
+      "model": "user_sections",
+      "foreignKey": "userId"
+    },
+    "user_devices": {
+      "type": "hasMany",
+      "model": "user_device_token",
+      "foreignKey": "userId"
+    },
+    "user_log": {
+      "type": "hasMany",
+      "model": "master_user_log",
+      "foreignKey": "user_id"
+    },
+    "user_have_assign_schools": {
+      "type": "hasMany",
+      "model": "user_school",
+      "foreignKey": "userId"
+    },
+    "user_has_fee_structure": {
+      "type": "hasOne",
+      "model": "student_fee_structure",
+      "foreignKey": "userId"
+    },
+    "receipt": {
+      "type": "hasMany",
+      "model": "receipt",
+      "foreignKey": "userId"
+    },
+    "defaulter": {
+      "type": "hasOne",
+      "model": "receipt",
+      "foreignKey": "userId"
+    }
+  }, 
+  "acls": [],
+  "methods": {}
+}

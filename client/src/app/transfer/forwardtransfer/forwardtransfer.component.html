@@ -1,0 +1,129 @@
+<div class="boxModel pull-left maxHightOuto" *ngIf="role_name=='Center Head'">
+
+  <!-- <div >
+      <form class="form-signin" ngNativeValidate [formGroup]="centerform" (ngSubmit)="onSubmitcenter(centerform.value)">
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+              <label> Admission No
+                  <input type="text" required class="form-control cleanup validate-empty width30" formControlName='adm_no'
+                      autofocus="" />
+              </label>
+          </div>
+       
+          <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+
+              <input class="btn btn-primary pull-right" value="Search" name="submit" id="submit" type="submit">
+              <hr/>
+          </div>
+      </form>
+  </div> -->
+
+  <div *ngIf="table_enable==true" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+      <span id="success_message" class="span_success"></span>
+      <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+              <tr>
+                  <th>Admission NO</th>
+                  <th>Student Name</th>
+                  <!-- <th>Assigned Course</th>
+                  <th>Assigned Course Type</th>
+                  <th>Assigned Batch</th> -->
+                  <th>Current center</th>
+                 
+                  <th>Requested Course</th>
+                  <th>Requested Course Type</th>
+                  <th>Requested Batch</th>
+                  <th>Transfer Request Date</th>
+  
+      
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let data of center_table_data;">
+                  <td>{{data.user.students.admission_no}}</td>
+                  <td>{{data.user.students.name}}</td>
+                  <td>{{data.assigned_center.school_code}}</td>
+                
+            
+                  <td>{{data.requested_boards.board_name}}</td>
+                  <td>{{data.requested_sections.class_name}}</td>
+                  <td>{{data.requested_sections.section_name}}</td>
+                  <td>{{data.request_date |date:'dd-MM-yyyy'}}</td>
+  
+          
+                  <td >
+                      <input class="btn btn-primary pull-right" value="Accept" name="submit" id="submit" type="button"  data-toggle="modal" data-target="#centerassign" (click)=openmodal(data.userId,data.requested_boardId,data.requested_classId,data.requested_sectionId,data.user.students.admission_no)>
+                      <input class="btn btn-primary pull-right" value="Reject" name="submit" id="submit" type="button" (click)=rejectrequest(data.userId)>
+
+                  </td>
+
+                
+
+              </tr>
+
+
+              <tr *ngIf="center_table_data.length==0">
+                  <td colspan="12">No Record Found</td>
+              </tr>
+
+
+          </tbody>
+      </table>
+  </div>
+
+</div>
+<div id="centerassign" *ngIf="open_modal==true"  class="modal md-modal fade" role="dialog">
+  <div class="modal-dialog">
+
+ 
+    <div class="modal-content">
+      <div class="modal-header text-left"> Assign Batch and Fee Structure
+          <button type="button" class="close" data-dismiss="modal">X</button>
+        </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <form class="form-signin" ngNativeValidate [formGroup]="batch_accept_form" (ngSubmit)="onAccept(batch_accept_form.value)">
+
+              <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                <select required class="form-control cleanup validate-empty width30" formControlName="course" id="board" #board (change)="classlistfunctionbatch(board.value,true)">
+                  <option *ngFor="let list of boardlistbatch" value="{{list.id}}">{{list.board_name}}</option>
+                </select>
+              </div>
+              <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                <select required class="form-control cleanup validate-empty width30" formControlName="course_type" #class (change)="onclasschangebatch(class.value,true)">
+                  <option value=""  selected="selected">Select course type</option>
+      
+                  <option *ngFor="let list of coursetype_list_batch" value="{{list.id}}">{{list.class_name}}</option>
+                </select>
+              </div>
+              <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+                <select required class="form-control cleanup validate-empty width30" formControlName="batch" #section (change)="packagelist(section.value)">
+                  <option value="" selected="selected"> --Select--</option>
+                  <option *ngFor="let list of sectionlist_batch" value="{{list.id}}">{{list.section_name}}</option>
+      
+                </select>
+              </div>
+              <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+                  <select required class="form-control cleanup validate-empty width30" formControlName="package" #package >
+                      <option value="">--Select Package--</option>
+              <option *ngFor="let item of fee_structure_list" value="{{item.fee_structure_master.id}}"> {{item.fee_structure_master.fee_structure_name}}</option>
+              
+                  </select>
+              </div>
+             
+      
+      
+              <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+      
+                <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+                <hr/>
+              </div>
+      
+            </form>                             
+      </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

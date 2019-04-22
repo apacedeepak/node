@@ -1,0 +1,161 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+<div class="headBox" style="border:0;padding: 0; min-height: inherit"><h5 class="h5 pull-left">Performance Overview </h5></div>
+<div class="col-sm-12 col-md-12 pull-left padding-right-none">
+  <ul class="nav navThemeborder">
+    <li><a class="active" data-toggle="tab" href="#weeklyTest">Weekly Test Analysis</a></li>
+    <li><a data-toggle="tab" href="#practiceTest">Practice Test Analysis</a></li>    
+  </ul>
+</div>
+<div class="clearfix"></div>	
+<div class="tab-content">	
+<div id="weeklyTest" class="tab-pane active">
+<div class="row">
+<div class="col-xs-12 col-sm-8 col-md-8 pull-left">
+<div class="boxModel pull-left maxHightOuto">
+<div class="headBox"><h5 class="h5 pull-left">Performance in last five weekly tests</h5></div>
+
+ <div class="col-xs-12 col-sm-12 col-md-12 pull-left padding-right-none padding-left-none">
+	<p-chart type="line" [data]="data" [options]="testOption" ></p-chart>
+	
+	 <div class="clearfix"></div>
+	 <div class="reportdiv">
+	 <p><img src="assets/images/reports/perform-icon1.png"> <strong>{{questionStatus.correctPercent}}%</strong> Questions Attempted Correctle</p>
+	 <p><img src="assets/images/reports/perform-icon2.png"> <strong>{{testTaken.total_tests_taken}}</strong> Tests Attempted</p>
+	 <p><img src="assets/images/reports/perform-icon3.png"> <strong>{{testTaken.question_average_time}}</strong> Sec Average time/question</p>
+	</div>
+	</div> 
+	</div>
+</div>
+	
+<div class="col-xs-12 col-sm-4 col-md-4">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox"><h5 class="h5 pull-left">Weekly Test Series</h5></div>
+    <div class="recentTestOuter">
+      <div class="pntaTest" *ngFor="let trend of trends;">
+        <div class="cirChart col-sm-12 col-sm-4 col-md-4 pull-left padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>
+        <div class="col-sm-12 col-sm-8 col-md-8  pull-left padding-right-none padding-left-none minHightText">
+          <h4>{{trend.test_name}}</h4>
+          <small>{{trend.test_date}}</small>
+          <a href="report/weeklytestperformance"><i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>	
+</div>
+
+<div class="clearfix"></div>
+  <div class="col-xs-12 col-sm-8 col-md-8 pull-left">
+    <div class="boxModel pull-left maxHightOuto">
+      <div class="headBox togglehead">
+        <h5 class="h5 pull-left">{{performanceData.graph_title}}
+          <div><small>{{performanceData.sub_heading}}</small></div>
+        </h5>
+        <div class="pull-right rightposition">
+          <div class="dropdown">
+            <a href="#" class="info-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-info-circle"></i></a>
+            <div class="dropdown-menu overveiwdrop">{{performanceData.info_text}}</div>
+          </div>
+        </div>	
+      </div>
+
+      <div class="table-view tableScroll-sm">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <td><strong>Subject-Chapter</strong></td>	
+              <td><strong>Weightage (In IIT-JEE)</strong></td>
+              <td><strong>Performance Weightage (%)</strong></td>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let subject of subjectReport;">
+              <tr *ngFor="let Chapter of subject.chapter_weightage_analysis;">
+                <td>{{subject.subject_name}}-{{Chapter.chapter_name}}</td>
+                <td>{{Chapter.weightage_in_jee}}</td>
+                <td>{{Chapter.performance_upon_weightage_percentage}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+      </table>
+      </div>
+
+    </div>
+  </div>
+
+<div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+<div class="boxModel pull-left">
+<div class="headBox"><h5 class="h5 pull-left">Summary &amp; Suggestions</h5></div>
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left margintop20">
+  <p *ngFor="let advice of expertAdvice;">
+    <span class="title-blue-sm">{{advice.title}}</span><br>
+    <span [innerHTML]="advice.expert_comment"></span>
+  </p>
+	<hr>
+</div>
+	
+</div>
+</div>
+
+</div>	
+</div>
+	
+<div id="practiceTest" class="tab-pane fade">
+<div class="col-xs-12 col-sm-8 col-md-8 pull-left">
+<div class="boxModel pull-left maxHightOuto">
+<div class="headBox"><h5 class="h5 pull-left">Performance in last five practice tests</h5></div>
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left padding-right-none padding-left-none">
+<img src="assets/images/reports/performance-graph.png"  height="490px">
+</div> 
+</div>
+</div>
+	
+<div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+<div class="boxModel pull-left maxHightOuto" style="min-height: 328px">
+<div class="headBox"><h5 class="h5 pull-left">Recent tests<br> <small>Continoue taking tests to improve your score</small></h5></div>
+
+<div class="recentTestOuter">
+<div class="pntaTest">
+<div class="cirChart col-sm-12 col-sm-4 col-md-4 padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>	
+<div class="col-sm-12 col-sm-8 col-md-8 padding-right-none padding-left-none minHightText">
+<h4>Chapter Test 3</h4>
+<small>Paper 2016</small>
+<a href="#"><i class="fa fa-angle-right"></i></a>
+</div>
+</div>	
+	
+<div class="pntaTest">
+<div class="cirChart col-sm-12 col-sm-4 col-md-4 padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>
+<div class="col-sm-12 col-sm-8 col-md-8 padding-right-none padding-left-none minHightText">
+<h4>Mock Test 1</h4>
+<a href="#"><i class="fa fa-angle-right"></i></a>
+</div>
+</div>
+<div class="pntaTest">
+<div class="cirChart col-sm-12 col-sm-4 col-md-4 padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>
+<div class="col-sm-12 col-sm-8 col-md-8 padding-right-none padding-left-none minHightText">
+<h4>Mock Test 1</h4>
+<a href="#"><i class="fa fa-angle-right"></i></a>
+</div>
+</div>
+<div class="pntaTest">
+<div class="cirChart col-sm-12 col-sm-4 col-md-4 padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>
+<div class="col-sm-12 col-sm-8 col-md-8 padding-right-none padding-left-none minHightText">
+<h4>Mock Test 1</h4>
+<a href="#"><i class="fa fa-angle-right"></i></a>
+</div>
+</div>
+
+<div class="pntaTest">
+<div class="cirChart col-sm-12 col-sm-4 col-md-4 padding-left-none"><img src="assets/images/reports/circular-chart.png"></div>
+<div class="col-sm-12 col-sm-8 col-md-8 padding-right-none padding-left-none minHightText">
+<h4>Mock Test 1</h4>
+<a href="#"><i class="fa fa-angle-right"></i></a>
+</div>
+</div>
+</div>
+	
+</div>	
+</div>	
+</div>
+</div>
+</div>

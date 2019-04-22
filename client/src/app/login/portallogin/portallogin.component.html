@@ -1,0 +1,19 @@
+<div style="color:red">{{ message }}</div>
+<form class="form-signin" ngNativeValidate [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" >
+          <div class="input-layout"><i class="fa fa-fw fa-user iconposition"></i>
+            <input type="text" class="form-control cleanup validate-empty" formControlName='username' placeholder="USERNAME" required="" autofocus="" />
+              <span class="highlight"></span>
+              <span class="bar"></span>
+             <!-- <label>USERNAME</label>-->
+          </div>
+          <div class="input-layout">
+          <i class="fa fa-fw fa-key iconposition"></i>
+          <input type="password" class="form-control validate-empty" formControlName='password' placeholder="PASSWORD" required=""/>
+
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <!--<label>PASSWORD</label>-->
+          </div>
+          <footer><input value="Login" name="submit" id="submit" type="submit"></footer>
+          <a routerLink="/contactus" class="contactBuutton"><img src="assets/images/contact-icon.png">Contact Us</a>
+      </form>

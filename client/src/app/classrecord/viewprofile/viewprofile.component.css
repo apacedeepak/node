@@ -1,0 +1,158 @@
+.studentProfileTab{ list-style-type:none; border-bottom:1px solid #cdcdcd; width:100%; float:left; padding:0; margin-bottom:20px;}
+.studentProfileTab li{ float:left; width: calc(100%/6); text-align:center;}
+.studentProfileTab li a{text-decoration: none; color:#b7b3b3; font-size:18px; padding:14px 5px;display:block; border-bottom:3px solid rgba(0,0,0,0.00)}
+.studentProfileTab li.active a,.studentProfileTab li a.active{ color:#222;border-bottom:3px solid #3c508c}
+.studentProfile {
+    width: 100%;
+    float: left;
+    box-shadow: 0 0 3px 3px #ddd;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    font-size: 13px;
+}
+
+.studentProfile p {
+    margin: 5px 0 0 0;
+    font-weight: bold;
+}
+.studentProfile p label{margin: 0;}
+.brifStatus h5 {
+    min-height: 25px;
+    font-size: 16px;
+}
+.brifStatus h5 big {
+    font-weight: bold;
+}
+.sinfo {
+    width: 100%;
+    float: left;
+    padding: 8px 10px;
+    font-weight: bold;
+}
+.parsentBlock {
+    background: #99e9b3;
+    border: 1px solid #65cf88;
+}
+.absentBlock {
+    background: #f1998c;
+    border: 1px solid #fb7a67;
+}
+.leaveBlock {
+    background: #fcdc8a;
+    border: 1px solid #f8ca55;
+}
+.accordinMonth .accordion_head {
+    background: #4d638c;
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.has-feedback {
+    position: relative;
+}
+
+.accordinMonth .accordion_head {
+    background: #447ab8;
+    border-radius: 0;
+}
+.accordinMonth .accordion_head::after {
+    content: "\f055";
+    font-size: 25px;
+    top: 5px;
+    right: 10px;
+    font-family: 'FontAwesome';
+   position: absolute;
+}
+.accordinMonth .minussign::after {
+    content: "\f056" !important;
+    font-size: 25px;
+    font-family: 'FontAwesome';
+}
+.accordinMonth {
+    margin: 20px 0;
+}
+.accordinMonth .minussign{margin-bottom: 0;}
+h4{font-size: 18px;}
+.tablestyle{margin-bottom: 15px;}
+.tablestyle thead td {
+    color: #fff;
+    font-size: 16px;
+}
+.tablestyle tbody tr:nth-child(2n) {
+    background-color: #dee4ea;
+}
+.tablestyle tr th:first-child, .tablestyle td:first-child {
+    border-left: 0px solid #f1f3f6;
+}
+.boxModel tbody tr td:first-child {
+    color: #333;
+    font-family: 'robotomedium';
+}
+.accordinMonth .accordion_body {
+    display: none;
+}
+.submitRcord {
+    padding: 10px 170px 10px 60px;
+}
+.subjectIcon {
+    background-color: #e03cac;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 0;
+    top: 9px;
+    display: flex;
+    -webkit-display: flex;
+    -moz-display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    -moz-flex-direction: column;
+    border-radius: 3px;
+}
+.messagetab{display: block !important;}
+.messagetab li a {
+    display: block;
+    padding: 6px 11px;
+    color: #6d6d6d;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    outline: none;
+    text-decoration: none;
+    font-size: 14px;
+}
+.messagetab li {
+    display: block;
+    min-height: 37px;
+}
+.messagetab li a.active  {
+    border: 1px solid #cdcdcd;
+    color: #000;
+    font-family: 'robotomedium';
+}
+.homeRvmail{font-size: 14px;}
+.homeRvmail a {color: #fff;}
+.selectDrop{width: 120px;font-size: 13px;padding: 7px;height: 35px; display: inline-block; margin-bottom: 6px;margin-top: 20px;}
+
+#calendar .fc-left{
+    margin-left: 312px!important;
+}
+#months{position: absolute;
+    z-index: 9;
+    border: 0;
+    background: #004b80 !important;
+    color: #fff;
+    font-size: 17px;
+    left: 50%;padding-left: 19px;
+    top: 5px; appearance: none;-webkit-appearance: none;-moz-appearance: none;margin-left: -60px;}
+#months:focus{outline:none;border-color: rgba(128, 189, 255, 0);box-shadow: rgba(128, 189, 255, 0) !important;}
+#months option{ font-size: 13px;}

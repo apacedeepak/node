@@ -1,0 +1,193 @@
+<div class="col-sm-12 col-md-12 padding-left-none padding-right-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div id='mainContent' class="">
+      <div class="headBox">
+        <h5 class="pull-left">Add Microschedule</h5>
+      </div>
+      <div>
+        <form [formGroup]="microschduleForm" (ngSubmit)="onSubmitDetail(microschduleForm.value)">
+          <input type="hidden" class="form-control" value="0" formControlName='id' />         
+            <div class="alert alert-success text-center mt15" *ngIf="globalObj.successMessage">{{ globalObj.successMessage}}</div>
+            <div class="alert alert-danger text-center mt15" *ngIf="globalObj.errorMessage">{{ globalObj.errorMessage}}</div>
+         
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Academic Session
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="academic_session_id" class="form-control required" #acdsession (change)="getBacthDateDetails(acdsession.value)">
+                <option value="">-- Academic Session --</option>
+                <option *ngFor="let acadSession of globalObj.academicSsessionList | keyvalue" value="{{acadSession.value.id}}">{{ acadSession.value.session_name }}</option>
+              </select>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Batch Start Date
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="batch_start_date_id" class="form-control required" #batchStartDate (change)="setMinTestDate(batchStartDate.value)">
+                <option value="">-- Batch Start Date --</option>
+                <option *ngFor="let batchDate of globalObj.batchDateList | keyvalue" value="{{batchDate.value.id}}">{{ batchDate.value.batch_start_date | date:'yyyy-MM-dd' }}</option>
+              </select>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Test Date
+                <b style="color:red">*</b>
+              </label>             
+              <div class="datBox">
+                <input class="calenerIcon required form-control" placeholder="Test Date" readonly ngbDatepicker #d="ngbDatepicker" formControlName="test_date"
+                  [value]="dp" id="dp" [minDate]="minDate" required>
+                <button class="btnover" (click)="d.toggle()" type="button"></button>
+              </div>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Course Mode
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="course_mode" class="form-control required">
+                <option value="">-- Course Mode --</option>
+                <option *ngFor="let courseMode of globalObj.courseModeList | keyvalue" value="{{courseMode.value.id}}">{{ courseMode.value.course_mode_name }}</option>
+              </select>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Course Name
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="course_name" class="form-control required" #courseNameId (change)="getCourseType(courseNameId.value)">
+                <option value="">-- Course Name --</option>
+                <option *ngFor="let courseName of globalObj.courseNameList | keyvalue" value="{{courseName.value.id}}@@{{ courseName.value.boardId }}">{{ courseName.value.board_name }}</option>
+              </select>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Course Type
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="course_type" class="form-control required" #courseType (click)="getSubjectList(courseType.value)">
+                <option value="">-- Course Type --</option>
+                <option *ngFor="let courseType of globalObj.courseTypeList | keyvalue" value="{{courseType.value.id}}@@{{ courseType.value.classId }}">{{ courseType.value.class_name }}</option>
+              </select>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem mt15">
+              <label>Subject
+                <b style="color:red">*</b>
+              </label>
+              <select formControlName="subject" class="form-control required" #subjectId (change)="getWholeSyllabusDetails(subjectId.value)">
+                <option value="">-- Subject --</option>
+                <option *ngFor="let subjectData of globalObj.subjectList | keyvalue" value="{{subjectData.value.id}}@@{{ subjectData.value.lms_subjectId}}">{{ subjectData.value.subject_name }}</option>
+              </select>
+            </div>
+          
+            <div *ngIf="lmsSubjectId>0" class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt15">
+              <label>Syllabus         <b style="color:red">*</b>              </label>            
+               
+             <ngx-treeview [config]="config" [items]="items" (selectedChange)="values = $event"></ngx-treeview>
+              
+            </div>
+           
+            <div class="col-sm-12 col-md-12 mt15 pull-left ">
+             
+                <div *ngIf="id>0; else elseSub">
+                  <input type="submit" value="Update" class="btn btn-primary mr10" [disabled]="(id > 0)? false : true"> &nbsp;
+                
+              
+              
+                <input type="button" value="Clear" class="btn btn-primary mr10" (click)="clearForm()" *ngIf="id > 0">
+             
+            </div>   
+            <ng-template #elseSub>
+                <div class="col-sm-12 col-md-12 mt15 pull-left ">
+              <input type="submit" value="Save" class="btn btn-primary mr10" [disabled]="(microschduleForm.valid)? false : true">
+                </div>
+            </ng-template>        
+          </div>
+        </form>
+
+    </div>
+  </div>
+
+   <div class="col-sm-12 col-md-12 pull-left mt25">
+      <table class="table table-striped table-bordered customTable">
+        <thead>
+          <tr>
+              <th align="center" class="textCenter">S. No</th>
+            <th align="center" class="textCenter">Session</th>
+            <th align="center" class="textCenter">Batch Start Date</th>
+            <th align="center" class="textCenter">Test Date</th>
+            <th align="center" class="textCenter">Course Type</th>
+            <th align="center" class="textCenter">Board </th>
+            <th align="center" class="textCenter">Class</th>
+            <th align="center" class="textCenter">Subject</th>
+            <th align="center" class="textCenter">Topics</th>
+            <th align="center" class="textCenter">Status</th>
+            <th align="center" class="textCenter">Action</th>
+          </tr>
+        </thead>
+
+        <ng-container *ngIf="totalRows >0 ;else nodata">
+          <tr *ngFor="let data of microscheduleList | keyvalue | paginate: { itemsPerPage: 10, currentPage: page}; index as i;">
+              <td align="center" class="vam">{{ i+1}}</td>
+            <td align="center" class="vam">{{ data.value.sessionData.session_name}}</td>
+            <td align="center" class="vam">{{ data.value.batchdateData.batch_start_date | date:'dd-MMM-yy'}}</td>
+            <td align="center" class="vam">{{ data.value.test_date | date:'dd-MMM-yy'}}</td>
+            <td align="center" class="vam">{{ data.value.coursemodeData.course_mode_name}}</td>
+            <td align="center" class="vam">{{ data.value.boardData.board_name}}</td>
+            <td align="center" class="vam">{{ data.value.classData.class_name}}</td>
+            <td align="center" class="vam">{{ data.value.subjectData.subject_name}}</td>
+            <td align="center" class="vam">
+              <a href="javaScript:void(0);" (click)="openSyllabus(data.value.id)" class="text-blue">View</a>
+            </td>
+            <td align="center" class="vam">
+              <div *ngIf="data.value.status == '1'; else elseBlock">
+                <a href="javaScript:void(0);" (click)="statusUpdate(data.value.id,2)" class="text-green">Active</a>
+              </div>
+
+              <ng-template #elseBlock>
+                <a href="javaScript:void(0);" (click)="statusUpdate(data.value.id,1)" class="text-danger">Inactive</a>
+              </ng-template>
+            </td>
+            <td align="center" class="vam">
+              <a (click)="editAndUpdateRowValues(data.value.id)">
+                <i class="material-icons">edit</i>
+              </a>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #nodata>
+          <tr>
+            <td colspan="11" align="center" class="vam">
+              <div class="text-center text-danger"> No record found..</div>
+            </td>
+          </tr>
+        </ng-template>
+      </table>
+
+      <div class="mt15" *ngIf="totalRows > 10">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</div>
+    </div>
+ 
+</div>
+</div>
+
+<div class="modal fade" id="showpopup">
+  <div class="modal-dialog" style='max-width: 900px;'>
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #004b80;">
+        <h5 style="color: #fff !important;"> {{ globalObj.viewClassName }} {{ globalObj.viewSubjectName }} Topic List</h5>
+        <button type="button" style="color: #fff !important;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <table class="table tablestyle tabgap">
+        <tr>
+          <th class="textCenter">#</th>
+          <th class="textCenter">Topics</th>
+        </tr>
+        <tr *ngFor="let syllabus of viewSyllabusList | keyvalue; index as j;">
+          <td align="center">{{ j+1 }}</td>
+          <td align="left">{{ syllabus.value }}</td>
+        </tr>
+      </table>
+      <!-- <ngx-treeview [config]="viewconfig" [items]="syllabusItems" (selectedChange)="syllabusValues = $event"></ngx-treeview> -->
+    </div>
+  </div>
+</div>

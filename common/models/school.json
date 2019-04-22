@@ -1,0 +1,89 @@
+{
+  "name": "school",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "school_name": {
+      "type": "string",
+      "required": true
+    },
+    "school_code": {
+      "type": "string",
+      "required": true
+    },
+    "school_acronym": {
+      "type": "string"
+    },
+    "school_master_id": {
+      "type": "number"
+    },
+    "school_address": {
+      "type": "string"
+    },
+    "school_pin": {
+      "type": "number"
+    },
+    "affiliation_no": {
+      "type": "string"
+    },
+    "school_logo": {
+      "type": "string"
+    },
+    "contact_no": {
+      "type": "string"
+    },
+    "school_email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "principal_signature": {
+      "type": "string"
+    },
+    "country_id": {
+      "type": "number"
+    },
+    "state": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "gstin_no": {
+      "type": "string"
+    },
+    "contact_person_userId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "has_many_sessions": {
+      "type": "hasMany",
+      "model": "session",
+      "foreignKey": "schoolId"
+    },
+    "school_have_users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "schoolId",
+      "through": "user_school"
+    },
+    "school_have_contact_users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "contact_person_userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

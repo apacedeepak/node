@@ -1,0 +1,100 @@
+<!--
+  Generated template for the HomeworkFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar primary>
+      <ion-toolbar>
+      </ion-toolbar>
+      <ion-buttons left>
+        <button ion-button (click)="close()"><ion-icon class="iconsize" name="close"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons right>
+          <button ion-button (click)="clearAll()">CLEAR</button>
+      </ion-buttons>
+      <ion-buttons right>
+          <button ion-button (click)="onApply()">APPLY</button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+   <ion-grid>
+      <ion-row>
+        <ion-col>
+                      <ion-row >
+                        <ion-list >
+                            <button class="{{classes?'buttonColor':''}}" ion-item (click)="assignedClass()">Class</button>
+                        </ion-list>
+                      </ion-row>
+                      <ion-row >
+                         <ion-list >
+                           <button class="{{sections?'buttonColor':''}}" [disabled]="class_id==0?true:false"  ion-item (click)="showSection()">Section</button>
+                          </ion-list >
+                        </ion-row>
+                        <ion-row >
+                          <ion-list >
+                           <button class="{{subjects?'buttonColor':''}}" [disabled]="section_id==0?true:false" ion-item (click)="showSubject()">Subject</button>
+                          </ion-list>
+                     </ion-row>
+                
+               
+        </ion-col>
+        <ion-col>
+            <ng-container *ngIf="classes">
+            <ion-list radio-group>
+                <ng-container *ngFor="let obj of globalObj.assignedClassData; let i = index">
+                        <ion-item>
+                          <ion-radio [checked]="(classSelectedFlag && obj.class_id==selectionData.classId) || (!classSelectedFlag && obj.class_id==class_id)" (click)="setValue('class',obj.class_id)" value="{{obj.class_id}}"></ion-radio>
+                          <ion-label>{{obj.class_name}}</ion-label>
+                    </ion-item>
+                  </ng-container>
+            </ion-list>
+            </ng-container>
+            <ng-container *ngIf="sections">
+                <ion-list radio-group>
+                    <div *ngFor="let obj of globalObj.assignedSectionData; let i = index">
+                        <ion-item>
+                          <ion-radio [checked]="(sectionSelectedFlag && obj.section_id==selectionData.sectionId) || (!sectionSelectedFlag && obj.section_id==section_id)" (click)="setValue('section',obj.section_id)" value="{{obj.section_id}}"></ion-radio>
+                          <ion-label>{{obj.section_name}}</ion-label>
+                        </ion-item>
+                      </div>
+                </ion-list>
+            </ng-container>
+            <ng-container *ngIf="subjects">
+                <ion-list radio-group>
+                    <div *ngFor="let obj of globalObj.assignedSubjectData; let i = index">
+                        <ion-item>
+                          <ion-radio [checked]="(subjectSelectedFlag && obj.subject_id==selectionData.subjectId) || (!subjectSelectedFlag && obj.subject_id==subject_id)" (click)="setValue('subject',obj.subject_id)" value="{{obj.subject_id}}" ></ion-radio>
+                          <ion-label>{{obj.subject_name}}</ion-label>
+                        </ion-item>
+                      </div>
+                </ion-list>
+            </ng-container>
+            <!-- <ng-container *ngIf="multiclass">
+                
+                    <div *ngFor="let obj of globalObj.assignedMultiSectionData; let i = index">
+                            <ion-item>
+                              <ion-checkbox color="dark" (click)="setHomeworkData('classsection',obj)"></ion-checkbox>
+                              <ion-label>{{obj.section_name}}</ion-label>
+                        </ion-item>
+                      </div>
+                
+                </ng-container>
+                <ng-container *ngIf="group">
+                
+                    <div *ngFor="let obj of globalObj.assignedGroupData; let i = index">
+                            <ion-item>
+                              <ion-checkbox color="dark" (click)="setHomeworkData('group',obj)"></ion-checkbox>
+                              <ion-label>{{obj.group_name}}</ion-label>
+                        </ion-item>
+                      </div>
+                
+                </ng-container> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

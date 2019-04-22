@@ -1,0 +1,56 @@
+{
+  "name": "student_feedback_remarks",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "feedbackmasterId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "number",
+      "default": 1
+    },
+    "added_date": {
+      "type": "date"
+    },
+    "addedBy": {
+      "type": "number"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "remarks_category": {
+      "type": "string"
+    },
+    "isAdmin": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assignedfeedback": {
+      "type": "belongsTo",
+      "model": "feedback_master",
+      "foreignKey": "feedbackmasterId"
+    },
+    "userassignedfeedback": {
+      "type": "belongsTo",
+      "model": "user_feedback_master",
+      "foreignKey": "feedbackmasterId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "addedBy"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

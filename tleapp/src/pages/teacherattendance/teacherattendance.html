@@ -1,0 +1,253 @@
+<!--
+  Generated template for the TeacherattendancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+       </button>
+    <ion-title>Attendance</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingText="pull to refresh">
+
+    </ion-refresher-content>
+  </ion-refresher>
+    
+  <!-- tabs -->
+  <ion-segment [(ngModel)]="tabbed" color="primary" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="attendance">
+      Take Attendance
+    </ion-segment-button>
+    <ion-segment-button (click)="leaveDetail()" value="leave">
+      Leave Details
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="tabbed == 'attendance'">
+  <!-- attendance switch -->
+  <ion-row class="borderBottom" radio-group [(ngModel)]="attendance_switch" (ionSelect)="toggleAttendance()">
+           <ion-col col-2></ion-col>   
+    <ion-col col-4 class="headingdisplay">
+      <ion-item class="under">
+        <ion-radio value="daily"></ion-radio>
+        <ion-label>Daily</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6 class="headingdisplay">
+      <ion-item class="under">
+        <ion-radio value="lecture"></ion-radio>
+        <ion-label>Lecture Wise</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ng-container *ngIf="attendance_switch == 'daily'">
+  <!-- Class section and date part -->
+  <ion-row>
+      <ion-col col-6 class="bordernone">
+        <ion-item class="under">
+          <ion-label>Class Section:<br><ion-label>{{classsection}}</ion-label></ion-label>
+        </ion-item>
+        
+      </ion-col>
+      <ion-col col-6 class="bordernone">
+        <ion-item class="under">
+          <ion-label>Select Date:<br>
+          <ion-label class="calenderstyle" (click)="openCalendar()">
+              <span class="paddingdate">{{globalObj.date | date:'d MMM'}}</span>
+                <ion-icon class="calicon" name="calendar"></ion-icon></ion-label>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- stat -->
+
+    <ion-grid>
+        <ion-row class="samefont">
+          <ion-col col-4 class="singlelinesmall padding5">
+            Total Students: <br><span class="statuscount">{{ttlcount}}</span>
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+              Present Student: <br><span class="statuscount">{{pcount}}</span>
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+            Default Attendance<br>
+            <ion-select class="attentype statuscount" [(ngModel)]="attendance_value" (ionChange)="setAttendance()">
+                <ion-option value="">Default Attendance</ion-option>
+                <ion-option value="p">Present</ion-option>
+                <ion-option value="a">Absent</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+    
+    <ion-grid>
+        <ion-row class="headingfont">
+          <ion-col col-4 class="singlelinesmall padding5">
+            Roll No.
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+            Student Name
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall textcenter">
+            Attended Class
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    <!-- data table -->
+    <ion-grid class="listcolor" *ngFor="let row of rows">
+        <ion-row class="headingfont">
+          <ion-col class="padding5">
+              {{row.roll}}
+          </ion-col>
+          <ion-col>
+            {{row.name}}
+          </ion-col>
+          <ion-col class='textcenter'>
+            <!--<button ion-button (click)="changeAttendStatus($event, row.user_id, row.status)">-->
+                <ion-icon [ngClass]="(row.status)== 'close' ? 'redclass':'greenclass'" (click)="changeAttendStatus($event, row.user_id, row.status)" name="{{ row.status }}"></ion-icon>
+             <!--</button>-->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+     <button class="submitbtn" ion-button full (click)="onSubmit($event)">Submit</button>
+   </ng-container>
+
+   <ng-container *ngIf="attendance_switch == 'lecture'">
+       <div class="backgroundblue">
+           <ion-grid>
+               <ion-row class="selectrow">
+                   <ion-col col-4>
+                       <ion-select class="selectall" (ionChange)="getSection()" [(ngModel)]="globalObj.selectClass">
+                            <ion-option value="">Select Class</ion-option>
+                            <ion-option *ngFor="let class of globalObj.assignedClassData" [value]="class.class_id">{{class.class_name}}</ion-option>
+                            
+                       </ion-select>
+                      </ion-col>
+                   <ion-col col-4>
+                       <ion-select class="selectall" (ionChange)="getSubject()" [(ngModel)]="globalObj.selectSec">
+                            <ion-option  value="">Select Section</ion-option>
+                            <ion-option *ngFor="let sec of globalObj.assignedSectionData"  [value]="sec.section_id">{{sec.section_name}}</ion-option>
+                       </ion-select>
+                       </ion-col>
+                   <ion-col col-4>
+                       <ion-select class="selectall" (ionChange)="getLecture()" [(ngModel)]="globalObj.selectSub">
+                            <ion-option value="">Select Subject</ion-option>
+                            <ion-option *ngFor="let sub of globalObj.assignedSubjectData" [value]="sub.subject_id">{{sub.subject_name}}</ion-option>
+                        </ion-select>
+                       </ion-col>
+               </ion-row>
+           </ion-grid>
+       </div>
+   
+       <div class="backgroundblue">
+           <ion-grid>
+               <ion-row class="selectrow">
+                   <ion-col col-6>
+                        <ion-label class="calenderlecstyle" (click)="openLectureCalendar()">
+                            <span class="paddingdate">{{globalObj.lectureDate | date:'d MMM'}}</span>
+                                <ion-icon class="calicon" name="calendar"></ion-icon></ion-label>
+                    </ion-col>
+                   <ion-col class="aligncenter" col-6>
+                       <ion-select class="selectall" (ionChange)="getStudentList()" [(ngModel)]="globalObj.lecture">
+                            <ion-option value="">Select Period</ion-option>
+                            <ion-option *ngFor="let lect of globalObj.assignedLecture" [value]="lect.lecture_id">{{lect.lecture_name}}</ion-option>
+                            
+                        </ion-select>
+                   </ion-col>
+               </ion-row>
+           </ion-grid>
+       </div>
+       <div *ngIf="globalObj.lecture">
+        <ion-grid>
+        <ion-row class="samefont">
+          <ion-col col-4 class="singlelinesmall padding5">
+              Total Students: <br><span class="statuscount">{{globalObj.lectureTotCount}}</span>
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+              Present Student: <br><span class="statuscount">{{globalObj.lecturePresent}}</span>
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+            Default Attendance<br>
+            <ion-select class="attentype statuscount" [(ngModel)]="globalObj.allAttendaceStatus" (ionChange)="setLectureAttendance()">
+                <ion-option value="">Default Attendance</ion-option>
+                <ion-option value="p">Present</ion-option>
+                <ion-option value="a">Absent</ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+       
+       <ion-grid>
+        <ion-row class="headingfont">
+          <ion-col col-4 class="singlelinesmall padding5">
+            Adm No.
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall">
+            Student Name
+          </ion-col>
+          <ion-col col-4 class="singlelinesmall textcenter">
+            Attended Class
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+       
+       <ion-grid class="listcolor" *ngFor="let row of globalObj.lectureAtten; index as i;">
+        <ion-row class="headingfont">
+          <ion-col class="padding5">
+              {{row.admission_no | slice: 4}}
+          </ion-col>
+          <ion-col>
+            {{row.student_name}}
+          </ion-col>
+          <ion-col class='textcenter'>
+            <ion-icon [ngClass]="(row.iconName)== 'close' ? 'redclass':'greenclass'" (click)="changeAttendanceStatus(i)"  name="{{ row.iconName }}"></ion-icon>
+             
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+   
+   <button class="submitbtn" ion-button full (click)="onSubmitLectureAttend($event)">Submit</button>
+   </div>
+   </ng-container>
+
+  </ng-container>
+  <ng-container *ngIf="tabbed == 'leave'">
+      
+      <ion-card *ngFor="let leave of globalObj.leavedetail;">
+        <ion-card-header>
+          <div><span>{{leave.name}}</span>
+              <ng-container *ngIf="leave.status == 'Pending'">
+              <span  (click)="approvReject(leave.leave_apply_id)" class="createIcon">
+                  <ion-icon class="create" ios="ios-create" md="md-create"></ion-icon></span>
+                  </ng-container>
+          </div>
+        </ion-card-header>
+        <ion-card-content class="headingfont">
+            <div>{{leave.from_date | date:'d MMM'}} To {{leave.to_date | date:'d MMM'}}</div>
+            <div><span class="lightcolor">Reason: </span><span>{{leave.detail}}</span></div>
+            <div><span class="lightcolor">Status: </span><span>{{leave.status}}</span></div>
+            <div *ngIf="leave.status == 'Rejected'"><span class="lightcolor">Rejected Reason: </span><span>{{leave.reject_reason}}</span></div>
+        </ion-card-content>
+    </ion-card>
+      
+      
+      
+  </ng-container>
+</ion-content>

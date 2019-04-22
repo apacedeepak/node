@@ -1,0 +1,150 @@
+<!--
+   Generated template for the HomeworkPage page.
+   
+   See http://ionicframework.com/docs/components/#navigation for more info on
+   Ionic pages and navigation.
+   -->
+   <ion-header>
+    <ion-navbar>
+       <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+       </button>
+       <ion-title>Homework</ion-title>
+       <!-- <page-sibling *ngIf="(globalObj.userType == 'parent' || globalObj.userType == 'Parent')" (siblingChange)="siblingChange()" ></page-sibling> -->
+       <page-notification callFromType=4></page-notification>
+    </ion-navbar>
+    <div style="background: #fff;">
+       <ion-segment *ngIf="(globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')" [(ngModel)]="tabIdentifierTeacher" color="primary" (ionChange)="changeTeacherData()">
+       <ion-segment-button value="homework">
+          All
+       </ion-segment-button>
+       <ion-segment-button value="homework_checked">
+        Checked
+       </ion-segment-button>
+       <ion-segment-button value="homework_unchecked">
+        Unchecked
+        </ion-segment-button>
+       <ion-segment-button value="draft">
+          Draft
+       </ion-segment-button>
+       </ion-segment> 
+
+       <ion-segment *ngIf="globalObj.userType == 'student' || globalObj.userType == 'Student' || globalObj.userType == 'parent' || globalObj.userType == 'Parent'" [(ngModel)]="tabIdentifier" color="primary" (ionChange)="changeData()">
+       <ion-segment-button value="all">
+          All
+       </ion-segment-button>
+       <ion-segment-button value="checked">
+        Checked
+     </ion-segment-button>
+     <ion-segment-button value="unchecked">
+        Unchecked
+     </ion-segment-button>
+       <ion-segment-button value="pending">
+          Unsubmitted
+       </ion-segment-button>
+       <!-- <ion-segment-button value="submitted">
+          Submitted
+       </ion-segment-button> -->
+       
+      
+       </ion-segment> 
+    </div>
+ </ion-header>
+ <ion-content>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content pullingText="pull to refresh">
+            
+                </ion-refresher-content>
+              </ion-refresher>
+    <div *ngIf="(globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')">
+       <div *ngIf="homework_draft_flag">
+          <ng-container *ngIf="homework.length > 0">
+             <div *ngFor="let item of homework" class="mailBlock" (click)="goToHomeworkDetail(item,'teacher')">
+             <div class="mailStatus" [ngClass]="{pendingmail : (item.homework_received_count == 0)}" [ngClass]="{checkedmail : (item.homework_received_count != 0 && (item.homework_assigned_count == item.homework_checked_count))}">
+             Received: {{item.homework_received_count}}/{{item.homework_assigned_count}}
+             Checked: {{item.homework_checked_count}}
+            </div>
+       <div class="mailername textoverlap attachtomail">{{item.subject_name}}
+       <div class="mailinginfo">
+       <ion-icon *ngIf="item.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>
+       {{item.added_date_app | date:item.displayTime=='0'?'d MMM':'h:mm a'}}
+       </div>
+       </div>
+       <div class="subtitle textoverlap">{{item.class_section_name}}</div>
+       <div class="subtitle textoverlap attachtomail" [innerHTML]= "item.homework_title | pipesRemovehtmltags"></div>
+       <div class="description textoverlap">Submission:{{item.target_date_app | date:'d MMM'}}</div>
+    </div>
+    </ng-container>
+    <ng-container *ngIf="((homework.length == 0) && noDataBoolean)">
+       <p class="text-info text-center">No Record Found</p>
+    </ng-container>
+    </div>
+    <div *ngIf="!homework_draft_flag">
+       <ng-container *ngIf="draft.length > 0; else nodataother">
+          <div *ngFor="let item of draft" class="mailBlock" (click)="goToDraft(item)">
+                        <div class="mailStatus">(DRAFT)</div>
+             <div class="mailername textoverlap attachtomail">
+                {{item.subject_name}}({{item.class_section_name}})
+                <div class="mailinginfo">
+                   <ion-icon *ngIf="item.attachment_count>0"  class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>
+                   {{item.added_date_app | date:item.displayTime=='0'?'d MMM':'h:mm a'}}
+                </div>
+             </div>
+             <div class="subtitle textoverlap attachtomail" [innerHTML]= "item.homework_title | pipesRemovehtmltags"></div>
+             <div class="description textoverlap" [innerHTML]= "item.homework_content | pipesRemovehtmltags"></div>
+          </div>
+       </ng-container>
+       <ng-template #nodataother>
+          <p class="text-info text-center">No Record Found</p>
+       </ng-template>
+    </div>
+    
+    <!-- <ion-fab bottom right>
+       <button id="plus_btn" ion-fab (click)="gotoCreateHomework()">
+          <ion-icon name="add"></ion-icon>
+       </button>
+    </ion-fab> -->
+    </div>    
+    <div *ngIf="globalObj.userType == 'student' || globalObj.userType == 'Student' || globalObj.userType == 'parent' || globalObj.userType == 'Parent'">
+                <span *ngIf="globalObj.searchDateFlag" class="maillable">{{globalObj.fromDate}}<span *ngIf="globalObj.searchDateFlag"> To {{globalObj.toDate}}</span>
+                <button type="button" (click)="removeDate()">
+                    <ion-icon name="close"></ion-icon></button></span>
+                    <span *ngFor="let itemname of globalObj.searchSubject;let i=index"  class="maillable">{{itemname}} 
+                                <button type="button" (click)="removeSubject(globalObj.searchSubjectId[i])">
+                                    <ion-icon name="close"></ion-icon></button></span>
+        <div *ngFor="let item of homework; let i=index" class="mailBlock">
+          <div class="mailStatus" [ngClass]="(!item.submitted?'pendingmail':((item.submitted && !item.checked)?'':((item.submitted && item.checked)?'checkedmail':'') ))">
+          <ng-container *ngIf="item.submitted && item.checked;else second">CHECKED</ng-container>
+          <ng-template #second>
+             <ng-container *ngIf="item.submitted && !item.checked;else third">UNCHECKED</ng-container>
+          </ng-template>
+          <ng-template #third>
+             <ng-container *ngIf="!item.submitted && !item.checked">NOT<br>SUBMITTED</ng-container>
+          </ng-template>
+       </div>
+       <div class="mailpending" (click)="goToHomeworkDetail(item,'student')">
+          <div class="mailername textoverlap attachtomail">
+             {{item.subject_name}}
+             <div class="mailinginfo">
+                <ion-icon *ngIf="item.attachment_count>0" class="paerclip"><img src="/assets/imgs/papperclip-blue.png"></ion-icon>
+                {{item.added_date_app | date:item.displayTime=='0'?'d MMM':'h:mm a'}}
+             </div>
+          </div>
+          <div class="subtitle textoverlap attachtomail" [innerHTML]= "item.homework_title | pipesRemovehtmltags"></div>
+          <div class="description textoverlap">Submission:{{item.target_date_app | date:'d MMM'}}</div>
+       </div>
+    </div>
+    <ng-container *ngIf="((homework.length == 0) && noDataBoolean)">
+       <p class="text-info  text-center">No Record Found</p>
+    </ng-container>
+    </div>  
+ </ion-content>
+ <ion-footer no-shadow>
+        <ion-fab right bottom #fab>
+            <button ion-fab (click)="gotoFilter(globalObj.userType)"><ion-icon name="funnel"></ion-icon></button>
+        </ion-fab>
+	<ion-toolbar *ngIf="(globalObj.userType == 'teacher' || globalObj.userType == 'Teacher')" position="bottom">
+        <button ion-button full (click)="gotoCreateHomework()">CREATE HOMEWORK</button>
+	</ion-toolbar>
+</ion-footer>
+ 

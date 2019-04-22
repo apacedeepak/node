@@ -1,0 +1,29 @@
+.suggestions{
+  width: 50%;
+  overflow: auto;
+  max-height: 100px;
+  /* position: absolute; */
+  top: 33px;
+  z-index: 1;
+  background: #fff;
+  box-shadow: 0 2px 2px 1px #ddd;
+  left: 10px;
+  border-radius: 4px;
+}
+.autodrop{
+      list-style-type: none;
+      padding: 0;
+}
+   .autodrop li{
+   text-align: left !important;
+   display: block; padding: 3px 4px;
+   }
+   .autodrop li:hover{ background: #f2f2f2;}
+   .fmGroup{margin:0px 0 15px 0;width: 100%;float: left;}
+   .fmGroup label{font-size:14px;}
+   .fmGroup select{font-size: 13px;}
+   .font14{font-size:14px;}
+   .margin-bottom-20{margin-bottom: 20px;}
+   .timetableColender thead th{background:#004B80;color: #fff}
+   .margin-top-10{margin-top:10px;}
+    .margin-left-15{margin-left: 15px;}

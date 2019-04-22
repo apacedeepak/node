@@ -1,0 +1,66 @@
+.profileTab{width: 100%;float: left;}
+.userPersonalizational{margin-bottom:-30px;}
+.btnMd {
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+	border-radius: 80%;
+	background-color: #4473cd;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+	box-shadow: -5px 5px 10px 0 rgba(0, 0, 0, 0.26);
+	border: 0;
+	font-size: 0;
+}
+.btnEditMd {background-image: url(/assets/images/icons/edit-md.png);}
+.btnUpdateMd{background-image: url(/assets/images/icons/default-subject.png);}
+/*Parent View Profile*/
+
+.checkcontainer{ display: inline-block; position: relative; padding-left:28px; margin-bottom: 12px; cursor: pointer;-webkit-user-select: none; -moz-user-select: none;-ms-user-select: none;user-select: none;font-weight:normal;margin-right:15px;font-weight: normal;}
+.checkcontainer input {position: absolute;opacity: 0;}
+.checkmark:before{ position: absolute; top: -7px; left: 0; height: 20px; width: 20px; color: #333; content:'\f096';
+  font-family: 'FontAwesome';font-size:24px; font-weight:normal;}
+.checkcontainer input:checked ~ .checkmark:before{ content:'\f046';}
+.checkcontainer input:checked ~ .checkmark:before,.checkcontainer input:checked ~ .radiobtn:before{color:#333;}
+.radiobtn:before{ position: absolute; top: -7px;left: 0;height: 20px;width: 20px; color: #ddd;border-radius: 50%;content:'\f192';font-family: 'FontAwesome'; font-size:24px; font-weight:normal;}
+.md-modal .modal-header {font-size: 18px;font-family: robotobold;}
+.md-modal .modal-dialog {width: 500px;}
+.md-modal thead{background-color: #3c6ecd; color:#fff; font-family: robotobold;font-size:18px;}
+.md-modal table{ margin:0;}
+#inDisciplinerecord .checkcontainer,
+#wardremarks .checkcontainer{ font-size:16px; min-width: 150px;}
+#inDisciplinerecord .radiobtn:before,
+#wardremarks .radiobtn:before{ position: absolute; top: -6px;left: 0;content: url(/assets/images/icons/radio.png);}
+#inDisciplinerecord .checkcontainer input:checked ~ .radiobtn:before,
+#wardremarks .checkcontainer input:checked ~ .radiobtn:before{content: url(/assets/images/icons/radio2.png);}
+#wardremarks .accordinMonth .minussign {background: #447ab8;}
+#wardremarks .accordinMonth .accordion_head {background: #447ab8;border-radius:0;font-size: 18px;color:#fff;padding: 10px 15px;}
+#wardremarks .accordinMonth thead {background: #cbced6;}
+#wardremarks .accordinMonth thead td{color: #000;}
+#wardremarks .accordinMonth .accordion_head{ margin-bottom:0;}
+#wardremarks .accordinMonth .accordion_head:after {content: "\f067";	font-family: 'FontAwesome';	position: absolute;	right: 10px;top: 10px;}
+#wardremarks .accordinMonth .minussign::after {content: "\f068" !important;}
+.btnEditsm {background-image: url(/assets/images/icons/edit-sm.png);}
+.btnSm {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    background-color: #ff8633;
+}
+.editImgBlock {
+    width: 100px;
+    display: inline-block;
+    position: relative;
+}
+.accordion_body{display: none;}
+.margin-bottom-10{margin-bottom: 10px;}
+.accordion_head{margin-top: 10px;}
+.mt15{margin-top: 15px;}

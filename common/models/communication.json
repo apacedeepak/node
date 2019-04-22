@@ -1,0 +1,104 @@
+{
+  "name": "communication",
+  "plural": "communication",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "message_subject": {
+      "type": "string"
+    },
+    "message_body": {
+      "type": "Text"
+    },
+    "attachments": {
+      "type": "Text"
+    },
+    "message_createdby": {
+      "type": "number"
+    },
+    "schoolId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "message_date": {
+      "type": "date",
+      "required": true
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "draft_data": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "String"
+    },
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "studentuserId": {
+      "type": "number",
+      "index": true
+    },
+    "draft_student_id": {
+      "type": "string",
+      "index": true
+    },
+    "post_by": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "message_users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "messageId",
+      "through": "message_recipient"
+    },
+    "students": {
+      "type": "hasOne",
+      "model": "student",
+      "foreignKey": "userId"
+    },
+    "staff": {
+      "type": "hasOne",
+      "model": "staff",
+      "foreignKey": "userId"
+    },
+    "parents": {
+      "type": "hasOne",
+      "model": "parent",
+      "foreignKey": "userId"
+    },
+    "messages": {
+      "type": "hasMany",
+      "model": "message_recipient",
+      "foreignKey": "messageId"
+    },
+    "users": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "userbelong": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "studentuserId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

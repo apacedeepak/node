@@ -1,0 +1,69 @@
+{
+  "name": "applicant_info",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": true
+    },
+    "class_id": {
+      "type": "number",
+      "required": true
+    },
+    "exam_type": {
+      "type": "string",
+      "required": true
+    },
+    "user_type": {
+      "type": "string",
+      "required": true
+    },
+    "fname": {
+      "type": "string",
+      "required": true
+    },
+    "lname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "mobile": {
+      "type": "string",
+      "required": true
+    },
+    "board_id": {
+      "type": "number"
+    },
+    "class_name": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "status": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "school_id": {
+      "type": "number",
+      "required": true
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

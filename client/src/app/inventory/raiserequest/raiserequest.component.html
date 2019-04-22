@@ -1,0 +1,150 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{raise_master_title}}</h5>
+      <span class="float-right">
+        <button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm mr10 mt15">Add</button>
+      </span>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <div *ngIf="show_add_item_master">
+      <form (ngSubmit)="onSubmit(itemMasterForm.value)" [formGroup]="itemMasterForm" ngNativeValidate>
+        <input type="hidden" class="form-control" value="" formControlName='id'  />
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Category<span class="text-danger">*</span>: </label>
+          <select class="form-control" required title="Please select cetegory" #inv_category_master_id (change)="getCategoryItem(inv_category_master_id.value)" formControlName='inv_category_master_id'>
+            <option value=""> Select category</option>
+            <option [value]="itemCategoryMaster.id" *ngFor="let itemCategoryMaster of globalObj.itemCategoryMasterData">
+              {{itemCategoryMaster.category_name}}</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Select Item<span class="text-danger">*</span>: </label>
+            <select formControlName='item_id' class="form-control" #item_id (change)="getItemDetail(item_id.value)" required title="Please select unit">
+                <option value=""> Select Item</option>
+                <option [value]="itemMaster.id" *ngFor="let itemMaster of globalObj.categoryItemList">
+                  {{itemMaster.item_name}}</option>
+              </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Enter Item Price: </label>
+          <input type="text" min="0" type="number" class="form-control" value="" #item_unit_price (change)="calTotalPrice(item_quantity.value,item_unit_price.value)" formControlName='item_unit_price' placeholder="Enter Item Unit Price"
+            title="Please Enter Item Unit Price" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Quantity: </label>
+          <input type="text" min="0" type="number" class="form-control" value="" formControlName='item_quantity' placeholder="Enter Item Unit Price"
+            title="Please Enter Item Quantity" autofocus="" #item_quantity (change)="calTotalPrice(item_quantity.value,item_unit_price.value)"/>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Total Price: </label>
+          <input type="text" min="0" type="number" class="form-control" value="{{globalObj.totalItemPrice}}" formControlName='item_total_price' placeholder=""
+            title="Total Item Price" autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Description: </label>
+          <textarea class="form-control" value="" formControlName='item_description' placeholder="Enter Description"
+            title="Please Insert Description" autofocus=""></textarea>
+        </div>
+
+
+      <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+              <label>Upload Item Image: </label>
+              <input-file fileLimit="1" fileAccept="image/*" (acceptedFile)="onAccept($event)" class="form-control cleanup validate-empty" formControlName="item_image_upload"></input-file>
+          </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-right divSpace text-center">          
+          <input class="btn btn-primary" value="Save" name="submit" id="submit" type="submit">
+          <button class="btn btn-warning mr10" (click)="getFromSet()">Reset</button>
+          <button class="btn btn-danger mr10" (click)="getFromClose()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div *ngIf="show_item_master_list">
+        <!--SEARCH START-->
+    <div id="searchTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <form class="form-horizontal" [formGroup]="raiseRequestSearchFormGroup">                    
+          <div id="searchTable" class="col-sm-12 col-md-12 pull-left customDivHead" style="margin-bottom:15px;">
+          <label class="customSearchTiTle">Search</label>
+          </div>
+          <div class="w-auto pull-left">
+              <label for="title">Request Id: </label>
+          </div>  
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+              <input type="text" class="form-control" required value="" formControlName='request_id' placeholder="yyyy/13 digit number" title="Please Enter Request Id"
+                  autofocus="" />
+          </div>
+
+           <div class="w-auto pull-left">
+              <label for="title">Center: </label>
+          </div>  
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+              <select formControlName='center_id' class="form-control" title="Select Center" placeholder="Select Subject">
+              <option value=""> Select Center</option>              
+              </select>
+          </div>    
+        <div class="w-auto pull-left">
+            <label for="title"> Item: </label>
+        </div>
+  
+        <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+            <select formControlName='item_id' class="form-control" title="Select Item" placeholder="Select item">
+              <option value=""> Select Item</option>            
+            </select>
+        </div>
+  
+      <div class="w-auto pull-left">
+           <button class="btn btn-info btn-sm">Submit</button>
+      </div>
+      </form>
+     </div>
+    <!--SEARCH END-->
+
+      <div id="leaveTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <span id="success_message" class="span_success text-success">{{successMessage.message}}</span>
+        <span id="error_message" class="span_error text-danger">{{errorMessage.message}}</span>
+        <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+            <tr>
+              <th align="center">S No.</th>
+              <th>Request Id</th>
+              <th>Category</th>
+              <th>Item</th>              
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Description</th>              
+              <th>Image</th>
+              <th>Action</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr *ngFor="let raiserequest of globalObj.itemRaiseRequestList; index as i">
+              <td align="center">{{i+1}}</td>
+              <td>{{raiserequest.request_id}} </td>
+              <td>{{raiserequest.itemMasterCategory.category_name}} </td>
+              <td>{{raiserequest.itemMaster.item_name}}</td>
+              <td>{{raiserequest.quantity}} </td>
+              <td> {{raiserequest.total_price}}</td>
+              <td>{{raiserequest.description}} </td>
+              <td><a target="_blank" href="{{serverurl}}{{raiserequest.image_path}}" download>View</a></td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="editraiseRequest(raiserequest.id)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-info btn-sm" (click)="deleteRaiserequest(raiserequest.id)">Delete</button>
+              </td>
+              <td>
+                {{raiserequest.inv_request_status.display_label}}
+              </td>
+            </tr> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

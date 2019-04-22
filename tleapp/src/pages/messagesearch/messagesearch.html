@@ -1,0 +1,186 @@
+<!--
+  Generated template for the MessagesearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+       <div>
+          <span (click)="dismiss()" class="backclass">
+              <ion-icon ios="ios-close" md="md-close" ></ion-icon>
+          </span>
+          <span class="aligncenter"><ion-title>Search</ion-title></span>
+          
+          <div class='hdMenu'>
+            <ion-icon ios="ios-checkmark" md="md-checkmark" (click)="okFunction()"></ion-icon>
+          </div>
+          
+      </div>
+    
+  </ion-navbar>
+    
+    <div style="background: #fff; position: relative;">
+  <ion-segment class="bordersegment" [(ngModel)]="globalObj.tabSelected">
+      <ion-segment-button value="userwise">
+        USERWISE
+      </ion-segment-button>
+      <ion-segment-button value="datewise">
+        DATEWISE
+      </ion-segment-button>
+    </ion-segment>
+    </div>
+    
+</ion-header>
+
+
+<ion-content class="borderstyle">
+    
+    
+    
+    <div class="paddingTop" [ngSwitch]="globalObj.tabSelected">
+        <ion-list *ngSwitchCase="'userwise'">
+        
+          <ion-list radio-group [(ngModel)]="globalObj.userTypeTab">
+                <ion-item>
+                  <ion-label>Admin</ion-label>
+                  <ion-radio value="admin" (click)="userSelect('admin')"></ion-radio>
+                </ion-item>
+                      <ng-container *ngIf="globalObj.userType == 'Teacher'">
+                <ion-item>
+                  <ion-label>Student</ion-label>
+                  <ion-radio value="student" (click)="userSelect('student')"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Parent</ion-label>
+                  <ion-radio value="parent" (click)="userSelect('parent')"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Staff</ion-label>
+                  <ion-radio value="staff" (click)="userSelect('staff')"></ion-radio>
+                </ion-item>
+                      </ng-container>
+                      <ng-container *ngIf="globalObj.userType == 'Student' || globalObj.userType == 'Parent'">
+                <ion-item>
+                  <ion-label>Class Teacher</ion-label>
+                  <ion-radio value="classteach" (click)="userSelect('classteach')"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Subject Teacher</ion-label>
+                  <ion-radio value="subteach" (click)="userSelect('subteach')"></ion-radio>
+                </ion-item>
+                          </ng-container>
+            </ion-list>
+            
+            <ng-container *ngIf="globalObj.selectType == 'student'">
+            <ion-list  *ngFor="let seclist of sectionlist; index as i">
+            
+                <ion-grid>
+            <ion-row>
+            <ion-col col-9>
+                <ion-item><ion-checkbox [checked]="seclist.check" (click)="getStudent(i, globalObj.selectType)" color="dark"></ion-checkbox>
+                <ion-label>{{seclist.section_name}}</ion-label></ion-item></ion-col>
+<!--            <ion-col col-3 class="text-right">
+                <ng-container *ngIf="seclist.check">
+                <ion-item><ion-checkbox [(ngModel)]="checkedItems[i]" color="dark"></ion-checkbox>
+                <ion-label>All</ion-label></ion-item>
+                    </ng-container>
+            </ion-col>-->
+            </ion-row>
+            </ion-grid>
+            <ng-container *ngIf="seclist.check">
+            <ion-item *ngFor="let student of seclist.assignStudent; index as j" class="itemList">
+                <ion-label>{{student.student_name}}</ion-label>
+                <ion-checkbox [checked]="student.check" (click)="checkedStudent(globalObj.selectType,student.user_id,i,j,null)"  color="dark"></ion-checkbox>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+            </ng-container>
+            
+            
+            <ng-container *ngIf="globalObj.selectType == 'parent'">
+            <ion-list  *ngFor="let seclist of sectionlists; index as i">
+            
+                <ion-grid>
+            <ion-row>
+            <ion-col col-9>
+                <ion-item><ion-checkbox [checked]="seclist.check" (click)="getStudent(i, globalObj.selectType)" color="dark"></ion-checkbox>
+                <ion-label>{{seclist.section_name}}</ion-label></ion-item></ion-col>
+<!--            <ion-col col-3 class="text-right">
+                <ng-container *ngIf="seclist.check">
+                <ion-item><ion-checkbox [(ngModel)]="checkedItemsParent[i]" color="dark"></ion-checkbox>
+                <ion-label>All</ion-label></ion-item>
+                    </ng-container>
+            </ion-col>-->
+            </ion-row>
+            </ion-grid>
+            <ng-container *ngIf="seclist.check">
+            <ion-item *ngFor="let student of seclist.assignStudent; index as j" class="itemList">
+                <ion-label>{{student.student_name}} </ion-label>
+                <ion-checkbox [checked]="student.check" (click)="checkedStudent(globalObj.selectType,student.parent_userId,i,j, student.user_id)"  color="dark"></ion-checkbox>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+            </ng-container>
+            
+            <ng-container *ngIf="globalObj.selectType != 'parent' && globalObj.selectType != 'student'">
+            <ion-item  *ngFor="let resp of displayRecepient; index as i">
+                <ion-label>{{resp.name}}</ion-label> 
+                <ion-checkbox [checked]="resp.check" (click)="addFinalReceipent(resp.user_id, i,resp.check)" color="dark"></ion-checkbox>
+            </ion-item>
+            </ng-container>
+            
+            
+             </ion-list>
+            
+        
+        
+        <ion-list *ngSwitchCase="'datewise'">
+            
+            
+            <ion-item class='fontsizedate'>
+                
+                <ion-grid>
+                    <ion-row (click)="openCalendar('fromdate')">
+                        <ion-col class='margin5' col-4>From Date:</ion-col>
+                        <ion-col col-7>
+                            <div class='calbox'>{{globalObj.fromDate | date:'d MMM yyyy'}}
+                                <span><ion-icon class="calicon" name="calendar"></ion-icon></span></div>
+                        </ion-col>
+                        <ion-col col-1>
+                            
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                
+                <ion-grid>
+                    <ion-row (click)="openCalendar('todate')">
+                        <ion-col class='margin5' col-4>To Date:</ion-col>
+                        <ion-col col-7>
+                            <div class='calbox'>{{globalObj.toDate | date:'d MMM yyyy'}}
+                              <span><ion-icon class="calicon" name="calendar"></ion-icon></span></div>
+                        </ion-col>
+                        <ion-col col-1>
+                            
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+               
+
+              </ion-item>
+            
+
+        </ion-list>
+    </div>
+    
+    
+<!--     <ion-buttons class='aligncenter'>
+      <button ion-button (click)="dismiss()">
+       Close
+      </button>
+        <button ion-button (click)="okFunction()">
+       Ok
+      </button>
+    </ion-buttons>-->
+
+</ion-content>

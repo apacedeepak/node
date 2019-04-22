@@ -1,0 +1,33 @@
+.mr10 {
+  margin-right: 10px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.bg-primary th {
+  color: #fff;
+}
+.btn-info:hover {
+  background-color: #2658b7;
+  border-color: #2658b7;
+}
+
+/*Basic*/
+.alert{padding:8px 10px;font-size: 14px;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;font-size: 14px}
+table td a, table th a{color:#333;}
+.form-control{font-size: 14px; padding:6px 12px;}
+.inputItem{ min-height: 55px;}
+.mt20{margin-top:20px;}
+.mt15{margin-top:15px;}
+.mb15{margin-bottom:15px;}
+.mt8{margin-top: 8px;}
+.btn{border-radius: 4px;}
+.mt10{margin-top:10px;}
+.mr10{margin-right:10px;}
+.mt25{margin-top: 25px;}
+.customDivHead{ color: #fff;font-size: 18px; border-bottom: 1px solid #ddd; margin-bottom: 18px; background: #004b80; padding: 10px 10px 3px 15px; }
+
+.divSpace {margin-top: 10px;}
+.searchForm{width:100%;float: left;padding: 0px 0 15px 0; border-radius: 4px; border:0px solid #ddd; background: #f2f2f2;overflow: hidden;margin-top: 10px;}

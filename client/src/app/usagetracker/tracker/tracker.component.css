@@ -1,0 +1,5 @@
+.btnGroup{margin-top: 18px; margin-right: 15px;}
+.btnGroup .btn-sm{font-size: 12px; padding: 5px 15px; font-weight: bold;border-radius: 28px;}
+.btnGroup .btn-defult{border-color:#3C6ECD;background-color:transparent;}
+.btnGroup .btn-info{background-color:#3C6ECD;border-color:#3C6ECD;}
+ .margin-top-10{margin-top: 10px;}

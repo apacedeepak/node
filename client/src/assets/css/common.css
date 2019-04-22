@@ -1,0 +1,21 @@
+/*Left Menu Css*/
+
+.collapsebody{display: none;}
+.menuTitle:after {
+  content: "\f078";
+  font-family: 'FontAwesome';
+  position: absolute;
+  right: 6px;
+  top: 7px;
+  font-size: 20px;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+}
+.minussign:after {
+  content: "\f077"!important;
+  font-family: 'FontAwesome';
+}
+.userNotification  .dropdown-toggle::after,.inputBar .dropdown-toggle::after{display:none;}
+.has-feedback{position: relative;}
+body.modal-open .modal-backdrop{display: none !important;}

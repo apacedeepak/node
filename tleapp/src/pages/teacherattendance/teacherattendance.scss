@@ -1,0 +1,46 @@
+page-teacherattendance {
+.samefont{font-size: 11px;font-weight: bold;
+          .attentype{
+              padding:0px; overflow: none; max-width: none; }
+}
+.headingfont{font-size: 11px;}
+.bordernone{ border-left: 1px solid #dedede;border-bottom: 1px solid #dedede;
+    .under{
+        .item-inner{border-bottom: none !important;font-size: 1.4rem;}
+    }
+}
+.padding5{padding-left:10px;}
+.headingdisplay{
+    .under{
+        .item-inner{border-bottom: none !important;font-size: 1.4rem;}
+    }
+} 
+.calenderstyle{border: 1px solid #dedede;
+    padding: 4px 0px;}
+
+.calicon{
+    display: inline-block;
+    font-size: 1.2em;
+    float: right;
+    padding: 0px 6px;
+}
+.borderBottom{border-bottom: 1px solid #dedede;}
+
+.submitbtn{width: 90%;margin: 5%; border-radius: 7px;background-color: #ff730e;}
+.greenclass{color: green;font-size: 1.8rem;}
+.redclass{color: red;font-size: 1.8rem;}
+.textcenter{text-align: center;}
+.listcolor{ border-bottom: 1px solid #bdbdbd;width: 95%;background-color: #e4e4e4;}
+.lightcolor{color:rgb(78, 76, 76);}
+.createIcon{    float: right;border: 1px solid #ed2722;padding: 0px 6px 2px 6px;border-radius: 17px;background-color: #ed2722;display: inline-block;width: 22px;
+    height: 22px;
+    .create{font-size: 0.7em;color: white;}
+}
+.backgroundblue{background-color: #3c6ecd;color: white;}
+.selectrow{font-size: 1.4rem; padding-left: 5px;padding-right: 5px;}
+.selectall{padding: 0px !important; max-width: 100% !important;}
+.calenderlecstyle{margin: 0px !important;border: 1px solid #dedede;padding: 4px 0px;}
+.aligncenter{text-align: center;}
+.paddingdate{padding-left: .9rem;}
+.statuscount{color:#030303b5;}
+}

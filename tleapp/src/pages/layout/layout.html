@@ -1,0 +1,46 @@
+<ion-menu [content]="content">
+  <ion-header>
+     <ion-toolbar>
+        <ion-row class="navuser" (click)="openProfile()">
+           <ion-col col-11 text-center>
+              <div class="profilethumb">
+                 <img [src]="globalObj.ProfileImage">   
+              </div>
+           </ion-col>
+           <ion-col col-11 text-center class="logedname">
+              {{globalObj.profileName}} <!--<span class="online"></span> <span class="offline"></span>-->
+           </ion-col>
+           <ion-col col-11 text-center class="logedname">
+            Last Login: {{globalObj.lastLogin | date : 'd MMM'}} 
+         </ion-col>
+        </ion-row>
+     </ion-toolbar>
+  </ion-header>
+  <ion-content>
+     <ul class="menuList">
+		 <li *ngFor="let menu of globalObj.menuList; let i=index; " (click)="openPage(menu.menu_name, menu.path, i, 'menu', menu.linkname); dropToggleFunc(i)">
+			<button><span class="menuICon"><img src="{{menu.icon}}"></span>
+				{{menu.menu_name}}
+				<ion-icon name="arrow-forward" *ngIf="globalObj.subMenuList[i].length > 0 && dropToggle[i]"></ion-icon>
+				<ion-icon name="arrow-down" *ngIf="globalObj.subMenuList[i].length > 0 && !dropToggle[i]"></ion-icon>
+			</button>
+      <ng-container *ngIf="isShow && menuname == menu.menu_name && globalObj.subMenu.length>0">
+			<ion-list >
+            <ion-item>
+              <ion-row >
+                <ion-list >
+                  <button menuClose submenu-item *ngFor="let p of globalObj.subMenu; let i=index;" (click)="openPage(menu.menu_name, p.path, i, 'submenu',menu.linkname)">
+                    <span class="subMenuICon"><img src="{{p.icon}}"></span><span class="subMenu">{{p.submenu_name}}</span>
+                  </button>
+                </ion-list>
+              </ion-row>
+            </ion-item>
+          </ion-list>  
+          </ng-container>
+		</li>
+    </ul>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

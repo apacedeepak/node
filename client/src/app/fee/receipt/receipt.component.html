@@ -1,0 +1,240 @@
+<div class="pageWorkArea">
+	<div class="boxwraper">
+		<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+			<div class="communication pull-left" style="margin-top:15px; overflow: hidden;">
+				<div class="headBox">
+
+					<a style="float:right;margin: 10px 10px 0 0;" href="javascript:void(0)" [routerLink]="['/fee/studentsearch']">
+						Student List
+					</a>
+
+
+				</div>
+
+				<div class="headBox">
+					<h5 class="h5 pull-left">Invoice Report</h5>
+					<button class="btn btn-sm btn-success pull-right" (click)="captureScreen();" value="Print" style="margin:18px 15px 0 0">
+						Print
+					</button>
+
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 clearfix" id="content" #content>
+
+					<div id="printid" style="font-family:Arial; font-size:14px; color:#333; margin-top:20px;padding: 15px; margin-bottom: 20px;">
+						
+						<div style="border-bottom:2px solid #ddd;padding-bottom: 15px; margin-bottom: 15px;width: 100%;float: left;">
+							<div style="width:30%;box-sizing:border-box;float:left">
+								<img src="{{logopath}}" alt="Company Logo" title="Extramarks Logo" style="width: auto; max-height: 75px;">
+							</div>
+							<div style="width:60%;box-sizing:border-box;float:right;text-align: right">
+								<b>{{school_name}}</b>
+								<br>{{school_address}}
+								<br>
+							</div>
+						</div>
+
+						<table style="width: 100%;margin-bottom: 10px">
+							<thead>
+								<tr>
+									<td colspan="2" style="padding:8px 0;font-weight: bold;">TAX INVOICE</td>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;width: 50%">GSTIN Number : {{gstin_no}}</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Payment Terms : Immediate</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">PAN No. : AAECE0158Q</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Mode of Payment : As per Contract</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Invoice Serial Number : {{invoice_no}}</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Place of Supply : {{city}}</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Invoice Date: {{receiptdate | date}}</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;"></td>
+								</tr>
+							</tbody>
+						</table>
+
+
+						<table style="width: 100%;margin-bottom: 15px">
+							<thead>
+								<tr>
+									<td colspan="2" style="padding:8px 0px;font-weight: bold;width: 50%;text-transform: uppercase;border-bottom:0;">Details of Receiver (Billed to)</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Name:</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">{{name}}</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Admission Number:</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">{{admission_no}}</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Address :</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">{{address}}</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">State :</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">{{state}}</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">State Code:</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">NA</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">GSTIN Number</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">NA</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">PAN No. :</td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">NA</td>
+								</tr>
+								<tr>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">Contact : </td>
+									<td align="left" valign="middle" style="padding:5px;border:1px solid #949393;">{{contact}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table style="width: 100%;">
+							<tbody>
+								<tr>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">S.No.</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">SAC Code</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Particulars</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Taxable Value</th>
+									<th colspan="2" align="center" valign="middle" style="padding:5px;border:1px solid #949393;">CGST</th>
+									<th colspan="2" align="center" valign="middle" style="padding:5px;border:1px solid #949393;">SGST</th>
+									<th colspan="2" align="center" valign="middle" style="padding:5px;border:1px solid #949393;">IGST</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Total Amount</th>
+								</tr>
+								<tr>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></th>
+
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Rate</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Amount</th>
+
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Rate</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Amount</th>
+
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Rate</th>
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;">Amount</th>
+
+									<th align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></th>
+								</tr>
+								<tr *ngFor="let item of distribuitionArr;index as i">
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{i+1}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.sac_hsn_code}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.particulars}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.taxabale_value}}</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.cgst_rate}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.cgst_amount}}</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.sgst_rate}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.sgst_amount}}</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.igst_rate}}</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.igst_amount}}</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">{{item.row_total_amount}}</td>
+								</tr>
+
+								<tr>
+									<td colspan="3" align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>Total</strong>
+									</td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>{{total_taxabale_value_str}}</strong>
+									</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>{{total_cgst_amount_str}}</strong>
+									</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>{{total_sgst_amount_str}}</strong>
+									</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;"></td>
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>{{total_igst_amount_str}}</strong>
+									</td>
+
+									<td align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>{{final_total_amount}}</strong>
+									</td>
+								</tr>
+
+								<tr>
+									<td colspan="11" style="padding:5px;border:1px solid #949393;">Invoice Value (In Words) : {{final_total_amount_str}}</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<table style="margin:15px 0;width: 100%;">
+							<tbody>
+								<tr>
+									<td style="padding:5px;border:1px solid #949393;width: 50%;">
+										<strong>Contact Us:</strong>
+										<br>Toll Free No. : {{invoice_bottom.toll_free_no}}
+										<br>Tax Under Reverse Charge : {{invoice_bottom.tax_under_reverse_charge}}
+										<br>Certified that the particulars given above are true and correct</td>
+									<td style="padding:5px;border:1px solid #949393;">For
+										<strong>{{invoice_bottom.company_name}}</strong>
+										<br>Authorised Signatory:{{invoice_bottom.authorised_signatory}}
+										<br>Name:{{invoice_bottom.name}}
+										<br>Designation:{{invoice_bottom.designation}}</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center" valign="middle" style="padding:5px;border:1px solid #949393;">
+										<strong>Registered Office : {{invoice_bottom.registered_office}}</strong>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<table style="width: 100%;">
+							<tbody>
+								<tr>
+									<td align="left" style="padding:5px;border:0px solid #949393;">
+										<strong>Company's Bank Details:
+											<br>Bank Name : {{invoice_bottom.bank_name}}
+											<br>Bank A/c. No. : {{invoice_bottom.bank_account_no}}
+											<br>IFSC/NEFT Code : {{invoice_bottom.ifsc_neft_code}}
+											<br>Branch Address :{{invoice_bottom.branch_address}}</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+					</div>
+
+					<div class="text-right" style="margin-bottom: 20px;">
+						<!-- <input type="button" title="Print" id="print" class="btn btn-success btn-sm" value="Print"><a href="/schoolerp/feecollection/collection/deletereceipt/recno/" id="confirm_delete">
+		   <input type="button" title="delete" id="delete" class="btn btn-danger btn-sm" value="Delete">
+	  </a> -->
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>

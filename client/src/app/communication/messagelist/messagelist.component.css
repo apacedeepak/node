@@ -1,0 +1,87 @@
+.searhIcon{top: -55px !important;right:5px;}
+.mailtime a {margin: 0 2px;}
+.nav-tabs{border-bottom: 1px solid #dee2e6;
+    padding: 0 15px;
+    width: 100%;
+    float: left;
+    margin: 0 0 15px 0;}
+.nav-tabs > li {
+    position: relative;
+    float: left;
+}
+.nav-tabs li a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    padding: 10px 15px;
+    color: #555;
+    font-size: 14px;
+    text-decoration: none;
+}
+.nav-tabs li.active a{
+    color: #222;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.custom-day {
+      text-align: center;
+      padding: 0.185rem 0.25rem;
+      display: inline-block;
+      height: 2rem;
+      width: 2rem;
+    }
+    .custom-day.focused {
+      background-color: #e6e6e6;
+    }
+    .custom-day.range, .custom-day:hover {
+      background-color: rgb(2, 117, 216);
+      color: white;
+    }
+    .custom-day.faded {
+      background-color: rgba(2, 117, 216, 0.5);
+    }
+    .homewrkMailing {padding: 10px 230px 10px 60px !important;}
+    .mailNote{right: 0;}
+    .tabsytle{float: left;margin-bottom: 12px; padding: 0 15px;}
+    .alert-info {
+      color: #0c5460;
+      background-color: #d1ecf1;
+      border-color: #bee5eb;
+      width: 98%;
+      float: left;
+      padding: 5px 10px;
+      font-size: 14px;
+      text-align: center;
+      box-sizing: border-box;
+  }
+.srchResult{border:0 !important;}
+  /* .browsers{
+  float: left;
+}
+.editors{
+  min-height: 250px !important;
+}
+.h5edit{padding:0; margin: 0;}
+.seleced_item {
+    width: 100%;
+    float: left;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+}
+
+.hdboxcontroller .fa-arrow-left {
+    color: #3c6ecd;
+    font-size: 25px;
+}
+.hdboxcontroller a{ display: inline-block; vertical-align:top;margin-left: 5px;} */
+.mailinkDiv{ width:140px; float:right;}
+.mControllerOverhide{ width:75px; overflow:hidden; background:#fff;height:100%;top:0; padding-top:8px; }
+.mailHovershow:hover .mControllerOverhide,
+.mailHovershow:hover .mailinkDiv{ width:auto; overflow:visible;}
+.dBlock{font-size: 12px;margin-top:5px;}

@@ -1,0 +1,134 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+  <div class="communication pull-left" style="margin-top:15px; overflow: hidden;">
+ <div class="headBox"><h5 class="h5 pull-left"><a href="1-1-1.html"><i class="fa fa-fw fa-arrow-left"></i></a> Question Wise Analysis</h5></div>
+ <ul class="nav navLineTheme">
+     <li><a data-toggle="tab" href="#easy" class="active">Easy  <span class="">{{ easyArr?.length || '0' }}</span></a></li>
+     <li><a data-toggle="tab" href="#medium">Medium  <span class="">{{ mediumArr?.length || '0' }}</span></a></li>
+     <li><a data-toggle="tab" href="#difficult">Difficult <span class="">{{ dificultyArr?.length || '0' }}</span></a></li>
+   </ul>
+ <div class="col-xs-12 col-sm-12 col-md-12 pull-left"> 
+ <div class="tab-content">
+    <div id="easy" class="tab-pane active"> 
+   <div class="qPanel" *ngFor="let easy of easyArr; index as i;">
+     <table class="table table-striped borderNone">
+       <tr>
+       <td style="width:215px;"><strong>Question No. {{easy.question_number}}:</strong></td>
+       <td><strong [innerHTML]="easy.question"></strong></td>
+       </tr>
+       <tr>
+       <td><strong>Your Answer:</strong></td>
+       <td><span *ngIf="easy.optiondata.attempted_option" [innerHTML]="easy.optiondata.attempted_option.optiontext"></span></td>
+       </tr>
+       <tr>
+       <td><strong>Correct Answer:</strong></td>
+       <td><span [innerHTML]="easy.optiondata.right_option.optiontext"></span></td>
+       </tr>
+       <tr>
+       <td><strong>Topic:</strong></td>
+       <td>{{easy.container_name}}</td>
+       </tr>
+       <tr>
+       <td><strong>Time Taken:</strong></td>
+       <td>{{easy.taken_time}}</td>
+       </tr>
+       <tr>
+       <td><strong>Average Time:</strong></td>
+       <td>{{easy.average_time}}</td>
+       </tr>
+       <tr>
+       <td><strong>Correct Responses:</strong></td>
+       <td>{{easy.peer_correct_percentage}}</td>
+       </tr>
+       <tr>
+       <td><strong>Explanation:</strong></td>
+       <td><span [innerHTML]="easy.explanatation"></span></td>
+       </tr>
+     </table>			
+         
+   </div>
+       </div>
+     
+     <div id="medium" class="tab-pane fade"> 
+ <div class="qPanel" *ngFor="let mediums of mediumArr; index as i;">
+     <table class="table table-striped borderNone">
+       <tr>
+        <td style="width:215px;"><strong>Question No. {{mediums.question_number}}:</strong></td>
+       <td><strong [innerHTML]="mediums.question"></strong></td>
+       </tr>
+       <tr>
+       <td><strong>Your Answer:</strong></td>
+       <td>Lorem Ipsum is simply dummy text.</td>
+       </tr>
+       <tr>
+       <td><strong>Correct Answer:</strong></td>
+       <td>It is a long established fact that a reader.</td>
+       </tr>
+       <tr>
+       <td><strong>Toppic:</strong></td>
+       <td>{{mediums.container_name}}</td>
+       </tr>
+       <tr>
+       <td><strong>Time Taken:</strong></td>
+       <td>{{mediums.taken_time}}</td>
+       </tr>
+       <tr>
+       <td><strong>Average Time:</strong></td>
+       <td>{{mediums.average_time}}</td>
+       </tr>
+       <tr>
+       <td><strong>Correct Responses:</strong></td>
+       <td>{{mediums.peer_correct_percentage}}</td>
+       </tr>
+       <tr>
+       <td><strong>Explanation:</strong></td>
+       <td><span [innerHTML]="mediums.explanatation"></span></td>
+       </tr>
+     </table>			
+         
+   </div>
+       </div>
+     
+   <div id="difficult" class="tab-pane fade"> 
+   <div class="qPanel" *ngFor="let difficulty of dificultyArr; index as i;">
+     <table class="table table-striped borderNone">
+       <tr>
+        <td style="width:215px;"><strong>Question No. {{difficulty.question_number}}:</strong></td>
+       <td><strong [innerHTML]="difficulty.question"></strong></td>
+       </tr>
+       <tr>
+       <td><strong>Your Answer:</strong></td>
+       <td>Lorem Ipsum is simply dummy text.</td>
+       </tr>
+       <tr>
+       <td><strong>Correct Answer:</strong></td>
+       <td>It is a long established fact that a reader.</td>
+       </tr>
+       <tr>
+       <td><strong>Toppic:</strong></td>
+       <td>{{difficulty.container_name}}</td>
+       </tr>
+       <tr>
+       <td><strong>Time Taken:</strong></td>
+       <td>{{difficulty.question_number}}</td>
+       </tr>
+       <tr>
+       <td><strong>Average Time:</strong></td>
+       <td>{{difficulty.question_number}}</td>
+       </tr>
+       <tr>
+       <td><strong>Correct Responses:</strong></td>
+       <td>{{difficulty.question_number}}</td>
+       </tr>
+       <tr>
+       <td><strong>Explanation:</strong></td>
+       <td><span [innerHTML]="difficulty.explanatation"></span></td>
+       </tr>
+     </table>			
+         
+   </div>
+       </div>
+     </div>
+ </div>	
+ 
+ </div>
+ </div>

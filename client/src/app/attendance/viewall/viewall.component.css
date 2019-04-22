@@ -1,0 +1,29 @@
+.sAttandSerchpan{ width:100%; background:#004c80;float:left; padding:10px 0;}
+.sAttandSerchpan label{ color:#fff; font-weight:normal;}
+.sAttandSerchpan input[type=text],.sAttandSerchpan select{ width:100%; border:0; border-radius:3px; height:35px; padding:0 15px;}
+.sAttandSerchpan input:focus,.sAttandSerchpan select:focus{ outline:none;}
+.sAttandSerchpan .clenderInput{background-image:url(/assets/images/icons/calendar.png);background-repeat:no-repeat; background-position:10px center; padding-left:32px !important;}
+.sAttandSerchpan .btn-group,.sAttandSerchpan .btn,.sAttandSerchpan .btn:focus{ display:block !important; border:0 !important;width:100%; border:0; border-radius:3px; height:35px; background-color:#fff !important; text-align:left !important; box-shadow:none !important}
+.padding-right-none{ padding-right:0;}
+.sAttandSerchpan .btn-group .caret{position: absolute; right: 10px; top: 17px;}
+.sAttandSerchpan .btn{ padding-right:25px !important;}
+.sAttandSerchpan .dropdown-menu label{color:#333;}
+.sAttandSerchpan .dropdown-menu{padding:15px; max-height: 250px;overflow-y: auto;}
+.margin-top-10{margin-top: 10px;}
+.btnGroup{margin-top: 18px; margin-right: 15px;}
+.btnGroup .btn-sm{font-size: 12px; padding: 5px 15px; font-weight: bold;border-radius: 28px;}
+.btnGroup .btn-defult{border-color:#3C6ECD;background-color:transparent;}
+.btnGroup .btn-info{background-color:#3C6ECD;border-color:#3C6ECD;}
+.calenerIcon {background-color: #fff !important; border: 0 !important;}
+.checkbtnBlock{ display:block; position: relative; padding-left:24px;cursor: pointer;-webkit-user-select: none; -moz-user-select: none;-ms-user-select: none;user-select: none;font-weight:normal; color:#414141 !important; font-size:15px;}
+.checkbtnBlock input{position: absolute;opacity: 0;left: 0; width: 26px;height: 26px; z-index:1;top: 0; margin: 0;}
+.checkbtnBlock .checkbtn:before{ position: absolute; top:0px; left: 0;  content: "\f096";font-family: 'FontAwesome'; color:#222; font-size: 20px;line-height: 24px;}
+.checkbtnBlock input:checked ~ .checkbtn:before{content: "\f046";color:green;}
+.overFlowY{max-height:400px; overflow-y: auto;}
+#showpopup .modal-body{padding:0;}
+#showpopup .modal-header{background-color:#1146A9; border-bottom: 0;border-radius: 0;color:#fff;}
+#showpopup .modal-content{border-radius: 0;}
+#showpopup .close{color:#fff;}
+#showpopup .close:hover{color:#fff;}
+#showpopup .tablestyle{margin: 0}
+#showpopup .tablestyle:after{display: none;}

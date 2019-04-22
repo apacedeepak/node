@@ -1,0 +1,46 @@
+.accordion_head{
+    background: #447ab8;
+    border-radius: 0;
+    font-size: 18px;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    width: 100%;
+    float: left;
+}
+.accordion_head:after {
+    content: "\f067";
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+}
+
+.minussign:after {
+    content: "\f068"!important;
+    font-family: 'FontAwesome';   
+}
+.accordion_body{
+    display: none;
+    width: 100%;
+    float: left;
+}
+.plussign, .minussign {
+    cursor: pointer;
+}
+.download{
+    background-image: none !important;
+    display: flex;
+    -webkit-display: flex;
+    -moz-display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    color: #fff;
+}
+.portalStudyPlan .panel .subjectFile h3{padding-right: 5px;}
+.portalStudyPlan .panel .subjectFile h3 {font-size: 13px; min-height: 85px;}

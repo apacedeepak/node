@@ -1,0 +1,164 @@
+<div class="row" style="margin-right:0;">
+   <!-- <div class="col-sm-12 col-md-12 pull-left text-right margin-top-15">
+        <a routerLink = "imprest"  class="pull-right btn btn-info btn-sm">
+        {{'view_expense_detail' | translate}}
+    </a>   
+    </div> -->
+   
+       <div class="col-sm-6 col-md-6 pull-left">
+        <div class="boxModel pull-left maxHightOuto">
+               
+            <div class="headBox">
+                <h5 class="h5 pull-left"> {{'balance_amount' | translate}}</h5>
+            </div>
+
+            <div class="filterResult">
+                <table class="table table-striped vmid">
+                
+                       <ng-container >
+                    <thead>
+                        <tr>
+                            <td><b> {{'serial_no' | translate}}</b></td>
+                            <td><b>  {{'term' | translate}}</b> </td>
+                            <td><b> {{'amount' | translate}}</b> </td>
+                        </tr>
+                    </thead>
+                    </ng-container>
+               
+                    <ng-container>
+
+                        <tbody>
+                            <tr *ngFor="let fee of feeDues; index as i" (click)="feeduedetails(fee.term_id)">
+                                <td>{{i + 1}}.</td>
+                                <td >{{fee.term_name}}</td>
+                                <td >{{fee.due_amount}}</td>
+                            </tr>
+                            <tr *ngIf="feeDues.length == 0">
+                                <td style="text-align: center;" colspan="3">   {{'no_record_found' | translate}}</td>
+                            </tr>
+                        </tbody>
+                       
+                    </ng-container>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 pull-left">
+        <div class="boxModel pull-left maxHightOuto">
+            <div class="headBox">
+                <h5 class="h5 pull-left"> {{'paid_payment_history' | translate}}</h5>
+            </div>
+            <div class="filterResult">
+                <table class="table table-striped vmid">
+                
+                 <ng-container>
+                    <thead>
+                        <tr>
+                            <td><b> {{'fee_receipt' | translate}}</b></td>
+                            <td><b> {{'terms' | translate}}</b> </td>
+                            <td><b> {{'amount' | translate}}</b> </td>
+                            <td><b> {{'status' | translate}}</b> </td>
+                        </tr>
+                    </thead>
+                    </ng-container>
+                 
+                
+                    <ng-container>
+                         <tbody>
+                             
+                            <tr *ngFor="let fee of feePaid; index as i" (click)="feereceipt(fee.receipt_id)">
+                                <td>{{fee.receiptno}}</td>
+                                <td >{{fee.term_name}}</td>
+                                <td >{{fee.total_amount}}</td>
+                                <td *ngIf="fee.cheque_dd_status == 'B'||fee.cheque_dd_status == 'BC'"> {{'bounce' | translate}}</td>
+                                <td *ngIf="fee.cheque_dd_status != 'B'||fee.cheque_dd_status != 'BC'"> {{'clear' | translate}}</td>
+                            </tr>
+                            <tr *ngIf="feePaid.length == 0">
+                                <td style="text-align: center;" colspan="4">   {{'no_record_found' | translate}}</td>
+                            </tr>
+                        </tbody>
+                    </ng-container>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="feedetailpop" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-left" >
+                <h4 class="modal-title"> {{'detailed_total_fee_due' | translate}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+    
+        </div>
+        <div class="modal-body">
+       <table class="table table-striped table-bordered">
+           <thead style="background-color:blue; color:white;">
+            <tr>
+                <td class="col-sm-2 col-md-2"><b> {{'serial_no' | translate}}</b></td>
+                <td class="col-sm-6 col-md-6"><b> {{'fee_name' | translate}}</b> </td>
+                <td class="col-sm-6 col-md-6"><b> {{'amount' | translate}}</b> </td>
+            </tr>
+           </thead>
+        <tbody>
+                <tr *ngFor="let feesd of feedetail; index as i">
+           
+             <td> {{i+1}}.</td>
+            <td>{{feesd.fee_head}}</td>
+            <td>{{feesd.due_amount}}</td>
+
+         </tr>
+         </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal"> {{'close' | translate}}</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+
+
+
+
+  <div id="feereciptpop" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header text-left" >
+                    <!-- <h4 class="modal-title">Detailed total fee </h4> -->
+             
+               <a href="{{feereciptdwnld}}" target="_blank" id="receipt_pdf" download >
+                  <button class="btn fa fa-download">  {{'download' | translate}}</button>
+                </a> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body reciept">
+          
+         
+            </div>
+       </div>
+      
+        </div>
+      </div>
+    
+      
+
+
+
+
+  
+
+
+  

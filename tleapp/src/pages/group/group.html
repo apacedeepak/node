@@ -1,0 +1,47 @@
+<!--
+  Generated template for the GroupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+      <ion-navbar hideBackButton="true" can-swipe-back="false">
+          <button ion-button menuToggle enable-menu-with-back-views="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <ion-title>Groups</ion-title>
+          <button class="creatGrop" (click)="openPopup()">Create Group</button>       
+        </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="pull to refresh">
+    
+        </ion-refresher-content>
+      </ion-refresher>
+    <ng-container *ngIf="globalObj.groupExist;else nogrpdata">
+    <ion-grid *ngFor="let item of groupData" (click)="groupDetail(item.groupId)" class="mailBlock groupBlock">
+    <ion-row>
+        <div class='rblock'(click)="changeFlagValue()" >
+          <button (click)= "redirectToModule(item.groupId,$event)" > <ion-icon name="more"></ion-icon></button>
+          {{item.count}}<br> Student
+        </div>
+        <ion-col class="mailername textoverlap" col-12>{{item.group_name }} </ion-col>
+        <ion-col  class="subtitle textoverlap" col-12>{{item.section_name}}</ion-col>
+        <ion-col class="description textoverlap" col-12>{{item.subject_name}}</ion-col>
+        <ion-col class="description textoverlap" col-12>Last Updated:{{item.updated_date_time_app | date : 'd MMM h:mm a'}}</ion-col>
+    </ion-row>
+   </ion-grid>
+
+    </ng-container>
+    <ng-template #nogrpdata><p class="text-info">No Record Found</p></ng-template>
+</ion-content>
+<!-- <ion-fab  right bottom #fab>
+  <button id="fabbutton" ion-fab (click)="openPopup()">
+<ion-icon name="add"></ion-icon>
+</button>
+</ion-fab> -->

@@ -1,0 +1,46 @@
+{
+  "name": "user_feedback_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "remarks_name": {
+      "type": "string",
+      "required": true
+    },
+    "remarks_category": {
+      "type": "string",
+      "required": true
+    },
+    "remarks_icon": {
+      "type": "string",
+      "required": false
+    },
+    "status": {
+      "type": "number",
+      "required": false
+    },
+    "schoolId": {
+      "type": "number",
+      "required": false
+    },
+    "added_date": {
+      "type": "date",
+      "required": false
+    },
+    "added_by": {
+      "type": "number",
+      "required": false
+    },
+    "isAdmin": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

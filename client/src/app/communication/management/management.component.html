@@ -1,0 +1,221 @@
+       <div class="row">
+       <div class="col-sm-12 col-md-12 margin-top-15 pull-left">
+          <div class="communication">
+             <div class="headBox margin-bottom-15">
+                <h5 class="h5 pull-left"><a href="javascript:void(0)" [routerLink]="['/dashboard/main']"><i class="fa fa-fw fa-arrow-left"></i></a>  {{'communication' | translate}}</h5>
+                <ul class="nav commnicationBox pull-right btnGroup">
+                   <li><a data-toggle="pill" (click)="messagetabfunc('message')" id="messagetab" href="#message" class="active"> {{'message' | translate}}</a> </li>
+                   <li><a data-toggle="pill" (click)="messagetabfunc('notice')" id="noticetab" href="#notice"> {{'notice' | translate}}</a></li>
+                   <li><a data-toggle="pill" (click)="messagetabfunc('circular')" id="circulartab" href="#circular"> {{'circular' | translate}}</a></li>
+                </ul>
+             </div>
+             <div class="col-sm-3 col-md-3  pull-left">
+                <div *ngIf="globalObj.showdaterange" class="alert alert-success alert-dismissible">
+                   <button type="button" (click)="removerange()" class="close" data-dismiss="alert">&times;</button>
+                   {{globalObj.fromrange}} To {{globalObj.torange}}
+                </div>
+             </div>
+             <!-- 
+                <div class="col-sm-3 col-md-3  pull-left  has-feedback ngCalendra">
+                      <input type="text" placeholder="Select date" class="calenerIcon" (click)="displaycal();">
+                      <ng-container *ngIf="globalObj.showcalander">
+                          <ngb-datepicker #dp (select)="onDateChange($event)" [displayMonths]="0" [dayTemplate]="t">
+                          </ngb-datepicker>
+                      </ng-container>
+                      <ng-template #t let-date="date" let-focused="focused">
+                          <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                              [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="globalObj.hoveredDate = date" (mouseleave)="globalObj.hoveredDate = null">
+                {{ date.day }}
+                </span>
+                    </ng-template>
+                </div> -->
+             <div class="leftRightgap pull-left">
+                <div class="tab-content">
+                   <div id="message" class="tab-pane active">
+                      <table class="table tablestyle">
+                         <thead>
+                            <tr>
+                               <td width="50px"> {{'serial_no' | translate}}</td>
+                               <td>
+                                 <div class="has-feedback dropContainer"> {{'user_type' | translate}}
+                                 <a href="javascript:void()" class="pull-right dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-angle-down"></i></a>
+                                 <div class="dropdown-menu">
+                                  <label class="radioContainer"><input [checked]="userfilter === ''" (click)="userFilterFunc('')" type="radio"> {{'all' | translate}} <span class="checkmarks"></span></label>
+                                  <label class="radioContainer"><input [checked]="userfilter === 'School'" (click)="userFilterFunc('School')" type="radio">  {{'admin' | translate}}<span class="checkmarks"></span></label>
+                                  <label class="radioContainer"><input [checked]="userfilter === 'Teacher'" (click)="userFilterFunc('Teacher')" type="radio"> {{'teacher' | translate}} <span class="checkmarks"></span></label>
+                                  <label class="radioContainer"><input [checked]="userfilter === 'Student'" (click)="userFilterFunc('Student')" type="radio"> {{'student' | translate}} <span class="checkmarks"></span></label>
+                                  <label class="radioContainer"><input [checked]="userfilter === 'Parent'" (click)="userFilterFunc('Parent')" type="radio"> {{'parent' | translate}} <span class="checkmarks"></span></label>
+                                  </div>
+                                </div>
+                                </td>
+                               <td> {{'sender_name_id' | translate}}</td>
+                               <td> {{'sent_on' | translate}}</td>
+                               <td> {{'subject' | translate}}</td>
+                               <td> {{'action' | translate}}</td>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            <ng-container *ngIf="globalObj.messagecount">
+                               <tr *ngFor = "let message of globalObj.messagearr | namefilter: userfilter; index as i  ">
+                                  <td>{{i+1}}.</td>
+                                  <td>{{message.senderType|translate}}</td>
+                                  <td><a href="javascript:void(0)" (click)="viewProfile(message.senderType, message.user_id)">{{message.senderName}}</a></td>
+                                  <td class="whiteSpace">{{message.message_onlydate}}</td>
+                                  <td [title]="message.message_subject" >
+                                     <div class="col-sm-200 textOverFlow">{{message.message_subject}}</div>
+                                  </td>
+                                  <td><a class="col-sm-200 textOverFlow" style="height:30px" href="javascript:void(0)" (click)="showmessage('message',message.message_id)" data-toggle="modal" data-target="#fullmsg" > {{'view' | translate}}</a></td>
+                               </tr>
+                            </ng-container>
+                            <ng-container *ngIf="globalObj.filterFlag || globalObj.messagearr.length == 0">
+                               <tr>
+                                  <td colspan="6">
+                                     <p class="text-info text-center"> {{'no_data_available' | translate}}</p>
+                                  </td>
+                               </tr>
+                            </ng-container>
+                         </tbody>
+                      </table>
+                   </div>
+                   <div id="notice" class="tab-pane">
+                      <table class="table tablestyle">
+                         <thead>
+                            <tr>
+                               <td width="50px"> {{'serial_no' | translate}}</td>
+                               <td> {{'sender_name_id' | translate}}</td>
+                               <td> {{'sent_on' | translate}}</td>
+                               <td> {{'subject' | translate}}</td>
+                               <td> {{'action' | translate}}</td>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            <ng-container *ngIf="globalObj.noticecount;else nontcdata">
+                               <tr *ngFor = "let notice of globalObj.noticearr;index as i ">
+                                  <td>{{i+1}}.</td>
+                                  <td>{{notice.senderName|translate}}</td>
+                                  <td class="whiteSpace">{{notice.sentOn}}</td>
+                                  <td [title]="notice.subject">
+                                     <div class="col-sm-200 textOverFlow">{{notice.subject}}</div>
+                                  </td>
+                                  <td><a class="col-sm-200 textOverFlow" style="height:30px" href="javascript:void(0)" (click)="showmessage('notice',notice.id)" data-toggle="modal" data-target="#fullmsg" > {{'view' | translate}}</a></td>
+                               </tr>
+                            </ng-container>
+                            <ng-template #nontcdata>
+                               <tr>
+                                  <td colspan="6">
+                                     <p class="text-info text-center">  {{'no_data_available' | translate}}</p>
+                                  </td>
+                               </tr>
+                            </ng-template>
+                         </tbody>
+                      </table>
+                   </div>
+                   <div id="circular" class="tab-pane">
+                      <table class="table tablestyle">
+                         <thead>
+                            <tr>
+                              <td width="50px"> {{'serial_no' | translate}}</td>
+                               <td> {{'sender_name_id' | translate}}</td>
+                               <td> {{'sent_on' | translate}}</td>
+                               <td> {{'subject' | translate}}</td>
+                               <td> {{'action' | translate}}</td>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            <ng-container *ngIf="globalObj.circularcount;else nocircdata">
+                               <tr *ngFor = "let circular of globalObj.circulararr;index as i">
+                                  <td>{{i+1}}.</td>
+                                  <td>{{circular.senderName|translate}}</td>
+                                  <td class="whiteSpace">{{circular.sentOn}}</td>
+                                  <td [title]="circular.subject">
+                                     <div class="col-sm-200 textOverFlow">{{circular.subject}}</div>
+                                  </td>
+                                  <td><a class="col-sm-200 textOverFlow" style="height:30px" href="javascript:void(0)" (click)="showmessage('circular',circular.id)" data-toggle="modal" data-target="#fullmsg" > {{'view' | translate}}</a></td>
+                               </tr>
+                            </ng-container>
+                            <ng-template #nocircdata>
+                               <tr>
+                                  <td colspan="6">
+                                     <p class="text-info text-center">   {{'no_data_available' | translate}}</p>
+                                  </td>
+                               </tr>
+                            </ng-template>
+                         </tbody>
+                      </table>
+                   </div>
+                </div>
+             </div>
+             <div  class="clearfix"></div>
+          </div>
+       </div>
+      </div>
+   
+ <!-- The Modal -->
+ <div class="modal" id="fullmsg">
+    <div class="modal-dialog">
+       <div class="modal-content modal-content-radius">
+          <!-- Modal Header -->
+          <div class="modal-header model-content-header  modal-content-radius">
+             <h4 *ngIf="globalObj.type=='message'" class="modal-title"> {{'message_details' | translate}}</h4>
+             <h4 *ngIf="globalObj.type=='notice'" class="modal-title"> {{'notice_details' | translate}}</h4>
+             <h4 *ngIf="globalObj.type=='circular'" class="modal-title"> {{'circular_details' | translate}}</h4>
+             <button type="button" (click)="cleardetail()" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body fontSize14">
+             <p *ngIf="globalObj.type=='message'"><b> {{'send_to' | translate}} :-</b>  {{globalObj.sendernames}}</p>
+             <p><b> {{'title' | translate}} :-</b>  {{globalObj.title}}</p>
+             <hr>
+             <p><b> {{'description' | translate}} :-</b> <span [innerHTML]= "globalObj.description" ></span></p>
+             <hr>
+             <div *ngFor="let aatt of globalObj.attachment" class="col-sm-12 col-md-12" style="word-wrap: break-word;">
+                <a  download="{{globalObj.serverurl}}{{aatt}}" target="_self" href="{{globalObj.serverurl}}{{aatt}}" class="" ><i class="fa fw fa-paperclip"></i> {{aatt | split: '~':1}}</a> 
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+<div id="viewProfileModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> {{'sender_details' | translate}}</h4>
+                    <a href="javascript:void(0)" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                </div>
+            <div class="modal-body">
+                    <div class="row">
+                            <div class="col-sm-6 col-md-6 pull-left">
+                                <div class="infopro">
+                                    <div *ngFor="let profileinfofirst of profileinfofirst">
+                                            <ng-container *ngIf="profileinfofirst.key != 'photo'; else photo">
+                                                <p>
+                                                    <label>{{profileinfofirst.key|translate}}</label>
+                                                    <label>{{profileinfofirst.value}}</label>
+                                                </p>
+                                           </ng-container>  
+                                           <ng-template #photo>
+                                                <div class="text-center" *ngIf="profileinfofirst.value !=''">
+                                                    <img src="{{profileinfofirst.value}}" height="120" width="120" />
+                                                </div>
+                                                <div class="text-center" *ngIf="profileinfofirst.value ==''">
+                                                    <img src="assets/images/profile_img.jpg" height="120" width="120" />
+                                                </div>
+                                            </ng-template>     
+                                    </div> </div>                                   
+                            </div>
+                            <div class="col-sm-6 col-md-6 pull-left">
+                                <table class="table">
+                                    <tbody>
+                                      <tr *ngFor="let profileinfosecond of profileinfosecond">
+                                        <td>{{profileinfosecond.key|translate}}</td>
+                                        <td>{{profileinfosecond.value}}</td> 
+                                      </tr>
+                                    </tbody> 
+                                </table>
+                            </div>
+                    </div>
+            </div>
+          </div>
+        </div>
+</div>

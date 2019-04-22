@@ -1,0 +1,44 @@
+<div class="col-sm-6 col-md-6 pull-left has-feedback mb15">
+<div class="maxHightOuto">
+ <div *ngIf="calendarOptions">
+    <ng-fullcalendar #ucCalendar (dayClick)="onDayCLimb15ck($event.detail)" [options]="calendarOptions" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+</div>
+</div>
+</div>
+
+<div class="col-sm-6 col-md-6 pull-left mb15">
+            <div class="attendaceScrore fullwith-left">
+                <h3><span class="pull-left">{{'Batch Schedule'|translate}}</span>
+                    <span class="pull-left" style="float: right;">{{dd}} {{mon}} {{yyyy}}</span>
+                </h3>
+
+            </div>
+            <div class="timeTableOverFlow">
+            <table class="table table-striped timetableColender">
+                <thead class="tbleHead">
+                    <tr>
+                        <td align="left">{{'Time (Lecture)'|translate}}</td>
+                        <td align="left">{{'subject'|translate}}</td>
+                        <td align="left">{{'Batch Name'|translate}}</td>
+                        <td align="left">{{'Faculty'|translate}}</td>
+                      
+                    </tr>
+                </thead>
+                 <tbody>
+                 
+                     <tr *ngFor="let timetable of timetablelist">
+ 
+                     <td align="left">{{timetable.start_time}}-{{timetable.end_time}}</td>
+                     <td align="left">{{ timetable.subject_info ? timetable.subject_info.subjects.subject_name:'--'}}</td>
+                     <td align="left">{{section_name}}</td>
+                     <td align="left">{{timetable.user_info ? timetable.user_info.user_belongs_to_staff.name:'--'}}</td>
+                    
+                      </tr>
+                    <tr>
+                      <td colspan="4" align="center" *ngIf="timetablelist.length == 0" class="ng-scope">{{'no_record_found'|translate}}</td><!-- end ngIf: timetablelist =='' -->
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+ </div>
+

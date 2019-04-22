@@ -1,0 +1,32 @@
+{
+  "name": "oauthaccestoken",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "access_token": {
+      "type": "string"
+    },
+    "client_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "number"
+    },
+    "expires": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "callfrom": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

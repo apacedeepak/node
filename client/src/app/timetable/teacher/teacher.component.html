@@ -1,0 +1,241 @@
+<!--div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none margin-bottom-10">
+    <div class="btnGroup">    
+            <button id='daily' class="showall btn btn-sm  btn-defult btn-info" (click)="onDayMonth('day')">{{'Daily'| translate}}</button> 
+            <button id='batchwise' class="showall btn btn-sm btn-defult" (click)="onDayMonth('month')">{{'Batchwise'| translate}}</button> 
+          
+           <select *ngIf="!global.dayMonthWise"  class="form-control"><option>Select Month</option></select>
+  </div>  
+    
+</div-->
+
+<div *ngIf="global.dayMonthWise" class="col-sm-4 col-md-4 pull-left has-feedback mb15">
+ <div class="pull-left overhide boxmodelColender" *ngIf="calendarOptionsCal && global.dayMonthWise">
+    <ng-fullcalendar #ucCalendarCal (dayClick)="onDayCLick($event.detail)" [options]="calendarOptionsCal" (clickButton)="clickButtonCal($event.detail)"></ng-fullcalendar>
+</div>
+</div>
+
+<div *ngIf="global.dayMonthWise" class="col-sm-8 col-md-8 pull-left mb15">
+    
+        <div class="table-responsive">            
+        <table class="table table-striped customTable">
+            <thead>               
+                <tr>
+                    <th align="left"> {{'serial_no'| translate}}</th>
+                    <th align="left">{{'Batch Name'| translate}}</th>
+                    <th align="left"> {{'subject'| translate}}</th>
+                    <th align="center">{{'Lecture Time'| translate}}</th>
+                    <th align="center">{{'Days'| translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+        
+                 <tr *ngFor="let time of schedule_list;index as j">
+                    <td>{{j+1}}</td>
+                 <td align="right">{{time.batchName}}</td>
+                 <td align="left">
+                        <a class="subjectName" href="javascript:void(0)" (click) = "getlmssubjectid(time.lms_class_id,time.subjectId,time.batch_start_date,time.batchId,time.lms_board_id,time.className,time.classId,time.batchName)"> {{time.subject_name}}</a></td>
+                 <td align="left">{{time.start_time}} &nbsp; to &nbsp; {{time.end_time}}</td>
+               
+                 <td align="left">{{time.days ? time.days:"--"}}</td>
+
+
+                  </tr>
+                  <tr *ngIf="schedule_list.length==0">
+                    <td colspan ="5" class="text-center text-primary">No Record Found</td> </tr>
+<!--                   
+                  <ng-container *ngIf="timetable.Schedule.length == 0">
+                      <tr>
+                      <td align="right">{{timetable.start_time}}-{{timetable.end_time}}</td>
+                 <td align="left">{{timetable.subject_name}}</td>
+                 <td align="left">{{timetable.batch_name}}</td>
+                  <td align="left"></td>
+                 
+                 <td align="left">
+                    <span>  {{'DPP not Created'| translate}} </span>
+                </td>
+                </tr>
+                  </ng-container> -->
+           
+                
+            </tbody>
+        </table>
+        </div>
+
+</div>
+
+
+<div *ngIf="global.dayMonthWise" class="col-sm-12 col-md-12 pull-left">
+
+        <div  class="overhide maxheightAuto">
+            <div class="attendaceScrore fullwith-left">
+                <h3 class="pull-left"><span class="mt10 pull-left"> Select Test Date</span>
+				 </h3>
+                    <span class="pull-left" style="float: right;">
+                    <select  class="form-control cleanup validate-empty" #date (change)="ondatechange(date.value);" style="height: 36px">
+                            <option value="">Select date</option>
+                            <option *ngFor="let item of microschedule_data" value="{{item.test_date}}"  >{{ item.test_date |date: 'dd/MM/yyyy' }}</option>
+                    </select></span>
+               
+
+            </div>
+            <div class="timeTableOverFlow">
+                    <form class="form-horizontal" [formGroup]="dpp_form" (ngSubmit)="onSubmitDetail(dpp_form.value)">         
+          <div class="table-responsive">
+                        <table class="table table-striped timetableColender">
+                <thead class="tbleHead">
+                   
+                    <tr>
+                        <td  align="left">S.No</td>                      
+                        <td align="left"> Topic</td>
+                        <td align="left">Select</td>
+                        <td align="left">Status</td>
+                  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of topic_list;index as i">
+                            <td  align="left">{{i+1}}</td>
+                            <td  align="left">{{item.topic_name}}</td>
+                            <td  align="left" formArrayName="selectbox">	<input class="cleanup validate-empty" [hidden]="covered_topic.includes(item.topic_id) ? 'active':''" type="checkbox"  [formControlName]='i'   autofocus="" /> <span class="checkmark"></span>   </td> 
+                            <td ><div *ngFor="let items of donetopics;index as j;"><label *ngIf ="items.topicId==item.topic_id">{{items.lms_dpp_message}}</label> </div></td>
+                    </tr>
+                    
+                 
+                    <tr>
+                        <!-- ngIf: timetablelist =='' --><td colspan="6" align="center" *ngIf="topic_list.length == 0" class="ng-scope text-center text-primary">{{'no_record_found'| translate}}</td><!-- end ngIf: timetablelist =='' -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem" *ngIf="topic_list.length > 0">
+        
+                    <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+                  </div>
+            </form>
+            </div>
+
+            </div>
+ </div>
+
+
+<div *ngIf="!global.dayMonthWise" class="col-sm-12 col-md-12 pull-left">
+        <div *ngIf="!global.dayMonthWise" class="text-center">
+        <div id='calendar' style='display: none;'></div>
+        <div id='caljump'>
+          <label for='months'></label>
+          <select class="form-control selectDrop" id='months' (change)='monthChange()'></select>
+      </div>
+
+    </div>
+      
+    
+    <div class="pull-left" style="max-height: inherit;width: 100%;">
+            <div class="attendaceScrore fullwith-left has-feedback" id="batchCalender">
+     <h3 class="has-feedback">
+    <div class="col-sm-4 col-md-4 pull-left text-left  padding-left-none"> {{'Batch Schedule'| translate}}</div>
+    <div class="col-sm-4 col-md-4 pull-left has-feedback">
+        <div class="bCalender" *ngIf="calendarOptionsCal && !global.dayMonthWise">
+    <ng-fullcalendar #ucCalendar  [options]="calendarOptionsCal" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+</div>
+    </div>
+    <div class="col-sm-4 col-md-4 pull-left text-right btnFilter padding-right-none ">
+        <a href="javascript:void(0)" (click)="searchdpp()" ><i class="fa fa-search"></i></a>
+    </div>
+                
+     </h3>
+
+            </div>
+            <div class="timeTableOverFlow">
+               <div class="table-responsive">  
+            <table class="table table-striped timetableColender">
+                <thead class="tbleHead">
+                   
+                    <tr>
+                        <td *ngIf="!global.dayMonthWise" align="left"> {{'date'| translate}}</td>
+                        <td align="left"> {{'Time (Lecture)'| translate}}</td>
+                        <td align="left"> {{'subject'| translate}}</td>
+                        <td align="left">{{'Batch Name'| translate}}</td>
+                         <td align="center">{{'Concept'| translate}}</td>
+                        <!-- <td align="center">Faculty Name</td> -->
+                        <td align="center">{{'status'| translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    
+                    <ng-container *ngFor="let timetable of timetablelist;index as i">
+                     <tr *ngFor="let time of timetable.Schedule;index as j">
+
+                     <td *ngIf="!global.dayMonthWise" align="left">{{timetable.batch_date}}</td>
+                     <td align="left">{{timetable.start_time}}-{{timetable.end_time}}</td>
+                     <td align="left">{{timetable.subject_name}}</td>
+                     <td align="left">{{timetable.batch_name}}</td>
+                     <td align="left">{{time.concept}}</td>
+<!--                     <td align="left"><p id="con{{i}}{{j}}" class="textLimit">{{time.concept}}</p>
+                              <a id="more{{i}}{{j}}" href="javascript:void(0)" (click)="showHide(i,j,'more')">show more</a>
+                            <a id="less{{i}}{{j}}" class='hideless' href="javascript:void(0)" (click)="showHide(i,j,'less')">show less</a>
+                      </td>-->
+                     
+                     <td align="left">
+
+                     <span *ngIf="time.paper_id > 0 &&  (time.teacher_paper_id == 0 || time.teacher_paper_id == '')&&time.is_completed==0"> <input class='btn btn-primary btn-sm' (click)="isComplete(time.paper_id, time.is_completed, timetable.batch_name, timetable.schedule_id, timetable.batch_id, time.day, time.teacher_paper_id, timetable.user_id)" value="{{'Mark As Complete'|translate}}" type="button" name="complete" >
+                     </span>
+                     <span *ngIf="time.paper_id > 0 &&  (time.teacher_paper_id == 0 || time.teacher_paper_id == '')&& time.is_completed !=0"> <input class='btn btn-primary btn-sm' (click)="isComplete(time.paper_id, time.is_completed, timetable.batch_name, timetable.schedule_id, timetable.batch_id, time.day, time.teacher_paper_id, timetable.user_id)" value="{{'Completed'|translate}}" type="button" name="complete" >
+                     </span>
+                     <span *ngIf="time.paper_id > 0 &&  time.teacher_paper_id > 0 && time.is_completed==0"> <input class='btn btn-primary btn-sm' (click)="completeDPP(time.paper_id, time.is_completed, timetable.batch_name, timetable.schedule_id, timetable.batch_id, time.day, time.teacher_paper_id, timetable.user_id)" value="{{'Mark As Complete'|translate}}" type="button" name="complete" >
+                     </span>
+                     <span *ngIf="time.paper_id > 0 &&  time.teacher_paper_id > 0 && time.is_completed!=0"> <input class='btn btn-primary btn-sm' (click)="completeDPP(time.paper_id, time.is_completed, timetable.batch_name, timetable.schedule_id, timetable.batch_id, time.day, time.teacher_paper_id, timetable.user_id)" value="{{'Completed'|translate}}" type="button" name="complete" >
+                     </span>
+                     <span *ngIf="time.paper_id == '' || time.paper_id == '0' || time.paper_id == 0">  {{'DPP not Created'| translate}} </span>
+                    </td>
+
+
+                      </tr>
+                      
+                      <ng-container *ngIf="timetable.Schedule.length == 0">
+                          <tr>
+                       <td align="right">{{timetable.batch_date}}</td>  
+                          <td align="right">{{timetable.start_time}}-{{timetable.end_time}}</td>
+                     <td align="left">{{timetable.subject_name}}</td>
+                     <td align="left">{{timetable.batch_name}}</td>
+                      <td align="left"></td>
+                     
+                     <td align="left">
+                        <span>  {{'DPP not Created'| translate}}</span>
+                    </td>
+                    </tr>
+                      </ng-container>
+                   </ng-container>
+                    <tr>
+                        <!-- ngIf: timetablelist =='' --><td colspan="6" align="center" *ngIf="timetablelist.length == 0" class="ng-scope">  {{'no_record_found'| translate}}</td><!-- end ngIf: timetablelist =='' -->
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+		</div>
+
+            </div>
+ </div>
+
+
+<div class="modal fade" id="timetablelay" style='pointer-events: none;'>
+  <div class="modal-dialog top15">
+    <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+          <p> {{'Do you want to add more questions in DPP?'| translate}}</p>
+          <span><button type="submit" class="btn btn-primary" (click)="finalComplete()"> {{'No'| translate}}</button></span>
+          <span><button type="submit" class="btn btn-primary" (click)="redirecttoassesment()"> {{'Yes'| translate}}</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

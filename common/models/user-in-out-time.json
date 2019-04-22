@@ -1,0 +1,27 @@
+{
+  "name": "user_in_out_time",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true
+    },
+    "in_time": {
+      "type": "string"
+    },
+    "out_time": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

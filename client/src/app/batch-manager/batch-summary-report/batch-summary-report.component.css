@@ -1,0 +1,9 @@
+.inputItem{ min-height: 50px;}
+.mb25{ margin-bottom: 25px;}
+.mr10{margin-right:8px;}
+.customTable thead th{ color: #fff; background: #0b3fa2;}
+table td, table th{padding: 8px;}
+a > .fa-trash-o{color:red;}
+a > .fa-pencil{color:#0b4ac1;}
+.dblock{ display: block;}
+

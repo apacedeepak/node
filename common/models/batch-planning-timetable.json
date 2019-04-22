@@ -1,0 +1,42 @@
+{
+  "name": "batch_planning_timetable",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "batch_planing_id": {
+      "type": "number",
+      "required": true
+    },
+    "lecher_type": {
+      "type": "string",
+      "required": true
+    },
+    "subject": {
+      "type": "number",
+      "required": true
+    },
+    "teacher": {
+      "type": "number",
+      "required": true
+    },
+    "start_time": {
+      "type": "string",
+      "required": true
+    },
+    "end_time": {
+      "type": "string",
+      "required": true
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

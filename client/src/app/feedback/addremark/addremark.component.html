@@ -1,0 +1,82 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none  padding-right-none">
+        <div class="boxModel pull-left maxHightOuto">
+           <div class="headBox">
+              <h5 class="h5 pull-left"> {{'add_remarks' | translate}}</h5>
+           </div>
+           <div class="col-sm-12 col-md-12 text-center pull-left">
+              <div class="text-center studentpage"><span class="spic" [ngStyle]="{'background-image':student_image ? 'url('+globalObj.domainUrlwithoutSlash+project_name+'/'+student_image+')' : 'url(assets/images/profile_img.jpg)' }">&nbsp;</span></div>
+              <ul class="nav center-Tab">
+                 <li><a data-toggle="tab" href="#positivefeedback" class="active"> {{'add_positive_feedback' | translate}}</a></li>
+                 <li><a data-toggle="tab" href="#negativefeedback"> {{'add_negative_feedback' | translate}}</a></li>
+              </ul>
+           </div>
+           <div class="tab-content tabPadding">
+              <div id="positivefeedback" class="tab-pane active">
+                 <div class="col-sm-2 col-md-2 pull-left" *ngFor="let obj of positiveArr">
+                    <div class="stBox overhiden" [class.maxh]="(obj.value || flagHeight || positiveHeight)">
+                       <label class="checkskill">
+                          <div class="text-center">
+                             <div class="fIcontainer">
+                                <input class="skillvalue" type="checkbox" [(ngModel)]="obj.value" id="{{ obj.name }}" name="{{ obj.name }}" (change)="onChangeRemark($event, obj)"><span class="checkbtn"></span>
+                                <span class="fIcon" [ngStyle]="{'background-image':obj.icon ? 'url('+globalObj.domainUrlwithoutSlash+project_name+obj.icon+')' : 'url()' }">&nbsp;<div class="firstLetter" *ngIf="!obj.icon">{{obj.name.charAt(0).toUpperCase()}}</div></span>
+                             </div>
+                          </div>
+                          <div class="text-center stName">{{ obj.name | ucfirst }}</div>
+                       </label>
+                       <div class="sturemarksbox" *ngIf="obj.value">
+                        <textarea maxlength="150" placeholder="{{'Add remark here' | translate}}..." [(ngModel)]="obj.remark" (change)="onChangeComment($event, obj)"></textarea>   
+                        </div>
+                    </div>
+                 </div>
+                 <!-- <div class="col-sm-2 col-md-2 pull-left">
+                    <div class="addction">
+                        <button (click)="addremovebehaviour()"> 
+                            <span><i  class="fa fa-fw fa-plus"></i></span>
+                            <p> {{'add_edit_skills' | translate}}</p>
+                        </button>
+                    </div>          
+                    </div>    -->
+                 <div class="col-sm-12 col-md-12 text-left pull-left" *ngIf="positiveArr.length > 0">                 
+                    <a class="btn btnBlue" [class.disabledbtn]="disabledbtn" (click)="addFeedback($event, 'positive')"> {{'update' | translate}}</a>                    
+                 </div>
+              </div>
+              <div id="negativefeedback" class="tab-pane fade">
+                 <div class="col-sm-2 col-md-2 pull-left" *ngFor="let obj of negativeArr">
+                    <div class="stBox overhiden" [class.maxh]="(obj.value || flagHeight || negativeHeight)">
+                       <label class="checkskill">
+                          <div class="text-center">
+                             <div class="fIcontainer">
+                                <input type="checkbox" [(ngModel)]="obj.value" id="{{ obj.name }}" name="{{ obj.name }}" (change)="onChangeRemark($event, obj)"><span class="checkbtn"></span>
+                                <span class="fIcon negativeBg" [ngStyle]="{'background-image':obj.icon ? 'url('+globalObj.domainUrlwithoutSlash+project_name+obj.icon+')' : 'url()' }">&nbsp;<div class="firstLetter" *ngIf="!obj.icon">{{obj.name.charAt(0).toUpperCase()}}</div></span>
+                             </div>
+                          </div>
+                          <div class="text-center stName">{{ obj.name | ucfirst }}</div>
+                       </label>
+                       <div class="sturemarksbox" *ngIf="obj.value">
+                          <textarea maxlength="150" placeholder="{{'Add remark here' | translate}}..." [(ngModel)]="obj.remark" (change)="onChangeComment($event, obj)"></textarea>   
+                       </div>
+                    </div>
+                 </div>
+                 <!-- <div class="col-sm-2 col-md-2 pull-left">
+                    <div class="addction">
+                        <button (click)="addremovebehaviour()"> 
+                            <span><i class="fa fa-fw fa-plus"></i></span>
+                            <p> {{'add_edit_skills' | translate}}</p>
+                        </button>
+                    </div>          
+                    </div> -->
+                 <div class="col-sm-12 col-md-12 text-left pull-left" *ngIf="negativeArr.length > 0">
+                    <a class="btn btnBlue" [class.disabledbtn]="disabledbtn" (click)="addFeedback($event, 'negative')"> {{'update' | translate}}</a>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <div *ngIf="responseMessage" id="successpop" class="successMessage">
+        <div>
+           <span class="has-feedback">
+              <p>{{popmessage}}</p>
+              <a style="cursor: default;" class="msgclose sm-blue-btn" (click)="closeme(popmessage)" (click)="closeme()"> {{'ok' | translate}}</a>
+           </span>
+        </div>
+     </div>

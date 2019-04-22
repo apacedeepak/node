@@ -1,0 +1,83 @@
+<!--
+  Generated template for the ComposePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+ <ion-title> Compose</ion-title>
+ <div class="htool">
+      <ion-icon (click)="openAttachmentLocation()" class="paerclip iconfontsize"><img src="/assets/imgs/papperclip.png"></ion-icon>
+      <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'draft')"><ion-icon class="iconcolor iconfontsize" ios="ios-document" md="md-document"></ion-icon></ion-button>
+      <ion-button type="submit"   class="leftmargin" (click)="onSubmit(form.value,'message')"><ion-icon class="sendmail iconfontsize"><img src="/assets/imgs/send-mail.png"></ion-icon></ion-button>
+ </div>
+  </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+    
+    <ion-grid>
+        <form [formGroup]="form">
+  <div class='rowborder tomail'>
+<ion-label class='toclass'>To</ion-label>
+<!--<div class='text-input-div'  (click)="recepientFunct()">-->
+<div class='text-input-div'>
+<span *ngFor="let itemname of globalObj.receipentName; index as i;" > 
+    <span class="maillable" *ngIf="i < 5 && !globalObj.receipentFlag">{{itemname.name}}
+    <button *ngIf="!globalObj.callfrom || (globalObj.callfrom && globalObj.callfrom!='reply')"  type="button" (click)="removeReceipient(itemname.user_id)">
+        <ion-icon name="close"></ion-icon></button>
+        
+    </span>
+    <span class="maillable" *ngIf="globalObj.receipentFlag">{{itemname.name}}
+    <button *ngIf="!globalObj.callfrom || (globalObj.callfrom && globalObj.callfrom!='reply')"  type="button" (click)="removeReceipient(itemname.user_id)">
+        <ion-icon name="close"></ion-icon></button>
+        
+    </span>
+</span> <br>
+    <div class='floatright'><span *ngIf="!globalObj.receipentFlag && globalObj.receipentName.length > 5" (click)="moreLess('more')">Show more...</span>
+    <span *ngIf="globalObj.receipentFlag && globalObj.receipentName.length > 0" (click)="moreLess('less')">Show less...</span>
+    </div>
+    
+<button *ngIf="globalObj.callfrom != 'reply'" class='addMail' (click)="doRadio()"><ion-icon ios="ios-add" md="md-add"></ion-icon></button>
+</div>    
+ </div>
+                                 
+<div class='rowborder'>
+      <ion-input type="text" formControlName="subject"  placeholder="Subject"></ion-input>
+</div>    
+           
+<!-- <div class=''> -->
+    <div contenteditable="true" id="contentText" (click)="clearPlaceholder()" [innerHTML]= "globalObj.enter_text | pipesRemovehtmltags" class="contentarea" ></div>
+    <!-- <ion-textarea class="contentarea" formControlName="htmlContent" placeholder="Enter a text"></ion-textarea> -->
+<!-- </div> -->
+  
+ <ion-row>
+
+     <ion-col class="paddingnone" *ngFor="let photo of globalObj.draftAttachments; let id = index">
+          <!-- <ion-card class="block">
+            <ion-icon name="trash" class="" (click)="deletePhoto(id)"></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+          </ion-card> -->
+<span class="attachport">{{photo | separator: '~': 1}} <button  class="removefile" type="button" (click)="removeDraftAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+  </ion-col>
+        <ion-col class="paddingnone" *ngFor="let photo of globalObj.photos; let id = index">
+          <!-- <ion-card class="block">
+            <ion-icon name="trash" class="" (click)="deletePhoto(id)"></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+          </ion-card> -->
+<span class="attachport"><ion-icon class="paerclip"><img src="/assets/imgs/papperclip-black.png"></ion-icon> {{photo}} <button  class="removefile" type="button" (click)="removeAttachment(id)"><ion-icon ios="ios-trash" md="md-trash"></ion-icon></button></span>
+  </ion-col>
+      </ion-row>
+    </form> 
+            
+ </ion-grid>
+  <!-- <ion-item>
+    <p>{{globalObj.imageURI}}</p>
+    
+  </ion-item> -->
+    
+</ion-content>
+
+

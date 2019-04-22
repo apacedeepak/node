@@ -1,0 +1,128 @@
+page-notification {
+
+    .mailBlock {
+	border-bottom: 1px solid #e3e3e3;
+	padding-bottom: .7rem;
+    padding-top: .7rem;
+	padding-left: 50px;
+	position: relative;
+ .mailername {
+ padding-left: 10px;
+ font-size: 1.8rem;
+ font-weight: bold;
+}
+.subtitle {
+	padding-left: 10px;
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+.description {
+	padding-left: 10px;
+	display: block;
+	font-size: 1.2rem;
+	color: #525252;
+ p {
+margin:0
+}
+h1 {
+	margin: 0
+}
+h2 {
+	margin: 0
+}
+h3 {
+	margin: 0
+}
+h4 {
+	margin: 0
+}
+h5 {
+	margin: 0
+}
+h6 {
+	margin: 0
+}
+td {
+	font-size: 1.2rem;
+	height: auto !important;
+font {
+font-size:1.2rem !important;
+}
+}
+}
+.textoverlap {
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 20px;
+	line-height: 20px;
+}
+.mailIndex {
+	width: 35px;
+	height: 35px;
+	border-radius: 80%;
+	display: flex;
+	justify-content: center;
+ padding-right:90px;
+ span {
+position:absolute;
+right:4px;
+top:14px;
+width:70px;
+text-align:right;
+color:#4385f5;
+font-size: 1.3rem;
+}
+	align-items: center;
+	font-size: 16px;
+	font-weight: bold;
+	position: absolute;
+	left: 15px;
+	top: 10px;
+	background: #f06292;
+	color: #fff;
+}
+}
+.mailBlock:last-child {
+	border-bottom: 0px solid #e3e3e3;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+.mailBlock:nth-child(3n+1) .mailIndex {
+	background: #eea01a;
+}
+.menuICon{ position:absolute; left:1.6rem;top: 1rem;
+img{ width:2.2rem;}
+}
+.notificationIcon{position: absolute;right:0px;top:15px;color: #fff;font-size:22px; padding-right: 10px;
+    .notificationbell{position: relative;bottom:  -15px;left:5px; z-index: 1}
+                  
+.badge-md-danger{
+position: relative;
+    right: 0px;
+    font-size: 1.0rem;
+    border-radius: 80%;
+    padding: 5px;
+    z-index: 2;
+    
+}
+
+}
+.readmail {
+ .mailername {
+font-weight:300;
+ span {
+color:#7e7e7e;
+}
+}
+.subtitle {
+	font-weight: 300;
+}
+.description {
+	color: #7f7f7f;
+	font-weight: 300;
+}
+}
+.text-info{color: #3c6ecd; padding: 5px 12px; margin: 3rem 0; text-align: center;}
+}

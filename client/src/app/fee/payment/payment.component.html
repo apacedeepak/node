@@ -1,0 +1,334 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+    <div class="communication pull-left" style="margin-top:15px; min-height:inherit">
+        <form class="form-signin" ngNativeValidate [formGroup]="termForm" (ngSubmit)="onTermSubmit(termForm.value)">
+            <div class="headBox">
+                <h5 class="h5 pull-left">
+                    <a href="/fee/studentsearch">
+                        <i class="fa fa-fw fa-arrow-left"></i>
+                    </a> Student Personal Details</h5>
+            </div>
+            <div class="col-sm-12 col-md-12 pull-left text-right margintop20">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <td>
+                            <strong>Name</strong>
+                        </td>
+                        <td>{{studentDetails.name}}</td>
+                        <td rowspan="5">
+                            <img class="img-thumbnail" src="{{hostUrl + studentDetails['student_photo']}}" alt="Student">
+                        </td>
+                        <td class="text-center" rowspan="5">
+                            <div class="text-left">
+                                <label>Unpaid Terms:</label>
+                                <select required formControlName="term_ids" class="form-control" multiple>
+                                    <option *ngFor="let item of unpaidTermList" value="{{item.term_name_id}}">{{item.term_name}}</option>
+
+                                </select>
+                                <div class="text-right margintop20">
+                                    <input type="submit" value="Submit" class="btn btn-info">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Class-Section</strong>
+                        </td>
+                        <td>{{studentDetails.class_section}}</td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <strong>Father Name</strong>
+                        </td>
+                        <td>{{studentDetails.father_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Admission No.</strong>
+                        </td>
+                        <td>{{studentDetails.admission_no}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong></strong>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="headwisedueslist.length > 0" class="communication pull-left" style="margin-top:15px; min-height:inherit">
+        <form class="form-signin" ngNativeValidate [formGroup]="paymentForm" (ngSubmit)="onPaymentSubmit(paymentForm.value)">
+            <div class="headBox marginbottom20">
+                <h5 class="h5 pull-left">Student Fee Detail</h5>
+            </div>
+
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+                <label>Fee Receipt No.</label>
+                <input type="text" value="FR/{{fin_year}}" formControlName="fee_receipt_no" class="form-control">
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+                <label>Fee Receipt Date</label>
+                <input type="text" value="{{currentDate}}" formControlName="fee_receipt_date" readonly class="form-control">
+            </div>
+            <div class="col-sm-12 col-md-12 pull-left pull-left margintop20">
+                <table class="table table-striped table-bordered customTable">
+                    <thead class="blueThead">
+                        <tr>
+                            <td>Fee Head</td>
+                            <td>CGST(%)</td>
+                            <td>SGST(%)</td>
+                            <td>IGST(%)</td>
+                            <td class="text-center" colspan="2">Head Wise Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of headwisedueslist; index as i">
+
+
+                            <td formArrayName="feeheadnameArr">
+                                <input readonly type="text" value="{{item.fee_head_name}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td style="display:none" formArrayName="hidArr">
+                                <input readonly type="hidden" value="{{item.fee_head_id}}" [formControlName]="i" class="form-control">
+                            </td>
+
+                            <td formArrayName="cgstArr">
+                                <input readonly type="text" value="{{item.cgst}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td formArrayName="sgstArr">
+                                <input readonly type="text" value="{{item.sgst}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td formArrayName="igstArr">
+                                <input readonly type="text" value="{{item.igst}}" [formControlName]="i" class="form-control">
+                            </td>
+
+
+                            <td style="display:none;" formArrayName="termnameidArr">
+                                <input readonly type="text" value="{{item.term_name_id}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td style="display:none;" formArrayName="termnameArr">
+                                <input readonly type="text" value="{{item.term_name}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td style="display:none;" formArrayName="termamountArr">
+                                <input readonly type="text" value="{{item.term_amount}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td formArrayName="originalamountArr">
+                                <input readonly type="text" value="{{item.total_due_amount}}" [formControlName]="i" class="form-control">
+                            </td>
+                            <td formArrayName="amountArr">
+                                <input readonly type="text" value="{{item.total_due_amount}}" [formControlName]="i" class="form-control">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5" class="text-right">Term Wise Total</td>
+                            <td>
+                                <input readonly type="text" formControlName="termwisetotal" value="{{termwisetotal}}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">Late Fee Fine</td>
+                            <td>
+                                <input readonly type="text" value="0" class="form-control" formControlName="fine_amount">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- <td colspan="6" class="text-left"><input type="checkbox"> Fee Waive Off</td>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-right">
+                <p class="pmt">Waive off Amount</p>
+                <p class="pmt">Waive off Remark</p>
+            </td>
+            <td>
+                <p><input type="text" class="form-control"></p>
+                <p><input type="text" class="form-control"></p>              
+            </td>
+          </tr> -->
+                            <tr>
+                                <td class="text-left">
+                                    <b>Balance&nbsp;Amount:</b> 
+                                    <input type="text" class="form-control" formControlName="balance_amount" #balanceamount readonly value="">
+
+                                </td>
+                                <td class="text-left">
+                                    <b>Payable&nbsp;Amount:</b>
+                                    <input type="text" class="form-control" formControlName="payable_amount" #payableamount readonly value="">
+                                    </td>
+                                <td colspan="3" class="text-right">Enter Amount</td>
+                                <td>
+                                    <input min="0" type="number" class="form-control" formControlName="total_paid" #totalpaid (blur)="autoFeeAdjustment(totalpaid.value)"
+                                        value="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">Remark</td>
+                                <td>
+                                    <input type="text" formControlName="remark" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right">Mode of Payment</td>
+                                <td>
+                                    <select class="form-control" formControlName="payment_mode" #paymentmode required (change)="setPaymentModeAttributes(paymentmode.value)">
+                                        <!-- <option value="">Select payment mode</option> -->
+                                        <option *ngFor="let item of paymentModeJson | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                            <tr *ngIf="payment_mode == 'CH' || payment_mode == 'DD'">
+                                    <td class="text-right">Challan No.</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="challan_no" required value="" >
+                                    </td>
+                                    <td class="text-right">Challan Date</td>
+                                    <td colspan="2">
+                                            <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+                                                    <div class="datBox" style="width: 230px;">
+                                        <input readonly type="text" class="calenerIcon form-control" ngbDatepicker #d="ngbDatepicker" formControlName="challan_date" required value="" >
+                                        <button class="btnover" (click)="d.toggle()" type="button"></button>
+                                                        </div></div>
+                                    </td>
+                                    
+                            </tr>
+
+                            <tr *ngIf="payment_mode == 'CH'">
+                                    <td class="text-right">Cheque No</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="cheque_no" required value="" >
+                                    </td>
+                                    <td class="text-right">Cheque Date</td>
+                                    <td colspan="2">
+                                            <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+                                                    <div class="datBox" style="width: 230px;">
+                                        <input readonly type="text" class="form-control calenerIcon" ngbDatepicker #d="ngbDatepicker"  formControlName="cheque_date" required value="" >
+                                        <button class="btnover" (click)="d.toggle()" type="button"></button>
+                                    </div></div>
+                                    </td>
+                                    
+                            </tr>
+
+                            <tr *ngIf="payment_mode == 'DD'">
+                                    <td class="text-right">DD No</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="dd_no" required value="" >
+                                    </td>
+                                    <td class="text-right">DD Date</td>
+                                    <td colspan="2">
+                                            <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+                                                    <div class="datBox" style="width: 230px;">
+                                        <input readonly type="text" class="form-control calenerIcon" ngbDatepicker #d="ngbDatepicker"  formControlName="dd_date" required value="" >
+                                        <button class="btnover" (click)="d.toggle()" type="button"></button>
+                                        </div></div>
+                                    </td>
+                            </tr>
+
+                            
+
+                            
+
+                            <tr *ngIf="payment_mode == 'OL'">
+                                    <td colspan="5" class="text-right">Account No.</td>
+                                    <td >
+                                        <input type="text" class="form-control" formControlName="account_no" required value="" >
+                                    </td>
+                                    
+                            </tr>
+
+                            <tr *ngIf="payment_mode == 'Card'">
+                                    <td colspan="5" class="text-right">Card Number (4 digit only).</td>
+                                    <td >
+                                        <input type="number" class="form-control" formControlName="card_no" required value="" >
+                                    </td>
+                                    
+                            </tr>
+
+                            <tr *ngIf="payment_mode == 'OL' || payment_mode == 'NEFT' || payment_mode == 'Card'">
+                                    <td class="text-right">Transaction ID</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="transaction_id" required value="" >
+                                    </td>
+                                    <td colspan="2" class="text-right">Transaction Date</td>
+                                    <td>
+                                        <div class="col-sm-2 col-md-2 pull-left has-feedback ngCalendra">
+                                            <div class="datBox" style="width: 230px;">
+                                        <input readonly type="text" class="form-control calenerIcon" ngbDatepicker #d="ngbDatepicker"  formControlName="transaction_date" required value="" >
+                                        <button class="btnover" (click)="d.toggle()" type="button"></button>
+                                        </div></div>
+                                    </td>
+
+                            </tr>
+
+                            <tr *ngIf="payment_mode == 'Card' || payment_mode == 'CH' || payment_mode == 'DD' || payment_mode == 'OL' || payment_mode == 'NEFT' ">
+                                    <td class="text-right">Bank Name</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="bank_name" required value="" >
+                                    </td>
+                                    <td class="text-right">Bank Branch</td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control" formControlName="bank_branch" required value="" >
+                                    </td>
+                            </tr>
+
+
+                            
+
+
+                            <tr *ngIf="payment_mode == 'Capital Float'">
+                                    <td colspan="5" class="text-right">Serial Number</td>
+                                    <td>
+                                        <input type="text" class="form-control" formControlName="serial_no" required value="" >
+                                    </td>
+                            </tr>
+                                <tr *ngIf="payment_mode == 'Bajaj Finserv'">
+                                        <td colspan="5" class="text-right">RRN NO.</td>
+                                        <td>
+                                            <input type="text" class="form-control" formControlName="rrn_no" required value="">
+                                        </td>
+                                </tr>
+
+                                <tr *ngIf="payment_mode == 'Paytm'">
+                                        <td colspan="5" class="text-right">Order ID</td>
+                                        <td>
+                                            <input type="text" class="form-control" formControlName="order_id" required value="">
+                                        </td>
+                                </tr>
+
+                                <tr *ngIf="payment_mode == 'HDFC Finance' || payment_mode == 'Bajaj Finance'">
+                                        <td class="text-right">Loan No.</td>
+                                        <td>
+                                            <input type="text" class="form-control" formControlName="loan_no" required value="">
+                                        </td>
+
+                                        <td class="text-right">Pro-forma on the name of</td>
+                                        <td>
+                                            <select class="form-control" formControlName="proforma_on_name_of" required>
+                                                <option value="">Select</option>
+                                                <option value="Mother">Mother</option>
+                                                <option value="Father">Father</option>
+                                            </select>
+                                        </td>
+
+                                        <td class="text-right">Name</td>
+                                        <td>
+                                            <input type="text" class="form-control" formControlName="name_on_proforma" required value="">
+                                        </td>
+                                </tr>
+
+                               
+
+                    </tbody>
+                </table>
+                <div class="text-right mb15">
+                    <input type="submit" value="Submit" class="btn btn-info">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div  class="headBox mb25">
+      <h5 class="pull-left">{{'Revenue Target'| translate}}</h5>
+  </div>
+
+  <form class="form-signin" ngNativeValidate [formGroup]="revenueMonthTargetForm" (ngSubmit)="revenueMonthTarget(revenueMonthTargetForm.value)">
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required  class="form-control cleanup validate-empty width30" formControlName="session_id"  (change)="getMonth($event)" >
+              <option value="" >Select Session</option>
+              <option *ngFor="let session of schoolSessions" value="{{session.id}}">{{session.session_name}}</option>
+          </select>
+          <div *ngIf="submitted && f.session_id.errors">
+            Session is required.
+          </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+        <select required class="form-control cleanup validate-empty width30" formControlName="year" >
+            <option value="" >Select Year</option>
+            <option *ngFor="let yearval of years" value="{{yearval}}" >{{yearval}}</option>
+        </select>
+    </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required class="form-control cleanup validate-empty width30" formControlName="month" >
+              <option value="" >Select Month</option>
+              <option *ngFor="let monthObj of months" value="{{monthObj.val}}" >{{monthObj.name}}</option>
+          </select>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem">
+          <input type="hidden" formControlName="school_id" value="" />
+          <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">  
+      </div>
+
+  </form>
+
+  <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt15">
+    <div class="error_message alert alert-danger" *ngIf="errorMessage.message">{{errorMessage.message}}</div>    
+    <div class="success_message alert alert-success" *ngIf="successMessage.message">{{successMessage.message}}</div>  
+    <div *ngIf="revenueMonthTargets.length > 0">
+        <table class="table table-striped table-bordered customTable mt15">
+            <thead class="thheadbg">
+                <tr>            
+                    <th>{{'Package' | translate}}</th>
+                    <th style="width: 136px;">{{'Admission Target' | translate}}</th>
+                    <th style="width: 136px;">{{'Discount Target(%)' | translate}}</th>
+                    <th >{{'Revenue Target' | translate}}</th>
+                    <th style="width: 150px;">{{'Status' | translate}}</th>
+                    
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let monthTarget of revenueMonthTargets; let i = index">     
+                       
+                    <!-- <td>
+                        <a href="javascript:void(0)" (click)="editCenter(center.id)"><i class="fa fa-fw fa-pencil"></i></a>
+                    </td> -->
+                    
+                            <td >{{monthTarget.fee_structure_name}}</td>
+                            <td colspan="3">
+                                <div style="width:617px">
+                                <form ngNativeValidate [formGroup]="addRevenueTargetForm" (ngSubmit)="addRevenueTarget(addRevenueTargetForm.value,monthTarget.id,monthTarget.revenue_id,monthTarget.admission_target,monthTarget.discount_target)">
+                                        
+                                        <input type="number" required class="form-control form-control-inline" formControlName="admission_target" value="{{monthTarget.admission_target}}" min="0" numbersOnly />
+                                        <input type="number" required class="form-control form-control-inline" formControlName="discount_target" value="{{monthTarget.discount_target}}" min="0"  max="100" numbersOnly />
+                                        <div class="revanueUpdate"><span *ngIf="monthTarget.revenue_target">{{monthTarget.revenue_target}}</span></div>
+                                        <input class="btn btn-primary btn-inline btn-sm" value="{{monthTarget.action}}" [disabled]="monthTarget.status=='Accepted'"   type="submit">
+
+                                </form>
+                            </div>
+                            </td>
+                            
+                            
+                            <td ><span *ngIf="monthTarget.status!=''" >{{monthTarget.status}}</span></td>
+                                        
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+
+</div>

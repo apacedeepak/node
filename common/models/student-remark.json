@@ -1,0 +1,45 @@
+{
+  "name": "student_remark",
+  "plural": "student_remark",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "remark": {
+      "type": "Text",
+      "required": true
+    },
+    "added_date": {
+      "type": "date",
+      "required": true
+    },
+    "remark_date": {
+      "type": "date",
+      "required": true
+    },
+    "senderId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "category": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "remark_send_by": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "senderId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

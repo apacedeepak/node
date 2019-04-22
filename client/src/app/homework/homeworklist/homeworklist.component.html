@@ -1,0 +1,257 @@
+ 
+<div class="boxwraper topSpace padding-left-none" style="padding-top: 15px;">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="communication">
+                <div class="headBox">
+                    <h5 class="h5 pull-left"> {{'homework' | translate}}</h5>
+                </div>
+                <div class="searchingFilter">
+                    <div class="col-sm-4 col-md-4 pull-left">
+                        <input id="selectCalender" class="calenerIcon clsmIcon" type="text" readonly="readonly" placeholder=" {{'select_date' | translate}}" (click)="displaycal();"
+                            data-keyboard="false" data-backdrop="static" data-controls-modal="allcalender" data-target="#allcalender"
+                            data-toggle="modal">
+
+                    </div>
+                    <div class="col-sm-4 col-md-4 pull-left">
+					<input class="allsubject sbjectsmIcon" type="text" readonly="readonly" placeholder="  {{'select_subject' | translate}}" data-keyboard="false"
+                            data-backdrop="static" data-controls-modal="choosesubject" data-target="#choosesubject" data-toggle="modal"></div>
+
+
+<div class="col-sm-12 col-md-12 pull-left">
+
+                    <div *ngIf="showdaterange" class="dateRange">
+                    <div class="alert">
+                        <span class="subjectname">{{fromrange}}</span> <b>-</b> <span class="subjectname">{{torange}} </span>          
+                        <a (click)="removerange()" aria-label="close" data-dismiss="alert" class="close">×</a>
+                    </div>
+                    </div>
+                    <ng-container *ngIf="subjectsearcharr.length>0">
+                     <div id="subject615" class="selecedSubject">
+                            <div *ngFor="let searchsub of subjectsearcharr" class="alert" style="" id="">
+                                <span class="subjectname">{{searchsub.name}}</span> <a (click)="removesubject(searchsub.id)" aria-label="close" data-dismiss="alert"
+                                    class="close">×</a>
+                            </div>
+                        </div> 
+                    </ng-container>
+</div>
+                </div>
+                <div class="tab-content leftRightgap">
+
+                    <ul class="nav commnicationBox">
+                        <li><a [class] = "allactive"  data-toggle="pill" href="#all"> {{'all' | translate}}</a> </li>
+                        <li><a [class] = "pendactive" data-toggle="pill" href="#pending"> {{'pending' | translate}}</a></li>
+                        <li><a [class] = "subactive" data-toggle="pill" href="#submitted"> {{'submitted' | translate}}</a></li>
+                        <li><a [class] = "unchkactive" data-toggle="pill" href="#unchecked"> {{'unchecked' | translate}}</a></li>
+                        <li><a [class] = "chkactive" data-toggle="pill" href="#checked"> {{'checked' | translate}}</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div [class] = "allactivediv" id="all">
+                            <ng-container *ngIf="allhomecond;else allhomenodata">
+                            <div class="mailBox submail" *ngFor="let homelist of data.response">
+                                <div class="sunjectIcon"> 
+                                    <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                </div>
+                                <a [style.color] = "homelist.lateflag ? 'red' : ''" routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/normal">
+                                    <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                    <h3>{{homelist.homework_title}}</h3>
+                                    <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                </a>
+                                <div class="mailtime ng-binding">
+                                    <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i> {{homelist.added_date}}
+                                </div>
+                            </div>
+                            </ng-container>
+                        <ng-template #allhomenodata>
+                                    <div class="text-info text-center">  {{'no_data_available' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div [class] = "pendactivediv" id="pending">
+                            <ng-container *ngIf="pendingcond;else pendingnodata">
+                                <div *ngFor="let homelist of data.response">
+                                    <ng-container *ngIf="homelist.submitted == 0" class="sunjectIcon">
+                                        <div class="mailBox submail  pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a [style.color] = "homelist.lateflag ? 'red' : ''"  routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/pending">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace ">
+                                                    <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>           {{homelist.added_date}}
+                                                
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #pendingnodata>
+                                    <div class="text-info text-center">   {{'no_data_available' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div [class] = "subactivediv" id="submitted">
+                            <ng-container *ngIf="submittedcond;else submittednodata">
+                                <div *ngFor="let homelist of data.response">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 0" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/submitted">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "> <i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #submittednodata>
+                                <div class="text-info text-center">  {{'no_data_available' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div [class] = "unchkactivediv" id="unchecked">
+                            <ng-container *ngIf="uncheckedcond;else uncheckednodata">
+                                <div *ngFor="let homelist of data.response">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 0" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/unchecked">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "><i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                              
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #uncheckednodata>
+                                    <div class="text-info text-center"> {{'no_data_available' | translate}}</div>
+                            </ng-template>
+                        </div>
+                        <div [class] = "chkactivediv" id="checked">
+                            <ng-container *ngIf="checkedcond;else checkednodata">
+                                <div *ngFor="let homelist of data.response">
+                                    <ng-container *ngIf="homelist.submitted == 1 && homelist.checked == 1" class="sunjectIcon">
+                                        <div class="mailBox submail pending">
+                                            <div class="sunjectIcon">
+                                                <img [src]="'homelist.subject_image'" onError="this.src='assets/images/default-subject.png'">
+                                            </div>
+                                            <a   routerLink="/homework/homeworkdetails/{{homelist.homework_id}}/checked">
+                                                <h2>{{homelist.subject_name}} ({{homelist.teacher_name}})</h2>
+                                                <h3>{{homelist.homework_title}}</h3>
+                                                <h4 [innerHTML]="homelist.homework_content | slice:0:10 "></h4>
+                                            </a>
+                                            <div class="mailtime mailtimeSpace "><i *ngIf="homelist.attachment_count == '1'" class="fa fa-fw fa-paperclip"></i>                                                    {{homelist.added_date}}
+                                             
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                            <ng-template #checkednodata>
+                                    <div class="text-info text-center">  {{'no_data_available' | translate}}</div>
+                            </ng-template>
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style='pointer-events: none;' class="modal fade" id="allcalender">
+    <div class="modal-dialog" style="width:320px">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"> {{'select_date' | translate}}</div>				
+            </div>
+            <div clamax-width:300pxss="modal-body">
+<div class="clearfix"></div>
+                <div class="radioBlock">
+                    <input type="radio" checked="checked" (click)="searchfor('assignment')" name="Choose-date" value="assigned-date" id="assigned-date">
+                    <label
+                        for="assigned-date"> {{'assigned_date' | translate}}</label>
+                        <input type="radio" name="Choose-date" (click)="searchfor('submit')" value="submission-date" id="submission-date">
+                        <label
+                            for="submission-date"> {{'submission_date' | translate}}</label>
+                </div>
+<div class="clearfix"></div>
+
+                <div class="tab-content">
+
+                    <div id="monthlyattendance615" class="tab-pane  in active">
+
+                        <!-- <input type="hidden" ng-model='user.popfromdate' name="popfromdate" value=''> -->
+
+                        <ngb-datepicker #dp (select)="onDateChange($event)" [displayMonths]="0" [dayTemplate]="t">
+                        </ngb-datepicker>
+
+                        <ng-template #t let-date="date" let-focused="focused">
+                            <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                       </span>
+                        </ng-template>
+                    </div>
+
+                    <div id="selectdate" class="tab-pane fade in">
+
+                        <!-- <input type="hidden"ng-model='user.poptodate' name="poptodate" value=''> -->
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button class="newclose btn btn-info"  data-dismiss="modal" type="button">{{'close' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subject modal popup -->
+<form [formGroup]='form'>
+<div role="dialog" class="modal fade" id="choosesubject" style="display: none;"><div class="modal-dialog">
+         <div class="modal-dialog" style="width:300px">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> {{'select_subject' | translate}}</h4>                
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">  
+                    <div formArrayName="subjectlistcheckBox">            
+                    <ul id="subjectlist">
+                        <li class="checkBlock" *ngFor="let subject of subjectlist;index as i" >
+                            <input formControlName="{{i}}" type="checkbox" (click)="setsubject(subject.subject_id,subject.subject_name,$event)"   [value]="subject.subject_id" [id]="subject.subject_id">
+                            <label [for]="subject.subject_id">{{subject.subject_name}} </label> 
+                        </li>           
+                    </ul>
+                    </div>
+                </div>
+            </div>
+             <div class="modal-footer" style="justify-content: center;">
+                    <button class="newclose btn btn-info btn-sm"  data-dismiss="modal" type="button"> {{'close' | translate}}
+                    </button>
+                </div>
+        </div>
+         </div>
+    </div>
+</div>
+ </form>

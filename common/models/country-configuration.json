@@ -1,0 +1,44 @@
+{
+  "name": "country_configuration",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "country_id": {
+      "type": "number"
+    },
+    "currency_name": {
+      "type": "string"
+    },
+    "currency_short_name": {
+      "type": "string"
+    },
+    "round_value": {
+      "type": "number"
+    },
+    "class_text": {
+      "type": "string",
+      "default": "Class"
+    },
+    "remove_field": {
+      "type": "string",
+      "default": "No"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "added_by": {
+      "type": "number"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

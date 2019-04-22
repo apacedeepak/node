@@ -1,0 +1,81 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{title}}</h5>
+      <span class="float-right">
+        <button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm mr10 mt15">Add</button>
+      </span>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <div *ngIf="show_add_item_master">
+      <form (ngSubmit)="onSubmit(imprestRequestForm.value)" [formGroup]="imprestRequestForm" ngNativeValidate>
+        <input type="hidden" class="form-control" value="" formControlName='id' />
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label>Enter Imprest Amount
+            <span class="text-danger">*</span>: </label>
+          <input type="number" required class="form-control" formControlName="imprest_amount" min="0" numbersOnly/>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-right divSpace text-left">
+          <input class="btn btn-primary mr10" value="Save" name="submit" id="submit" type="submit">
+          <button class="btn btn-primary mr10" (click)="getFromSet()">Reset</button>
+          <button class="btn btn-primary" (click)="getFromClose()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div *ngIf="show_item_master_list">
+      <div id="leaveTable" class="col-sm-12 col-md-12 pull-left">
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+          <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+          <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+        </div>
+        <table class="table table-striped table-bordered customTable" id="content" #content>
+          <thead class="thheadbg">
+            <tr>
+              <th align="center">S No.</th>
+              <th>Center</th>
+              <th>Imprest Amount</th>
+              <th>Approved Amount</th>
+              <th>Satus</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let imprestRequest of imprestRequestList; index as i">
+              <td align="center">{{i+1}}</td>
+              <td>{{imprestRequest.school.school_name}} </td>
+              <td>{{imprestRequest.amount}} </td>
+              <td>{{imprestRequest.approved_amount}} </td>
+              <td>
+                <ng-template [ngIf]="imprestRequest.approved_status==1">
+                  Pending
+                </ng-template>
+                <ng-template [ngIf]="imprestRequest.approved_status==2">
+                  Approved
+                </ng-template>
+                <ng-template [ngIf]="imprestRequest.approved_status==3">
+                  Reject
+                </ng-template>
+              </td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="imprestRequestEdit(imprestRequest.id)" *ngIf="imprestRequest.approved_status==1">Edit</button>
+              </td>
+            </tr>
+            <tr *ngIf="(imprestRequestList.length==0)">
+              <td colspan="6" align="center">
+                <span style="color:red;text-align: center;"> No record found..</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="(imprestRequestList.length>0)">
+          <a class="btn btn-info btn-sm" (click)="captureScreen();" value="Print" href="javascript:void(0)">
+            Export
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

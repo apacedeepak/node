@@ -1,0 +1,87 @@
+<div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25"><h5  class="pull-left">Invoice List</h5></div>
+    
+    <form class="form-signin" ngNativeValidate [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)" >
+        
+              
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+                    <label>Cheque/DD No</label>
+                <select class="form-control" formControlName="payment_mode" #paymentmode>
+                    <option value="">Select payment mode</option>
+                    <option *ngFor="let item of paymentModeJson | keyvalue" value="{{item.key}}">{{item.value}}</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+                <label>Payment mode</label>
+              <input type="text" value="" class="form-control" formControlName="cheque_dd_no" placeholder="Cheque/DD No."/>
+              </div>    
+
+            
+
+        <!-- <div class="col-xs-12 col-sm-4 col-md-4 pull-left inputItem mt15">
+            <label>Session</label>
+        <select class="form-control" formControlName="session_id"   multiple>
+           <option *ngFor="let item of sessionlist" value="{{item.id}}">{{item.session_name}}</option>
+        </select>
+        </div> -->
+
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 pull-left inputItem mt25">
+      <input class="btn btn-primary mr15" value="Search" name="submit" id="submit" type="submit"> 
+    </div>
+      
+    </form>
+    
+    
+     <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+       <span id ="success_message" class="span_success"></span>  
+       <div class="table-responsive">
+      <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+              <tr>            
+                <th>Receipt Date</th>
+                <th class="text-center">Adm No.</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Class</th>
+                <th class="text-center">Receipt No.</th>
+                <th class="text-center">Payment Mode</th>
+                <th class="text-center">Amount</th>
+                <th>Action</th>
+                
+              </tr>
+          </thead>
+          <tbody >
+              <tr  *ngFor="let data of invoiceList;">             
+                  
+                  <td >{{data.receiptdate | date}}</td>
+                  <td > {{data.user.students.admission_no}}</td>
+                  <td >{{data.user.students.name}}</td>
+                  <td >{{data.section_name}}</td>
+                  <td >{{data.feereceiptno}}/{{data.id}}</td>
+                  <td >{{data.payment_type}}</td>
+                  <td >{{data.total_amount}}</td>
+                  <td>
+                    <a href="javascript:void(0)" (click)="cancelInvoice(data.id)">Cancel</a>
+                  </td>
+                  <!-- <td>
+  
+                    <span *ngFor="let innerdata of data.fee_strcuture_master_map_fee_structure_detail;index as i" class="label label-primary">{{innerdata.section.section_name}} 
+                    <span *ngIf="i < data.fee_strcuture_master_map_fee_structure_detail.length-1"></span> 
+                    </span>
+  
+                  </td> -->
+                       
+                     
+                </tr>
+       
+              <tr *ngIf="invoiceList.length == 0">
+                  <td colspan="10">
+                   <div class="text-center text-danger">No record Found...</div>
+                  </td>
+              </tr>
+    
+          </tbody>
+      </table>
+    </div> 
+</div> 
+       </div>

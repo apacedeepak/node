@@ -1,0 +1,69 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysqldb": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "schoolerp_api",
+    "password": "",
+    "name": "mysqldb",
+    "user": "root",
+    "connector": "mysql",
+    "timezone": "UTC+05:30",
+    "legacyUtcDateProcessing": false,
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "mail.extramarks.co.in",
+        "secure": false,
+        "port": 25,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "erp@extramarks.co.in",
+          "pass": "Em@erp#123$"
+        }
+      }
+    ]
+  },
+  "mysqlolddb": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "schoolerp",
+    "password": "EDU23*EXM23",
+    "name": "mysqlolddb",
+    "user": "root",
+    "connector": "mysql",
+    "legacyUtcDateProcessing": false,
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "mail.extramarks.co.in",
+        "secure": false,
+        "port": 25,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "erp@extramarks.co.in",
+          "pass": "Em@erp#123$"
+        }
+      }
+    ]
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "../schoolerp/upload/",
+    "maxFileSize": "52428800"
+  },
+  "sendmail": {
+    "name": "sendmail",
+    "connector": "loopback-connector-sendmail",
+    "silent": false
+  }
+}

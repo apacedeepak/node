@@ -1,0 +1,42 @@
+{
+  "name": "menumaster",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "menu_name": {
+      "type": "string"
+    },
+    "linkfor": {
+      "type": "string"
+    },
+    "linkname": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string"
+    },
+    "parentId": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "default": "Active"
+    },
+    "path": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

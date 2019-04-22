@@ -1,0 +1,40 @@
+<div class="col-sm-12 col-md-12 pull-left padding-left-none padding-right-none">
+ <div class="communication pull-left" style="margin-top:15px; overflow: hidden;">
+<!--        <div class="headBox marginbottom20"><h5 class="h5 pull-left">Contact Us</h5></div> -->
+ 
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left mainBranch" *ngIf="head_name">
+<h3 class="inCoheading">Corporate Headquarters</h3>
+<address>
+<span class="mainBranchName">{{head_name}}</span><br>
+{{address}}<br>
+<strong><i class="fa fa-fw fa-phone"></i> Call Us :</strong> {{contact_no}},
+<strong><i class="fa fa-fw fa-envelope-o"></i> Email:</strong>	<a href="mailto:{{email}}">{{email}}</a>
+</address>
+</div>	
+<div class="col-xs-12 col-sm-12 col-md-12 pull-left subBranches">
+<h4 class="inCoheading-sm"> 
+<div class="pull-left mb20" >PAN INDIA Centres</div>
+
+</h4>
+<!-- <div class="clearfix></div> -->
+<div class="clearfix"></div>
+<div class="row" style="margin: 0">
+<div class="col-xs-12 col-sm-4 col-md-4 mb18 padding10" *ngFor="let centre of renderdata;let i = index;">
+<div class="contactAddress text-center">
+<div class="iconBar text-center"><img src="assets/images/buldingaddress.png" alt="Call Us"></div>
+<address>
+<p class="centerName"><strong>{{centre.school_name}}</strong></p>
+<p>{{centre.school_address}}</p>
+<p><strong>Call Us :</strong>{{centre.contact_no}}</p>
+<p><strong>Email:</strong>{{centre.school_email}}</p>	
+</address>
+</div>
+</div>		
+</div>	
+</div>
+		
+</div>
+</div>
+
+
+

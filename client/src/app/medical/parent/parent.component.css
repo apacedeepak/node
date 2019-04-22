@@ -1,0 +1,22 @@
+.marginbottom20 {margin-bottom: 20px; position: relative;}
+.nav-gray{ margin-bottom:20px;}
+.nav-gray > li > a{background-color: #eee; color:#333; padding: 10px 15px;text-decoration: none;}
+.nav-gray > li > a.active{color: #fff;background-color: #337ab7;}
+.nav-pills > li > a {border-radius: 4px;}
+.nav-pills > li + li {margin-left: 2px;}
+.commnicationBox li{margin-left: 2px;}
+.fileUpload {position: relative; overflow: hidden; margin:0px;}
+.fileUpload input.upload { position: absolute;top: 0; right: 0; margin:0; padding:0;font-size:20px; cursor: pointer;opacity: 0;height:100%;}
+.uploadFileName{ background:none; border:0; min-width: 300px; display:inline-block; font-style:italic; padding-left:5px;}
+.uploadSorseFile{ width:100%;float:left; padding:0 100px 0 0; position:relative;}
+.uploadSorseFile .fileUpload{ position:absolute; right:0; top:0;}
+.uploadSorseFile .uploadFileName {min-width: 100%; font-style:inherit;padding-top: 5px;}
+.blockLable{ display:block;}
+.messagebox{ width: 100%; border: 1px solid #ccc; border-radius: 4px; height:70px; padding: 10px;background:#fff;}
+.formArea {background: #fbfbfb; width: 100%; float: left; padding: 20px; border: 1px solid #e6e6e6;}
+.formArea .calenerIcon { width: 100%; background:#fff url(/assets/images/icons/calendar.png) no-repeat 95% center; border: 1px solid #ccc; border-radius: 4px; height: 35px; padding-left: 10px; padding-right:35px; }
+.btn-default { color: #333; background-color: #fff; border-color: #ccc; }
+.btn-info{background-color: #337ab7;border-color: #2B72AF;}
+.btn-info:hover{background-color: #206BAB;border-color: #2B72AF;}
+.marginbottom20 .error { position: absolute; font-size: 12px; bottom: -20px;}
+.blockLable .error {position: static;}

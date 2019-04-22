@@ -1,0 +1,119 @@
+<div class="col-sm-12 col-md-12 padding-left-none">
+  <div class="boxModel pull-left maxHightOuto">
+    <div class="headBox mb25">
+      <h5 class="pull-left">{{feedback_master_title}}</h5>
+      <span class="float-right">
+        <button (click)="toggle()" id="btToggle" class="btn btn-info btn-sm mr10 mt15">Add</button>
+      </span>
+    </div>
+    <div>{{globalObj.message}}</div>
+    <div *ngIf="show_add_item_master">
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+        <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+        <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+      </div>
+      <form (ngSubmit)="onSubmit(addFeedBackForm.value)" [formGroup]="addFeedBackForm" ngNativeValidate>
+        <input type="hidden" class="form-control" value="" formControlName='id' />
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Remarks Name:
+            <span class="text-danger">*</span>: </label>
+          <input type="text" type="text" class="form-control" value="" #remark_name required formControlName='remark_name' placeholder="Remark Name"
+            autofocus="" />
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label for="email">Remark Category
+            <span class="text-danger">*</span>: </label>
+          <select formControlName='remark_category' class="form-control" #remark_category required title="Please select remark category">
+            <option value=""> Select Remark Category</option>
+            <option value="{{remarkCategoryJson.category_name}}" *ngFor="let remarkCategoryJson of remarkCategoryJsonArr; index as i">{{remarkCategoryJson.category_name | titlecase}}</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4 pull-left mb15">
+          <label>Remark Icon: </label>
+          <input-file fileLimit="1" fileAccept="image/*" (acceptedFile)="onAccept($event)" class="form-control cleanup validate-empty"
+            formControlName="remark_icon"></input-file>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-right text-left mb15">
+          <input class="btn btn-primary mr10" value="Save" name="submit" id="submit" type="submit">
+          <button class="btn btn-primary mr10" (click)="getFromSet()">Reset</button>
+          <button class="btn btn-primary" (click)="getFromClose()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div *ngIf="show_item_master_list">
+      <!--SEARCH START-->
+      <!-- <div id="searchTable" class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <form class="form-horizontal" [formGroup]="searchFeedbackMasterForm"> 
+        <div class="col-auto pull-left">
+            <label for="title">Remark Category: </label>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+            <select [(ngModel)]="FormCenterSearch" formControlName='remark_category' class="form-control" title="Select Center" placeholder="Select Subject">
+              <option [value]="0"> Select Category</option>
+              <option [value]="remarkCategoryJson.category_name" *ngFor="let remarkCategoryJson of remarkCategoryJsonArr; index as i">{{remarkCategoryJson.category_name}}</option>
+            </select>
+          </div>
+       
+          <div class="col-xs-12 col-sm-3 col-md-3 pull-left">
+            <button class="btn btn-info" (click)="onSearchSubmit(searchFeedbackMasterForm.value)">Submit</button>
+          </div>
+        </form>
+      </div> -->
+      <!--SEARCH END-->
+
+      <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt15">
+        <div class="col-xs-12 col-sm-12 col-md-12 pull-left" *ngIf="successMessage.message">
+          <div class="alert alert-success text-center mt10">{{successMessage.message}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-md-3 pull-left" *ngIf="errorMessage.message">
+          <div class="alert alert-danger text-center mt10">{{errorMessage.message}}</div>
+        </div>
+        <table class="table table-striped table-bordered customTable">
+          <thead class="thheadbg">
+            <tr>
+              <th align="center">S No.</th>
+              <th>Remarks Name</th>
+              <th>Remarks Category</th>
+              <th>Remark Icon</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedbackMaster of feedbackMasterList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage}; let i = index">
+              <td align="center">{{ itemsPerPage * (currentPage - 1) + i +1 }}</td>     
+              <td>{{feedbackMaster.remarks_name}} </td>
+              <td>{{feedbackMaster.remarks_category | titlecase}}</td>
+              <td>
+                <span *ngIf="feedbackMaster.remarks_icon">
+                  <a target="_blank" href="{{serverurl}}{{feedbackMaster.remarks_icon}}" download>View</a>
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="editFeedbackMaster(feedbackMaster.id)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-info btn-sm" (click)="deleteFeedbackMaster(feedbackMaster.id)">Delete</button>
+              </td>
+            </tr>
+            <tr *ngIf="(feedbackMasterList.length==0)">
+              <td colspan="5" align="center">
+                <span style="color:red;text-align: center;"> No record found..</span>
+              </td>
+            </tr>
+            <tr>             
+              <td colspan="5">
+                  <span  align="center">
+                  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                  </span>
+              </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

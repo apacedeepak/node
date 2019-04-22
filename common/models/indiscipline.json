@@ -1,0 +1,31 @@
+{
+  "name": "indiscipline",
+  "plural": "indiscipline",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "indiscipline_type": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "created_date": {
+      "type": "date",
+      "required": true
+    },
+    "modified_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

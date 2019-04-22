@@ -1,0 +1,49 @@
+{
+  "name": "product_master",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "product_name": {
+      "type": "string"
+    },
+    "product_category": {
+      "type": "number"
+    },
+    "category_name": {
+      "type": "string"
+    },
+    "board_type_id": {
+      "type": "number"
+    },
+    "board_id": {
+      "type": "number"
+    },
+    "board_name": {
+      "type": "string"
+    },
+    "lms_type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    },
+    "product_image": {
+      "type": "string"
+    },
+    "product_url": {
+      "type": "string"
+    },
+    "added_date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

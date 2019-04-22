@@ -1,0 +1,111 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+      <h5 class="pull-left">{{'Profit & Loss Report'| translate}}</h5>
+  </div>
+ 
+  <form class="form-signin" ngNativeValidate [formGroup]="profitlossForm" (ngSubmit)="getProfitLossReport(profitlossForm.value)">
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left inputItem">
+          <select required  class="form-control cleanup validate-empty width30" formControlName="session_id"   >
+              <option value="" >Select Session</option>
+              <option *ngFor="let session of acadmicSessions" value="{{session.id}}">{{session.session_name}}</option>
+          </select>
+          
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left datBox">
+        <input  required formControlName="from_date" class="form-control calenerIcon" placeholder="From Date" ngbDatepicker #fromDate="ngbDatepicker"   readonly  />
+        <button class="btnover" (click)="fromDate.toggle()" type="button"></button>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 pull-left datBox">
+        <input  required class="form-control calenerIcon" formControlName="to_date" placeholder="To Date" ngbDatepicker #toDate="ngbDatepicker"   readonly  />
+        <button class="btnover" (click)="toDate.toggle()" type="button"></button>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left text-center">
+          
+          <input class="btn btn-primary" value="Submit" name="submit" id="submit" type="submit">
+          <hr/>
+      </div>
+
+  </form>
+
+  <div class="col-sm-12 col-md-12 pull-left" style="margin-top:15px;">
+        <span id ="success_message" class="span_success"></span>    
+        
+       <div class="table-responsive">
+        <table *ngIf="reports.length > 0" class="table table-bordered">
+            <thead class="">
+                <tr>            
+                    <th width="200px">{{'Particulars' | translate}}</th>
+                    <th *ngFor="let report of reports" >{{report.schoolName}}</th>
+                                    
+                </tr>
+            </thead>
+            <tbody >
+                <tr>     
+   
+                    <td>Collection</td>
+                    <td *ngFor="let report of reports">{{report.totalAmount}}</td>
+                     </tr>
+                <tr>     
+                                      
+                    <td>Refund</td>
+                    <td *ngFor="let report of reports">{{report.refundAmount}}</td>
+                            
+                </tr>
+                <tr>     
+                                      
+                    <td>Net Collection</td>
+                    <td *ngFor="let report of reports">{{report.netAmount}}</td>
+                            
+                </tr>
+                <tr>     
+                                      
+                    <td>Gst</td>
+                    <td *ngFor="let report of reports">{{report.taxAmount}}</td>
+                            
+                </tr>
+                <tr>     
+                                      
+                    <td>Revenue</td>
+                    <td *ngFor="let report of reports">{{report.revenueAmount}}</td>
+                            
+                </tr>
+                <tr>     
+                                      
+                    <td ><strong>Expenses</strong></td>
+                    <td *ngFor="let report of reports"></td>
+                    
+                            
+                </tr>
+                <tr *ngFor="let category of expenseCategories; let i = index">     
+                                      
+                    <td>{{category.category_name}}</td>
+                    <td *ngFor="let report of reports">{{report.category[i]}}</td>
+                            
+                </tr>
+
+                <tr>     
+                                      
+                    <td>Total Expenses</td>
+                    <td *ngFor="let report of reports">{{report.expenseAmount}}</td>
+                            
+                </tr>
+                <tr>     
+                                      
+                    <td><strong>Profit/Loss</strong> </td>
+                    <td *ngFor="let report of reports">{{report.netProfitAmount}}</td>
+                            
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+
+
+</div>

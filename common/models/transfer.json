@@ -1,0 +1,120 @@
+{
+  "name": "transfer",
+  "plural": "transfer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "assigned_classId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "assigned_sectionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "assign_boardId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "assigned_school_id": {
+      "type": "number",
+      "required": true
+    },
+    "requested_classId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "requested_sectionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "requested_boardId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "requested_school_id": {
+      "type": "number",
+      "required": true
+    },
+    "sessionId": {
+      "type": "number",
+      "required": true,
+      "index": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "transfer_type": {
+      "type": "string",
+      "required": true
+    },
+    "request_date": {
+      "type": "date"
+    },
+    "approve_reject_date": {
+      "type": "date"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "propose_start_date": {
+      "type": "date",
+      "dataType": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "assigned_sections": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "assigned_sectionId"
+    },
+    "requested_sections": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "requested_sectionId"
+    },
+    "assigned_center": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "assigned_school_id"
+    },
+    "assigned_boards": {
+      "type": "belongsTo",
+      "model": "boards",
+      "foreignKey": "assign_boardId"
+    },
+    "requested_boards": {
+      "type": "belongsTo",
+      "model": "boards",
+      "foreignKey": "requested_boardId"
+    },
+    "requested_center": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "requested_school_id"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

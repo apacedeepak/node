@@ -1,0 +1,38 @@
+{
+  "name": "fee_structure_detail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "fee_structure_id": {
+      "type": "number",
+      "required": true
+    },
+    "section_id": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Active"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "section": {
+      "type": "belongsTo",
+      "model": "section",
+      "foreignKey": "section_id"
+    },
+    "fee_structure_master": {
+      "type": "belongsTo",
+      "model": "fee_structure_master",
+      "foreignKey": "fee_structure_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,6 @@
+.mailBox:nth-child(3){border-bottom: 0;}
+.mailinkDiv{ width:140px; float:right;}
+.mControllerOverhide{ width:75px; overflow:hidden; background:#fff;height:100%;top:0; padding-top:12px; right:10px;}
+.mailHovershow:hover .mControllerOverhide,
+.mailHovershow:hover .mailinkDiv{ width:auto; overflow:visible;}
+.dBlock{font-size: 12px;margin-top:5px;}

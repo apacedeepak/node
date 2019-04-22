@@ -1,0 +1,77 @@
+{
+  "name": "parent",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "number",
+      "index": true
+    },
+    "father_name": {
+      "type": "string",
+      "required": true
+    },
+    "father_contact": {
+      "type": "string"
+    },
+    "mother_contact": {
+      "type": "string"
+    },
+    "father_photo": {
+      "type": "string"
+    },
+    "mother_photo": {
+      "type": "string"
+    },
+    "schoolId": {
+      "type": "number",
+      "required": true
+    },
+    "old_parent_id": {
+      "type": "number"
+    },
+    "mother_name": {
+      "type": "string",
+      "required": true
+    },
+    "father_email": {
+      "type": "string"
+    },
+    "mother_email": {
+      "type": "string"
+    },
+    "father_occupation": {
+      "type": "string"
+    },
+    "mother_occupation": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date",
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "school": {
+      "type": "belongsTo",
+      "model": "school",
+      "foreignKey": "schoolId"
+    },
+    "parentbelongstostudent": {
+      "type": "hasMany",
+      "model": "student",
+      "foreignKey": "parentId"
+    },
+    "parentidbyuser": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

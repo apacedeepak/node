@@ -1,0 +1,228 @@
+<!-- <div #tpl>
+  <p>test</p>
+  </div> -->
+
+<div class="pageWorkArea" *ngIf="ledgerflag==false">
+  <div class="boxwraper">
+    <div class="row" style="margin-right:0;">    
+      <div class="col-sm-12 col-md-12 pull-left">
+        <div class="boxModel pull-left maxHightOuto">
+          
+          <div class="headBox">
+            <h5 class="h5 pull-left"> {{'expense_details' | translate}}</h5>
+            <button class="pull-right btn btn-info btn-sm" style="margin: 18px 18px 0 0;" (click)="changeflag()"> {{'student_ledger' | translate}}</button>
+          </div>
+
+          <div class="col-sm-3 col-md-3 pull-left margintop20">
+          <label>  {{'from_date' | translate}} <b class="redColor">*</b></label>
+          <input type="text" class="form-control calenerIcon" (click)="displaycal();" value="{{dateA |date:'dd-MM-yyyy'}}">
+          <ng-container *ngIf="showcalander&&fromDateFlag==true">
+            <ngb-datepicker #dp (select)="onDateChange($event, 'from')" [displayMonths]="0" [dayTemplate]="t">
+            </ngb-datepicker>
+        </ng-container>    
+        
+        </div>
+
+          <div class="col-sm-3 col-md-3 pull-left margintop20">
+          <label>  {{'to_date' | translate}} <b class="redColor">*</b></label>
+          <input type="text" class="form-control calenerIcon" (click)="displaycal2();" value="{{today |date:'dd-MM-yyyy'}}">
+          <ng-container *ngIf="showcalander&&toDateFlag==true">
+            <ngb-datepicker #dp (select)="onDateChange($event, 'to')" [displayMonths]="0" [dayTemplate]="t">
+            </ngb-datepicker>
+        </ng-container>  
+        </div>
+          
+          <div class="col-sm-3 col-md-3 pull-left margintop20">
+          <label> {{'expense_head' | translate}}</label>
+          <select [formControl]="heads" class="form-control" #head (change)="totalexpense(head.value,'','')">
+              <option value="" selected="selected"> {{'select_headname' | translate}}</option>
+              <option *ngFor="let head of headName" value="{{head.headName}}">{{head.headName}}</option>
+           </select>
+          </div>
+          <div class="clearfix"></div>
+          <hr/>
+          <div class="col-sm-12 col-md-12 pull-left">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td><b> {{'bill_no' | translate}}</b></td>
+                  <td><b> {{'head_name' | translate}}</b></td>
+                  <td><b> {{'particulars' | translate}}</b></td>
+                  <td><b> {{'date' | translate}}</b></td>
+                  <td><b> {{'amount' | translate}}</b></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let expenses of  totalExpense; index as i">
+                  <td>{{expenses.bill_no}}</td>
+                  <td>{{expenses.expense_head_name}}</td>
+                  <td>---</td>
+                  <td>{{expenses.amount_date | date:'yyyy-MM-dd'}}</td>
+                  <td>{{expenses.amount}}</td>
+                </tr>
+                <tr *ngIf="totalExpense.length==0">
+                  <td style="text-align: center;" colspan="5">  {{'no_record_found' | translate}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+           </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+
+<div  *ngIf="ledgerflag==true" class="pageWorkArea">
+  <div class="boxwraper">
+    <div class="row" style="margin-right:0;">    
+      <div class="col-sm-12 col-md-12 pull-left">
+        <div class="boxModel pull-left maxHightOuto">
+          <div class="headBox">
+            <h5 class="h5 pull-left">  {{'student_ledger' | translate}}</h5>           
+          </div>
+          <div class="col-sm-3 col-md-3 pull-left margintop20">
+              <label>   {{'from_date' | translate}} <b class="redColor">*</b></label>
+              <input type="text" class="form-control calenerIcon" (click)="displaycal();" value="{{dateA |date:'dd-MM-yyyy'}}">
+              <ng-container *ngIf="showcalander&&fromDateFlag==true">
+                <ngb-datepicker #dp (select)="onDateChange($event, 'from')" [displayMonths]="0" [dayTemplate]="t">
+                </ngb-datepicker>
+            </ng-container>    
+            
+            </div>
+  
+            <div class="col-sm-3 col-md-3 pull-left margintop20">
+                <label>   {{'to_date' | translate}} <b class="redColor">*</b></label>
+                <input type="text" class="form-control calenerIcon" (click)="displaycal2();" value="{{today |date:'dd-MM-yyyy'}}">
+                <ng-container *ngIf="showcalander&&toDateFlag==true">
+                  <ngb-datepicker #dp (select)="onDateChange($event, 'to')" [displayMonths]="0" [dayTemplate]="t">
+                  </ngb-datepicker>
+              </ng-container>  
+              </div>
+          
+          <div class="col-sm-2 col-md-2 pull-left margintop20">         
+          <a  id="ledgerId"  >
+                        <button class="btn btn-info" id ="button"style="margin-top:25px"(click)="ledgerpdf();"><i class="fa fa-fw fa-file-pdf-o"></i>  {{'download_pdf' | translate}}</button>
+          </a>
+          <a id="hiddentdown" download href="{{pdf}}" target="_blank" style=display:none; >
+              <button class="btn btn-info" id ="hiddbutton"style="margin-top:25px"><i class="fa fa-fw fa-file-pdf-o"></i>    {{'download_pdf' | translate}}</button>
+          </a> 
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="widget" #tpl1 id="ledger" *ngIf="ledgerflag==true">
+
+    <table style="border:1px solid #000; border-width:0 0 1px 1px; font-family:Arial;font-size:12px" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="border:1px solid #000; border-width:1px 1px 0px 0; padding:2px;" width="100" rowspan="2"><img src="{{schoolDetail.school_logo}}"  width="100"></td>
+            <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="5" align="center"><h1 style="font-size: 20px; padding-top: 20px;">{{schoolDetail.school_name}}</h1></td>
+
+    </tr>
+    <tr>
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6" align="center"> 
+            <span> Phone No. :{{schoolDetail.contact_no}}&nbsp;  Email Id : {{schoolDetail.school_email}} </span> <br>
+            <span> Address: {{schoolDetail.school_address}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b>  Student Name </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="2">{{studentData.name}}</td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b>  Admission No</b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="2">{{studentData.admission_no}}</td>
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Account No. </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="2"></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Class</b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="2">{{studentData.class_section}}</td>
+
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="1"><b> Period</b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="5">{{dateA |date:'dd-MM-yyyy'}} to {{today |date:'dd-MM-yyyy'}} </td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+</tr>
+<tr>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Date </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Transaction Id </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Particulars</b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px; width: 120px"><b> Amount Deposited </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px; width: 120px"><b> Amount Withdrawn </b></td>
+    <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b> Balance</b></td>
+
+</tr>
+
+<tr>
+  
+    
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">&nbsp; </td>
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;">&nbsp;</td>
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" align="right"> Opening Balance </td>
+        <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px; text-align: center;" colspan="3">
+         {{opening_balance}} </td>  
+   
+  
+</tr>
+<tr *ngFor="let collect of totalCollection; index as i">
+ 
+   <ng-container *ngIf="collect.receipt_no">
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.	receipt_date|date:'dd-MM-yyyy'}}</td>
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect" >{{collect.receipt_no}}</td>
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect"></td>
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.amount}}</td>
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect" ></td>
+    <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.balance}}</td>
+  </ng-container>
+  <ng-container *ngIf="collect.bill_no">
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.amount_date|date:'dd-MM-yyyy'}}</td>
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect" >{{collect.bill_no}}</td>
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.expense_head_name}}</td>
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect"></td>
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect" >{{collect.amount}}</td>
+      <td  style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" class="formatcollect">{{collect.balance}}</td>
+    </ng-container>
+  </tr>
+  <tr>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+
+</tr>
+<tr>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" align="right" colspan="3">Closing Balance</td>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;">{{receiptN0_sum}}</td>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;">-{{bill_no_sum}}</td>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;">{{totalbalance}}
+      
+      </td>
+</tr>
+<tr>
+      <td style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;" colspan="6">&nbsp;</td>
+
+</tr>
+<tr>
+  <td colspan="6" style="border:1px solid #000; border-width:1px 1px 0 0; padding:2px;"><b>Your final ledger balance is Rs. {{totalbalance}}/- </b></td>
+</tr>
+</table>
+</div>

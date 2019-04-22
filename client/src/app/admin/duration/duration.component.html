@@ -1,0 +1,69 @@
+<div class="boxModel pull-left maxHightOuto">
+  <div class="headBox mb25">
+    <h5 class="pull-left">{{'Activity Duration' | translate}} </h5>
+  </div>
+  
+  <div class="clearfix"></div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="alert alert-success text-center mt10" *ngIf="globalObj.message">{{ globalObj.message}}</div>
+  <div class="alert alert-danger text-center mt10" *ngIf="globalObj.errorMessage">{{ globalObj.errorMessage}}</div>
+  </div>
+
+  <form class="form-horizontal" [formGroup]="durationForm">
+    <input type="hidden" class="form-control" value="0" formControlName='id' />
+    <div class="form-group">
+      <div class="col-xs-12 col-sm-3 col-md-3 inputItem pull-left">
+        <label>Name:
+          <b style="color:red">*</b>
+        </label>
+        <select class="form-control required" formControlName='duration_name' placeholder="Duration Name" title="Please insert duration name"
+          autofocus="" required="required" [attr.disabled]="(id > 0)? 'disabled': null">
+          <option value="">--- Select Duration Type ---</option>
+          <option value="Lecture">Lecture</option>
+          <option value="Lecture Break">Lecture Break</option>
+          <option value="Lunch Break">Lunch Break</option>
+        </select>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 inputItem pull-left">
+        <label>Time (in minutes):
+          <b style="color:red">*</b>
+        </label>
+        <input type="number" class="form-control required" formControlName='duration_time' placeholder="Duration Time"
+          title="Please insert duration time" min="0" max="240"/>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12 pull-left mt15">
+        <button class="btn btn-primary mr10" [disabled]="durationForm.invalid" (click)="onSubmit(durationForm.value)">Submit</button>
+        <button class="btn btn-warning mr10 text-white" (click)="clearForm()" *ngIf="id > 0">Clear</button>
+        <!--<button class="btn btn-primary hide" (click)="getHrlogin()">MY HR Login</button>-->
+      </div>
+    </div>
+  </form>
+
+  <div id="leaveTable" class="col-sm-12 col-md-12 pull-left mt25">
+    <span id="success_message" class="span_success"></span>
+    <table class="table table-striped table-bordered customTable">
+      <thead class="thheadbg">
+        <tr>
+          <th class="textCenter">#</th>
+          <th class="textCenter">Duration Type</th>
+          <th class="textCenter">Time (in minutes)</th>
+          <th class="textCenter">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let duration of globalObj.durationList; index as i">
+          <td class="text-center">{{i+1}}</td>
+          <td>{{duration.duration_name}} </td>
+          <td class="text-center">{{duration.duration_time}} </td>
+          <td class="text-center">
+            <a href="javascript:void" (click)="durationEdit(duration.id)">
+              <i class="material-icons">edit</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

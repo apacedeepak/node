@@ -1,0 +1,207 @@
+page-homework {
+        #plus_btn{
+            background-color: #4473cd;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 80%;
+            padding: 12px !important;
+            box-shadow:0 4px 3px 3px rgba(41, 36, 36, 0.4);
+            position: fixed;
+            right:2.2rem;
+            bottom:1rem;
+        }
+        #fabbutton{
+            display: inline-block;
+            position: fixed;
+            right: 2rem;
+            bottom: 1rem; z-index:1;}
+       .mailBlock {
+           box-shadow: 0 0 4px 1px #ddd;
+           border-radius: 4px;
+           padding-bottom: .7rem;
+           padding-top: .7rem;
+           padding-left:1rem;
+           position: relative;
+           padding-right: 10.3rem;
+           overflow: hidden;
+           margin-top: 1rem;
+           margin-right: 1rem;
+           margin-left: 1rem;
+        .mailername {
+        font-size: 1.8rem;
+        font-weight: bold;
+        padding-right:90px;
+        span {
+       position:absolute;
+       right:4px;
+       top:14px;
+       width:70px;
+       text-align:right;
+       color:#4385f5;
+       font-size: 1.3rem;
+       }
+       }
+       .subtitle {
+           font-size: 1.5rem;
+           font-weight: 500;
+       }
+       .description {
+	display: block;
+	font-size: 1.2rem;
+	color: #525252;
+ p{margin:0}
+ h1{margin:0}
+ h2{margin:0}
+ h3{margin:0}
+ h4{margin:0}
+ h5{margin:0}
+ h6{margin:0}
+ td{font-size:1.2rem; height: auto !important;
+font{font-size:1.2rem !important;}
+}
+       }
+.textoverlap {
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 20px;
+    line-height: 20px;
+}
+       .mailIndex {
+           width: 35px;
+           height: 35px;
+           border-radius: 80%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           font-size: 16px;
+           font-weight: bold;
+           position: absolute;
+           left: 15px;
+           top: 10px;
+           background: #f06292;
+           color: #fff;
+       }
+       .mailpending{width: calc(100% - 1rem);}
+       .mailStatus{width:10rem; position: absolute; right: 0; top:0; background: #27475e; height: 100%; color: #fff; display: flex;
+           justify-content: center; align-items: center;font-size: 1.3rem;text-align: center;}
+       &:last-child{margin-bottom: 1rem}
+       }
+        .draftblock{ padding-right:.5rem;}
+       .checkedmail{background:#5cc05d !important;}
+       .pendingmail{background:#a20202 !important;}       
+       .attachtomail{padding-right: 6rem;position:relative;
+       .mailinginfo{position: absolute;right:.1rem;top:0;font-size: 1.2rem;font-weight: 400; color: #3C6ECD;
+       .ion-md-link{font-size: 1.4rem !important; margin-right: 5px;}
+    }
+       }
+       .readmail {
+        .mailername {
+       font-weight:300;
+        span {
+       color:#7e7e7e;
+       }
+       }
+       .subtitle {
+           font-weight: 300;
+       }
+       .description {
+           color: #7f7f7f;
+           font-weight: 300;
+       }
+       }
+       .floatLable {
+           font-weight: 500;
+           background: #fff;
+           border-radius: 4px;
+           padding: .9rem 1rem;
+           color: #222;
+           font-size: 1.4rem;
+           float: left;
+           margin:.2rem 0 0 0;
+           -webkit-box-shadow: 0 0 4px 2px #333;
+           box-shadow: 0 0 4px 2px #333;
+           -webkit-box-shadow: 0 0 5px 2px rgba(51, 51, 51, 0.31);
+           box-shadow: 0 0 5px 2px rgba(51, 51, 51, 0.31);
+           width: 9rem;
+           text-align: center;
+       }
+       #ListBackdrop {
+           background-color: #000 !important;
+           position: fixed !important;
+           height: 100%;
+           width: 100%;
+           z-index: 1;
+           opacity: 0.6;
+           top: 0;
+       }
+       .fab-list-active {
+           right: 3rem !important;
+           width: 16rem !important;
+       }
+       .fab {
+           float: right;
+           display: inline-block;
+       }
+       .floatList {
+           width: 100%;
+           list-style-type: none;
+           margin: 0 0 1rem 0;
+           padding: 0;
+       }
+       .floatList li {
+           width: 100%;
+           float: left;
+           margin:.7rem 0;
+           position:relative;
+        .fab-in-list {
+       margin:0 !important;
+        img {
+       width:70%;
+       }
+       }
+       }
+       .fablabeldraft .fab-md-in-list {
+           background-color: #ff9800 !important
+       }
+       .fablabelsendmail .fab-md-in-list {
+           background-color: #ff9800 !important
+       }
+       .fablabelinbox .fab-md-in-list {
+           background-color: #673bb7 !important
+       }
+       .fablabelcompose .fab-md-in-list {
+           background-color: #fec107 !important
+       }
+       #ListBackdrop{
+           bottom: 0;
+           background: rgba(0, 0, 0, 0.68);
+           height: 100%;
+           width: 100%;
+           right:0;
+           position:fixed;
+       }
+       #fabbutton{
+           display: inline-block;
+           position: absolute;
+           right: 2rem;
+           bottom: 1rem; z-index:1;}
+       
+       .segment-md .segment-button{opacity: 1;color: #6e6e6e; border-bottom-width:4px;font-size: 1.3rem;border-color: #fff;line-height: 4.5rem;height:4.8rem;}
+      .segment-button.segment-activated {
+    border-color: #ff8633 !important;
+    color: #ff8633 !important;
+    opacity: 1;
+}
+.paerclip{display: inline-block;vertical-align: text-bottom;margin-right:.2rem;
+img{height: .9rem;}
+}
+.text-center{text-align: center;}
+ion-fab[bottom] {
+    bottom: 61px;
+}
+.maillable{font-size: 1.3rem;background-color: #ebe7e7;margin-right: .3rem;margin-bottom: .2rem;display: inline-block;padding:.5rem .3rem .3rem 1.2rem;border-radius: 28px;vertical-align: top;color: #6f6767;
+    button{ vertical-align:middle;background-color: #ebe7e7;}
+    }
+}
